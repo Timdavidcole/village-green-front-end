@@ -1,6 +1,17 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { createStore } from 'redux';
+
+const defaultState = { checked: false };
+const reducer = function(state = defaultState, action) {
+ switch (action.type) {
+    case 'TOGGLE':
+      return { ...state, checked: !state.checked };
+  }
+return state;
+};
+const store = createStore(reducer);
 
 function App() {
   return (
