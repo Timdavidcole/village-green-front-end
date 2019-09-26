@@ -2,7 +2,7 @@ import { applyMiddleware, createStore } from "redux";
 import { promiseMiddleware } from "./middleware";
 
 const defaultState = {
-  appName: "conduit",
+  appName: "Village Green",
   notices: null
 };
 const reducer = function(state = defaultState, action) {
