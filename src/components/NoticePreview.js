@@ -2,12 +2,11 @@ import React from "react";
 
 const NoticePreview = props => {
   const notice = props.notice;
-
   return (
     <div className="article-preview">
       <div className="article-meta">
         <a>
-          <img src={notice.author.image} />
+          <img alt="Notice Author" src={notice.author.image} />
         </a>
 
         <div className="info">

@@ -2,8 +2,6 @@ import Header from "./Header";
 import React from "react";
 import { connect } from "react-redux";
 import agent from "../agent";
-import PropTypes from "prop-types";
-import { Redirect } from "react-router-dom";
 
 const mapStateToProps = state => ({
   appName: state.common.appName,
@@ -17,7 +15,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class App extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const token = window.localStorage.getItem("jwt");
     if (token) {
       agent.setToken(token);

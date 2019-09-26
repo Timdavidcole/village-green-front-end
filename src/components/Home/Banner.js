@@ -7,7 +7,7 @@ const Banner = ({ appName }) => {
         <h1 className="logo-font">
           {appName.toLowerCase()}
         </h1>
-        <p>The local noticeboard for anywhere, anyone, and anything.</p>
+        <p>the local noticeboard for anywhere, anything, and anyone</p>
       </div>
     </div>
   );
