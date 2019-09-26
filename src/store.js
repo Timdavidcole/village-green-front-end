@@ -1,18 +1,14 @@
-import { applyMiddleware, createStore } from "redux";
+import { applyMiddleware, createStore, combineReducers } from "redux";
 import { promiseMiddleware } from "./middleware";
+import auth from "./reducers/auth";
+import common from "./reducers/common";
+import home from "./reducers/home";
 
-const defaultState = {
-  appName: "Village Green",
-  notices: null
-};
-const reducer = function(state = defaultState, action) {
-  // eslint-disable-next-line default-case
-  switch (action.type) {
-    case "HOME_PAGE_LOADED":
-      return { ...state, notices: action.payload.notices };
-  }
-  return state;
-};
+const reducer = combineReducers({
+  auth,
+  common,
+  home
+});
 
 const middleware = applyMiddleware(promiseMiddleware);
 

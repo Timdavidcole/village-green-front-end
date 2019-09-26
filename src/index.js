@@ -3,18 +3,19 @@ import { Provider } from "react-redux";
 import ReactDOM from "react-dom";
 import React from "react";
 import store from "./store";
-import { Router, Route } from "react-router";
-import { HashRouter } from "react-router-dom";
+import { Route, BrowserRouter, Switch } from "react-router-dom";
 import Home from "./components/Home";
 import Login from "./components/Login";
 
 ReactDOM.render(
   <Provider store={store}>
-    <HashRouter>
+    <BrowserRouter>
       <Route path="/" component={App} />
-      <Route exact path="/" component={Home} />
-      <Route path="login" component={Login} />
-    </HashRouter>{" "}
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/login" component={Login} />
+      </Switch>
+    </BrowserRouter>
   </Provider>,
   document.getElementById("root")
 );

@@ -1,15 +1,13 @@
-"use strict";
-
 import NoticePreview from "./NoticePreview";
 import React from "react";
 
 const Notices = props => {
   if (!props.notices) {
-    return <div className="notice-preview">Loading...</div>;
+    return <div className="article-preview">Loading...</div>;
   }
 
   if (props.notices.length === 0) {
-    return <div className="notice-preview">No notices are here... yet.</div>;
+    return <div className="article-preview">No notices are here... yet.</div>;
   }
 
   return (

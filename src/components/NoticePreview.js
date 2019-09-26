@@ -4,8 +4,8 @@ const NoticePreview = props => {
   const notice = props.notice;
 
   return (
-    <div className="notice-preview">
-      <div className="notice-meta">
+    <div className="article-preview">
+      <div className="article-meta">
         <a>
           <img src={notice.author.image} />
         </a>
