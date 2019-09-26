@@ -5,8 +5,8 @@ import React from "react";
 import { createStore } from "redux";
 
 const defaultState = {
-  appName: "conduit",
-  articles: null
+  appName: "Village Green",
+  notices: null
 };
 const reducer = function(state = defaultState, action) {
   return state;
