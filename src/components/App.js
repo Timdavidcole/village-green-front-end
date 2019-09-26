@@ -34,9 +34,6 @@ class App extends React.Component {
   }
   render() {
 
-    // if (this.props.redirectTo) {
-    //   return <Redirect to={this.props.redirectTo} />
-    // }
     return (
       <div>
         <Header

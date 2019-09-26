@@ -8,16 +8,17 @@ const API_ROOT = "https://village-green-backend-api.herokuapp.com/api";
 const responseBody = res => res.body;
 
 let token = null;
+
 const tokenPlugin = req => {
   if (token) {
-    req.set('authorization', `Token ${token}`);
+    req.set("authorization", `Token ${token}`);
   }
-}
+};
 
 const requests = {
-  get: url => superagent.get(`${API_ROOT}${url}`).then(responseBody),
+  get: url => superagent.get(`${API_ROOT}${url}`).use(tokenPlugin).then(responseBody),
   post: (url, body) =>
-    superagent.post(`${API_ROOT}${url}`, body).then(responseBody)
+    superagent.post(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody)
 };
 
 const Notices = {
