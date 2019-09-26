@@ -1,23 +1,17 @@
-import React from 'react';
-import './App.css';
-import { createStore } from 'redux';
+import React from "react";
+import { connect } from "react-redux";
 
-const defaultState = { checked: false };
-const reducer = function(state = defaultState, action) {
- switch (action.type) {
-    case 'TOGGLE':
-      return { ...state, checked: !state.checked };
-    default:
-      return state;
+const mapStateToProps = state => ({
+  appName: state.appName
+});
+
+class App extends React.Component {
+  render() {
+    return <div>{this.props.appName}</div>;
   }
-};
-const store = createStore(reducer);
-
-function App() {
-  return (
-    <div>
-    </div>
-  );
 }
 
-export default App;
+export default connect(
+  mapStateToProps,
+  () => ({})
+)(App);
