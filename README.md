@@ -9,7 +9,7 @@ This is my first full-stack completely self-made personal project, from concept 
 
 ### &nbsp;&nbsp;&nbsp;&nbsp;A global noticeboard, for local issues.
 
- - Anyone can view the local noticeboard from anywhere in the world.  Just open up the app and it auto-populates a noticeboard based on proximity to the user; weighing up important notice attributes like proximity/relevance/age/popularity/MASS.  Then by scrolling around the map, any user can easily view any noticeboard from anywhere in the world.  Going on holiday, moving to a new area?  Just checkout out the local noticeboard to see what that community is up to!
+ - Anyone can view the local noticeboard for anywhere in the world.  Just open up the app and it auto-populates a noticeboard based on proximity to the user; weighing up important notice attributes like proximity/relevance/age/popularity/MASS.  Then by scrolling around the map, any user can easily view any noticeboard from anywhere in the world.  Going on holiday, moving to a new area?  Just checkout out the local noticeboard to see what that community is up to!
 
 ### &nbsp;&nbsp;&nbsp;&nbsp;Free for local postings
 
