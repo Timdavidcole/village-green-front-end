@@ -42,7 +42,7 @@ class AddressContainer extends React.Component {
   render() {
     if (this.props.addressAutoComplete) {
       return (
-        <div>
+        <div style={{margin:"10px"}}>
           <center>
             <SlideDown className={"my-dropdown-slidedown"}>
               <AddressItem
