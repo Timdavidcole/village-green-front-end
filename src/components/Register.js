@@ -2,6 +2,7 @@ import React from "react";
 import ListErrors from "./ListErrors";
 import agent from "../agent";
 import { connect } from "react-redux";
+import AddressItem from "./AddressItem.js";
 
 const mapStateToProps = state => ({ ...state.auth });
 
@@ -29,8 +30,10 @@ class Register extends React.Component {
       this.props.onChangePassword(event.target.value);
     this.changeUsername = event =>
       this.props.onChangeUsername(event.target.value);
-    this.changeAddress = event =>
+    this.changeAddress = event => {
       this.props.onChangeAddress(event.target.value);
+      agent.Address.get(event.target.value);
+    };
     this.submitForm = (username, email, password, address) => event => {
       event.preventDefault();
       this.props.onSubmit(username, email, password, address);
@@ -39,6 +42,7 @@ class Register extends React.Component {
 
   render() {
     const { email, password, username, address } = this.props;
+    console.log(this.props);
     return (
       <div className="auth-page">
         <div className="container page">
@@ -46,7 +50,9 @@ class Register extends React.Component {
             <div className="col-md-6 offset-md-3 col-xs-12">
               <h1 className="text-xs-center">Sign up</h1>
               <ListErrors errors={this.props.errors} />
-              <form onSubmit={this.submitForm(username, email, password, address)}>
+              <form
+                onSubmit={this.submitForm(username, email, password, address)}
+              >
                 <fieldset>
                   <fieldset className="form-group">
                     <input
@@ -72,7 +78,7 @@ class Register extends React.Component {
                     <input
                       className="form-control form-control-lg"
                       type="username"
-                      placeholder="username"
+                      placeholder="Username"
                       value={username}
                       onChange={this.changeUsername}
                     />
@@ -82,12 +88,22 @@ class Register extends React.Component {
                     <input
                       className="form-control form-control-lg"
                       type="address"
-                      placeholder="address"
+                      placeholder="Address"
                       value={address}
                       onChange={this.changeAddress}
                     />
                   </fieldset>
 
+                  <div style={{ border: "solid black 1px" }}>
+                    <AddressItem
+                      value={this.props.street}
+                      placeholder="Test AddressItem"
+                    />
+                    <AddressItem
+                      value={this.props.city}
+                      placeholder="Test AddressItem2"
+                    />
+                  </div>
                   <button
                     className="btn btn-lg btn-primary pull-xs-right"
                     type="submit"

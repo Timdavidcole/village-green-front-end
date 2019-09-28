@@ -15,6 +15,19 @@ const tokenPlugin = req => {
   }
 };
 
+const Address = {
+  get: query =>
+    superagent
+      .get(`https://autocomplete.geocoder.api.here.com/6.2/suggest.json`)
+      .query({
+        app_id: 'yiHAq4dpgi8IolLODQhZ',
+        app_code: 'ZoP4eVfs_w8jCGMGu9dw_g',
+        query: query,
+        maxresults: 1
+      })
+      .then(res => console.log(JSON.parse(res.text).suggestions[0]))
+};
+
 const requests = {
   get: url =>
     superagent
@@ -43,6 +56,7 @@ const Auth = {
 export default {
   Notices,
   Auth,
+  Address,
   setToken: _token => {
     token = _token;
   }
