@@ -7,8 +7,6 @@ const API_ROOT = "https://village-green-backend-api.herokuapp.com/api";
 
 const responseBody = res => res.body;
 
-let token = null;
-
 const tokenPlugin = req => {
   if (token) {
     req.set("authorization", `Token ${token}`);
@@ -25,7 +23,7 @@ const Address = {
         query: query,
         maxresults: 1
       })
-      .then(res => console.log(JSON.parse(res.text).suggestions[0]))
+      .then(res => JSON.parse(res.text).suggestions[0])
 };
 
 const requests = {
@@ -52,6 +50,8 @@ const Auth = {
   register: (username, email, password, address = null) =>
     requests.post("/users", { user: { username, email, password, address } })
 };
+
+let token = null;
 
 export default {
   Notices,

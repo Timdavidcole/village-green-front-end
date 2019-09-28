@@ -3,36 +3,24 @@ import { connect } from "react-redux";
 
 const mapStateToProps = state => ({ ...state.auth });
 
-const mapDispatchToProps = dispatch => ({
-  onChangeEmail: value =>
-    dispatch({ type: "UPDATE_FIELD_AUTH", key: "email", value }),
-  onChangePassword: value =>
-    dispatch({ type: "UPDATE_FIELD_AUTH", key: "password", value }),
-  onChangeUsername: value =>
-    dispatch({ type: "UPDATE_FIELD_AUTH", key: "username", value }),
-  onChangeAddress: value =>
-    dispatch({ type: "UPDATE_FIELD_AUTH", key: "address", value }),
-});
-
 class AddressItem extends React.Component {
   render() {
     return (
-      <fieldset >
+      <fieldset>
         <label>{this.props.label}</label>
         <input
-          style={{width:"100%"}}
+          style={{width:"50%", margin:"3px", borderRadius:"10px"}}
           type="text"
-          defaultValue={this.props.value}
+          value={this.props.value}
           onChange={this.props.onChange}
           placeholder={this.props.placeholder}
         />
-      </fieldset>
+      </fieldset>  
     );
   }
 }
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(AddressItem);
 
