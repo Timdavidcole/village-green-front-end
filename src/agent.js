@@ -58,6 +58,10 @@ const Notices = {
 };
 
 const Comments = {
+  create: (slug, comment) =>
+    requests.post(`/notices/${slug}/comments`, { comment }),
+  delete: (slug, commentId) =>
+    requests.del(`/notices/${slug}/comments/${commentId}`),
   forNotice: slug => requests.get(`/notices/${slug}/comments`)
 };
 
