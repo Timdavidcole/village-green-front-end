@@ -51,8 +51,22 @@ const LoggedInView = props => {
         </li>
 
         <li className="nav-item">
+          <div
+            onClick={props.onClickLogout}
+            className="nav-link"
+            style={{ cursor: "pointer" }}
+          >
+            Log Out
+          </div>
+        </li>
+
+        <li className="nav-item">
           <Link to={`/@${props.currentUser.username}`} className="nav-link">
-            <img alt="User Profile" src={props.currentUser.image} className="user-pic" />
+            <img
+              alt="User Profile"
+              src={props.currentUser.image}
+              className="user-pic"
+            />
             {props.currentUser.username}
           </Link>
         </li>
@@ -74,7 +88,10 @@ class Header extends React.Component {
 
           <LoggedOutView currentUser={this.props.currentUser} />
 
-          <LoggedInView currentUser={this.props.currentUser} />
+          <LoggedInView
+            onClickLogout={this.props.onClickLogout}
+            currentUser={this.props.currentUser}
+          />
         </div>
       </nav>
     );
