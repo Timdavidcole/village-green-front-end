@@ -23,6 +23,11 @@ class AddressContainer extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
+    if (this.props.addressAutoComplete) {
+      if (this.props.addressAutoComplete.label !== nextProps.addressAutoComplete.label) {
+        return true;
+      }
+    }
     if (this.props.address !== nextProps.address) {
       return true;
     } else {
@@ -47,6 +52,7 @@ class AddressContainer extends React.Component {
   }
 
   render() {
+    console.log(this.props.addressAutoComplete)
     if (this.props.addressAutoComplete) {
       return (
         <div style={{margin:"10px"}}>
@@ -73,7 +79,6 @@ class AddressContainer extends React.Component {
                 placeholder="Post Code"
               />
             </SlideDown>
-            <button type="submit" className="btn btn-primary" onClick={(event) => this.confirmAddress()}>Look right?</button>
           </center>
         </div>
       );

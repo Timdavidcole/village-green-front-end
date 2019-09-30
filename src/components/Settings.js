@@ -2,9 +2,11 @@ import ListErrors from "./ListErrors";
 import React from "react";
 import agent from "../agent";
 import { connect } from "react-redux";
+import AddressContainer from "./AddressContainer";
 
 const mapStateToProps = state => ({
   ...state.settings,
+  ...state.auth,
   currentUser: state.common.currentUser
 });
 
@@ -61,13 +63,23 @@ class SettingsForm extends React.Component {
       bio: "",
       email: "",
       password: "",
-      address: ""
+      address: "",
+      addressAutoComplete: ""
     };
 
-    this.updateState = field => ev => {
+    this.updateState = field => event => {
       const state = this.state;
-      const newState = Object.assign({}, state, { [field]: ev.target.value });
+      const newState = Object.assign({}, state, {
+        [field]: event.target.value
+      });
       this.setState(newState);
+      if ((field = "address")) {
+        console.log("FETCH")
+        console.log(event.target.value)
+        agent.Address.get(event.target.value).then(addressAutoComplete =>
+          this.setState({ addressAutoComplete: addressAutoComplete })
+        );
+      }
     };
 
     this.submitForm = ev => {
@@ -109,6 +121,7 @@ class SettingsForm extends React.Component {
   }
 
   render() {
+    console.log(this.state.addressAutoComplete);
     return (
       <form onSubmit={this.submitForm}>
         <fieldset>
@@ -121,7 +134,6 @@ class SettingsForm extends React.Component {
               onChange={this.updateState("image")}
             />
           </fieldset>
-
           <fieldset className="form-group">
             <input
               className="form-control form-control-lg"
@@ -131,7 +143,6 @@ class SettingsForm extends React.Component {
               onChange={this.updateState("username")}
             />
           </fieldset>
-
           <fieldset className="form-group">
             <textarea
               className="form-control form-control-lg"
@@ -141,7 +152,6 @@ class SettingsForm extends React.Component {
               onChange={this.updateState("bio")}
             ></textarea>
           </fieldset>
-
           <fieldset className="form-group">
             <input
               className="form-control form-control-lg"
@@ -151,7 +161,6 @@ class SettingsForm extends React.Component {
               onChange={this.updateState("email")}
             />
           </fieldset>
-
           <fieldset className="form-group">
             <input
               className="form-control form-control-lg"
@@ -161,7 +170,18 @@ class SettingsForm extends React.Component {
               onChange={this.updateState("password")}
             />
           </fieldset>
-
+          Address
+          <fieldset className="form-group">
+            <input
+              className="form-control form-control-lg"
+              type="text"
+              value={this.state.address}
+              onChange={this.updateState("address")}
+            />
+          </fieldset>
+          <AddressContainer
+            addressAutoComplete={this.state.addressAutoComplete}
+          />
           <button
             className="btn btn-lg btn-primary pull-xs-right"
             type="submit"
