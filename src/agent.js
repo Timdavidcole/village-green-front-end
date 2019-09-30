@@ -47,7 +47,14 @@ const requests = {
 };
 
 const Notices = {
-  all: page => requests.get(`/notices?limit=10`)
+  all: page => requests.get(`/notices?limit=10`),
+  get: slug => 
+  requests.get(`/notices/${slug}`)
+};
+
+const Comments = {
+  forNotice: slug =>
+    requests.get(`/notices/${slug}/comments`)
 };
 
 const Auth = {
@@ -62,6 +69,7 @@ const Auth = {
 export default {
   Notices,
   Auth,
+  Comments,
   Address,
   setToken: _token => {
     token = _token;

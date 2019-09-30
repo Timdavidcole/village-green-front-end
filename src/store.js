@@ -4,8 +4,11 @@ import auth from "./reducers/auth";
 import common from "./reducers/common";
 import home from "./reducers/home";
 import settings from './reducers/settings';
+import notice from './reducers/notice';
+
 
 const reducer = combineReducers({
+  notice,
   auth,
   common,
   home,
