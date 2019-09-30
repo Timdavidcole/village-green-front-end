@@ -10,13 +10,16 @@ const mapStateToProps = state => ({ ...state.auth });
 const mapDispatchToProps = dispatch => ({
   getAddressAutoComplete: value => {
     dispatch({ type: "UPDATE_FIELD_AUTH", key: "addressAutoComplete", value });
-  }
+  },
+  onChangeAddress: value =>
+    dispatch({ type: "UPDATE_FIELD_AUTH", key: "address", value }),
 });
 
 class AddressContainer extends React.Component {
   constructor() {
     super();
     this.addressAutoComplete = this.addressAutoComplete.bind(this);
+    this.confirmAddress = this.confirmAddress.bind(this);
   }
 
   shouldComponentUpdate(nextProps) {
@@ -37,6 +40,10 @@ class AddressContainer extends React.Component {
     agent.Address.get(this.props.address).then(object => {
       this.props.getAddressAutoComplete(object);
     });
+  }
+
+  confirmAddress(event){
+    this.props.onChangeAddress(this.props.addressAutoComplete.label)
   }
 
   render() {
@@ -66,6 +73,7 @@ class AddressContainer extends React.Component {
                 placeholder="Post Code"
               />
             </SlideDown>
+            <button type="submit" className="btn btn-primary" onClick={(event) => this.confirmAddress()}>Look right?</button>
           </center>
         </div>
       );

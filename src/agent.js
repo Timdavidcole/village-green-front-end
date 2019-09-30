@@ -7,6 +7,8 @@ const API_ROOT = "https://village-green-backend-api.herokuapp.com/api";
 
 const responseBody = res => res.body;
 
+let token = null;
+
 const tokenPlugin = req => {
   if (token) {
     req.set("authorization", `Token ${token}`);
@@ -18,8 +20,8 @@ const Address = {
     superagent
       .get(`https://autocomplete.geocoder.api.here.com/6.2/suggest.json`)
       .query({
-        app_id: 'yiHAq4dpgi8IolLODQhZ',
-        app_code: 'ZoP4eVfs_w8jCGMGu9dw_g',
+        app_id: "yiHAq4dpgi8IolLODQhZ",
+        app_code: "ZoP4eVfs_w8jCGMGu9dw_g",
         query: query,
         maxresults: 1
       })
@@ -36,6 +38,11 @@ const requests = {
     superagent
       .post(`${API_ROOT}${url}`, body)
       .use(tokenPlugin)
+      .then(responseBody),
+  put: (url, body) =>
+    superagent
+      .put(`${API_ROOT}${url}`, body)
+      .use(tokenPlugin)
       .then(responseBody)
 };
 
@@ -48,10 +55,9 @@ const Auth = {
   login: (email, password) =>
     requests.post("/users/login", { user: { email, password } }),
   register: (username, email, password, address = null) =>
-    requests.post("/users", { user: { username, email, password, address } })
+    requests.post("/users", { user: { username, email, password, address } }),
+  save: user => requests.put("/user", { user })
 };
-
-let token = null;
 
 export default {
   Notices,
