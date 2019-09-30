@@ -1,4 +1,4 @@
-// import NoticeMeta from "./NoticeMeta";
+import NoticeMeta from "./NoticeMeta";
 // import CommentContainer from "./CommentContainer";
 import { Link } from "react-router-dom";
 import React from "react";
@@ -31,7 +31,6 @@ class Notice extends React.Component {
   }
 
   render() {
-    console.log(this.props.notice)
     if (!this.props.notice) {
       return null;
     }
@@ -45,7 +44,7 @@ class Notice extends React.Component {
         <div className="banner">
           <div className="container">
             <h1>{this.props.notice.title}</h1>
-            {/* <NoticeMeta notice={this.props.notice} canModify={canModify} /> */}
+            <NoticeMeta notice={this.props.notice} canModify={canModify} />
           </div>
         </div>
 

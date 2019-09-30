@@ -29,6 +29,11 @@ const Address = {
 };
 
 const requests = {
+  del: url =>
+    superagent
+      .del(`${API_ROOT}${url}`)
+      .use(tokenPlugin)
+      .then(responseBody),
   get: url =>
     superagent
       .get(`${API_ROOT}${url}`)
@@ -48,13 +53,12 @@ const requests = {
 
 const Notices = {
   all: page => requests.get(`/notices?limit=10`),
-  get: slug => 
-  requests.get(`/notices/${slug}`)
+  get: slug => requests.get(`/notices/${slug}`),
+  del: slug => requests.del(`/notices/${slug}`)
 };
 
 const Comments = {
-  forNotice: slug =>
-    requests.get(`/notices/${slug}/comments`)
+  forNotice: slug => requests.get(`/notices/${slug}/comments`)
 };
 
 const Auth = {
