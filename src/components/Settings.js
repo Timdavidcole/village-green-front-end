@@ -74,8 +74,6 @@ class SettingsForm extends React.Component {
       });
       this.setState(newState);
       if ((field = "address")) {
-        console.log("FETCH")
-        console.log(event.target.value)
         agent.Address.get(event.target.value).then(addressAutoComplete =>
           this.setState({ addressAutoComplete: addressAutoComplete })
         );
@@ -121,7 +119,6 @@ class SettingsForm extends React.Component {
   }
 
   render() {
-    console.log(this.state.addressAutoComplete);
     return (
       <form onSubmit={this.submitForm}>
         <fieldset>

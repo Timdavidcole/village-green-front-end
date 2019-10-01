@@ -43,7 +43,8 @@ const requests = {
     superagent
       .post(`${API_ROOT}${url}`, body)
       .use(tokenPlugin)
-      .then(responseBody),
+      .then(responseBody)
+      .then(resp => console.log(resp)),
   put: (url, body) =>
     superagent
       .put(`${API_ROOT}${url}`, body)
@@ -51,8 +52,16 @@ const requests = {
       .then(responseBody)
 };
 
+const Profile = {
+  get: username => requests.get(`/profiles/${username}`),
+};
+
 const Notices = {
   all: page => requests.get(`/notices?limit=10`),
+  byAuthor: (author, page) =>
+    requests.get(`/notices?author=${encodeURIComponent(author)}&limit=5`),
+  favoritedBy: (author, page) =>
+    requests.get(`/notices?favorited=${encodeURIComponent(author)}&limit=5`),
   get: slug => requests.get(`/notices/${slug}`),
   del: slug => requests.del(`/notices/${slug}`)
 };
@@ -79,6 +88,7 @@ export default {
   Auth,
   Comments,
   Address,
+  Profile,
   setToken: _token => {
     token = _token;
   }

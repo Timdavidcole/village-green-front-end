@@ -9,6 +9,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Settings from './components/Settings';
 import Notice from './components/Notice';
+import Profile from './components/Profile';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -20,6 +21,7 @@ ReactDOM.render(
         <Route path="/register" component={Register} />
         <Route path="/settings" component={Settings} />
         <Route path="/notice/:id" component={Notice} />
+        <Route path="/@:username" component={Profile} />
       </Switch>
     </BrowserRouter>
   </Provider>,

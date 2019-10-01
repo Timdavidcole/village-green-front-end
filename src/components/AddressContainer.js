@@ -52,7 +52,6 @@ class AddressContainer extends React.Component {
   }
 
   render() {
-    console.log(this.props.addressAutoComplete)
     if (this.props.addressAutoComplete) {
       return (
         <div style={{margin:"10px"}}>

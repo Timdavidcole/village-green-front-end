@@ -1,13 +1,13 @@
-import NoticeActions from './NoticeActions';
-import { Link } from 'react-router-dom';
-import React from 'react';
+import NoticeActions from "./NoticeActions";
+import { Link } from "react-router-dom";
+import React from "react";
 
 const NoticeMeta = props => {
   const notice = props.notice;
   return (
     <div className="article-meta">
       <Link to={`@${notice.author.username}`}>
-        <img src={notice.author.image} />
+        <img alt="author" src={notice.author.image} />
       </Link>
 
       <div className="info">
