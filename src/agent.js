@@ -15,25 +15,80 @@ const tokenPlugin = req => {
   }
 };
 
+const Address = {
+  get: query =>
+    superagent
+      .get(`https://autocomplete.geocoder.api.here.com/6.2/suggest.json`)
+      .query({
+        app_id: "yiHAq4dpgi8IolLODQhZ",
+        app_code: "ZoP4eVfs_w8jCGMGu9dw_g",
+        query: query,
+        maxresults: 1
+      })
+      .then(res => JSON.parse(res.text).suggestions[0])
+};
+
 const requests = {
-  get: url => superagent.get(`${API_ROOT}${url}`).use(tokenPlugin).then(responseBody),
+  del: url =>
+    superagent
+      .del(`${API_ROOT}${url}`)
+      .use(tokenPlugin)
+      .then(responseBody),
+  get: url =>
+    superagent
+      .get(`${API_ROOT}${url}`)
+      .use(tokenPlugin)
+      .then(responseBody),
   post: (url, body) =>
-    superagent.post(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody)
+    superagent
+      .post(`${API_ROOT}${url}`, body)
+      .use(tokenPlugin)
+      .then(responseBody)
+      .then(resp => console.log(resp)),
+  put: (url, body) =>
+    superagent
+      .put(`${API_ROOT}${url}`, body)
+      .use(tokenPlugin)
+      .then(responseBody)
+};
+
+const Profile = {
+  get: username => requests.get(`/profiles/${username}`),
 };
 
 const Notices = {
-  all: page => requests.get(`/notices?limit=10`)
+  all: page => requests.get(`/notices?limit=10`),
+  byAuthor: (author, page) =>
+    requests.get(`/notices?author=${encodeURIComponent(author)}&limit=5`),
+  favoritedBy: (author, page) =>
+    requests.get(`/notices?favorited=${encodeURIComponent(author)}&limit=5`),
+  get: slug => requests.get(`/notices/${slug}`),
+  del: slug => requests.del(`/notices/${slug}`)
+};
+
+const Comments = {
+  create: (slug, comment) =>
+    requests.post(`/notices/${slug}/comments`, { comment }),
+  delete: (slug, commentId) =>
+    requests.del(`/notices/${slug}/comments/${commentId}`),
+  forNotice: slug => requests.get(`/notices/${slug}/comments`)
 };
 
 const Auth = {
   current: () => requests.get("/user"),
   login: (email, password) =>
-    requests.post("/users/login", { user: { email, password } })
+    requests.post("/users/login", { user: { email, password } }),
+  register: (username, email, password, address = null) =>
+    requests.post("/users", { user: { username, email, password, address } }),
+  save: user => requests.put("/user", { user })
 };
 
 export default {
   Notices,
   Auth,
+  Comments,
+  Address,
+  Profile,
   setToken: _token => {
     token = _token;
   }

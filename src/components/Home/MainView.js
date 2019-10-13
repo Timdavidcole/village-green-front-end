@@ -3,7 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 const mapStateToProps = state => ({
-  notices: state.home.notices
+  ...state.notices
 });
 
 const MainView = props => {

@@ -1,16 +1,20 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const NoticePreview = props => {
   const notice = props.notice;
+
   return (
     <div className="article-preview">
       <div className="article-meta">
-        <a>
-          <img alt="Notice Author" src={notice.author.image} />
-        </a>
+        <Link to={`@${notice.author.username}`}>
+          <img src={notice.author.image} alt="author"/>
+        </Link>
 
         <div className="info">
-          <a className="author">{notice.author.username}</a>
+          <Link className="author" to={`@${notice.author.username}`}>
+            {notice.author.username}
+          </Link>
           <span className="date">
             {new Date(notice.createdAt).toDateString()}
           </span>
@@ -23,7 +27,7 @@ const NoticePreview = props => {
         </div>
       </div>
 
-      <a to={`notice/${notice.slug}`} className="preview-link">
+      <Link to={`notice/${notice.slug}`} className="preview-link">
         <h1>{notice.title}</h1>
         <p>{notice.description}</p>
         <span>Read more...</span>
@@ -36,7 +40,7 @@ const NoticePreview = props => {
             );
           })}
         </ul>
-      </a>
+      </Link>
     </div>
   );
 };

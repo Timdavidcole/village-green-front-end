@@ -6,6 +6,8 @@ export default (state = {}, action) => {
         ...state,
         notices: action.payload.notices
       };
+    case "HOME_PAGE_UNLOADED":
+      return {};
   }
 
   return state;
