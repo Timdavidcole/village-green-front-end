@@ -1,5 +1,6 @@
 import Banner from "./Banner";
 import MainView from "./MainView";
+import MainMap from "./MainMap";
 import React from "react";
 import agent from "../../agent";
 import { connect } from "react-redux";
@@ -23,6 +24,9 @@ class Home extends React.Component {
         <Banner appName={this.props.appName} />
 
         <div className="container page">
+          <div className="main-map">
+            <MainMap />
+          </div>
           <div className="row">
             <MainView />
           </div>

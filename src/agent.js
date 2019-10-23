@@ -43,8 +43,7 @@ const requests = {
     superagent
       .post(`${API_ROOT}${url}`, body)
       .use(tokenPlugin)
-      .then(responseBody)
-      .then(resp => console.log(resp)),
+      .then(responseBody),
   put: (url, body) =>
     superagent
       .put(`${API_ROOT}${url}`, body)
