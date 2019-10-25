@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import MapComponent from "./MapComponent";
 
 class MainMap extends React.PureComponent {
@@ -14,7 +13,7 @@ class MainMap extends React.PureComponent {
   delayedShowMarker = () => {
     setTimeout(() => {
       this.setState({ isMarkerShown: true });
-    }, 3000);
+    }, 1000);
   };
 
   handleMarkerClick = () => {
