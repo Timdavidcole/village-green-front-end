@@ -1,5 +1,6 @@
 import Banner from "./Banner";
 import MainView from "./MainView";
+import MapNavBar from "./MapNavBar";
 import MainMap from "./MainMap";
 import React from "react";
 import agent from "../../agent";
@@ -20,9 +21,9 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className="home-page">
+      <div className="home-page" style={{padding:"0px"}}>
         <Banner appName={this.props.appName} />
-
+        <MapNavBar />
         <div className="container page">
           <div className="main-map">
             <MainMap />

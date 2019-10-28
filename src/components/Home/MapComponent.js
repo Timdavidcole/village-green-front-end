@@ -19,6 +19,8 @@ class MapComponent extends React.Component {
       map: ""
     };
     this.updatePosition = this.updatePosition.bind(this);
+    this.markerIcon = this.markerIcon.bind(this);
+
   }
 
   componentDidMount() {
@@ -55,7 +57,6 @@ class MapComponent extends React.Component {
         });
         return true;
       } else return true;
-      return true;
     } else return false;
   }
 
@@ -63,6 +64,12 @@ class MapComponent extends React.Component {
     this.setState({
       center: { lat: position.coords.latitude, lng: position.coords.longitude }
     });
+  }
+
+  markerIcon() {
+    if (this.props.currentUser) {
+      return { icon: {url: require('./icons8-home-address-64.png'), scaledSize: {width: 32, height: 32}}} 
+    }
   }
 
   render() {
@@ -75,7 +82,12 @@ class MapComponent extends React.Component {
           this.setState({ center: this.state.map.getCenter().toJSON() })
         }
       >
-        {this.props.isMarkerShown && <Marker position={this.state.center} />}
+        {this.props.isMarkerShown && (
+          <Marker
+            options={this.markerIcon()}
+            position={this.state.center}
+          />
+        )}
       </GoogleMap>
     );
   }
