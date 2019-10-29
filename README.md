@@ -5,6 +5,12 @@
 
 This is my first full-stack completely self-made personal project, from concept to copy.  I came up with the idea while staying with a friend in the countryside staring out the window (as you do!) at the village community/parish noticeboard and wondering why on earth that doesn't exist on the internet.  And why can't we do it better.  We are so focused on globalisation and connecting people far away from each other, we neglect connecting people and services near to each other.  So my plan is to rectify this.
 
+For the time being the best way to check out my work so far is use my Heroku deployment
+
+```
+https://village-green.herokuapp.com/
+```
+
 ## Key Features
 
 ### &nbsp;&nbsp;&nbsp;&nbsp;A global noticeboard, for local issues.
