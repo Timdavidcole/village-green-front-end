@@ -1,6 +1,7 @@
 const defaultState = {
   appName: "Village Green",
-  token: null
+  token: null,
+  centerMap: { lat: 51.508402, lng: -0.126326 }
 };
 
 export default (state = defaultState, action) => {
@@ -22,6 +23,11 @@ export default (state = defaultState, action) => {
         ...state,
         redirectTo: action.error ? null : "/",
         currentUser: action.error ? null : action.payload.user
+      };
+    case "CHANGE_CENTER":
+      return {
+        ...state,
+        centerMap: action.payload.coordinates
       };
     case "LOGIN":
     case "REGISTER":

@@ -8,7 +8,13 @@ import {
 } from "react-google-maps";
 
 const mapStateToProps = state => ({
-  currentUser: state.common.currentUser
+  currentUser: state.common.currentUser,
+  centerMap: state.map.centerMap,
+  centerLocation: state.map.location
+});
+
+const mapDispatchToProps = dispatch => ({
+  changeMapCenter: payload => dispatch({ type: "CHANGE_CENTER", payload })
 });
 
 class MapComponent extends React.Component {
@@ -18,22 +24,24 @@ class MapComponent extends React.Component {
       center: { lat: 51.508402, lng: -0.126326 },
       map: ""
     };
-    this.updatePosition = this.updatePosition.bind(this);
+    this.updateCenterPosition = this.updateCenterPosition.bind(this);
     this.markerIcon = this.markerIcon.bind(this);
-
   }
 
   componentDidMount() {
     if (this.props.currentUser) {
-      this.setState({
-        center: {
-          lat: this.props.currentUser.homeXCoord,
-          lng: this.props.currentUser.homeYCoord
-        }
-      });
+      this.updateCenterPosition(
+        this.props.currentUser.homeXCoord,
+        this.props.currentUser.homeYCoord,
+        "HOME"
+      );
     } else {
       navigator.geolocation.getCurrentPosition(position =>
-        this.updatePosition(position)
+        this.updateCenterPosition(
+          position.coords.latitude,
+          position.coords.longitude,
+          ''
+        )
       );
     }
   }
@@ -42,34 +50,46 @@ class MapComponent extends React.Component {
     if (
       this.state.map !== nextState.map ||
       this.props.isMarkerShown !== nextProps.isMarkerShown ||
-      this.state.center !== nextState.center ||
+      this.props.centerMap !== nextProps.centerMap ||
       this.props.currentUser !== nextProps.currentUser
     ) {
       if (
         this.props.currentUser !== nextProps.currentUser &&
         nextProps.currentUser
       ) {
-        this.setState({
-          center: {
-            lat: nextProps.currentUser.homeXCoord,
-            lng: nextProps.currentUser.homeYCoord
-          }
-        });
+        this.updateCenterPosition(
+          nextProps.currentUser.homeXCoord,
+          nextProps.currentUser.homeYCoord,
+          "HOME"
+        );
         return true;
       } else return true;
     } else return false;
   }
 
-  updatePosition(position) {
-    this.setState({
-      center: { lat: position.coords.latitude, lng: position.coords.longitude }
+  updateCenterPosition(lat, lng, loc = "") {
+    this.props.changeMapCenter({
+      coordinates: { lat: lat, lng: lng },
+      location: loc
     });
   }
 
   markerIcon() {
-    if (this.props.currentUser) {
-      return { icon: {url: require('./icons8-home-address-64.png'), scaledSize: {width: 32, height: 32}}} 
-    }
+    console.log(this.props.centerLocation)
+    if (this.props.currentUser && this.props.centerLocation === "HOME") {
+      return {
+        icon: {
+          url: require("./icons8-home-address-64.png"),
+          scaledSize: { width: 64, height: 64 }
+        }
+      };
+    } else
+      return {
+        icon: {
+          url: require("./icons8-arrow-pointing-down-100.png"),
+          scaledSize: { width: 64, height: 64 }
+        }
+      };
   }
 
   render() {
@@ -77,22 +97,23 @@ class MapComponent extends React.Component {
       <GoogleMap
         defaultZoom={16}
         ref={thisMap => this.setState({ map: thisMap })}
-        center={this.state.center}
+        center={this.props.centerMap}
         onCenterChanged={() =>
-          this.setState({ center: this.state.map.getCenter().toJSON() })
+          this.props.changeMapCenter({
+            coordinates: this.state.map.getCenter().toJSON(),
+            location: ""
+          })
         }
       >
         {this.props.isMarkerShown && (
-          <Marker
-            options={this.markerIcon()}
-            position={this.state.center}
-          />
+          <Marker options={this.markerIcon()} position={this.props.centerMap} />
         )}
       </GoogleMap>
     );
   }
 }
 
-export default connect(mapStateToProps)(
-  withScriptjs(withGoogleMap(MapComponent))
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withScriptjs(withGoogleMap(MapComponent)));

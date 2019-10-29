@@ -21,11 +21,10 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className="home-page" style={{padding:"0px"}}>
-        <Banner appName={this.props.appName} />
-        <MapNavBar />
-        <div className="container page">
+      <div className="home-page" style={{ padding: "0px" }}>
+        <div style={{ width: "80%", marginLeft: "auto", marginRight: "auto" }}>
           <div className="main-map">
+            <MapNavBar />
             <MainMap />
           </div>
           <div className="row">
