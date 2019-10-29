@@ -1,8 +1,6 @@
 # Notice
   ## The Noticeboard for anyone, anywhere and anything.
 
-<img width="1432" alt="Noticeboard-example" src="https://user-images.githubusercontent.com/45185594/63637450-f7a78380-c673-11e9-82b7-4650089570ed.png">
-
 This is my first full-stack completely self-made personal project, from concept to copy.  I came up with the idea while staying with a friend in the countryside staring out the window (as you do!) at the village community/parish noticeboard and wondering why on earth that doesn't exist on the internet.  And why can't we do it better.  We are so focused on globalisation and connecting people far away from each other, we neglect connecting people and services near to each other.  So my plan is to rectify this.
 
 For the time being the best way to check out my work so far is use my Heroku deployment
