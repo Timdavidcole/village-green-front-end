@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import MapSearchBox from "./MapSearchBox";
 
 const mapStateToProps = state => ({
   currentUser: state.common.currentUser
@@ -85,6 +86,7 @@ class MapNavBar extends React.Component {
           >
             <i class="fa fa-fw fa-location-arrow"></i> Current Location
           </button>
+          <MapSearchBox />
         </div>
       </div>
     );
