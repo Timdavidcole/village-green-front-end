@@ -5,13 +5,13 @@ const NoticePreview = props => {
   const notice = props.notice;
 
   return (
-    <div className="article-preview">
-      <div className="article-meta">
+    <div style={{boxShadow: "5px 5px 5px #cfcfcf", borderRadius:"6px", margin: "10px"}}>
+      <div style={{display: "inline-block"}}>
         <Link to={`@${notice.author.username}`}>
-          <img src={notice.author.image} alt="author"/>
+          <img style={{borderRadius:"6px", width: "30px", height: "30px", objectFit: "cover"}} src={notice.author.image} alt="author"/>
         </Link>
 
-        <div className="info">
+        <div style={{display: "block"}}>
           <Link className="author" to={`@${notice.author.username}`}>
             {notice.author.username}
           </Link>
@@ -20,7 +20,7 @@ const NoticePreview = props => {
           </span>
         </div>
 
-        <div className="pull-xs-right">
+        <div style={{float: "right"}}>
           <button className="btn btn-sm btn-outline-primary">
             <i className="ion-heart"></i> {notice.favoritesCount}
           </button>
@@ -28,7 +28,7 @@ const NoticePreview = props => {
       </div>
 
       <Link to={`notice/${notice.slug}`} className="preview-link">
-        <h1>{notice.title}</h1>
+        <h3>{notice.title}</h3>
         <p>{notice.description}</p>
         <span>Read more...</span>
         <ul className="tag-list">
