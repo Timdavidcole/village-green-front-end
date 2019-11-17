@@ -5,22 +5,23 @@ const NoticePreview = props => {
   const notice = props.notice;
 
   return (
-    <div style={{boxShadow: "5px 5px 5px #cfcfcf", borderRadius:"6px", margin: "10px"}}>
-      <div style={{display: "inline-block"}}>
-        <Link to={`@${notice.author.username}`}>
-          <img style={{borderRadius:"6px", width: "30px", height: "30px", objectFit: "cover"}} src={notice.author.image} alt="author"/>
-        </Link>
-
-        <div style={{display: "block"}}>
-          <Link className="author" to={`@${notice.author.username}`}>
+    <div style={{boxShadow: "3px 3px 8px #cfcfcf", borderRadius:"6px", margin: "10px", padding: "5px"}}>
+      <div style={{width: "800px"}}>
+        <div style={{margin: "4px", display: "inline-block", width: "40px", float: "left"}}>
+          <Link to={`@${notice.author.username}`}>
+            <img style={{borderRadius:"6px", width: "40px", height: "40px", objectFit: "cover"}} src={notice.author.image} alt="author"/>
+          </Link>
+        </div>
+        <div style={{float: "left"}}>
+          <Link style={{display: "block"}} to={`@${notice.author.username}`}>
             {notice.author.username}
           </Link>
-          <span className="date">
+          <span style={{color: "grey", display: "block"}}>
             {new Date(notice.createdAt).toDateString()}
           </span>
         </div>
 
-        <div style={{float: "right"}}>
+        <div>
           <button className="btn btn-sm btn-outline-primary">
             <i className="ion-heart"></i> {notice.favoritesCount}
           </button>
