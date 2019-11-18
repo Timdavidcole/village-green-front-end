@@ -1,50 +1,19 @@
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+// Global module
+var myModule = (function() {
+  // Module object
+  var module = { privateVariable: "Hello World" }
 
-function run(film, character) {
-  let charFilms = request(
-    "https://challenges.hackajob.co/swapi/api/people/?search=",
-    character
-  );
-
-  let filmChars = request(
-    "https://challenges.hackajob.co/swapi/api/films/?search=",
-    film
-  );
-
-  if (filmChars.results[0] !== undefined) {
-    filmChars = filmChars.results[0].characters.map(character => {
-      return request(character, "").name;
-    });
-  } else {
-    charFilms = ["none"];
+  function privateMethod() {
+    // ...
   }
 
-  if (charFilms.results[0] !== undefined) {
-    charFilms = charFilms.results[0].films.map(film => {
-      return request(film, "").title;
-    });
-  } else {
-    charFilms = ["none"];
-  }
-  return (
-    film +
-    ": " +
-    filmChars.sort().join(", ") +
-    "; " +
-    character +
-    ": " +
-    charFilms.sort().join(", ")
-  );
-}
+  module.publicProperty = "Foobar";
+  module.publicMethod = function() {
+    console.log(this.privateVariable);
+  };
 
-function request(url, param) {
-  let request = new XMLHttpRequest();
-  request.open("GET", url + param, false);
-  request.send(null);
+  return module;
+})();
 
-  if (request.status === 200) {
-    return JSON.parse(request.responseText);
-  }
-}
-
-console.log(run("A New Hope", "Raymus Antilles"));
+console.log(myModule.publicProperty);
+myModule.publicMethod();

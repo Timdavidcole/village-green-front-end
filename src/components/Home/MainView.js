@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 
 const MainView = props => {
   return (
-    <div className="col-md-9">
+    <div>
       <Notices notices={props.notices} />
     </div>
   );
