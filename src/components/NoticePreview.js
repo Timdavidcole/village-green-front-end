@@ -7,7 +7,7 @@ const NoticePreview = props => {
   return (
     <div style={{boxShadow: "3px 3px 8px #cfcfcf", borderRadius:"6px", margin: "10px", padding: "5px"}}>
       <div style={{width: "800px"}}>
-        <div style={{margin: "4px", display: "inline-block", width: "40px", float: "left"}}>
+        <div style={{margin: "4px", display: "inline-block", width: "40px", float: "left", overflow:"hidden"}}>
           <Link to={`@${notice.author.username}`}>
             <img style={{borderRadius:"6px", width: "40px", height: "40px", objectFit: "cover"}} src={notice.author.image} alt="author"/>
           </Link>
