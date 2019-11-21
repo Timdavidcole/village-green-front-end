@@ -49,7 +49,7 @@ const NoticePreview = props => {
 
       <Link to={`notice/${notice.slug}`}>
         <h3>{notice.title}</h3>
-        <h4>{notice.description}</h4>
+        <h5>{notice.description}</h5>
         <span>{notice.body}</span>
       </Link>
       <div
