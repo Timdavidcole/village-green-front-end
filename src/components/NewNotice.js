@@ -2,6 +2,7 @@ import React from "react";
 import ListErrors from "./ListErrors";
 import agent from "../agent";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 const mapStateToProps = state => ({ ...state.auth });
 
@@ -32,52 +33,21 @@ class NewNotice extends React.Component {
   }
 
   render() {
-    const { email, password } = this.props;
+    const notice = this.props.notice;
+
     return (
-      <div className="auth-page">
-        <div className="container page">
-          <div className="row">
-            <div className="col-md-6 offset-md-3 col-xs-12">
-              <h1 className="text-xs-center">Sign In</h1>
-              <p className="text-xs-center">
-                <a>Need an account?</a>
-              </p>
-              <ListErrors errors={this.props.errors} />
-              <form onSubmit={this.submitForm(email, password)}>
-                <fieldset>
-                  <fieldset className="form-group">
-                    <input
-                      className="form-control form-control-lg"
-                      type="email"
-                      placeholder="Email"
-                      value={email}
-                      onChange={this.changeEmail}
-                    />
-                  </fieldset>
-
-                  <fieldset className="form-group">
-                    <input
-                      className="form-control form-control-lg"
-                      type="password"
-                      placeholder="Password"
-                      value={password}
-                      onChange={this.changePassword}
-                    />
-                  </fieldset>
-
-                  <button
-                    className="btn btn-lg btn-primary pull-xs-right"
-                    type="submit"
-                    disabled={this.props.inProgress}
-                  >
-                    {" "}
-                    Sign in
-                  </button>
-                </fieldset>
-              </form>
-            </div>
-          </div>
-        </div>
+      <div
+        style={{
+          width: "600px",
+          boxShadow: "3px 3px 8px #cfcfcf",
+          borderRadius: "6px",
+          margin: "10px",
+          padding: "5px"
+        }}
+      >
+          <h3>Enter title here...</h3>
+          <h5>Enter description here...</h5>
+          <span>Enter body here...</span>
       </div>
     );
   }
