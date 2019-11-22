@@ -85,6 +85,9 @@ class Header extends React.Component {
           <Link to="/" className="navbar-brand">
             {this.props.appName.toLowerCase()}
           </Link>
+          <Link to="/" style={{position: "relative", top: "6px", fontSize: "18px", fontStyle: "italic"}}>
+            the noticeboard for anywhere, anything and anyone...
+          </Link>
           <LoggedOutView currentUser={this.props.currentUser} />
           <LoggedInView
             onClickLogout={this.props.onClickLogout}
