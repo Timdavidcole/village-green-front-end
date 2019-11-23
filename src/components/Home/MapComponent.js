@@ -40,7 +40,7 @@ class MapComponent extends React.Component {
         this.updateCenterPosition(
           position.coords.latitude,
           position.coords.longitude,
-          ''
+          ""
         )
       );
     }
@@ -75,7 +75,7 @@ class MapComponent extends React.Component {
   }
 
   markerIcon() {
-    console.log(this.props.centerLocation)
+    console.log(this.props.centerLocation);
     if (this.props.currentUser && this.props.centerLocation === "HOME") {
       return {
         icon: {
@@ -98,6 +98,7 @@ class MapComponent extends React.Component {
         defaultZoom={16}
         ref={thisMap => this.setState({ map: thisMap })}
         center={this.props.centerMap}
+        defaultOptions={{ mapTypeControl: false }}
         onCenterChanged={() =>
           this.props.changeMapCenter({
             coordinates: this.state.map.getCenter().toJSON(),

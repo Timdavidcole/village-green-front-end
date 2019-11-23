@@ -42,10 +42,10 @@ class NewNotice extends React.Component {
       <div
         style={{
           width: "600px",
-          boxShadow: "3px 3px 8px #cfcfcf",
+          boxShadow: "5px 10px 20px 3px rgba(176,176,176,0.79)",
           borderRadius: "6px",
-          margin: "10px",
-          padding: "5px"
+          margin: "20px",
+          padding: "15px"
         }}
       >
         <h3>Post a Notice</h3>

@@ -47,19 +47,19 @@ class MapNavBar extends React.Component {
 
   currLocOnClick() {
     return () =>
-      navigator.geolocation.getCurrentPosition(position =>
+      navigator.geolocation.getCurrentPosition(position => {
+        console.log(position);
         this.props.changeMapCenter({
           coordinates: {
             lat: position.coords.latitude,
             lng: position.coords.longitude
           },
           location: ""
-        })
-      );
+        });
+      });
   }
 
   homeButton() {
-    console.log(this.props.currentUser);
     if (this.props.currentUser) {
       return (
         <button
