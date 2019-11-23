@@ -22,7 +22,7 @@ class Home extends React.Component {
   render() {
     return (
       <div className="home-page" style={{ padding: "0px" }}>
-        <div style={{ width: "80%", marginLeft: "auto", marginRight: "auto" }}>
+        <div style={{ width: "100%"}}>
           <div className="main-map">
             <MapNavBar />
             <MainMap />
