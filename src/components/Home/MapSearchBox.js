@@ -44,7 +44,8 @@ class MapSearchBox extends React.Component {
           padding: "4px",
           borderRadius: "5px",
           width: "50%",
-          float: "right"
+          float: "right",
+          boxShadow: "10px 10px 20px 3px rgba(176,176,176,0.79)"
         }}
         onPlaceSelected={place => this.getCoords(place)}
         types={["address"]}

@@ -24,10 +24,11 @@ class MapNavBar extends React.Component {
       margin: "3px",
       padding: "5px",
       paddingRight: "8px",
-      borderRadius: "3px",
+      borderRadius: "5px",
       backgroundColor: "#70bf6d",
       color: "white",
-      outline: 0
+      outline: 0,
+      boxShadow: "10px 10px 20px 3px rgba(176,176,176,0.79)"
     };
   }
 
@@ -74,10 +75,17 @@ class MapNavBar extends React.Component {
   }
 
   render() {
-    console.log(this.props.currentUser);
     return (
       <div className="map-nav-bar-container">
-        <div className="navbar" style={{ margin: "0px" }}>
+        <div
+          className="navbar"
+          style={{
+            margin: "0px",
+            position: "absolute",
+            zIndex: "50",
+            width: "100%"
+          }}
+        >
           {this.homeButton()}
           <button
             onClick={this.currLocOnClick()}
