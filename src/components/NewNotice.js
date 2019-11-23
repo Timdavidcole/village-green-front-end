@@ -52,11 +52,29 @@ class NewNotice extends React.Component {
           backgroundColor: "white"
         }}
       >
-        <h3>Post a Notice</h3>
-        <form onSubmit={this.submitForm(title, description, body)}>
+        <form
+          style={{ width: "100%", display: "inline-block" }}
+          onSubmit={this.submitForm(title, description, body)}
+        >
           <fieldset>
             <fieldset>
+            <span
+          style={{
+            color: "#5cb85c",
+            fontFamily: "titillium web,sans-serif",
+            fontSize: "1.4rem",
+            width: "180px"
+          }}
+        >
+          post a notice
+        </span>
               <input
+                style={{
+                  border: "0px none",
+                  fontFamily: "titillium web,sans-serif",
+                  fontSize: "1.3rem",
+                  float: "right"
+                }}
                 type="title"
                 placeholder="Enter title here..."
                 value={title}
@@ -66,6 +84,7 @@ class NewNotice extends React.Component {
 
             <fieldset>
               <input
+                style={{ border: "0px none" }}
                 type="description"
                 placeholder="Enter description here..."
                 value={description}
@@ -75,6 +94,7 @@ class NewNotice extends React.Component {
 
             <fieldset>
               <input
+                style={{ border: "0px none" }}
                 type="body"
                 placeholder="Enter body here..."
                 value={body}
@@ -82,10 +102,7 @@ class NewNotice extends React.Component {
               />
             </fieldset>
 
-            <button
-              type="submit"
-              disabled={this.props.inProgress}
-            >
+            <button type="submit" disabled={this.props.inProgress}>
               {" "}
               Post Notice
             </button>
