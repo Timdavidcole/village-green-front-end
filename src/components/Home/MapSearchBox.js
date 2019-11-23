@@ -49,6 +49,7 @@ class MapSearchBox extends React.Component {
         }}
         onPlaceSelected={place => this.getCoords(place)}
         types={["address"]}
+        placeholder={"Search a location..."}
       />
     );
   }

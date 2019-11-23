@@ -13,8 +13,11 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type: "UPDATE_FIELD_AUTH", key: "description", value }),
   onChangeBody: value =>
     dispatch({ type: "UPDATE_FIELD_AUTH", key: "body", value }),
-  onSubmit: (email, password) =>
-    dispatch({ type: "LOGIN", payload: agent.Auth.login(email, password) }),
+  onSubmit: (title, description, body) =>
+    dispatch({
+      type: "LOGIN",
+      payload: agent.Auth.login(title, description, body)
+    }),
   onUnload: () => dispatch({ type: "LOGIN_PAGE_UNLOADED" })
 });
 
@@ -25,9 +28,9 @@ class NewNotice extends React.Component {
     this.changeDescription = event =>
       this.props.onChangeDescription(event.target.value);
     this.changeBody = event => this.props.onChangeBody(event.target.value);
-    this.submitForm = (email, password) => event => {
+    this.submitForm = (title, description, body) => event => {
       event.preventDefault();
-      this.props.onSubmit(email, password);
+      this.props.onSubmit(title, description, body);
     };
   }
 
@@ -41,11 +44,11 @@ class NewNotice extends React.Component {
     return (
       <div
         style={{
-          width: "400px",
+          width: "450px",
           boxShadow: "5px 10px 20px 3px rgba(176,176,176,0.79)",
           borderRadius: "6px",
           margin: "20px",
-          padding: "15px",
+          padding: "10px",
           position: "absolute",
           top: "100px",
           zIndex: "50",
@@ -58,25 +61,28 @@ class NewNotice extends React.Component {
         >
           <fieldset>
             <fieldset>
-            <span
-          style={{
-            color: "#5cb85c",
-            fontFamily: "titillium web,sans-serif",
-            fontSize: "1.4rem",
-            width: "180px"
-          }}
-        >
-          post a notice
-        </span>
+              <span
+                style={{
+                  color: "#5cb85c",
+                  fontFamily: "titillium web,sans-serif",
+                  fontSize: "21px",
+                  width: "170px",
+                  top: "1px",
+                  position: "relative"
+                }}
+              >
+                post a new notice
+              </span>
               <input
                 style={{
                   border: "0px none",
                   fontFamily: "titillium web,sans-serif",
-                  fontSize: "1.3rem",
-                  float: "right"
+                  fontSize: "21px",
+                  float: "right",
+                  width: "220px"
                 }}
                 type="title"
-                placeholder="Enter title here..."
+                placeholder="enter title here..."
                 value={title}
                 onChange={this.changeTitle}
               />
@@ -84,27 +90,49 @@ class NewNotice extends React.Component {
 
             <fieldset>
               <input
-                style={{ border: "0px none" }}
+                style={{
+                  border: "0px none",
+                  fontFamily: "titillium web,sans-serif",
+                  fontSize: "18px",
+                  width: "350px"
+                }}
                 type="description"
-                placeholder="Enter description here..."
+                placeholder="enter description here..."
                 value={description}
                 onChange={this.changeDescription}
               />
             </fieldset>
 
             <fieldset>
-              <input
-                style={{ border: "0px none" }}
+              <textarea
+                style={{
+                  border: "0px none",
+                  fontFamily: "titillium web,sans-serif",
+                  fontSize: "18px",
+                  width: "350px",
+                  boxShadow: 'none',
+                }}
                 type="body"
-                placeholder="Enter body here..."
+                placeholder="enter body here..."
                 value={body}
                 onChange={this.changeBody}
               />
             </fieldset>
 
-            <button type="submit" disabled={this.props.inProgress}>
+            <button
+              type="submit"
+              disabled={this.props.inProgress}
+              style={{
+                padding: "10px",
+                borderRadius: "10px",
+                backgroundColor: "#70bf6d",
+                color: "white",
+                outline: 0,
+                float: "right"
+              }}
+            >
               {" "}
-              Post Notice
+              Post!
             </button>
           </fieldset>
         </form>
