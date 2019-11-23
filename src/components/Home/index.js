@@ -5,6 +5,8 @@ import MainMap from "./MainMap";
 import React from "react";
 import agent from "../../agent";
 import { connect } from "react-redux";
+import NewNotice from "../NewNotice";
+
 
 const mapStateToProps = state => ({
   appName: state.common.appName
@@ -25,6 +27,7 @@ class Home extends React.Component {
         <div style={{ width: "100%"}}>
           <div className="main-map">
             <MapNavBar />
+            <NewNotice />
             <MainMap />
           </div>
           <div className="row">

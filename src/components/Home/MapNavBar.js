@@ -48,7 +48,6 @@ class MapNavBar extends React.Component {
   currLocOnClick() {
     return () =>
       navigator.geolocation.getCurrentPosition(position => {
-        console.log(position);
         this.props.changeMapCenter({
           coordinates: {
             lat: position.coords.latitude,

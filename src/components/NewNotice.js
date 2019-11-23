@@ -41,19 +41,22 @@ class NewNotice extends React.Component {
     return (
       <div
         style={{
-          width: "600px",
+          width: "400px",
           boxShadow: "5px 10px 20px 3px rgba(176,176,176,0.79)",
           borderRadius: "6px",
           margin: "20px",
-          padding: "15px"
+          padding: "15px",
+          position: "absolute",
+          top: "100px",
+          zIndex: "50",
+          backgroundColor: "white"
         }}
       >
         <h3>Post a Notice</h3>
         <form onSubmit={this.submitForm(title, description, body)}>
           <fieldset>
-            <fieldset className="form-group">
+            <fieldset>
               <input
-                className="form-control form-control-lg"
                 type="title"
                 placeholder="Enter title here..."
                 value={title}
@@ -61,9 +64,8 @@ class NewNotice extends React.Component {
               />
             </fieldset>
 
-            <fieldset className="form-group">
+            <fieldset>
               <input
-                className="form-control form-control-lg"
                 type="description"
                 placeholder="Enter description here..."
                 value={description}
@@ -71,9 +73,8 @@ class NewNotice extends React.Component {
               />
             </fieldset>
 
-            <fieldset className="form-group">
+            <fieldset>
               <input
-                className="form-control form-control-lg"
                 type="body"
                 placeholder="Enter body here..."
                 value={body}
@@ -82,7 +83,6 @@ class NewNotice extends React.Component {
             </fieldset>
 
             <button
-              className="btn btn-lg btn-primary pull-xs-right"
               type="submit"
               disabled={this.props.inProgress}
             >
