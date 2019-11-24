@@ -75,7 +75,6 @@ class MapComponent extends React.Component {
   }
 
   markerIcon() {
-    console.log(this.props.centerLocation);
     if (this.props.currentUser && this.props.centerLocation === "HOME") {
       return {
         icon: {

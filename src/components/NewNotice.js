@@ -60,42 +60,45 @@ class NewNotice extends React.Component {
           onSubmit={this.submitForm(title, description, body)}
         >
           <fieldset>
-            <label for="title"
-              style={{
-                color: "#5cb85c",
-                fontFamily: "titillium web,sans-serif",
-                fontSize: "21px",
-                width: "170px",
-                padding: "4px",
-                position: "relative",
-                float: "right",
-                bottom: "2px"
-              }}
-            >
-              post a new notice
-            </label>
-            <input
-              style={{
-                border: "0px none",
-                fontFamily: "titillium web,sans-serif",
-                fontSize: "21px",
-                width: "220px",
-                padding: "4px"
-              }}
-              type="title"
-              id="title"
-              placeholder="enter title here..."
-              value={title}
-              onChange={this.changeTitle}
-            />
-
+            <div style={{
+                  borderBottom: "1px dashed red"
+                }}>
+              <label
+                for="title"
+                style={{
+                  color: "#5cb85c",
+                  fontFamily: "titillium web,sans-serif",
+                  fontSize: "21px",
+                  width: "170px",
+                  padding: "4px",
+                  position: "relative",
+                  float: "right",
+                  bottom: "2px"
+                }}
+              >
+                post a new notice
+              </label>
+              <input
+                style={{
+                  border: "0px none",
+                  fontFamily: "titillium web,sans-serif",
+                  fontSize: "21px",
+                  width: "220px",
+                  padding: "4px"
+                }}
+                type="title"
+                id="title"
+                placeholder="enter title here..."
+                value={title}
+                onChange={this.changeTitle}
+              />
+            </div>
             <input
               style={{
                 border: "0px none",
                 fontFamily: "titillium web,sans-serif",
                 fontSize: "18px",
                 width: "428px",
-                marginTop: "4px",
                 padding: "4px"
               }}
               type="description"

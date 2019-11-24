@@ -2,9 +2,16 @@ import React from "react";
 import { connect } from "react-redux";
 import Autocomplete from "react-google-autocomplete";
 import Geocode from "react-geocode";
+import PlacesAutocomplete from "react-places-autocomplete";
+import {
+  geocodeByAddress,
+  geocodeByPlaceId,
+  getLatLng
+} from "react-places-autocomplete";
 
 const mapStateToProps = state => ({
-  currentUser: state.common.currentUser
+  currentUser: state.common.currentUser,
+  centerMap: state.map.centerMap
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -37,6 +44,7 @@ class MapSearchBox extends React.Component {
   render() {
     Geocode.setApiKey("AIzaSyB9-449YKR60GMDFtlaiFHJiU3W5MYrPJ4");
     Geocode.setLanguage("en");
+    console.log(this.props.centerMap);
     return (
       <Autocomplete
         style={{
@@ -48,7 +56,8 @@ class MapSearchBox extends React.Component {
           boxShadow: "10px 10px 20px 3px rgba(176,176,176,0.79)"
         }}
         onPlaceSelected={place => this.getCoords(place)}
-        types={["address"]}
+        types={["geocode"]}
+        location={`${this.props.centerMap.lat},${this.props.centerMap.lng}`}
         placeholder={"Search a location..."}
       />
     );
