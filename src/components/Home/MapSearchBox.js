@@ -43,7 +43,7 @@ class MapSearchBox extends React.Component {
           margin: "3px",
           padding: "4px",
           borderRadius: "5px",
-          width: "50%",
+          width: "40%",
           float: "right",
           boxShadow: "10px 10px 20px 3px rgba(176,176,176,0.79)"
         }}

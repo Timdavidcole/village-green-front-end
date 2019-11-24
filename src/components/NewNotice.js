@@ -67,8 +67,10 @@ class NewNotice extends React.Component {
                   fontFamily: "titillium web,sans-serif",
                   fontSize: "21px",
                   width: "170px",
-                  top: "1px",
-                  position: "relative"
+                  padding: "4px",
+                  position: "relative",
+                  float: "right",
+                  bottom: "3px"
                 }}
               >
                 post a new notice
@@ -78,8 +80,8 @@ class NewNotice extends React.Component {
                   border: "0px none",
                   fontFamily: "titillium web,sans-serif",
                   fontSize: "21px",
-                  float: "right",
-                  width: "220px"
+                  width: "220px",
+                  padding: "4px"
                 }}
                 type="title"
                 placeholder="enter title here..."
@@ -94,7 +96,9 @@ class NewNotice extends React.Component {
                   border: "0px none",
                   fontFamily: "titillium web,sans-serif",
                   fontSize: "18px",
-                  width: "350px"
+                  width: "400px",
+                  marginTop: "4px",
+                  padding: "4px"
                 }}
                 type="description"
                 placeholder="enter description here..."
@@ -104,26 +108,29 @@ class NewNotice extends React.Component {
             </fieldset>
 
             <fieldset>
-              <textarea
+              <textarea rows="5"
                 style={{
                   border: "0px none",
                   fontFamily: "titillium web,sans-serif",
                   fontSize: "18px",
                   width: "350px",
-                  boxShadow: 'none',
-                }}
+                  marginTop: "4px",
+                  boxShadow: "none",
+                  padding: "4px",
+                  resize: "none"
+                                }}
                 type="body"
                 placeholder="enter body here..."
                 value={body}
                 onChange={this.changeBody}
               />
-            </fieldset>
-
-            <button
+              <button
               type="submit"
               disabled={this.props.inProgress}
               style={{
+                bottom: "0px",
                 padding: "10px",
+                fontFamily: "titillium web,sans-serif",
                 borderRadius: "10px",
                 backgroundColor: "#70bf6d",
                 color: "white",
@@ -134,6 +141,7 @@ class NewNotice extends React.Component {
               {" "}
               Post!
             </button>
+            </fieldset>
           </fieldset>
         </form>
       </div>
