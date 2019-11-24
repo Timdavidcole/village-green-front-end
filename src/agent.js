@@ -56,6 +56,8 @@ const Profile = {
 };
 
 const Notices = {
+  create: (notice) =>
+  requests.post(`/notices/`, { notice }),
   all: page => requests.get(`/notices?limit=10`),
   byAuthor: (author, page) =>
     requests.get(`/notices?author=${encodeURIComponent(author)}&limit=5`),

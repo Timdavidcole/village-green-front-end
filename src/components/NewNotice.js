@@ -60,88 +60,85 @@ class NewNotice extends React.Component {
           onSubmit={this.submitForm(title, description, body)}
         >
           <fieldset>
-            <fieldset>
-              <span
-                style={{
-                  color: "#5cb85c",
-                  fontFamily: "titillium web,sans-serif",
-                  fontSize: "21px",
-                  width: "170px",
-                  padding: "4px",
-                  position: "relative",
-                  float: "right",
-                  bottom: "3px"
-                }}
-              >
-                post a new notice
-              </span>
-              <input
-                style={{
-                  border: "0px none",
-                  fontFamily: "titillium web,sans-serif",
-                  fontSize: "21px",
-                  width: "220px",
-                  padding: "4px"
-                }}
-                type="title"
-                placeholder="enter title here..."
-                value={title}
-                onChange={this.changeTitle}
-              />
-            </fieldset>
+            <label for="title"
+              style={{
+                color: "#5cb85c",
+                fontFamily: "titillium web,sans-serif",
+                fontSize: "21px",
+                width: "170px",
+                padding: "4px",
+                position: "relative",
+                float: "right",
+                bottom: "2px"
+              }}
+            >
+              post a new notice
+            </label>
+            <input
+              style={{
+                border: "0px none",
+                fontFamily: "titillium web,sans-serif",
+                fontSize: "21px",
+                width: "220px",
+                padding: "4px"
+              }}
+              type="title"
+              id="title"
+              placeholder="enter title here..."
+              value={title}
+              onChange={this.changeTitle}
+            />
 
-            <fieldset>
-              <input
-                style={{
-                  border: "0px none",
-                  fontFamily: "titillium web,sans-serif",
-                  fontSize: "18px",
-                  width: "400px",
-                  marginTop: "4px",
-                  padding: "4px"
-                }}
-                type="description"
-                placeholder="enter description here..."
-                value={description}
-                onChange={this.changeDescription}
-              />
-            </fieldset>
-
-            <fieldset>
-              <textarea rows="5"
-                style={{
-                  border: "0px none",
-                  fontFamily: "titillium web,sans-serif",
-                  fontSize: "18px",
-                  width: "350px",
-                  marginTop: "4px",
-                  boxShadow: "none",
-                  padding: "4px",
-                  resize: "none"
-                                }}
-                type="body"
-                placeholder="enter body here..."
-                value={body}
-                onChange={this.changeBody}
-              />
-              <button
+            <input
+              style={{
+                border: "0px none",
+                fontFamily: "titillium web,sans-serif",
+                fontSize: "18px",
+                width: "428px",
+                marginTop: "4px",
+                padding: "4px"
+              }}
+              type="description"
+              placeholder="enter description here..."
+              value={description}
+              onChange={this.changeDescription}
+            />
+            <textarea
+              rows="4"
+              style={{
+                display: "inline",
+                border: "0px none",
+                fontFamily: "titillium web,sans-serif",
+                fontSize: "18px",
+                width: "350px",
+                marginTop: "4px",
+                boxShadow: "none",
+                padding: "4px"
+              }}
+              type="body"
+              placeholder="enter body here..."
+              value={body}
+              onChange={this.changeBody}
+            />
+            <button
               type="submit"
               disabled={this.props.inProgress}
               style={{
-                bottom: "0px",
+                position: "absolute",
+                bottom: "15px",
+                right: "20px",
+                display: "inline",
                 padding: "10px",
-                fontFamily: "titillium web,sans-serif",
                 borderRadius: "10px",
                 backgroundColor: "#70bf6d",
                 color: "white",
                 outline: 0,
-                float: "right"
+                verticalAlign: "middle"
               }}
             >
               {" "}
               Post!
             </button>
-            </fieldset>
           </fieldset>
         </form>
       </div>
