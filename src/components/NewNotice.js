@@ -60,16 +60,18 @@ class NewNotice extends React.Component {
           onSubmit={this.submitForm(title, description, body)}
         >
           <fieldset>
-            <div style={{
-                  borderBottom: "1px dashed red"
-                }}>
+            <div
+              style={{
+                borderBottom: "1px dashed red"
+              }}
+            >
               <label
                 for="title"
                 style={{
                   color: "#5cb85c",
                   fontFamily: "titillium web,sans-serif",
                   fontSize: "21px",
-                  width: "170px",
+                  width: "200px",
                   padding: "4px",
                   position: "relative",
                   float: "right",
