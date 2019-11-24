@@ -110,7 +110,7 @@ class NewNotice extends React.Component {
                 border: "0px none",
                 fontFamily: "titillium web,sans-serif",
                 fontSize: "18px",
-                width: "350px",
+                width: "360px",
                 marginTop: "4px",
                 boxShadow: "none",
                 padding: "4px"
@@ -126,7 +126,7 @@ class NewNotice extends React.Component {
               style={{
                 position: "absolute",
                 bottom: "15px",
-                right: "20px",
+                right: "15px",
                 display: "inline",
                 padding: "10px",
                 borderRadius: "10px",
