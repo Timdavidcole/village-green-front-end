@@ -70,6 +70,6 @@ I like Javascript :).  So it's going to be full-stack Javascript for the time be
 ```
 Database: Mongo DB
 Back-End: Node/Express
-Front-End: React
+Front-End: React/Redux
 APIs: Google Maps
 ```
