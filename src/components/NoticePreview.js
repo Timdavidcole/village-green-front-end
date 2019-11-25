@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 const NoticePreview = props => {
   const notice = props.notice;
-  console.log(notice);
   return (
     <div
       style={{

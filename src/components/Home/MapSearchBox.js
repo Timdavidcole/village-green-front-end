@@ -44,7 +44,6 @@ class MapSearchBox extends React.Component {
   render() {
     Geocode.setApiKey("AIzaSyB9-449YKR60GMDFtlaiFHJiU3W5MYrPJ4");
     Geocode.setLanguage("en");
-    console.log(this.props.centerMap);
     return (
       <Autocomplete
         style={{

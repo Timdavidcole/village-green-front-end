@@ -7,9 +7,10 @@ const mapStateToProps = state => ({
 });
 
 const MainView = props => {
+  console.log(props.notices)
   return (
     <div>
-      <Notices notices={props.notices} />
+      <Notices notices={props.notices || []} />
     </div>
   );
 };

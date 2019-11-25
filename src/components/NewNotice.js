@@ -1,13 +1,11 @@
 import React from "react";
-import ListErrors from "./ListErrors";
 import agent from "../agent";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 
 const mapStateToProps = state => ({ ...state.auth });
 
 const mapDispatchToProps = dispatch => ({
-  onSubmit: payload => dispatch({ type: "NEW_NOTICE", payload })
+  onSubmit: payload => dispatch({ type: "NEW_NOTICE", payload }),
 });
 
 class NewNotice extends React.Component {
@@ -17,7 +15,7 @@ class NewNotice extends React.Component {
       title: "",
       description: "",
       body: ""
-    }
+    };
     this.setTitle = ev => {
       this.setState({ title: ev.target.value });
     };
@@ -39,13 +37,12 @@ class NewNotice extends React.Component {
         description: "",
         body: ""
       });
-      this.props.onSubmit(payload);
+      this.props.onSubmit(payload)
     };
   }
 
   render() {
-    const { title, description, body } = this.props;
-
+    console.log(this.props)
     return (
       <div
         style={{
