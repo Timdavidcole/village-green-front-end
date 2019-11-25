@@ -1,11 +1,11 @@
 import React from "react";
-import agent from "../agent";
+import agent from "../../agent";
 import { connect } from "react-redux";
 
 const mapStateToProps = state => ({ ...state.auth });
 
 const mapDispatchToProps = dispatch => ({
-  onSubmit: payload => dispatch({ type: "NEW_NOTICE", payload }),
+  onSubmit: payload => dispatch({ type: "NEW_NOTICE", payload })
 });
 
 class NewNotice extends React.Component {
@@ -37,15 +37,15 @@ class NewNotice extends React.Component {
         description: "",
         body: ""
       });
-      this.props.onSubmit(payload)
+      this.props.onSubmit(payload);
     };
   }
 
   render() {
     return (
-      <div className="div1"
+      <div
+        className="div1"
         style={{
-          width: "450px",
           boxShadow: "5px 10px 20px 3px rgba(176,176,176,0.79)",
           borderRadius: "6px",
           margin: "10px",
@@ -70,11 +70,11 @@ class NewNotice extends React.Component {
                   color: "#5cb85c",
                   fontFamily: "titillium web,sans-serif",
                   fontSize: "21px",
-                  width: "200px",
                   padding: "4px",
                   position: "relative",
                   float: "right",
-                  bottom: "2px"
+                  bottom: "2px",
+                  width: "180px"
                 }}
               >
                 post a new notice
@@ -84,8 +84,8 @@ class NewNotice extends React.Component {
                   border: "0px none",
                   fontFamily: "titillium web,sans-serif",
                   fontSize: "21px",
-                  width: "220px",
-                  padding: "4px"
+                  padding: "4px",
+                  width: "75%"
                 }}
                 type="title"
                 id="title"
@@ -99,7 +99,7 @@ class NewNotice extends React.Component {
                 border: "0px none",
                 fontFamily: "titillium web,sans-serif",
                 fontSize: "18px",
-                width: "428px",
+                width: "100%",
                 padding: "4px"
               }}
               type="description"
@@ -114,7 +114,7 @@ class NewNotice extends React.Component {
                 border: "0px none",
                 fontFamily: "titillium web,sans-serif",
                 fontSize: "18px",
-                width: "360px",
+                width: "80%",
                 marginTop: "4px",
                 boxShadow: "none",
                 padding: "4px"

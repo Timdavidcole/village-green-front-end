@@ -1,10 +1,9 @@
-import MainView from "./MainView";
 import MapNavBar from "./MapNavBar";
 import MainMap from "./MainMap";
 import React from "react";
 import agent from "../../agent";
 import { connect } from "react-redux";
-import Notices from "../Notices";
+import Notices from "./Notices";
 
 const mapStateToProps = state => ({
   ...state.notices,

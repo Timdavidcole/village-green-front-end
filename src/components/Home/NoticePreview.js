@@ -7,12 +7,10 @@ const NoticePreview = props => {
     <div
       className={`div${props.index}`}
       style={{
-        display: "flex",
         boxShadow: "5px 10px 20px 3px rgba(176,176,176,0.79)",
         borderRadius: "6px",
         margin: "10px",
         padding: "10px",
-        top: "100px",
         zIndex: "49",
         backgroundColor: "white"
       }}
