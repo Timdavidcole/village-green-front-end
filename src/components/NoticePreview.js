@@ -4,27 +4,37 @@ import { Link } from "react-router-dom";
 const NoticePreview = props => {
   const notice = props.notice;
   return (
-    <div className={`div${props.index}`}
+    <div
+      className={`div${props.index}`}
       style={{
         display: "flex",
         boxShadow: "5px 10px 20px 3px rgba(176,176,176,0.79)",
         borderRadius: "6px",
-        margin: "20px",
+        margin: "10px",
         padding: "10px",
         top: "100px",
         zIndex: "49",
-        backgroundColor: "white",
+        backgroundColor: "white"
       }}
     >
-      <div>
-        <div>
-          <Link to={`@${notice.author.username}`}>
-            {notice.author.username}
-          </Link>
-          <span style={{ color: "grey", display: "block" }}>
-            {new Date(notice.createdAt).toDateString()}
-          </span>
+      <Link
+        style={{
+          width: "100%"
+        }}
+        to={`notice/${notice.slug}`}
+      >
+        <div style={{ borderBottom: "1px dashed red" }}>
+          {" "}
+          <h3>{notice.title}</h3>
         </div>
+        <h5>{notice.description}</h5>
+        <span>{notice.body}</span>
+      </Link>
+      <div
+        style={{
+          marginRight: "5px"
+        }}
+      >
         <div
           style={{
             margin: "4px",
@@ -44,13 +54,12 @@ const NoticePreview = props => {
             />
           </Link>
         </div>
+        <div>
+          <Link to={`@${notice.author.username}`}>
+            {notice.author.username}
+          </Link>
+        </div>
       </div>
-
-      <Link to={`notice/${notice.slug}`}>
-        <h3>{notice.title}</h3>
-        <h5>{notice.description}</h5>
-        <span>{notice.body}</span>
-      </Link>
       <div
         style={{ position: "fixed", bottom: "0", right: "0", margin: "10px" }}
       >

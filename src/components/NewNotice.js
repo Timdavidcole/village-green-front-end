@@ -48,7 +48,7 @@ class NewNotice extends React.Component {
           width: "450px",
           boxShadow: "5px 10px 20px 3px rgba(176,176,176,0.79)",
           borderRadius: "6px",
-          margin: "20px",
+          margin: "10px",
           padding: "10px",
           zIndex: "50",
           backgroundColor: "white"
@@ -108,7 +108,7 @@ class NewNotice extends React.Component {
               onChange={this.setDescription}
             />
             <textarea
-              rows="4"
+              rows="3"
               style={{
                 display: "inline",
                 border: "0px none",
@@ -129,10 +129,9 @@ class NewNotice extends React.Component {
               disabled={this.props.inProgress}
               style={{
                 position: "absolute",
-                bottom: "15px",
-                right: "15px",
                 display: "inline",
                 padding: "10px",
+                margin: "5px",
                 borderRadius: "10px",
                 backgroundColor: "#70bf6d",
                 color: "white",
