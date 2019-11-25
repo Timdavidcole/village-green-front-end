@@ -43,15 +43,13 @@ class NewNotice extends React.Component {
 
   render() {
     return (
-      <div
+      <div className="div1"
         style={{
           width: "450px",
           boxShadow: "5px 10px 20px 3px rgba(176,176,176,0.79)",
           borderRadius: "6px",
           margin: "20px",
           padding: "10px",
-          position: "absolute",
-          top: "100px",
           zIndex: "50",
           backgroundColor: "white"
         }}

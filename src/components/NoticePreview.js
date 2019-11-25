@@ -4,26 +4,30 @@ import { Link } from "react-router-dom";
 const NoticePreview = props => {
   const notice = props.notice;
   return (
-    <div
+    <div className={`div${props.index}`}
       style={{
-        width: "450px",
-        position: "absolute",
+        display: "flex",
         boxShadow: "5px 10px 20px 3px rgba(176,176,176,0.79)",
         borderRadius: "6px",
         margin: "20px",
         padding: "10px",
         top: "100px",
-        zIndex: "50",
+        zIndex: "49",
         backgroundColor: "white",
       }}
     >
       <div>
+        <div>
+          <Link to={`@${notice.author.username}`}>
+            {notice.author.username}
+          </Link>
+          <span style={{ color: "grey", display: "block" }}>
+            {new Date(notice.createdAt).toDateString()}
+          </span>
+        </div>
         <div
           style={{
             margin: "4px",
-            display: "inline-block",
-            width: "40px",
-            float: "right",
             overflow: "hidden"
           }}
         >
@@ -39,14 +43,6 @@ const NoticePreview = props => {
               alt="author"
             />
           </Link>
-        </div>
-        <div style={{ float: "right" }}>
-          <Link style={{ display: "block" }} to={`@${notice.author.username}`}>
-            {notice.author.username}
-          </Link>
-          <span style={{ color: "grey", display: "block" }}>
-            {new Date(notice.createdAt).toDateString()}
-          </span>
         </div>
       </div>
 

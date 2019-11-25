@@ -1,5 +1,7 @@
 import NoticePreview from "./NoticePreview";
 import React from "react";
+import NewNotice from "./NewNotice";
+import "./noticesGrid.css";
 
 const Notices = props => {
   if (!props.notices) {
@@ -11,9 +13,12 @@ const Notices = props => {
   }
 
   return (
-    <div>
-      {props.notices.map(notice => {
-        return <NoticePreview notice={notice} key={notice.slug} />;
+    <div class="parent">
+      <NewNotice />
+      {props.notices.map((notice, i) => {
+        return (
+          <NoticePreview index={i + 2} notice={notice} key={notice.slug} />
+        );
       })}
     </div>
   );

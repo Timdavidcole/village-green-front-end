@@ -4,7 +4,6 @@ import MainMap from "./MainMap";
 import React from "react";
 import agent from "../../agent";
 import { connect } from "react-redux";
-import NewNotice from "../NewNotice";
 import Notices from "../Notices";
 
 const mapStateToProps = state => ({
@@ -31,7 +30,6 @@ class Home extends React.Component {
         <div style={{ width: "100%"}}>
           <div className="main-map">
             <MapNavBar />
-            <NewNotice />
             <Notices notices={this.props.notices || []} />
             <MainMap />
           </div>
