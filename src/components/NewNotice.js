@@ -7,35 +7,40 @@ import { Link } from "react-router-dom";
 const mapStateToProps = state => ({ ...state.auth });
 
 const mapDispatchToProps = dispatch => ({
-  onChangeTitle: value =>
-    dispatch({ type: "UPDATE_FIELD_AUTH", key: "title", value }),
-  onChangeDescription: value =>
-    dispatch({ type: "UPDATE_FIELD_AUTH", key: "description", value }),
-  onChangeBody: value =>
-    dispatch({ type: "UPDATE_FIELD_AUTH", key: "body", value }),
-  onSubmit: (title, description, body) =>
-    dispatch({
-      type: "LOGIN",
-      payload: agent.Auth.login(title, description, body)
-    }),
-  onUnload: () => dispatch({ type: "LOGIN_PAGE_UNLOADED" })
+  onSubmit: payload => dispatch({ type: "NEW_NOTICE", payload })
 });
 
 class NewNotice extends React.Component {
   constructor() {
     super();
-    this.changeTitle = event => this.props.onChangeTitle(event.target.value);
-    this.changeDescription = event =>
-      this.props.onChangeDescription(event.target.value);
-    this.changeBody = event => this.props.onChangeBody(event.target.value);
-    this.submitForm = (title, description, body) => event => {
-      event.preventDefault();
-      this.props.onSubmit(title, description, body);
+    this.state = {
+      title: "",
+      description: "",
+      body: ""
+    }
+    this.setTitle = ev => {
+      this.setState({ title: ev.target.value });
     };
-  }
-
-  componentWillUnmount() {
-    this.props.onUnload();
+    this.setDescription = ev => {
+      this.setState({ description: ev.target.value });
+    };
+    this.setBody = ev => {
+      this.setState({ body: ev.target.value });
+    };
+    this.createNotice = ev => {
+      ev.preventDefault();
+      const payload = agent.Notices.create({
+        title: this.state.title,
+        description: this.state.description,
+        body: this.state.body
+      });
+      this.setState({
+        title: "",
+        description: "",
+        body: ""
+      });
+      this.props.onSubmit(payload);
+    };
   }
 
   render() {
@@ -57,7 +62,7 @@ class NewNotice extends React.Component {
       >
         <form
           style={{ width: "100%", display: "inline-block" }}
-          onSubmit={this.submitForm(title, description, body)}
+          onSubmit={this.createNotice}
         >
           <fieldset>
             <div
@@ -91,8 +96,8 @@ class NewNotice extends React.Component {
                 type="title"
                 id="title"
                 placeholder="enter title here..."
-                value={title}
-                onChange={this.changeTitle}
+                value={this.state.title}
+                onChange={this.setTitle}
               />
             </div>
             <input
@@ -105,8 +110,8 @@ class NewNotice extends React.Component {
               }}
               type="description"
               placeholder="enter description here..."
-              value={description}
-              onChange={this.changeDescription}
+              value={this.state.description}
+              onChange={this.setDescription}
             />
             <textarea
               rows="4"
@@ -122,8 +127,8 @@ class NewNotice extends React.Component {
               }}
               type="body"
               placeholder="enter body here..."
-              value={body}
-              onChange={this.changeBody}
+              value={this.state.body}
+              onChange={this.setBody}
             />
             <button
               type="submit"
