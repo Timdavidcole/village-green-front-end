@@ -1,4 +1,3 @@
-import Banner from "./Banner";
 import MainView from "./MainView";
 import MapNavBar from "./MapNavBar";
 import MainMap from "./MainMap";
@@ -6,9 +5,10 @@ import React from "react";
 import agent from "../../agent";
 import { connect } from "react-redux";
 import NewNotice from "../NewNotice";
-
+import Notices from "../Notices";
 
 const mapStateToProps = state => ({
+  ...state.notices,
   appName: state.common.appName
 });
 
@@ -17,6 +17,10 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class Home extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   componentDidMount() {
     this.props.onLoad(agent.Notices.all());
   }
@@ -28,10 +32,8 @@ class Home extends React.Component {
           <div className="main-map">
             <MapNavBar />
             <NewNotice />
+            <Notices notices={this.props.notices || []} />
             <MainMap />
-          </div>
-          <div className="row">
-            <MainView />
           </div>
         </div>
       </div>

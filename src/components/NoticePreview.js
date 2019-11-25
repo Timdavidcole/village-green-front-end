@@ -6,11 +6,15 @@ const NoticePreview = props => {
   return (
     <div
       style={{
-        width: "600px",
-        boxShadow: "3px 3px 8px #cfcfcf",
+        width: "450px",
+        position: "absolute",
+        boxShadow: "5px 10px 20px 3px rgba(176,176,176,0.79)",
         borderRadius: "6px",
-        margin: "10px",
-        padding: "5px"
+        margin: "20px",
+        padding: "10px",
+        top: "100px",
+        zIndex: "50",
+        backgroundColor: "white",
       }}
     >
       <div>
