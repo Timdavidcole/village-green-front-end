@@ -51,7 +51,8 @@ class NewNotice extends React.Component {
           margin: "10px",
           padding: "10px",
           zIndex: "50",
-          backgroundColor: "white"
+          backgroundColor: "white",
+          width: "100%"
         }}
       >
         <form
