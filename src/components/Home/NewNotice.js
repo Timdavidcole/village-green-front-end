@@ -55,29 +55,39 @@ class NewNotice extends React.Component {
         }}
       >
         <form
-          style={{ position: "relative", height: "100%", width: "100%", display: "inline-block" }}
+          style={{
+            position: "relative",
+            height: "100%",
+            width: "100%",
+            display: "inline-block"
+          }}
           onSubmit={this.createNotice}
         >
-          <fieldset>
-            <div
-              style={{
-                borderBottom: "1px dashed red"
-              }}
-            >
-              <label
+          <fieldset
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              height: "100%"
+            }}
+          >
+            <label
                 for="title"
                 style={{
                   color: "#5cb85c",
                   fontFamily: "titillium web,sans-serif",
                   fontSize: "21px",
                   padding: "4px",
-                  position: "relative",
-                  float: "right",
-                  bottom: "2px"
+                  position: "absolute",
+                  right: "0px"
                 }}
               >
                 post a new notice
               </label>
+            <div
+              style={{
+                borderBottom: "1px dashed red"
+              }}
+            >
               <input
                 style={{
                   border: "0px none",
@@ -107,7 +117,6 @@ class NewNotice extends React.Component {
               onChange={this.setDescription}
             />
             <textarea
-              rows="3"
               style={{
                 display: "inline",
                 border: "0px none",
@@ -117,8 +126,8 @@ class NewNotice extends React.Component {
                 marginTop: "4px",
                 boxShadow: "none",
                 padding: "4px",
-                height: "100%", 
-                width: "80%" 
+                height: "calc(100% - 90px)",
+                width: "80%"
               }}
               type="body"
               placeholder="enter body here..."
@@ -127,25 +136,25 @@ class NewNotice extends React.Component {
             />
           </fieldset>
           <button
-              type="submit"
-              disabled={this.props.inProgress}
-              style={{
-                position: "absolute",
-                bottom: "0px",
-                right: "0px",                
-                display: "inline",
-                padding: "10px",
-                margin: "5px",
-                borderRadius: "10px",
-                backgroundColor: "#70bf6d",
-                color: "white",
-                outline: 0,
-                verticalAlign: "middle"
-              }}
-            >
-              {" "}
-              Post!
-            </button>
+            type="submit"
+            disabled={this.props.inProgress}
+            style={{
+              position: "absolute",
+              bottom: "0px",
+              right: "0px",
+              display: "inline",
+              padding: "10px",
+              margin: "5px",
+              borderRadius: "10px",
+              backgroundColor: "#70bf6d",
+              color: "white",
+              outline: 0,
+              verticalAlign: "middle"
+            }}
+          >
+            {" "}
+            Post!
+          </button>
         </form>
       </div>
     );
