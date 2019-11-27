@@ -90,7 +90,7 @@ class MapNavBar extends React.Component {
             href="#"
             style={this.buttonStyle()}
           >
-            <i class="fa fa-fw fa-location-arrow"></i> Current Location
+            <i className="fa fa-fw fa-location-arrow"></i> Current Location
           </button>
           <MapSearchBox />
         </div>

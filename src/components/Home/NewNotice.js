@@ -126,7 +126,7 @@ class NewNotice extends React.Component {
                 marginTop: "4px",
                 boxShadow: "none",
                 padding: "4px",
-                height: "calc(100% - 90px)",
+                height: "calc(100% - 86px)",
                 width: "80%"
               }}
               type="body"
