@@ -27,9 +27,9 @@ class MainMap extends React.PureComponent {
         isMarkerShown={this.state.isMarkerShown}
         onMarkerClick={this.handleMarkerClick}
         googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9-449YKR60GMDFtlaiFHJiU3W5MYrPJ4&v=3.exp&libraries=geometry,drawing,places"
-        loadingElement={<div style={{ height: `93vh` }} />}
-        containerElement={<div style={{ height: `93vh` }} />}
-        mapElement={<div style={{ height: `93vh` }} />}
+        loadingElement={<div style={{ height: `94vh` }} />}
+        containerElement={<div style={{ height: `94vh` }} />}
+        mapElement={<div style={{ height: `94vh` }} />}
       />
     );
   }

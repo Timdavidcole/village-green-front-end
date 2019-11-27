@@ -75,12 +75,11 @@ class MapNavBar extends React.Component {
 
   render() {
     return (
-      <div className="map-nav-bar-container">
+      <div>
         <div
           className="navbar"
           style={{
             margin: "0px",
-            position: "absolute",
             zIndex: "50",
             width: "100%"
           }}

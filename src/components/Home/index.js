@@ -26,10 +26,12 @@ class Home extends React.Component {
   render() {
     return (
       <div className="home-page" style={{ padding: "0px" }}>
-        <div style={{ width: "100%"}}>
+        <div style={{ width: "100%" }}>
           <div className="main-map">
-            <MapNavBar />
-            <Notices notices={this.props.notices || []} />
+            <div style={{ width: "100%", position: "absolute" }}>
+              <MapNavBar />
+              <Notices notices={this.props.notices || []} />
+            </div>
             <MainMap />
           </div>
         </div>
