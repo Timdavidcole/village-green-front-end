@@ -5,6 +5,8 @@
     grid-column-gap: 0px;
     grid-row-gap: 0px;
     position: absolute;
+    height: 85vh;
+    width: 100vw
 }
 
 .div1 {
