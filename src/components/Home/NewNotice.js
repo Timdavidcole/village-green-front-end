@@ -127,7 +127,7 @@ class NewNotice extends React.Component {
                 boxShadow: "none",
                 padding: "4px",
                 height: "calc(100% - 86px)",
-                width: "80%"
+                width: "calc(100% - 70px)"
               }}
               type="body"
               placeholder="enter body here..."
