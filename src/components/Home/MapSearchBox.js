@@ -2,12 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import Autocomplete from "react-google-autocomplete";
 import Geocode from "react-geocode";
-import PlacesAutocomplete from "react-places-autocomplete";
-import {
-  geocodeByAddress,
-  geocodeByPlaceId,
-  getLatLng
-} from "react-places-autocomplete";
 
 const mapStateToProps = state => ({
   currentUser: state.common.currentUser,

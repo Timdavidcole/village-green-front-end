@@ -15,9 +15,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class Home extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   componentDidMount() {
     this.props.onLoad(agent.Notices.all());
