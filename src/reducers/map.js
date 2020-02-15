@@ -1,7 +1,7 @@
 const defaultState = {
   centerMap: { lat: 51.508402, lng: -0.126326 },
   centerLocation: "",
-  location: ''
+  location: ""
 };
 
 export default (state = defaultState, action) => {
@@ -11,7 +11,11 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         centerMap: action.payload.coordinates,
-        location: action.payload.location,
+        location: action.payload.location
+      };
+    case "CHANGE_NOTICES":
+      return {
+        ...state,
         notices: action.payload.notices
       };
   }
