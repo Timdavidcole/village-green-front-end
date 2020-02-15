@@ -44,6 +44,7 @@ class Register extends React.Component {
     if (this.props.address && this.props.addressAutoComplete) {
       return (
         this.props.addressAutoComplete.address.houseNumber +
+        " " +
         this.props.addressAutoComplete.address.street +
         ", " +
         this.props.addressAutoComplete.address.city +

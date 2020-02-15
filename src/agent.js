@@ -59,10 +59,10 @@ const Profile = {
 const Notices = {
   create: (notice) =>
   requests.post(`/notices/`, { notice }),
-  all: page => requests.get(`/notices?limit=8`),
-  byAuthor: (author, page) =>
+  all: (coords) => requests.get(`/notices?limit=8&coords=${coords}`),
+  byAuthor: (author) =>
     requests.get(`/notices?author=${encodeURIComponent(author)}&limit=5`),
-  favoritedBy: (author, page) =>
+  favoritedBy: (author) =>
     requests.get(`/notices?favorited=${encodeURIComponent(author)}&limit=5`),
   get: slug => requests.get(`/notices/${slug}`),
   del: slug => requests.del(`/notices/${slug}`)

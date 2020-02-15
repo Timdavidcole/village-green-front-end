@@ -1,4 +1,5 @@
 import React from "react";
+import agent from "../../agent";
 import { connect } from "react-redux";
 import {
   withScriptjs,
@@ -14,7 +15,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  changeMapCenter: payload => dispatch({ type: "CHANGE_CENTER", payload })
+  changeMapCenter: payload => dispatch({ type: "CHANGE_CENTER", payload }),
 });
 
 class MapComponent extends React.Component {
@@ -101,7 +102,8 @@ class MapComponent extends React.Component {
         onCenterChanged={() =>
           this.props.changeMapCenter({
             coordinates: this.state.map.getCenter().toJSON(),
-            location: ""
+            location: "",
+            notices: agent.Notices.all(this.state.map.getCenter().toJSON())
           })
         }
       >

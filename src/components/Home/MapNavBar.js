@@ -63,11 +63,11 @@ class MapNavBar extends React.Component {
       return (
         <button
           onClick={this.homeOnClick()}
-          class="active"
+          className="active"
           style={this.buttonStyle()}
           href="#"
         >
-          <i class="fa fa-fw fa-home"></i> Home
+          <i className="fa fa-fw fa-home"></i> Home
         </button>
       );
     } else return null;

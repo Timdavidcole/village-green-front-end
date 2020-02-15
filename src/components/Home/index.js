@@ -17,10 +17,11 @@ const mapDispatchToProps = dispatch => ({
 class Home extends React.Component {
 
   componentDidMount() {
-    this.props.onLoad(agent.Notices.all());
+    this.props.onLoad(agent.Notices.all(JSON.stringify({ lat: 51.508402, lng: -0.126326 })));
   }
 
   render() {
+
     return (
       <div style={{ width: "100%", height: "94vh" }}>
         <div style={{ width: "100%", position: "absolute" }}>

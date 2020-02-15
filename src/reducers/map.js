@@ -11,7 +11,8 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         centerMap: action.payload.coordinates,
-        location: action.payload.location
+        location: action.payload.location,
+        notices: action.payload.notices
       };
   }
   return state;
