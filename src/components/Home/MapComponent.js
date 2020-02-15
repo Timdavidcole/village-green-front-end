@@ -29,10 +29,11 @@ class MapComponent extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props.currentUser)
     if (this.props.currentUser) {
       this.updateCenterPosition(
-        this.props.currentUser.homeXCoord,
-        this.props.currentUser.homeYCoord,
+        this.props.currentUser.location.coordinates[0],
+        this.props.currentUser.location.coordinates[1],
         "HOME"
       );
     } else {
@@ -58,8 +59,8 @@ class MapComponent extends React.Component {
         nextProps.currentUser
       ) {
         this.updateCenterPosition(
-          nextProps.currentUser.homeXCoord,
-          nextProps.currentUser.homeYCoord,
+          nextProps.currentUser.location.coordinates[0],
+          nextProps.currentUser.location.coordinates[1],
           "HOME"
         );
         return true;
