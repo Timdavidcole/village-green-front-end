@@ -5,15 +5,25 @@ import "./noticesGrid.css";
 
 const Notices = props => {
   if (!props.notices) {
-    return <div className="article-preview">Loading...</div>;
+    return (
+      <div className="parent">
+        <NewNotice />
+        <div className="article-preview">Loading...</div>
+      </div>
+    );
   }
 
   if (props.notices.length === 0) {
-    return <div className="article-preview">No notices are here... yet.</div>;
+    return (
+      <div className="parent"> 
+        <NewNotice />
+        <div className="article-preview">No notices are here... yet.</div>
+      </div>
+    );
   }
 
   return (
-    <div class="parent">
+    <div className="parent">
       <NewNotice />
       {props.notices.map((notice, i) => {
         return (
