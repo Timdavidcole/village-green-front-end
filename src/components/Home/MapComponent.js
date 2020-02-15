@@ -103,7 +103,7 @@ class MapComponent extends React.Component {
           this.props.changeMapCenter({
             coordinates: this.state.map.getCenter().toJSON(),
             location: "",
-            notices: agent.Notices.all(this.state.map.getCenter().toJSON())
+            notices: agent.Notices.all(JSON.stringify(this.state.map.getCenter()))
           })
         }
       >
