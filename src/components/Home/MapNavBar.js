@@ -37,8 +37,8 @@ class MapNavBar extends React.Component {
       return () =>
         this.props.changeMapCenter({
           coordinates: {
-            lat: this.props.currentUser.homeXCoord,
-            lng: this.props.currentUser.homeYCoord
+            lat: this.props.currentUser.location.coordinates[0],
+            lng: this.props.currentUser.location.coordinates[1]
           },
           location: "HOME"
         });

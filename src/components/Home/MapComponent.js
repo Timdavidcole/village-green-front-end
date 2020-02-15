@@ -29,7 +29,6 @@ class MapComponent extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.currentUser)
     if (this.props.currentUser) {
       this.updateCenterPosition(
         this.props.currentUser.location.coordinates[0],
