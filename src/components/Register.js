@@ -37,10 +37,25 @@ class Register extends React.Component {
       event.preventDefault();
       this.props.onSubmit(username, email, password, address);
     };
+    this.addressAutoComplete = this.addressAutoComplete.bind(this);
+  }
+
+  addressAutoComplete () {
+    if( this.props.address && this.props.addressAutoComplete) {
+      return this.props.addressAutoComplete.address.houseNumber +
+      this.props.addressAutoComplete.address.street +
+      ", " +
+      this.props.addressAutoComplete.address.city +
+      ", " +
+      this.props.addressAutoComplete.address.country +
+      ", " +
+      this.props.addressAutoComplete.address.postalCode
+    } else return null
   }
 
   render() {
     const { email, password, username, address } = this.props;
+
     return (
       <div className="auth-page">
         <div className="container page">
@@ -49,7 +64,12 @@ class Register extends React.Component {
               <h1 className="text-xs-center">Sign up</h1>
               <ListErrors errors={this.props.errors} />
               <form
-                onSubmit={this.submitForm(username, email, password, address)}
+                onSubmit={this.submitForm(
+                  username,
+                  email,
+                  password,
+                  this.addressAutoComplete()
+                )}
               >
                 <fieldset>
                   <fieldset className="form-group">
@@ -61,7 +81,6 @@ class Register extends React.Component {
                       onChange={this.changeEmail}
                     />
                   </fieldset>
-
                   <fieldset className="form-group">
                     <input
                       className="form-control form-control-lg"
@@ -71,7 +90,6 @@ class Register extends React.Component {
                       onChange={this.changePassword}
                     />
                   </fieldset>
-
                   <fieldset className="form-group">
                     <input
                       className="form-control form-control-lg"
@@ -90,7 +108,6 @@ class Register extends React.Component {
                       onChange={this.changeAddress}
                     />
                   </fieldset>
-
                   <AddressContainer />
                   <button
                     className="btn btn-lg btn-primary pull-xs-right"

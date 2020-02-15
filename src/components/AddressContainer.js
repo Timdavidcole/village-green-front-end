@@ -19,7 +19,6 @@ class AddressContainer extends React.Component {
   constructor() {
     super();
     this.addressAutoComplete = this.addressAutoComplete.bind(this);
-    this.confirmAddress = this.confirmAddress.bind(this);
   }
 
   shouldComponentUpdate(nextProps) {
@@ -47,15 +46,10 @@ class AddressContainer extends React.Component {
     });
   }
 
-  confirmAddress(event){
-    this.props.onChangeAddress(this.props.addressAutoComplete.label)
-  }
-
   render() {
     if (this.props.addressAutoComplete) {
       return (
         <div style={{margin:"10px"}}>
-          <center>
             <SlideDown className={"my-dropdown-slidedown"}>
               <AddressItem
                 value={this.props.addressAutoComplete.address.houseNumber}
@@ -78,7 +72,6 @@ class AddressContainer extends React.Component {
                 placeholder="Post Code"
               />
             </SlideDown>
-          </center>
         </div>
       );
     } else {
