@@ -75,6 +75,9 @@ class MapComponent extends React.Component {
       coordinates: { lat: lat, lng: lng },
       location: loc
     });
+    this.props.changeNotices(
+      agent.Notices.all(JSON.stringify({ lat: lat, lng: lng }))
+    )
   }
 
   markerIcon() {
