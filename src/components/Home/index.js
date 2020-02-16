@@ -7,7 +7,7 @@ import Notices from "./Notices";
 
 const mapStateToProps = (state) => ({
   noticesVisible: state.notices.noticesVisible,
-  centerMap: state.common.centerMap,
+  centerMap: state.map.centerMap,
   ...state.notices
 });
 
