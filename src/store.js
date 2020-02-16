@@ -8,7 +8,7 @@ import notice from "./reducers/notice";
 import notices from "./reducers/notices";
 import profile from "./reducers/profile";
 import map from "./reducers/map";
-
+import createLogger from 'redux-logger';
 
 const reducer = combineReducers({
   notice,
@@ -21,7 +21,7 @@ const reducer = combineReducers({
   settings
 });
 
-const middleware = applyMiddleware(promiseMiddleware, localStorageMiddleware);
+const middleware = applyMiddleware(promiseMiddleware, localStorageMiddleware, createLogger);
 
 const store = createStore(reducer, middleware);
 

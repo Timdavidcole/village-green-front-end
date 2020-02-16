@@ -28,7 +28,8 @@ class MapNavBar extends React.Component {
       backgroundColor: "#70bf6d",
       color: "white",
       outline: 0,
-      boxShadow: "10px 10px 20px 3px rgba(176,176,176,0.79)"
+      boxShadow: "10px 10px 20px 3px rgba(176,176,176,0.79)",
+      visibility: "visible"
     };
   }
 
@@ -81,7 +82,8 @@ class MapNavBar extends React.Component {
           style={{
             margin: "0px",
             zIndex: "50",
-            width: "100%"
+            width: "100%",
+            visibility: "hidden"
           }}
         >
           {this.homeButton()}

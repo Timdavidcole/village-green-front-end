@@ -1,4 +1,4 @@
-export default (state = {}, action) => {
+export default (state = { notices: [], noticesVisible: "visible" }, action) => {
   // eslint-disable-next-line default-case
   switch (action.type) {
     case "HOME_PAGE_LOADED":
@@ -13,7 +13,18 @@ export default (state = {}, action) => {
         noticeErrors: action.error ? action.payload.errors : null,
         notices: action.error
           ? null
-          : ([action.payload.notice]).concat(state.notices || [])
+          : [action.payload.notice].concat(state.notices || [])
+      };
+    case "CHANGE_NOTICES":
+      return {
+        ...state,
+        notices: action.payload.notices,
+        noticesVisible: "visible"
+      };
+    case "NOTICES_VISIBLE":
+      return {
+        ...state,
+        noticesVisible: "hidden"
       };
     case "HOME_PAGE_UNLOADED":
       return {};

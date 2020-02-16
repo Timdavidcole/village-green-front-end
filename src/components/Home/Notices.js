@@ -15,15 +15,19 @@ const Notices = props => {
 
   if (props.notices.length === 0) {
     return (
-      <div className="parent"> 
+      <div className="parent">
         <NewNotice />
         <div className="article-preview">No notices are here... yet.</div>
       </div>
     );
   }
-
   return (
-    <div className="parent">
+    <div
+      style={{ 
+        visibility: props.noticesVisible
+      }}
+      className="parent"
+    >
       <NewNotice />
       {props.notices.map((notice, i) => {
         return (

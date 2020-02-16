@@ -46,7 +46,8 @@ class MapSearchBox extends React.Component {
           borderRadius: "5px",
           width: "40%",
           float: "right",
-          boxShadow: "10px 10px 20px 3px rgba(176,176,176,0.79)"
+          boxShadow: "10px 10px 20px 3px rgba(176,176,176,0.79)",
+          visibility: "visible"
         }}
         onPlaceSelected={place => this.getCoords(place)}
         types={["geocode"]}

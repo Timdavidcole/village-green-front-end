@@ -8,7 +8,7 @@ export default (state = {}, action) => {
         comments: action.payload[1].comments
       };
     case "NOTICE_PAGE_UNLOADED":
-      return {};
+      return {...state};
     case "ADD_COMMENT":
       return {
         ...state,

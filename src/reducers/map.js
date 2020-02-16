@@ -13,11 +13,6 @@ export default (state = defaultState, action) => {
         centerMap: action.payload.coordinates,
         location: action.payload.location
       };
-    case "CHANGE_NOTICES":
-      return {
-        ...state,
-        notices: action.payload.notices
-      };
   }
   return state;
 };

@@ -16,7 +16,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   changeMapCenter: payload => dispatch({ type: "CHANGE_CENTER", payload }),
-  changeNotices: payload => dispatch({ type: "CHANGE_NOTICES", payload })
+  changeNotices: payload => dispatch({ type: "CHANGE_NOTICES", payload }),
+  noticesVisible: payload => dispatch({ type: "NOTICES_VISIBLE", payload })
 });
 
 class MapComponent extends React.Component {
@@ -97,12 +98,11 @@ class MapComponent extends React.Component {
     return (
       <GoogleMap
         onDragEnd={() =>
-          this.props.changeNotices({
-            notices: agent.Notices.all(
-              JSON.stringify(this.state.map.getCenter())
-            )
-          })
+          this.props.changeNotices(
+            agent.Notices.all(JSON.stringify(this.state.map.getCenter()))
+          )
         }
+        onDragStart={() => this.props.noticesVisible()}
         defaultZoom={16}
         ref={thisMap => this.setState({ map: thisMap })}
         center={this.props.centerMap}
