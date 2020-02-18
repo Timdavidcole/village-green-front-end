@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "../../styles/noticePreview.css";
 
 const NoticePreview = props => {
   const notice = props.notice;
@@ -58,11 +59,12 @@ const NoticePreview = props => {
           </Link>
         </div>
       </div>
-      <div
-        style={{ position: "fixed", bottom: "0", right: "0", margin: "10px" }}
-      >
-        <button className="btn btn-sm btn-outline-primary">
-          <i className="ion-heart"></i> {notice.favoritesCount}
+      <div>
+        <button className="thumbs-up-button">
+          <i className="thumbs-up-icon"></i>
+        </button>
+        <button className="thumbs-down-button">
+          <i className="thumbs-down-icon"></i>
         </button>
       </div>
     </div>

@@ -1,0 +1,35 @@
+.thumbs-up-button {
+    height: 50px;
+    width: 50px;
+    background-color: transparent;
+    vertical-align: top;
+    border-radius: 100%;
+}
+
+.thumbs-up-icon {
+    background: url('002-thumbs-up.svg');
+    height: 25px;
+    width: 25px;
+    display: inline-block;
+    background-size: cover;
+}
+
+.thumbs-down-button {
+    height: 50px;
+    width: 50px;
+    background-color: transparent;
+    position: relative; 
+    vertical-align: top;
+    border-radius: 100%;
+}
+
+.thumbs-down-icon {
+    background: url('001-thumb.svg');
+    height: 25px;
+    width: 25px;
+    top: 16px;
+    left:12px;
+    position: absolute;
+    display: inline-block;
+    background-size: cover;
+}
