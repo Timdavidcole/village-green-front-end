@@ -13,7 +13,8 @@ const NoticePreview = props => {
         margin: "10px",
         padding: "10px",
         zIndex: "49",
-        backgroundColor: "white"
+        backgroundColor: "white",
+        position: "relative"
       }}
     >
       <Link
@@ -59,7 +60,7 @@ const NoticePreview = props => {
           </Link>
         </div>
       </div>
-      <div>
+      <div className="thumb-buttons-container">
         <button className="thumbs-up-button">
           <i className="thumbs-up-icon"></i>
         </button>

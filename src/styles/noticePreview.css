@@ -1,9 +1,28 @@
+.thumb-buttons-container {
+    position: absolute;
+    bottom: 7px;
+    right: 7px;
+    outline: none
+}
+
 .thumbs-up-button {
     height: 50px;
     width: 50px;
-    background-color: transparent;
+    background-color: #84cc82;
     vertical-align: top;
     border-radius: 100%;
+    outline-style: none;
+    border: none !important;
+    outline: none !important;
+    margin: 5px;
+}
+
+.thumbs-up-button:hover {
+    background-color: #a6eea3;
+}
+
+.thumbs-up-button:active {
+    background-color: #169211;
 }
 
 .thumbs-up-icon {
@@ -12,15 +31,27 @@
     width: 25px;
     display: inline-block;
     background-size: cover;
+    outline: none
 }
 
 .thumbs-down-button {
     height: 50px;
     width: 50px;
-    background-color: transparent;
-    position: relative; 
+    background-color: #84cc82;
+    position: relative;
     vertical-align: top;
     border-radius: 100%;
+    border: none !important;
+    outline: none !important;
+    margin: 5px;
+}
+
+.thumbs-down-button:hover {
+    background-color: #a6eea3;
+}
+
+.thumbs-down-button:active {
+    background-color: #169211;
 }
 
 .thumbs-down-icon {
@@ -28,7 +59,7 @@
     height: 25px;
     width: 25px;
     top: 16px;
-    left:12px;
+    left: 12px;
     position: absolute;
     display: inline-block;
     background-size: cover;
