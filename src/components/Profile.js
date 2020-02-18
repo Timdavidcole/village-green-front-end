@@ -33,21 +33,7 @@ class Profile extends React.Component {
     return (
       <ul className="nav nav-pills outline-active">
         <li className="nav-item">
-          <Link
-            className="nav-link active"
-            to={`@${this.props.profile.username}`}
-          >
-            My Notices
-          </Link>
-        </li>
-
-        <li className="nav-item">
-          <Link
-            className="nav-link"
-            to={`@${this.props.profile.username}/favorites`}
-          >
-            Favorited Notices
-          </Link>
+          <Notices notices={this.props.notices || []} />
         </li>
       </ul>
     );
