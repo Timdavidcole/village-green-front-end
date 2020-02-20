@@ -6,7 +6,15 @@
     grid-row-gap: 0px;
     position: absolute;
     height: 87vh;
-    width: 100vw
+    width: 100vw;
+    animation: fade 2s ease-in-out;
+
+}
+
+@keyframes fade {
+    0% {opacity: 0.5} 
+    50% {opacity: 1}
+    100%{opacity: 0.5}
 }
 
 .div1 {
