@@ -22,7 +22,7 @@ class AddressContainer extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    if (this.props.addressAutoComplete) {
+    if (this.props.addressAutoComplete && nextProps.addressAutoComplete) {
       if (this.props.addressAutoComplete.label !== nextProps.addressAutoComplete.label) {
         return true;
       }
