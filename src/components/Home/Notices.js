@@ -23,9 +23,11 @@ const Notices = props => {
   }
   return (
     <div
-      // style={{ 
-      //   visibility: props.noticesVisible
-      // }}
+      style={{ 
+        visibility: props.noticesVisible,
+        opacity: props.noticesVisible ? '1' : '0',
+        transition: "visibility 0.2s ease-in-out, opacity 0.2s ease-in-out"
+      }}
       className="parent"
     >
       <NewNotice />

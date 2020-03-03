@@ -14,9 +14,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class NoticePreview extends React.Component {
-  constructor(props){
-    super(props)
-  }
 
   render() {
     const notice = this.props.notice;
