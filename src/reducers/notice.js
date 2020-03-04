@@ -8,7 +8,7 @@ export default (state = {}, action) => {
         comments: action.payload[1].comments
       };
     case "NOTICE_PAGE_UNLOADED":
-      return {...state};
+      return { ...state };
     case "ADD_COMMENT":
       return {
         ...state,
@@ -23,6 +23,8 @@ export default (state = {}, action) => {
         ...state,
         comments: state.comments.filter(comment => comment.id !== commentId)
       };
+    case "PIN_NOTICE":
+      return { ...state };
   }
 
   return state;

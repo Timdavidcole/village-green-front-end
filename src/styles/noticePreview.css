@@ -6,15 +6,15 @@
 }
 
 .thumbs-up-button {
-    height: 50px;
-    width: 50px;
+    height: 35px;
+    width: 35px;
     background-color: #84cc82;
     vertical-align: top;
     border-radius: 100%;
     outline-style: none;
     border: none !important;
     outline: none !important;
-    margin: 5px;
+    margin: 3px;
 }
 
 .thumbs-up-button:hover {
@@ -27,23 +27,23 @@
 
 .thumbs-up-icon {
     background: url('002-thumbs-up.svg');
-    height: 25px;
-    width: 25px;
+    height: 18px;
+    width: 18px;
     display: inline-block;
     background-size: cover;
     outline: none
 }
 
 .thumbs-down-button {
-    height: 50px;
-    width: 50px;
+    height: 35px;
+    width: 35px;
     background-color: #84cc82;
     position: relative;
     vertical-align: top;
     border-radius: 100%;
     border: none !important;
     outline: none !important;
-    margin: 5px;
+    margin: 3px;
 }
 
 .thumbs-down-button:hover {
@@ -56,11 +56,43 @@
 
 .thumbs-down-icon {
     background: url('001-thumb.svg');
-    height: 25px;
-    width: 25px;
-    top: 16px;
-    left: 12px;
+    height: 18px;
+    width: 18px;
+    top: 10px;
+    left: 10px;
     position: absolute;
     display: inline-block;
     background-size: cover;
+}
+
+.pin-notice-button {
+    height: 35px;
+    width: 35px;
+    background-color: #84cc82;
+    position: relative;
+    vertical-align: top;
+    border-radius: 100%;
+    border: none !important;
+    outline: none !important;
+    margin: 3px;
+}
+
+.pin-notice-button:hover {
+    background-color: #a6eea3;
+}
+
+.pin-notice-button:active {
+    background-color: #169211;
+}
+
+.pin-notice-icon {
+    background: url('icons8-pin-64.png');
+    height: 20px;
+    width: 20px;
+    top: 7px;
+    left: 8px;
+    position: absolute;
+    display: inline-block;
+    background-size: cover;
+    transform: rotate(315deg)
 }

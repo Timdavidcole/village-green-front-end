@@ -21,6 +21,7 @@ class Home extends React.Component {
   }
 
   render() {
+    console.log(this.props.notices)
     return (
       <div style={{ width: "100%", height: "94vh" }}>
         <div style={{ width: "100%", position: "absolute" }}>

@@ -6,8 +6,6 @@ const promiseMiddleware = store => next => action => {
     action.payload.then(
       res => {
         action.payload = res;
-        console.log("MIDDLEWARE")
-        console.log(action)
         store.dispatch(action);
       },
       error => {

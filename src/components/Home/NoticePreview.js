@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import "../../styles/noticePreview.css";
 import { Transition } from "react-transition-group";
+import NoticeButtons from "./NoticeButtons"
 
 const mapStateToProps = state => ({
   ...state.notice,
@@ -94,17 +95,7 @@ class NoticePreview extends React.Component {
                 </Link>
               </div>
             </div>
-            <div
-              className="thumb-buttons-container"
-              onClick={this.buttonClickedStyle}
-            >
-              <button className="thumbs-up-button">
-                <i className="thumbs-up-icon"></i>
-              </button>
-              <button className="thumbs-down-button">
-                <i className="thumbs-down-icon"></i>
-              </button>
-            </div>
+            <NoticeButtons notice={notice}/>
           </div>
         )}
       </Transition>
