@@ -44,9 +44,9 @@ class NewNotice extends React.Component {
 
   render() {
     const duration = {
-      appear: 2000,
-      enter: 2000,
-      exit: 2000
+      appear: 100,
+      enter: 100,
+      exit: 100
     };
 
     const defaultStyle = {

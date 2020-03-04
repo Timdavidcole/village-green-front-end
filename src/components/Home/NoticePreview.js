@@ -18,9 +18,9 @@ class NoticePreview extends React.Component {
   render() {
     const notice = this.props.notice;
     const duration = {
-      appear: 2000,
-      enter: 2000,
-      exit: 2000
+      appear: 100,
+      enter: 100,
+      exit: 100
     };
 
     const defaultStyle = {

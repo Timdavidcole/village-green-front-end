@@ -91,8 +91,8 @@ class MapComponent extends React.Component {
     } else
       return {
         icon: {
-          url: require("./icons8-arrow-pointing-down-100.png"),
-          scaledSize: { width: 64, height: 64 }
+          url: require("./noun_notice board_2007674.png"),
+          scaledSize: { width: 64, height: 64 },
         }
       };
   }
