@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import "../../styles/noticePreview.css";
+import { Transition } from "react-transition-group";
 
 const mapStateToProps = state => ({
   ...state.notice,
@@ -14,79 +15,101 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class NoticePreview extends React.Component {
-
   render() {
     const notice = this.props.notice;
+    const duration = {
+      appear: 2000,
+      enter: 2000,
+      exit: 2000
+    };
+
+    const defaultStyle = {
+      boxShadow: "5px 10px 20px 3px rgba(176,176,176,0.79)",
+      borderRadius: "6px",
+      margin: "10px",
+      padding: "10px",
+      backgroundColor: "white",
+      position: "relative",
+      transition: `opacity 0.1s linear`,
+      opacity: "1",
+      zIndex: "5000"
+    };
+
+    const transitionStyles = {
+      entering: { opacity: "0" },
+      entered: { opacity: "0" },
+      exiting: { opacity: "1" },
+      exited: { opacity: "1" }
+    };
     return (
-      <div
-        className={`div${this.props.index}`}
-        style={{
-          boxShadow: "5px 10px 20px 3px rgba(176,176,176,0.79)",
-          borderRadius: "6px",
-          margin: "10px",
-          padding: "10px",
-          zIndex: "49",
-          backgroundColor: "white",
-          position: "relative"
-        }}
-      >
-        <Link
-          style={{
-            width: "100%"
-          }}
-          to={`notice/${notice.slug}`}
-        >
-          <div style={{ borderBottom: "1px dashed red" }}>
-            {" "}
-            <h3>{notice.title}</h3>
-          </div>
-          <h5>{notice.description}</h5>
-          <span>{notice.body}</span>
-        </Link>
-        <div
-          style={{
-            marginRight: "5px"
-          }}
-        >
+      <Transition in={!this.props.noticesVisible} timeout={duration}>
+        {state => (
           <div
+            className={`div${this.props.index}`}
             style={{
-              margin: "4px",
-              overflow: "hidden"
+              ...defaultStyle,
+              ...transitionStyles[state]
             }}
           >
-            <Link to={`@${notice.author.username}`}>
-              <img
+            <Link
+              style={{
+                width: "100%"
+              }}
+              to={`notice/${notice.slug}`}
+            >
+              <div style={{ borderBottom: "1px dashed red" }}>
+                {" "}
+                <h3>{notice.title}</h3>
+              </div>
+              <h5>{notice.description}</h5>
+              <span>{notice.body}</span>
+            </Link>
+            <div
+              style={{
+                marginRight: "5px"
+              }}
+            >
+              <div
                 style={{
-                  borderRadius: "6px",
-                  width: "40px",
-                  height: "40px",
-                  objectFit: "cover"
+                  margin: "4px",
+                  overflow: "hidden"
                 }}
-                src={notice.author.image}
-                alt="author"
-              />
-            </Link>
+              >
+                <Link to={`@${notice.author.username}`}>
+                  <img
+                    style={{
+                      borderRadius: "6px",
+                      width: "40px",
+                      height: "40px",
+                      objectFit: "cover"
+                    }}
+                    src={notice.author.image}
+                    alt="author"
+                  />
+                </Link>
+              </div>
+              <div>
+                <Link to={`@${notice.author.username}`}>
+                  {notice.author.username}
+                </Link>
+              </div>
+            </div>
+            <div
+              className="thumb-buttons-container"
+              onClick={this.buttonClickedStyle}
+            >
+              <button className="thumbs-up-button">
+                <i className="thumbs-up-icon"></i>
+              </button>
+              <button className="thumbs-down-button">
+                <i className="thumbs-down-icon"></i>
+              </button>
+            </div>
           </div>
-          <div>
-            <Link to={`@${notice.author.username}`}>
-              {notice.author.username}
-            </Link>
-          </div>
-        </div>
-        <div className="thumb-buttons-container" onclick={this.buttonClickedStyle}>
-          <button className="thumbs-up-button">
-            <i className="thumbs-up-icon"></i>
-          </button>
-          <button className="thumbs-down-button">
-            <i className="thumbs-down-icon"></i>
-          </button>
-        </div>
-      </div>
+        )}
+      </Transition>
     );
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(NoticePreview);
+export default connect(mapStateToProps, mapDispatchToProps)(NoticePreview);
