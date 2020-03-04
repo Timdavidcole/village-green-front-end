@@ -77,7 +77,7 @@ class MapComponent extends React.Component {
     });
     this.props.changeNotices(
       agent.Notices.all(JSON.stringify({ lat: lat, lng: lng }))
-    )
+    );
   }
 
   markerIcon() {
@@ -100,12 +100,12 @@ class MapComponent extends React.Component {
   render() {
     return (
       <GoogleMap
+        onDragStart={() => this.props.noticesVisible()}
         onDragEnd={() =>
           this.props.changeNotices(
             agent.Notices.all(JSON.stringify(this.state.map.getCenter()))
           )
         }
-        onDragStart={() => this.props.noticesVisible()}
         defaultZoom={16}
         ref={thisMap => this.setState({ map: thisMap })}
         center={this.props.centerMap}

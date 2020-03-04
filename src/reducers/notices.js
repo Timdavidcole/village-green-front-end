@@ -19,12 +19,12 @@ export default (state = { notices: [], noticesVisible: "visible" }, action) => {
       return {
         ...state,
         notices: action.payload.notices,
-        noticesVisible: "visible"
+        noticesVisible: true
       };
     case "NOTICES_VISIBLE":
       return {
         ...state,
-        noticesVisible: "hidden"
+        noticesVisible: false
       };
     case "HOME_PAGE_UNLOADED":
       return {};
