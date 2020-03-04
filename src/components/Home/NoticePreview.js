@@ -6,7 +6,6 @@ import { Transition } from "react-transition-group";
 import NoticeButtons from "./NoticeButtons"
 
 const mapStateToProps = state => ({
-  ...state.notice,
   currentUser: state.common.currentUser
 });
 
@@ -95,7 +94,7 @@ class NoticePreview extends React.Component {
                 </Link>
               </div>
             </div>
-            <NoticeButtons notice={notice}/>
+            <NoticeButtons index={this.props.index - 2} notice={notice}/>
           </div>
         )}
       </Transition>

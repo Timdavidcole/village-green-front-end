@@ -4,7 +4,7 @@ import "../../styles/noticePreview.css";
 import agent from "../../agent";
 
 const mapStateToProps = state => ({
-  ...state.notice,
+  ...state.notices,
   currentUser: state.common.currentUser
 });
 
@@ -20,16 +20,37 @@ class NoticeButtons extends React.Component {
   }
 
   pinNotice() {
-    this.props.pinNotice(agent.Pinned.pinNotice(this.props.notice.slug));
+    var newNotices = this.props.notices;
+    if (this.props.notice.isPinned) {
+      agent.Pinned.unPinNotice(this.props.notice.slug)
+        .then(() => (newNotices[this.props.index] = this.props.notice))
+        .then(() => {
+          this.props.pinNotice(newNotices);
+        });
+    } else {
+      agent.Pinned.pinNotice(this.props.notice.slug)
+        .then(() => (newNotices[this.props.index] = this.props.notice))
+        .then(() => {
+          this.props.pinNotice(newNotices);
+        });
+    }
+  }
+
+  pinStyle() {
+    if (this.props.notice.isPinned) {
+      return {
+        backgroundColor: "#169211"
+      };
+    }
   }
 
   render() {
-    const notice = this.props.notice
     return (
       <div className="thumb-buttons-container">
         <button
-          onClick={event => this.pinNotice(event)}
+          onClick={() => this.pinNotice()}
           className="pin-notice-button"
+          style={this.pinStyle()}
         >
           <i className="pin-notice-icon"></i>
         </button>

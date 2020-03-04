@@ -26,7 +26,7 @@ export default (state = { notices: [], noticesVisible: true }, action) => {
         noticesVisible: false
       };
     case "HOME_PAGE_UNLOADED":
-      return {};
+      return { ...state };
     case "PROFILE_PAGE_LOADED":
     case "PROFILE_FAVORITES_PAGE_LOADED":
       return {
@@ -36,7 +36,7 @@ export default (state = { notices: [], noticesVisible: true }, action) => {
       };
     case "PROFILE_PAGE_UNLOADED":
     case "PROFILE_FAVORITES_PAGE_UNLOADED":
-      return {};
+      return {...state};
   }
 
   return state;
