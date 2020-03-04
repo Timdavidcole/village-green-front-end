@@ -8,7 +8,6 @@ const Notices = props => {
   if (!props.notices) {
     return (
       <div className="parent">
-        <NewNotice />
         <div className="article-preview">Loading...</div>
       </div>
     );
@@ -17,28 +16,31 @@ const Notices = props => {
   if (props.notices.length === 0) {
     return (
       <div className="parent">
-        <NewNotice />
         <div className="article-preview">No notices are here... yet.</div>
       </div>
     );
   }
 
-  const duration = 1000;
+  const duration = {
+    appear: 1000,
+    enter: 1000,
+    exit: 1000,
+   };
 
   const defaultStyle = {
-    transition: `opacity 1s linear`,
-    opacity: 0
+    transition: `opacity 1s ease-in-out`,
+    opacity: 1
   };
 
   const transitionStyles = {
-    entering: { opacity: 1 },
-    entered: { opacity: 1 },
-    exiting: { opacity: 0 },
-    exited: { opacity: 0 }
+    entering: { opacity: 0 },
+    entered: { opacity: 0 },
+    exiting: { opacity: 1 },
+    exited: { opacity: 1 }
   };
 
   return (
-    <Transition in={props.noticesVisible} timeout={duration}>
+    <Transition in={!props.noticesVisible} timeout={duration}>
       {state => (
         <div className="parent"
           style={{
