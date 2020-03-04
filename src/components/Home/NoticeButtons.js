@@ -4,13 +4,12 @@ import "../../styles/noticePreview.css";
 import agent from "../../agent";
 
 const mapStateToProps = state => ({
-  ...state.notices,
+  ...state.notice,
   currentUser: state.common.currentUser
 });
 
 const mapDispatchToProps = dispatch => ({
-  pinNotice: payload => dispatch({ type: "PIN_NOTICE", payload }),
-  onUnload: () => dispatch({ type: "NOTICE_PAGE_UNLOADED" }),
+  pinNotice: payload => dispatch({ type: "UPDATE_NOTICE", payload }),
   onLoad: payload => dispatch({ type: "HOME_PAGE_LOADED", payload })
 });
 
@@ -25,6 +24,7 @@ class NoticeButtons extends React.Component {
   }
 
   render() {
+    const notice = this.props.notice
     return (
       <div className="thumb-buttons-container">
         <button
