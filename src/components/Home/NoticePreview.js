@@ -16,8 +16,6 @@ const mapDispatchToProps = dispatch => ({
 
 class NoticePreview extends React.Component {
   render() {
-    console.log("render Notice");
-    console.log(this.props.notice);
 
     const notice = this.props.notice;
     const duration = {
@@ -44,8 +42,6 @@ class NoticePreview extends React.Component {
       exiting: { opacity: "1" },
       exited: { opacity: "1" }
     };
-    console.log(this.props.index)
-    console.log(this.props.page)
     return (
       <Transition in={!this.props.noticesVisible} timeout={duration}>
         {state => (

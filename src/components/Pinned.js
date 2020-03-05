@@ -46,8 +46,6 @@ class Pinned extends React.Component {
       return null;
     }
 
-    console.log(profile);
-
     return (
       <div className="profile-page">
         <div className="user-info">

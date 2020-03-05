@@ -17,7 +17,6 @@ const mapDispatchToProps = dispatch => ({
 
 class Profile extends React.Component {
   componentWillMount() {
-    console.log(this.props.match.params)
     this.props.onLoad(
       Promise.all([
         agent.Profile.get(this.props.match.params.username),
@@ -69,9 +68,8 @@ class Profile extends React.Component {
         <div className="container">
           <div className="row">
             <div className="col-xs-12 col-md-10 offset-md-1">
-              <div className="articles-toggle">{this.renderTabs()}</div>
+              <div className="articles-toggle"></div>
 
-              <Notices notices={this.props.notices} />
             </div>
           </div>
         </div>
