@@ -11,8 +11,9 @@ import Settings from './components/Settings';
 import Notice from './components/Notice';
 import Profile from './components/Profile';
 import Pinned from './components/Pinned';
+import PrivateRoute from './components/PrivateRoute';
 
-
+console.log(window.localStorage)
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
@@ -20,11 +21,11 @@ ReactDOM.render(
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
-        <Route path="/@:username/pinned" component={Pinned} />
+        <PrivateRoute path="/@:username/pinned" component={Pinned} />
         <Route path="/register" component={Register} />
-        <Route path="/settings" component={Settings} />
+        <PrivateRoute path="/settings" component={Settings} />
         <Route path="/notice/:id" component={Notice} />
-        <Route path="/@:username" component={Profile} />
+        <PrivateRoute path="/@:username" component={Profile} />
       </Switch>
     </BrowserRouter>
   </Provider>,

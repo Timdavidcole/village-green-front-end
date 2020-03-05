@@ -8,7 +8,8 @@ import Notices from "./Notices";
 const mapStateToProps = state => ({
   noticesVisible: state.notices.noticesVisible,
   centerMap: state.map.centerMap,
-  notices: state.notices.notices
+  notices: state.notices.notices,
+  loggedIn: state.auth.loggedIn
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -20,7 +21,10 @@ class Home extends React.Component {
     this.props.onLoad(agent.Notices.all(JSON.stringify(this.props.centerMap)));
   }
 
+
   render() {
+    console.log(this.props.loggedIn)
+
     return (
       <div style={{ width: "100%", height: "94vh" }}>
         <div style={{ width: "100%", position: "absolute" }}>

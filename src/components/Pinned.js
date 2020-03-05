@@ -1,6 +1,5 @@
 import Notices from "./Home/Notices";
 import React from "react";
-import { Link } from "react-router-dom";
 import agent from "../agent";
 import { connect } from "react-redux";
 
@@ -8,7 +7,8 @@ const mapStateToProps = state => ({
   currentUser: state.common.currentUser,
   profile: state.profile,
   notices: state.pinned.notices,
-  noticesVisible: state.notices.noticesVisible
+  noticesVisible: state.notices.noticesVisible,
+  loggedIn: state.auth.loggedIn
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -30,21 +30,13 @@ class Pinned extends React.Component {
     this.props.onUnload();
   }
 
-  renderTabs() {
-    return (
-      <ul className="nav nav-pills outline-active">
-        <li className="nav-item">
-          <Notices notices={this.props.notices || []} />
-        </li>
-      </ul>
-    );
-  }
-
   render() {
     const profile = this.props.currentUser;
     if (!profile) {
       return null;
     }
+
+    console.log(this.props.loggedIn)
 
     return (
       <div className="profile-page">
