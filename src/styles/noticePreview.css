@@ -8,13 +8,14 @@
 .thumbs-up-button {
     height: 35px;
     width: 35px;
-    background-color: #84cc82;
+    background-color: white;
     vertical-align: top;
     border-radius: 100%;
     outline-style: none;
     border: none !important;
     outline: none !important;
     margin: 3px;
+    box-shadow: 3px 3px 10px 0px rgba(176,176,176,0.79)
 }
 
 .thumbs-up-button:hover {
@@ -22,7 +23,7 @@
 }
 
 .thumbs-up-button:active {
-    background-color: #169211;
+    background-color: #2bae27;
 }
 
 .thumbs-up-icon {
@@ -37,13 +38,15 @@
 .thumbs-down-button {
     height: 35px;
     width: 35px;
-    background-color: #84cc82;
+    background-color: white;
     position: relative;
     vertical-align: top;
     border-radius: 100%;
     border: none !important;
     outline: none !important;
     margin: 3px;
+    box-shadow: 3px 3px 10px 0px rgba(176,176,176,0.79)
+
 }
 
 .thumbs-down-button:hover {
@@ -51,7 +54,7 @@
 }
 
 .thumbs-down-button:active {
-    background-color: #169211;
+    background-color: #2bae27;
 }
 
 .thumbs-down-icon {
@@ -68,13 +71,15 @@
 .pin-notice-button {
     height: 35px;
     width: 35px;
-    background-color: #84cc82;
+    background-color: white;
     position: relative;
     vertical-align: top;
     border-radius: 100%;
     border: none !important;
     outline: none !important;
     margin: 3px;
+    box-shadow: 3px 3px 10px 0px rgba(176,176,176,0.79)
+
 }
 
 .pin-notice-button:hover {
@@ -82,7 +87,9 @@
 }
 
 .pin-notice-button:active {
-    background-color: #169211;
+    transform: translate(0px,2px);
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 1px 1px 10px 0px rgba(176,176,176,0.79)
 }
 
 .pin-notice-icon {

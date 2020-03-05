@@ -16,7 +16,11 @@ const mapDispatchToProps = dispatch => ({
 class NoticeButtons extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      hover: false
+    };
     this.pinNotice = this.pinNotice.bind(this);
+    this.toggleHover = this.toggleHover.bind(this);
   }
 
   pinNotice() {
@@ -44,11 +48,19 @@ class NoticeButtons extends React.Component {
   }
 
   pinStyle() {
-    if (this.props.notice.isPinned) {
+    if (this.state.hover) {
+      return { backgroundColor: "#a6eea3" };
+    } else if (this.props.notice.isPinned) {
       return {
-        backgroundColor: "#169211"
+        backgroundColor: "#43b83f"
       };
+    } else {
+      return { backgroundColor: "white" };
     }
+  }
+
+  toggleHover() {
+    this.setState({ hover: !this.state.hover });
   }
 
   render() {
@@ -58,6 +70,8 @@ class NoticeButtons extends React.Component {
           onClick={() => this.pinNotice()}
           className="pin-notice-button"
           style={this.pinStyle()}
+          onMouseEnter={this.toggleHover}
+          onMouseLeave={this.toggleHover}
         >
           <i className="pin-notice-icon"></i>
         </button>
