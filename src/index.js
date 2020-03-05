@@ -10,6 +10,8 @@ import Register from "./components/Register";
 import Settings from './components/Settings';
 import Notice from './components/Notice';
 import Profile from './components/Profile';
+import Pinned from './components/Pinned';
+
 
 ReactDOM.render(
   <Provider store={store}>
@@ -18,6 +20,7 @@ ReactDOM.render(
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
+        <Route path="/@:username/pinned" component={Pinned} />
         <Route path="/register" component={Register} />
         <Route path="/settings" component={Settings} />
         <Route path="/notice/:id" component={Notice} />

@@ -45,6 +45,12 @@ const LoggedInView = props => {
         </li>
 
         <li className="nav-item">
+          <Link to={`/@${props.currentUser.username}/pinned`} className="nav-link">
+            Pinned Notices
+          </Link>
+        </li>
+
+        <li className="nav-item">
           <Link to="/settings" className="nav-link">
             <i className="ion-gear-a"></i>&nbsp;Settings
           </Link>

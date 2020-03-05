@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import "../../styles/noticePreview.css";
 import { Transition } from "react-transition-group";
-import NoticeButtons from "./NoticeButtons"
+import NoticeButtons from "./NoticeButtons";
 
 const mapStateToProps = state => ({
   currentUser: state.common.currentUser
@@ -16,6 +16,9 @@ const mapDispatchToProps = dispatch => ({
 
 class NoticePreview extends React.Component {
   render() {
+    console.log("render Notice");
+    console.log(this.props.notice);
+
     const notice = this.props.notice;
     const duration = {
       appear: 100,
@@ -41,6 +44,8 @@ class NoticePreview extends React.Component {
       exiting: { opacity: "1" },
       exited: { opacity: "1" }
     };
+    console.log(this.props.index)
+    console.log(this.props.page)
     return (
       <Transition in={!this.props.noticesVisible} timeout={duration}>
         {state => (
@@ -94,7 +99,11 @@ class NoticePreview extends React.Component {
                 </Link>
               </div>
             </div>
-            <NoticeButtons index={this.props.index - 2} notice={notice}/>
+            <NoticeButtons
+              page={this.props.page}
+              index={this.props.index - 2}
+              notice={notice}
+            />
           </div>
         )}
       </Transition>

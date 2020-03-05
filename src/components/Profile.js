@@ -17,6 +17,7 @@ const mapDispatchToProps = dispatch => ({
 
 class Profile extends React.Component {
   componentWillMount() {
+    console.log(this.props.match.params)
     this.props.onLoad(
       Promise.all([
         agent.Profile.get(this.props.match.params.username),

@@ -53,27 +53,24 @@ const requests = {
 };
 
 const Profile = {
-  get: username => requests.get(`/profiles/${username}`),
+  get: username => requests.get(`/profiles/${username}`)
 };
 
 const Notices = {
-  create: (notice) =>
-  requests.post(`/notices/`, { notice }),
-  all: (coords) => requests.get(`/notices?limit=7&coords=${coords}`),
-  byAuthor: (author) =>
-    requests.get(`/notices?author=${encodeURIComponent(author)}&limit=5`),
-  favoritedBy: (author) =>
-    requests.get(`/notices?favorited=${encodeURIComponent(author)}&limit=5`),
+  create: notice => requests.post(`/notices/`, { notice }),
+  all: coords => requests.get(`/notices?limit=7&coords=${coords}`),
+  byAuthor: author =>
+    requests.get(`/notices?author=${encodeURIComponent(author)}&limit=10`),
+  pinned: author =>
+    requests.get(`/notices?pinned=${encodeURIComponent(author)}&limit=10`),
   get: slug => requests.get(`/notices/${slug}`),
   del: slug => requests.del(`/notices/${slug}`)
 };
 
 const Pinned = {
-  pinNotice: (slug) =>
-  requests.post(`/notices/${slug}/pin`),
-  unPinNotice: (slug) =>
-  requests.del(`/notices/${slug}/pin`)
-}
+  pinNotice: slug => requests.post(`/notices/${slug}/pin`),
+  unPinNotice: slug => requests.del(`/notices/${slug}/pin`)
+};
 
 const Comments = {
   create: (slug, comment) =>

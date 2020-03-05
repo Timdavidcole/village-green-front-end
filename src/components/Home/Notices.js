@@ -5,7 +5,9 @@ import "./noticesGrid.css";
 
 class Notices extends React.Component {
   render() {
-    console.log("update notices")
+    console.log("render Notices");
+    console.log(this.props.notices);
+
     if (!this.props.notices) {
       return (
         <div className="parent">
@@ -21,12 +23,42 @@ class Notices extends React.Component {
         </div>
       );
     }
+
+    if (this.props.page === "pinned") {
+      return (
+        <div
+          className="parent"
+          style={{
+            zIndex: "5000"
+          }}
+        >
+          {this.props.notices.map((notice, i) => {
+            return (
+              <NoticePreview
+                page={this.props.page}
+                noticesVisible={this.props.noticesVisible}
+                index={i + 1}
+                notice={notice}
+                key={notice.slug}
+              />
+            );
+          })}
+        </div>
+      );
+    }
+
     return (
-      <div className="parent">
+      <div
+        className="parent"
+        style={{
+          zIndex: "5000"
+        }}
+      >
         <NewNotice noticesVisible={this.props.noticesVisible} />
         {this.props.notices.map((notice, i) => {
           return (
             <NoticePreview
+              page={this.props.page}
               noticesVisible={this.props.noticesVisible}
               index={i + 2}
               notice={notice}

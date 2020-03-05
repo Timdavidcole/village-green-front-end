@@ -1,5 +1,4 @@
 export default (state = { notices: [], noticesVisible: true }, action) => {
-  console.log(action.payload)
   switch (action.type) {
     case "HOME_PAGE_LOADED":
       return {

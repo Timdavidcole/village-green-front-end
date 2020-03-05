@@ -54,7 +54,7 @@
 }
 
 .thumbs-down-button:active {
-    background-color: #2bae27;
+    background-color: #70c46e;
 }
 
 .thumbs-down-icon {
@@ -87,9 +87,9 @@
 }
 
 .pin-notice-button:active {
-    transform: translate(0px,2px);
+    transform: translate(0px,3px);
     transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 1px 1px 10px 0px rgba(176,176,176,0.79)
+    box-shadow: 1px 1px 7px 0px rgba(176,176,176,0.79)
 }
 
 .pin-notice-icon {

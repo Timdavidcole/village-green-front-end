@@ -7,6 +7,7 @@ import settings from "./reducers/settings";
 import notice from "./reducers/notice";
 import notices from "./reducers/notices";
 import profile from "./reducers/profile";
+import pinned from "./reducers/pinned";
 import map from "./reducers/map";
 import createLogger from 'redux-logger';
 
@@ -18,7 +19,8 @@ const reducer = combineReducers({
   home,
   profile,
   map,
-  settings
+  settings,
+  pinned
 });
 
 const middleware = applyMiddleware(promiseMiddleware, localStorageMiddleware, createLogger);
