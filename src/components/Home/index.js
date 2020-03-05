@@ -8,7 +8,7 @@ import Notices from "./Notices";
 const mapStateToProps = state => ({
   noticesVisible: state.notices.noticesVisible,
   centerMap: state.map.centerMap,
-  ...state.notices
+  notices: state.notices.notices
 });
 
 const mapDispatchToProps = dispatch => ({

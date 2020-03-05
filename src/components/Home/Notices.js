@@ -5,6 +5,7 @@ import "./noticesGrid.css";
 
 class Notices extends React.Component {
   render() {
+    console.log("update notices")
     if (!this.props.notices) {
       return (
         <div className="parent">

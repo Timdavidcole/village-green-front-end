@@ -4,7 +4,7 @@ import "../../styles/noticePreview.css";
 import agent from "../../agent";
 
 const mapStateToProps = state => ({
-  ...state.notices,
+  notices: state.notices.notices,
   currentUser: state.common.currentUser
 });
 
@@ -20,17 +20,24 @@ class NoticeButtons extends React.Component {
   }
 
   pinNotice() {
-    var newNotices = this.props.notices;
     if (this.props.notice.isPinned) {
       agent.Pinned.unPinNotice(this.props.notice.slug)
-        .then(() => (newNotices[this.props.index] = this.props.notice))
-        .then(() => {
+        .then(notice => {
+          var notices = [...this.props.notices];
+          notices[this.props.index] = notice.notice;
+          return notices;
+        })
+        .then(newNotices => {
           this.props.pinNotice(newNotices);
         });
     } else {
       agent.Pinned.pinNotice(this.props.notice.slug)
-        .then(() => (newNotices[this.props.index] = this.props.notice))
-        .then(() => {
+        .then(notice => {
+          var notices = [...this.props.notices];
+          notices[this.props.index] = notice.notice;
+          return notices;
+        })
+        .then(newNotices => {
           this.props.pinNotice(newNotices);
         });
     }

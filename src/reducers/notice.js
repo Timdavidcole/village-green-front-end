@@ -1,7 +1,4 @@
-import { createBuilderStatusReporter } from "typescript";
-
 export default (state = {}, action) => {
-  console.log(action.payload);
   // eslint-disable-next-line default-case
   switch (action.type) {
     case "NOTICE_PAGE_LOADED":
@@ -25,13 +22,6 @@ export default (state = {}, action) => {
       return {
         ...state,
         comments: state.comments.filter(comment => comment.id !== commentId)
-      };
-    case "PIN_NOTICE":
-      return { ...state };
-    case "UPDATE_NOTICE":
-      return {
-        ...state,
-        notices: action.payload
       };
   }
 
