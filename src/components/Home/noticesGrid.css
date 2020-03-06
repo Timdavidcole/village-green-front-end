@@ -8,4 +8,5 @@
     position: absolute;
     height: calc(100vh - 118px);
     width: 100vw;
+    pointer-events: none
 }

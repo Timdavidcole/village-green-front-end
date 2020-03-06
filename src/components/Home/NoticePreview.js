@@ -15,6 +15,25 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class NoticePreview extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { randomTop: null, randomLeft: null };
+
+    this.getRndInteger = this.getRndInteger.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({
+      randomTop: this.getRndInteger(-20, 20),
+      randomLeft: this.getRndInteger(-20, 20)
+    });
+  }
+
+  getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+
   render() {
     const notice = this.props.notice;
     const duration = {
@@ -22,10 +41,6 @@ class NoticePreview extends React.Component {
       enter: 100,
       exit: 100
     };
-
-    const getRndInteger = function (min, max) {
-      return Math.floor(Math.random() * (max - min) ) + min;
-    }
 
     const defaultStyle = {
       boxShadow: "5px 10px 20px 3px rgba(176,176,176,0.79)",
@@ -37,8 +52,9 @@ class NoticePreview extends React.Component {
       transition: `opacity 0.1s linear`,
       opacity: "1",
       zIndex: "5000",
-      top: `${getRndInteger(-20, 20)}px`,
-      left: `${getRndInteger(-20, 20)}px`
+      top: `${this.state.randomTop}px`,
+      left: `${this.state.randomLeft}px`,
+      pointerEvents: "auto"
     };
 
     const transitionStyles = {
