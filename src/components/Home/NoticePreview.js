@@ -87,14 +87,30 @@ class NoticePreview extends React.Component {
               <Link to={`notice/${notice.slug}`}>
                 <div style={{ width: "100%" }}>
                   <div style={{ borderBottom: "1px dashed red" }}>
-                    {" "}
                     <h3 style={{ textAlign: "center" }}>{notice.title}</h3>
                   </div>
-                  <span style={{ textAlign: "center" }}>
+                  <span
+                    style={{
+                      textAlign: "center",
+                      display: "inline-block",
+                      width: "100%"
+                    }}
+                  >
                     {notice.description}
                   </span>
                   <br></br>
-                  <span style={{ fontSize: "1.3vh" }}>{notice.body}</span>
+                  <span
+                    style={{
+                      display: "inline-block",
+                      height: "110px",
+                      fontSize: "1.3vh",
+                      overflowY: "auto",
+                      width: "100%",
+                      textAlign: "center"
+                    }}
+                  >
+                    {notice.body}
+                  </span>
                 </div>
               </Link>
               <div
@@ -102,7 +118,7 @@ class NoticePreview extends React.Component {
                   width: "100%",
                   position: "absolute",
                   margin: "0px",
-                  bottom: "0px"
+                  bottom: "-5px"
                 }}
               >
                 <NoticePreviewUser notice={notice} />
