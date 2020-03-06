@@ -23,7 +23,7 @@ class LoggedInView extends React.Component {
     const duration = {
       appear: 400,
       enter: 400,
-      exit: 400
+      exit: 0
     };
 
     const defaultStyle = {

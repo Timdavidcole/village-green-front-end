@@ -46,7 +46,7 @@ class NoticeButtons extends React.Component {
           } else {
             this.props.pinNotice(newNotices);
           }
-          setTimeout(() => this.props.removePinnedEvent(), 400);
+          setTimeout(() => this.props.removePinnedEvent(), 300);
         });
     } else {
       agent.Pinned.pinNotice(this.props.notice.slug)
@@ -67,7 +67,7 @@ class NoticeButtons extends React.Component {
           } else {
             this.props.pinNotice(newNotices);
           }
-          setTimeout(() => this.props.removePinnedEvent(), 400);
+          setTimeout(() => this.props.removePinnedEvent(), 300);
         });
     }
   }
