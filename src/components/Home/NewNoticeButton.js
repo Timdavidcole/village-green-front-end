@@ -3,7 +3,7 @@ import agent from "../../agent";
 import { connect } from "react-redux";
 import { Transition } from "react-transition-group";
 
-const mapStateToProps = state => ({ ...state.auth });
+const mapStateToProps = state => ({ ...state.notice });
 
 const mapDispatchToProps = dispatch => ({
   onClick: () => dispatch({ type: "DISPLAY_NEW_NOTICE" })
@@ -23,12 +23,13 @@ class NewNoticeButton extends React.Component {
     this.toggleHoverIn = this.toggleHoverIn.bind(this);
     this.toggleHoverOut = this.toggleHoverOut.bind(this);
     this.toggleClick = this.toggleClick.bind(this);
+    this.openNewNotice = this.openNewNotice.bind(this)
   }
-  toggleHoverIn(event) {
+  toggleHoverIn() {
     this.setState({ hover: true });
   }
 
-  toggleHoverOut(event) {
+  toggleHoverOut() {
     this.setState({ hover: false });
   }
 
@@ -39,6 +40,10 @@ class NewNoticeButton extends React.Component {
         randomLeft: this.getRndInteger(-15, 15)
       });
     }
+  }
+
+  openNewNotice () {
+    this.props.onClick()
   }
 
   getRndInteger(min, max) {

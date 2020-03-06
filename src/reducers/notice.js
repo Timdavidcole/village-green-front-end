@@ -23,6 +23,16 @@ export default (state = {}, action) => {
         ...state,
         comments: state.comments.filter(comment => comment.id !== commentId)
       };
+    case "DISPLAY_NEW_NOTICE":
+      return {
+        ...state,
+        showNewNoticeWindow: true
+      };
+    case "HIDE_NEW_NOTICE":
+      return {
+        ...state,
+        showNewNoticeWindow: false
+      };
   }
 
   return state;
