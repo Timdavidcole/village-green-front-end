@@ -35,7 +35,7 @@ class NoticeButtons extends React.Component {
             notices.splice(this.props.index + 1, 1);
             return notices;
           } else {
-            var notices = [...this.props.notices];
+            notices = [...this.props.notices];
             notices[this.props.index] = notice.notice;
             return notices;
           }
@@ -56,7 +56,7 @@ class NoticeButtons extends React.Component {
             notices.splice(this.props.index + 1, 1);
             return notices;
           } else {
-            var notices = [...this.props.notices];
+            notices = [...this.props.notices];
             notices[this.props.index] = notice.notice;
             return notices;
           }

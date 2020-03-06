@@ -13,13 +13,11 @@ const mapDispatchToProps = dispatch => ({
   pinNotice: payload => dispatch({ type: "PIN_NOTICE", payload }),
   onLoad: payload => dispatch({ type: "HOME_PAGE_LOADED", payload }),
   updatePinned: payload => dispatch({ type: "REMOVE_PINNED", payload }),
-  removePinnedEvent: () => dispatch({ type: "REMOVE_PINNED_EVENT" })
+  removePinnedEvent: () => dispatch({ type: "REMOVE_PINNED_EVENT" }),
+  onClick: () => dispatch({ type: "DISPLAY_NEW_NOTICE" })
 });
 
 class LoggedInView extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     const duration = {
@@ -56,8 +54,8 @@ class LoggedInView extends React.Component {
             </Link>
           </li>
 
-          <li className="nav-item">
-            <Link to="/editor" className="nav-link">
+          <li onClick={this.props.onClick} className="nav-item">
+            <Link to="/" className="nav-link">
               <i className="ion-compose"></i>&nbsp;New Notice
             </Link>
           </li>

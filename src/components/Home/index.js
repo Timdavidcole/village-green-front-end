@@ -14,8 +14,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onLoad: payload => dispatch({ type: "HOME_PAGE_LOADED", payload }),
-  // hideNewNoticeWindow: () => dispatch({ type: "HIDE_NEW_NOTICE" })
+  onLoad: payload => dispatch({ type: "HOME_PAGE_LOADED", payload })
 });
 
 class Home extends React.Component {
@@ -23,17 +22,9 @@ class Home extends React.Component {
     this.props.onLoad(agent.Notices.all(JSON.stringify(this.props.centerMap)));
   }
 
-  // collapse() {
-  //   this.setState({ expanded: false });
-  // }
-
   render() {
     return (
-      <div
-        // tabIndex="0"
-        // onBlur={this.props.hideNewNoticeWindow}
-        style={{ width: "100%" }}
-      >
+      <div style={{ width: "100%" }}>
         <div style={{ width: "100%", position: "absolute" }}>
           <MapNavBar />
           <NewNotice />
