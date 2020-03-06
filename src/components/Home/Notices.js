@@ -2,6 +2,7 @@ import NoticePreview from "./NoticePreview";
 import React from "react";
 import NewNotice from "./NewNotice";
 import "./noticesGrid.css";
+import { classicNameResolver } from "typescript";
 
 class Notices extends React.Component {
   render() {
@@ -51,8 +52,8 @@ class Notices extends React.Component {
         className="parent"
         style={{
           zIndex: "1",
-          height: "auto",
-          width: "auto"
+          height: "calc(100vh - 130px)",
+          width: "100vw"
         }}
       >
         <NewNotice noticesVisible={this.props.noticesVisible} />

@@ -71,10 +71,10 @@ class NoticeButtons extends React.Component {
 
   pinStyle() {
     if (this.state.hover) {
-      return { backgroundColor: "#a6eea3" };
+      return { backgroundColor: "#c9eec7" };
     } else if (this.props.notice.isPinned) {
       return {
-        backgroundColor: "#70c46e"
+        backgroundColor: "#96d095"
       };
     } else {
       return { backgroundColor: "white" };

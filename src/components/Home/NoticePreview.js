@@ -27,8 +27,8 @@ class NoticePreview extends React.Component {
   componentDidMount() {
     if (this.props.page !== "pinned") {
       this.setState({
-        randomTop: this.getRndInteger(-17, 17),
-        randomLeft: this.getRndInteger(-17, 17)
+        randomTop: this.getRndInteger(-15, 15),
+        randomLeft: this.getRndInteger(-15, 15)
       });
     }
   }
@@ -79,7 +79,10 @@ class NoticePreview extends React.Component {
           >
             <div
               style={{
-                width: "100%"
+                width: "100%",
+                height: "100%",
+                position: "relative"
+
               }}
             >
               <Link to={`notice/${notice.slug}`}>
@@ -92,15 +95,15 @@ class NoticePreview extends React.Component {
                     {notice.description}
                   </span>
                   <br></br>
-                  <span style={{ fontSize: "1.5vh" }}>{notice.body}</span>
+                  <span style={{ fontSize: "1.3vh" }}>{notice.body}</span>
                 </div>
               </Link>
               <div
                 style={{
                   width: "100%",
-                  position: "relative",
+                  position: "absolute",
                   margin: "0px",
-                  bottom: "-5px"
+                  bottom: "0px"
                 }}
               >
                 <NoticePreviewUser notice={notice} />

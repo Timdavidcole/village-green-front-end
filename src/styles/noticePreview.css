@@ -51,11 +51,11 @@
 }
 
 .thumbs-down-button:hover {
-    background-color: #a6eea3;
+    background-color: #c9eec7;
 }
 
 .thumbs-down-button:active {
-    background-color: #70c46e;
+    background-color: #96d095;
 }
 
 .thumbs-down-icon {

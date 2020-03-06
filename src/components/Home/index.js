@@ -26,7 +26,7 @@ class Home extends React.Component {
     console.log(this.props.loggedIn)
 
     return (
-      <div style={{ width: "100%", height: "94vh" }}>
+      <div style={{ width: "100%" }}>
         <div style={{ width: "100%", position: "absolute" }}>
           <MapNavBar />
           <Notices
