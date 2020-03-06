@@ -9,9 +9,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  pinNotice: payload => dispatch({ type: "UPDATE_NOTICE", payload }),
+  pinNotice: payload => dispatch({ type: "PIN_NOTICE", payload }),
   onLoad: payload => dispatch({ type: "HOME_PAGE_LOADED", payload }),
-  updatePinned: payload => dispatch({ type: "UPDATE_PINNED", payload })
+  updatePinned: payload => dispatch({ type: "REMOVE_PINNED", payload }),
+  removePinnedEvent: () => dispatch({ type: "REMOVE_PINNED_EVENT" })
 });
 
 class NoticeButtons extends React.Component {
@@ -45,6 +46,7 @@ class NoticeButtons extends React.Component {
           } else {
             this.props.pinNotice(newNotices);
           }
+          setTimeout(() => this.props.removePinnedEvent(), 400);
         });
     } else {
       agent.Pinned.pinNotice(this.props.notice.slug)
@@ -65,6 +67,7 @@ class NoticeButtons extends React.Component {
           } else {
             this.props.pinNotice(newNotices);
           }
+          setTimeout(() => this.props.removePinnedEvent(), 400);
         });
     }
   }

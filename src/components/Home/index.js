@@ -23,8 +23,6 @@ class Home extends React.Component {
 
 
   render() {
-    console.log(this.props.loggedIn)
-
     return (
       <div style={{ width: "100%" }}>
         <div style={{ width: "100%", position: "absolute" }}>

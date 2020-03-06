@@ -82,7 +82,6 @@ class NoticePreview extends React.Component {
                 width: "100%",
                 height: "100%",
                 position: "relative"
-
               }}
             >
               <Link to={`notice/${notice.slug}`}>

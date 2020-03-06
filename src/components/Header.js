@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import React from "react";
+import LoggedInView from "./LoggedInView"
 
 const LoggedOutView = props => {
   if (!props.currentUser) {
@@ -28,61 +29,6 @@ const LoggedOutView = props => {
   return null;
 };
 
-const LoggedInView = props => {
-  if (props.currentUser) {
-    return (
-      <ul className="nav navbar-nav pull-xs-right">
-        <li className="nav-item">
-          <Link to="/" className="nav-link">
-            Home
-          </Link>
-        </li>
-
-        <li className="nav-item">
-          <Link to="/editor" className="nav-link">
-            <i className="ion-compose"></i>&nbsp;New Notice
-          </Link>
-        </li>
-
-        <li className="nav-item">
-          <Link to={`/@${props.currentUser.username}/pinned`} className="nav-link">
-            Pinned Notices
-          </Link>
-        </li>
-
-        <li className="nav-item">
-          <Link to="/settings" className="nav-link">
-            <i className="ion-gear-a"></i>&nbsp;Settings
-          </Link>
-        </li>
-
-        <li className="nav-item">
-          <div
-            onClick={props.onClickLogout}
-            className="nav-link"
-            style={{ cursor: "pointer" }}
-          >
-            Log Out
-          </div>
-        </li>
-
-        <li className="nav-item">
-          <Link to={`/@${props.currentUser.username}`} className="nav-link">
-            <img
-              alt="User Profile"
-              src={props.currentUser.image}
-              className="user-pic"
-            />
-            {props.currentUser.username}
-          </Link>
-        </li>
-      </ul>
-    );
-  }
-
-  return null;
-};
-
 class Header extends React.Component {
   render() {
     return (
@@ -92,7 +38,7 @@ class Header extends React.Component {
             {this.props.appName.toLowerCase()}
           </Link>
           <Link to="/" style={{position: "relative", top: "6px", fontSize: "18px", fontStyle: "italic"}}>
-            the noticeboard for anywhere, anything and anyone...
+            the noticeboard for anyone, anywhere and anything...
           </Link>
           <LoggedOutView currentUser={this.props.currentUser} />
           <LoggedInView

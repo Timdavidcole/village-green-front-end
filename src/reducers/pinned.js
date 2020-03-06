@@ -9,7 +9,7 @@ export default (state = {}, action) => {
       };
     case "PINNED_FAVORITES_PAGE_UNLOADED":
       return {};
-    case "UPDATE_PINNED":
+    case "REMOVE_PINNED":
       return {
         ...state,
         notices: action.payload

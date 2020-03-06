@@ -1,4 +1,7 @@
-export default (state = { notices: [], noticesVisible: true }, action) => {
+export default (
+  state = { notices: [], noticesVisible: true, pinnedEvent: false },
+  action
+) => {
   switch (action.type) {
     case "HOME_PAGE_LOADED":
       return {
@@ -27,10 +30,16 @@ export default (state = { notices: [], noticesVisible: true }, action) => {
       };
     case "HOME_PAGE_UNLOADED":
       return {};
-    case "UPDATE_NOTICE":
+    case "PIN_NOTICE":
       return {
         ...state,
-        notices: action.payload
+        notices: action.payload,
+        pinnedEvent: true
+      };
+    case "REMOVE_PINNED_EVENT":
+      return {
+        ...state,
+        pinnedEvent: false
       };
   }
 
