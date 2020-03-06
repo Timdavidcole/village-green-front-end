@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import React from "react";
+import MenuIcon from "./MenuIcon";
 import { connect } from "react-redux";
 import { Transition } from "react-transition-group";
+import "../styles/menuStyles.css";
 
 const mapStateToProps = state => ({
   pinnedEvent: state.notices.pinnedEvent
@@ -32,11 +34,19 @@ class LoggedInView extends React.Component {
     };
 
     const transitionStyles = {
-      entering: { transform: "scale(1.15)", color: "#2e962a" },
-      entered: { transform: "scale(1.15)", color: "#2e962a" },
+      entering: { transform: "scale(1.15)", color: "#2e962a", fill: "#2e962a" },
+      entered: { transform: "scale(1.15)", color: "#2e962a", fill: "#2e962a" },
       exiting: { transform: "scale(1)" },
       exited: { transform: "scale(1)" }
     };
+
+    const pinColor = {
+      entering: "#2e962a",
+      entered: "#2e962a",
+      exiting: "#aeaeae",
+      exited: "#aeaeae" 
+    };
+
     if (this.props.currentUser) {
       return (
         <ul className="nav navbar-nav pull-xs-right">
@@ -63,7 +73,8 @@ class LoggedInView extends React.Component {
                     ...transitionStyles[state]
                   }}
                 >
-                  Pinned Notices
+                  
+                  <MenuIcon class={"pinSVGMain"} stroke={pinColor[state]}/>Pinned Notices
                 </Link>
               )}
             </Transition>

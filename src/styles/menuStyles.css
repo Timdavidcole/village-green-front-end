@@ -1,0 +1,11 @@
+.pinSVG {
+    stroke: #2e962a !important;
+}
+
+.pinSVGMain {
+    display: inline-block;
+    height: 14px;
+    width: 15px;
+    transition: color 0.2s ease-in
+
+}
