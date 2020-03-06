@@ -20,7 +20,8 @@ class NewNotice extends React.Component {
     this.state = {
       title: "",
       description: "",
-      body: ""
+      body: "",
+      image: ""
     };
     this.setTitle = ev => {
       this.setState({ title: ev.target.value });
@@ -31,17 +32,22 @@ class NewNotice extends React.Component {
     this.setBody = ev => {
       this.setState({ body: ev.target.value });
     };
+    this.setImage = ev => {
+      this.setState({ image: ev.target.value });
+    };
     this.createNotice = ev => {
       ev.preventDefault();
       const payload = agent.Notices.create({
         title: this.state.title,
         description: this.state.description,
-        body: this.state.body
+        body: this.state.body,
+        image: this.state.image
       });
       this.setState({
         title: "",
         description: "",
-        body: ""
+        body: "",
+        image: ""
       });
       this.props.onSubmit(payload);
     };
