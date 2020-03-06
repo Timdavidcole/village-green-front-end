@@ -3,6 +3,7 @@ import agent from "../../agent";
 import { connect } from "react-redux";
 import ReactDOM from "react-dom";
 import "../../styles/newNotice.css";
+import ExitButton from "./ExitButton";
 
 const mapStateToProps = state => ({
   showNewNoticeWindow: state.notice.showNewNoticeWindow
@@ -58,6 +59,9 @@ class NewNotice extends React.Component {
     const domNode = ReactDOM.findDOMNode(this);
 
     if (!domNode || !domNode.contains(event.target)) {
+      if (this.props.showNewNoticeWindow) {
+        event.preventDefault();
+      }
       this.props.hideNewNoticeWindow();
     }
   };
@@ -102,7 +106,7 @@ class NewNotice extends React.Component {
         <div
           style={{ textAlign: "right", position: "relative", width: "100%" }}
         >
-          <i className="exit-green-x"></i>
+          <ExitButton onClick={this.props.hideNewNoticeWindow} />
         </div>
 
         <form
