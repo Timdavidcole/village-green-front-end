@@ -13,7 +13,6 @@ import Profile from './components/Profile';
 import Pinned from './components/Pinned';
 import PrivateRoute from './components/PrivateRoute';
 
-console.log(window.localStorage)
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
