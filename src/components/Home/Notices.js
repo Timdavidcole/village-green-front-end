@@ -1,8 +1,7 @@
 import NoticePreview from "./NoticePreview";
 import React from "react";
-import NewNotice from "./NewNotice";
+import NewNoticeButton from "./NewNoticeButton";
 import "./noticesGrid.css";
-import { classicNameResolver } from "typescript";
 
 class Notices extends React.Component {
   render() {
@@ -56,7 +55,7 @@ class Notices extends React.Component {
           width: "100vw"
         }}
       >
-        <NewNotice noticesVisible={this.props.noticesVisible} />
+        <NewNoticeButton noticesVisible={this.props.noticesVisible} />
         {this.props.notices.map((notice, i) => {
           return (
             <NoticePreview
