@@ -6,7 +6,7 @@ import { Transition } from "react-transition-group";
 const mapStateToProps = state => ({ ...state.auth });
 
 const mapDispatchToProps = dispatch => ({
-  onSubmit: payload => dispatch({ type: "NEW_NOTICE", payload })
+  onClick: () => dispatch({ type: "DISPLAY_NEW_NOTICE" })
 });
 
 class NewNoticeButton extends React.Component {
@@ -56,15 +56,6 @@ class NewNoticeButton extends React.Component {
       return {
         backgroundColor: "#96d095",
         color: "#0e460c",
-        fontFamily: "titillium web,sans-serif",
-        fontSize: "21px",
-        padding: "4px",
-        borderRadius: "5px",
-        position: "relative",
-        outline: "none",
-        border: "none",
-        height: "100%",
-        width: "100%",
         transform: "translate(0px,3px)",
         transition: "transform 0.2s, box-shadow 0.2s",
         boxShadow: "1px 1px 4px 1px rgba(176,176,176,0.79)"
@@ -74,30 +65,12 @@ class NewNoticeButton extends React.Component {
       return {
         boxShadow: "2px 2px 7px 3px rgba(176,176,176,0.79)",
         backgroundColor: "#c9eec7",
-        color: "#5cb85c",
-        fontFamily: "titillium web,sans-serif",
-        fontSize: "21px",
-        padding: "4px",
-        borderRadius: "5px",
-        position: "relative",
-        outline: "none",
-        border: "none",
-        height: "100%",
-        width: "100%"
+        color: "#5cb85c"
       };
     } else {
       return {
         backgroundColor: "white",
-        color: "#5cb85c",
-        fontFamily: "titillium web,sans-serif",
-        fontSize: "21px",
-        padding: "4px",
-        borderRadius: "5px",
-        position: "relative",
-        outline: "none",
-        border: "none",
-        height: "100%",
-        width: "100%"
+        color: "#5cb85c"
       };
     }
   }
@@ -109,7 +82,7 @@ class NewNoticeButton extends React.Component {
       exit: 100
     };
 
-    const defaultStyle = {
+    const defaultBoxStyle = {
       boxShadow: "5px 10px 20px 3px rgba(176,176,176,0.79)",
       borderRadius: "6px",
       margin: "10px",
@@ -125,6 +98,20 @@ class NewNoticeButton extends React.Component {
       height: "250px"
     };
 
+    const defaultButtonStyle = {
+      backgroundColor: "white",
+      color: "#5cb85c",
+      fontFamily: "titillium web,sans-serif",
+      fontSize: "21px",
+      padding: "4px",
+      borderRadius: "5px",
+      position: "relative",
+      outline: "none",
+      border: "none",
+      height: "100%",
+      width: "100%"
+    };
+
     const transitionStyles = {
       entering: { opacity: "0" },
       entered: { opacity: "0" },
@@ -137,14 +124,14 @@ class NewNoticeButton extends React.Component {
           <div
             className="div1"
             style={{
-              ...defaultStyle,
+              ...defaultBoxStyle,
               ...transitionStyles[state]
             }}
           >
             <button
               onMouseEnter={this.toggleHoverIn}
               onMouseLeave={this.toggleHoverOut}
-              style={this.buttonStyle()}
+              style={{ ...defaultButtonStyle, ...this.buttonStyle() }}
               onClick={this.openNewNotice}
               onMouseDown={this.toggleClick}
               onMouseUp={this.toggleClick}
