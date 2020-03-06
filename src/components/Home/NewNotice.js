@@ -2,6 +2,7 @@ import React from "react";
 import agent from "../../agent";
 import { connect } from "react-redux";
 import ReactDOM from "react-dom";
+import "../../styles/newNotice.css";
 
 const mapStateToProps = state => ({
   showNewNoticeWindow: state.notice.showNewNoticeWindow
@@ -57,26 +58,27 @@ class NewNotice extends React.Component {
     const domNode = ReactDOM.findDOMNode(this);
 
     if (!domNode || !domNode.contains(event.target)) {
-      console.log('handleClickOutside')
-      this.props.hideNewNoticeWindow()
+      this.props.hideNewNoticeWindow();
     }
   };
 
   visible() {
-    console.log("visible");
     if (this.props.showNewNoticeWindow) {
       return {
-        visibility: "visible"
+        visibility: "visible",
+        transform: "scale(1)",
+        opacity: "1",
+        transition: "transform 0.2s ease-in, opacity 0.2s ease-in"
       };
     } else
       return {
-        visibility: "hidden"
+        visibility: "hidden",
+        opacity: "0",
+        transform: "scale(0.1)"
       };
   }
 
   render() {
-    console.log("render New Notice");
-
     const defaultStyle = {
       position: "absolute",
       pointerEvents: "auto",
@@ -85,8 +87,8 @@ class NewNotice extends React.Component {
       margin: "10px",
       padding: "10px",
       backgroundColor: "white",
-      width: "50vw",
-      height: "50vh",
+      width: "60vw",
+      height: "60vh",
       zIndex: "5100"
     };
 
@@ -97,12 +99,17 @@ class NewNotice extends React.Component {
           ...this.visible()
         }}
       >
+        <div
+          style={{ textAlign: "right", position: "relative", width: "100%" }}
+        >
+          <i className="exit-green-x"></i>
+        </div>
+
         <form
           style={{
             position: "relative",
-            height: "100%",
-            width: "100%",
-            display: "inline-block"
+            height: "93%",
+            width: "100%"
           }}
           onSubmit={this.createNotice}
         >
@@ -168,7 +175,7 @@ class NewNotice extends React.Component {
                 marginTop: "4px",
                 boxShadow: "none",
                 padding: "4px",
-                height: "calc(100% - 86px)",
+                height: "calc(100% - 140px)",
                 width: "calc(100% - 70px)"
               }}
               type="body"
@@ -194,7 +201,6 @@ class NewNotice extends React.Component {
               verticalAlign: "middle"
             }}
           >
-            {" "}
             Post!
           </button>
         </form>

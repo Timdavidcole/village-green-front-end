@@ -36,8 +36,8 @@ class NewNoticeButton extends React.Component {
   componentDidMount() {
     if (this.props.page !== "pinned") {
       this.setState({
-        randomTop: this.getRndInteger(-15, 15),
-        randomLeft: this.getRndInteger(-15, 15)
+        randomTop: this.getRndInteger(-5, 5),
+        randomLeft: this.getRndInteger(-5, 5)
       });
     }
   }
