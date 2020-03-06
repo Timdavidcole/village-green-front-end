@@ -50,6 +50,7 @@ class NewNotice extends React.Component {
     };
 
     const defaultStyle = {
+      pointerEvents: "auto",
       boxShadow: "5px 10px 20px 3px rgba(176,176,176,0.79)",
       borderRadius: "6px",
       margin: "10px",

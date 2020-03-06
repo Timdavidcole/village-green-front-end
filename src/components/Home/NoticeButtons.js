@@ -31,9 +31,7 @@ class NoticeButtons extends React.Component {
         .then(notice => {
           if (this.props.page === "pinned") {
             var notices = [...this.props.noticesPinned];
-            console.log(notices[this.props.index + 1]);
             notices.splice(this.props.index + 1, 1);
-            console.log(notices);
             return notices;
           } else {
             var notices = [...this.props.notices];
@@ -53,9 +51,7 @@ class NoticeButtons extends React.Component {
         .then(notice => {
           if (this.props.page === "pinned") {
             var notices = [...this.props.noticesPinned];
-            console.log(notices[this.props.index + 1]);
             notices.splice(this.props.index + 1, 1);
-            console.log(notices);
             return notices;
           } else {
             var notices = [...this.props.notices];

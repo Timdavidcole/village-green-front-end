@@ -58,7 +58,7 @@ const Profile = {
 
 const Notices = {
   create: notice => requests.post(`/notices/`, { notice }),
-  all: coords => requests.get(`/notices?limit=7&coords=${coords}`),
+  all: coords => requests.get(`/notices?limit=20&coords=${coords}`),
   byAuthor: author =>
     requests.get(`/notices?author=${encodeURIComponent(author)}&limit=10`),
   pinned: author =>

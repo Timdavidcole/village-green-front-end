@@ -4,9 +4,9 @@
     grid-template-rows: repeat(auto-fill, minmax(250px, 1fr));
     grid-column-gap: 0px;
     grid-row-gap: 0px;
-    grid-auto-rows: minmax(100px, auto);
+    grid-auto-rows: minmax(min-content, max-content);
     position: absolute;
-    height: calc(100vh - 118px);
+    height: calc(100vh);
     width: 100vw;
     pointer-events: none
 }

@@ -1,9 +1,9 @@
 .thumb-buttons-container {
     position: absolute;
-    right: 7px;
+    right: 0px;
     outline: none;
     display: inline-block;
-    
+    margin-top: 6px;
 }
 
 .thumbs-up-button {
@@ -15,7 +15,7 @@
     outline-style: none;
     border: none !important;
     outline: none !important;
-    margin: 3px;
+    margin-left: 4px;
     box-shadow: 3px 3px 10px 0px rgba(176,176,176,0.79)
 }
 
@@ -45,7 +45,7 @@
     border-radius: 100%;
     border: none !important;
     outline: none !important;
-    margin: 3px;
+    margin-left: 4px;
     box-shadow: 3px 3px 10px 0px rgba(176,176,176,0.79)
 
 }
@@ -78,7 +78,7 @@
     border-radius: 100%;
     border: none !important;
     outline: none !important;
-    margin: 3px;
+    margin-left: 4px;
     box-shadow: 3px 3px 10px 0px rgba(176,176,176,0.79)
 
 }

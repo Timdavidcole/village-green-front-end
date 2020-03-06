@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import "../../styles/noticePreview.css";
 import { Transition } from "react-transition-group";
 import NoticeButtons from "./NoticeButtons";
+import NoticePreviewUser from "./NoticePreviewUser";
 
 const mapStateToProps = state => ({
   currentUser: state.common.currentUser
@@ -18,16 +19,18 @@ class NoticePreview extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { randomTop: null, randomLeft: null };
+    this.state = { randomTop: 0, randomLeft: 0 };
 
     this.getRndInteger = this.getRndInteger.bind(this);
   }
 
   componentDidMount() {
-    this.setState({
-      randomTop: this.getRndInteger(-20, 20),
-      randomLeft: this.getRndInteger(-20, 20)
-    });
+    if (this.props.page !== "pinned") {
+      this.setState({
+        randomTop: this.getRndInteger(-17, 17),
+        randomLeft: this.getRndInteger(-17, 17)
+      });
+    }
   }
 
   getRndInteger(min, max) {
@@ -47,14 +50,15 @@ class NoticePreview extends React.Component {
       borderRadius: "6px",
       margin: "10px",
       padding: "10px",
-      backgroundColor: "white",
+      backgroundColor: "#fffbf0",
       position: "relative",
-      transition: `opacity 0.1s linear`,
+      transition: `opacity 0.2s linear`,
       opacity: "1",
       zIndex: "5000",
       top: `${this.state.randomTop}px`,
       left: `${this.state.randomLeft}px`,
-      pointerEvents: "auto"
+      pointerEvents: "auto",
+      height: "250px"
     };
 
     const transitionStyles = {
@@ -82,46 +86,24 @@ class NoticePreview extends React.Component {
                 <div style={{ width: "100%" }}>
                   <div style={{ borderBottom: "1px dashed red" }}>
                     {" "}
-                    <h3>{notice.title}</h3>
+                    <h3 style={{ textAlign: "center" }}>{notice.title}</h3>
                   </div>
-                  <h5>{notice.description}</h5>
-                  <span>{notice.body}</span>
+                  <span style={{ textAlign: "center" }}>
+                    {notice.description}
+                  </span>
+                  <br></br>
+                  <span style={{ fontSize: "1.5vh" }}>{notice.body}</span>
                 </div>
               </Link>
               <div
                 style={{
                   width: "100%",
                   position: "relative",
-                  bottom: "5px",
-                  margin: "0px"
+                  margin: "0px",
+                  bottom: "-5px"
                 }}
               >
-                <div
-                  style={{
-                    display: "inline-block"
-                  }}
-                >
-                  <div
-                    style={{
-                      overflow: "hidden"
-                    }}
-                  >
-                    <Link to={`@${notice.author.username}`}>
-                      <img
-                        style={{
-                          borderRadius: "6px",
-                          width: "35px",
-                          height: "35px",
-                          objectFit: "cover",
-                          margin: "5px"
-                        }}
-                        src={notice.author.image}
-                        alt="author"
-                      />
-                      {notice.author.username}
-                    </Link>
-                  </div>
-                </div>
+                <NoticePreviewUser notice={notice} />
                 <NoticeButtons
                   page={this.props.page}
                   index={this.props.index - 2}
