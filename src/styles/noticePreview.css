@@ -1,8 +1,9 @@
 .thumb-buttons-container {
     position: absolute;
-    bottom: 7px;
     right: 7px;
-    outline: none
+    outline: none;
+    display: inline-block;
+    
 }
 
 .thumbs-up-button {

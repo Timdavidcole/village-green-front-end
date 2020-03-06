@@ -16,13 +16,16 @@ const mapDispatchToProps = dispatch => ({
 
 class NoticePreview extends React.Component {
   render() {
-
     const notice = this.props.notice;
     const duration = {
       appear: 100,
       enter: 100,
       exit: 100
     };
+
+    const getRndInteger = function (min, max) {
+      return Math.floor(Math.random() * (max - min) ) + min;
+    }
 
     const defaultStyle = {
       boxShadow: "5px 10px 20px 3px rgba(176,176,176,0.79)",
@@ -33,7 +36,9 @@ class NoticePreview extends React.Component {
       position: "relative",
       transition: `opacity 0.1s linear`,
       opacity: "1",
-      zIndex: "5000"
+      zIndex: "5000",
+      top: `${getRndInteger(-20, 20)}px`,
+      left: `${getRndInteger(-20, 20)}px`
     };
 
     const transitionStyles = {
@@ -52,54 +57,62 @@ class NoticePreview extends React.Component {
               ...transitionStyles[state]
             }}
           >
-            <Link
+            <div
               style={{
                 width: "100%"
               }}
-              to={`notice/${notice.slug}`}
             >
-              <div style={{ borderBottom: "1px dashed red" }}>
-                {" "}
-                <h3>{notice.title}</h3>
-              </div>
-              <h5>{notice.description}</h5>
-              <span>{notice.body}</span>
-            </Link>
-            <div
-              style={{
-                marginRight: "5px"
-              }}
-            >
+              <Link to={`notice/${notice.slug}`}>
+                <div style={{ width: "100%" }}>
+                  <div style={{ borderBottom: "1px dashed red" }}>
+                    {" "}
+                    <h3>{notice.title}</h3>
+                  </div>
+                  <h5>{notice.description}</h5>
+                  <span>{notice.body}</span>
+                </div>
+              </Link>
               <div
                 style={{
-                  margin: "4px",
-                  overflow: "hidden"
+                  width: "100%",
+                  position: "relative",
+                  bottom: "5px",
+                  margin: "0px"
                 }}
               >
-                <Link to={`@${notice.author.username}`}>
-                  <img
+                <div
+                  style={{
+                    display: "inline-block"
+                  }}
+                >
+                  <div
                     style={{
-                      borderRadius: "6px",
-                      width: "40px",
-                      height: "40px",
-                      objectFit: "cover"
+                      overflow: "hidden"
                     }}
-                    src={notice.author.image}
-                    alt="author"
-                  />
-                </Link>
-              </div>
-              <div>
-                <Link to={`@${notice.author.username}`}>
-                  {notice.author.username}
-                </Link>
+                  >
+                    <Link to={`@${notice.author.username}`}>
+                      <img
+                        style={{
+                          borderRadius: "6px",
+                          width: "35px",
+                          height: "35px",
+                          objectFit: "cover",
+                          margin: "5px"
+                        }}
+                        src={notice.author.image}
+                        alt="author"
+                      />
+                      {notice.author.username}
+                    </Link>
+                  </div>
+                </div>
+                <NoticeButtons
+                  page={this.props.page}
+                  index={this.props.index - 2}
+                  notice={notice}
+                />
               </div>
             </div>
-            <NoticeButtons
-              page={this.props.page}
-              index={this.props.index - 2}
-              notice={notice}
-            />
           </div>
         )}
       </Transition>

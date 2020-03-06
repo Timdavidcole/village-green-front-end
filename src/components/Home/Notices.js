@@ -5,7 +5,6 @@ import "./noticesGrid.css";
 
 class Notices extends React.Component {
   render() {
-
     if (!this.props.notices) {
       return (
         <div className="parent">
@@ -27,7 +26,9 @@ class Notices extends React.Component {
         <div
           className="parent"
           style={{
-            zIndex: "1"
+            zIndex: "1",
+            height: "auto",
+            width: "auto"
           }}
         >
           {this.props.notices.map((notice, i) => {
@@ -49,7 +50,9 @@ class Notices extends React.Component {
       <div
         className="parent"
         style={{
-          zIndex: "1"
+          zIndex: "1",
+          height: "auto",
+          width: "auto"
         }}
       >
         <NewNotice noticesVisible={this.props.noticesVisible} />
