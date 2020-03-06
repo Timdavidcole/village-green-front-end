@@ -27,7 +27,7 @@ class Notices extends React.Component {
         <div
           className="parent"
           style={{
-            zIndex: "5000"
+            zIndex: "1"
           }}
         >
           {this.props.notices.map((notice, i) => {
@@ -49,7 +49,7 @@ class Notices extends React.Component {
       <div
         className="parent"
         style={{
-          zIndex: "5000"
+          zIndex: "1"
         }}
       >
         <NewNotice noticesVisible={this.props.noticesVisible} />

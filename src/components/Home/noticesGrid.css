@@ -5,10 +5,8 @@
     grid-column-gap: 0px;
     grid-row-gap: 0px;
     position: absolute;
-    height: 87vh;
+    height: calc(100vh - 118px);
     width: 100vw;
-    opacity: 1;
-
 }
 
 .div1 {

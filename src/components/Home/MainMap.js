@@ -23,14 +23,14 @@ class MainMap extends React.PureComponent {
 
   render() {
     return (
-        <MapComponent
-          isMarkerShown={this.state.isMarkerShown}
-          onMarkerClick={this.handleMarkerClick}
-          googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9-449YKR60GMDFtlaiFHJiU3W5MYrPJ4&v=3.exp&libraries=geometry,drawing,places"
-          loadingElement={<div style={{ height: "100%" }} />}
-          containerElement={<div style={{ height: "100%" }} />}
-          mapElement={<div style={{ height: "100%" }} />}
-        />
+      <MapComponent
+        isMarkerShown={this.state.isMarkerShown}
+        onMarkerClick={this.handleMarkerClick}
+        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9-449YKR60GMDFtlaiFHJiU3W5MYrPJ4&v=3.exp&libraries=geometry,drawing,places"
+        loadingElement={<div style={{ height: "calc(100vh - 55px)" }} />}
+        containerElement={<div style={{ height: "calc(100vh - 55px)" }} />}
+        mapElement={<div style={{ height: "calc(100vh - 55px)" }} />}
+      />
     );
   }
 }
