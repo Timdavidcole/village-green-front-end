@@ -58,10 +58,10 @@ class NoticePreviewImage extends React.Component {
       top: `${this.state.randomTop}px`,
       left: `${this.state.randomLeft}px`,
       pointerEvents: "auto",
-      height: "250px",
-      display: "inline-block",
+      display: "inline-flex",
       width: "290px",
-      verticalAlign: "middle"
+      verticalAlign: "middle",
+      height: "100%"
     };
 
     const transitionStyles = {
@@ -85,8 +85,7 @@ class NoticePreviewImage extends React.Component {
               className="card-inner"
               style={{
                 width: "100%",
-                height: "100%",
-                position: "relative",
+                position: "absolute",
                 backgroundColor: "#e4dfc0"
               }}
             >
@@ -94,16 +93,20 @@ class NoticePreviewImage extends React.Component {
                 className="card-front"
                 style={{
                   backgroundColor: "#e4dfc0",
-                  height: "250px",
-                  width: "250px",
                   backgroundImage: `url(${notice.image})`,
-                  backgroundSize: "cover"
+                  backgroundSize: "100%"
                 }}
-              ></div>
+              >
+                <img
+                  src={notice.image}
+                  style={{ visibility: "hidden", maxWidth: "290px" }}
+                />
+              </div>
               <div
                 className="card-back"
                 style={{
                   height: "250px",
+                  width: "290px",
                   backgroundColor: "#e4dfc0"
                 }}
               >
@@ -138,9 +141,9 @@ class NoticePreviewImage extends React.Component {
                 </Link>
                 <div
                   style={{
-                    width: "100%",
+                    width: "93%",
                     position: "absolute",
-                    margin: "0px",
+                    margin: "10px",
                     bottom: "-5px"
                   }}
                 >

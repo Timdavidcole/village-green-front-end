@@ -16,7 +16,7 @@
     border: none !important;
     outline: none !important;
     margin-left: 4px;
-    box-shadow: 3px 3px 10px 0px rgba(176,176,176,0.79)
+    box-shadow: 3px 3px 10px 0px rgba(176, 176, 176, 0.79)
 }
 
 .thumbs-up-button:hover {
@@ -46,8 +46,7 @@
     border: none !important;
     outline: none !important;
     margin-left: 4px;
-    box-shadow: 3px 3px 10px 0px rgba(176,176,176,0.79)
-
+    box-shadow: 3px 3px 10px 0px rgba(176, 176, 176, 0.79)
 }
 
 .thumbs-down-button:hover {
@@ -79,8 +78,7 @@
     border: none !important;
     outline: none !important;
     margin-left: 4px;
-    box-shadow: 3px 3px 10px 0px rgba(176,176,176,0.79)
-
+    box-shadow: 3px 3px 10px 0px rgba(176, 176, 176, 0.79)
 }
 
 .pin-notice-button:hover {
@@ -88,9 +86,9 @@
 }
 
 .pin-notice-button:active {
-    transform: translate(0px,3px);
+    transform: translate(0px, 3px);
     transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 1px 1px 7px 0px rgba(176,176,176,0.79)
+    box-shadow: 1px 1px 7px 0px rgba(176, 176, 176, 0.79)
 }
 
 .pin-notice-icon {
@@ -105,46 +103,48 @@
     transform: rotate(315deg)
 }
 
-#noticeCard{
+#noticeCard {
     background-color: transparent;
 }
 
-#noticeCard:hover .card-inner, .card-inner {
-	transform: rotateY(180deg);
-  z-index:555555;
+#noticeCard:hover .card-inner,
+.card-inner {
+    transform: rotateY(180deg);
+    z-index: 555555;
 }
 
 .card:hover {
-  z-index:555555;
+    z-index: 555555;
 }
 
 .card-inner {
-	transition: 0.6s;
-	transform-style: preserve-3d;
-	position: relative;
-  background-color: transparent !important;
-  transform: scale(0.9);
+    transition: 0.6s;
+    transform-style: preserve-3d;
+    position: relative;
+    background-color: transparent !important;
+    transform: scale(1);
 }
 
-.card-front, .card-back {
-	backface-visibility: hidden;
-	position: absolute;
-	top: 0;
-	left: 0;
+.card-front,
+.card-back {
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .card-back-big {
-  transform: rotateY(180deg);
-  box-shadow: 18px 29px 26px +12px rgba(128,128,128,0.53);
-  transform: scale(1.5);
+    transform: rotateY(180deg);
+    box-shadow: 18px 29px 26px +12px rgba(128, 128, 128, 0.53);
+    transform: scale(1.5);
 }
 
 .card-front {
-	transform: rotateY(0deg);
-  box-shadow: 18px 29px 26px -12px rgba(128,128,128,0.53);
+    transform: rotateY(0deg);
+    box-shadow: 18px 29px 26px -12px rgba(128, 128, 128, 0.53);
 }
 
 .card-back {
-	transform: rotateY(180deg);
-  box-shadow: 18px 29px 26px +12px rgba(128,128,128,0.53);
+    transform: rotateY(180deg);
+    box-shadow: 18px 29px 26px +12px rgba(128, 128, 128, 0.53);
 }
