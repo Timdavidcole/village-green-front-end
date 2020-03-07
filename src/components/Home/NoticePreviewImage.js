@@ -145,8 +145,8 @@ class NoticePreviewImage extends React.Component {
                   style={{
                     width: "93%",
                     position: "absolute",
-                    bottom: "0px"
-                  }}
+                    margin: "0px",
+                    bottom: "5px"                  }}
                 >
                   <NoticePreviewUser notice={notice} />
                   <NoticeButtons
