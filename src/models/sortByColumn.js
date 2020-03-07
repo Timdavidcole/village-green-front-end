@@ -3,7 +3,6 @@ const sortByColumn = function(notices, columnHeight) {
   var columnIndex = 0;
   var oldNotices = [...notices];
   var usedIndexes = [];
-  console.log(oldNotices)
 
 
   function sumHeights(notices) {
@@ -16,8 +15,6 @@ const sortByColumn = function(notices, columnHeight) {
     return sum;
   }
   oldNotices.forEach((notice, index) => {
-    console.log(notice)
-    console.log(columnIndex)
     if (!newNotices[columnIndex]) {
       newNotices.push([]);
     }
@@ -28,14 +25,10 @@ const sortByColumn = function(notices, columnHeight) {
       (columnHeight < (notice.height + 20) && !usedIndexes.includes(index))
     ) {
       newNotices[columnIndex].push(notice);
-      console.log('PUSH TO NEW NOTICES 1')
-      console.log(JSON.stringify(newNotices))
 
       usedIndexes.push(index);
     } else {
       newNotices.push([notice]);
-      console.log('PUSH TO NEW NOTICES 3')
-      console.log(JSON.stringify(newNotices))
       usedIndexes.push(index);
       oldNotices.some((noticeNew, indexNew) => {
         if (
@@ -44,8 +37,6 @@ const sortByColumn = function(notices, columnHeight) {
           columnHeight < (noticeNew.height + 20)
         ) {
           newNotices[columnIndex].push(noticeNew);
-          console.log('PUSH TO NEW NOTICES 2')
-          console.log(JSON.stringify(newNotices))
           usedIndexes.push(indexNew);
           return true;
         }
@@ -58,9 +49,7 @@ const sortByColumn = function(notices, columnHeight) {
       columnIndex++;
     }
   });
-  console.log(usedIndexes)
   newNotices[0].splice(0, 1);
-  console.log(newNotices)
   return newNotices.flat();
 };
 
