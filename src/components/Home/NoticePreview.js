@@ -7,12 +7,14 @@ import NoticeButtons from "./NoticeButtons";
 import NoticePreviewUser from "./NoticePreviewUser";
 
 const mapStateToProps = state => ({
-  currentUser: state.common.currentUser
+  currentUser: state.common.currentUser,
+  notices: state.notices.notices
 });
 
 const mapDispatchToProps = dispatch => ({
   onLoad: payload => dispatch({ type: "NOTICE_PAGE_LOADED", payload }),
-  onUnload: () => dispatch({ type: "NOTICE_PAGE_UNLOADED" })
+  onUnload: () => dispatch({ type: "NOTICE_PAGE_UNLOADED" }),
+  loadDivDim: payload => dispatch({ type: "LOAD_DIV_DIMENSIONS", payload })
 });
 
 class NoticePreview extends React.Component {
@@ -23,6 +25,7 @@ class NoticePreview extends React.Component {
 
     this.getRndInteger = this.getRndInteger.bind(this);
     this.getRndFloat = this.getRndFloat.bind(this);
+    this.addDimensions = this.addDimensions.bind(this);
   }
 
   componentDidMount() {
@@ -39,8 +42,15 @@ class NoticePreview extends React.Component {
   }
 
   getRndFloat() {
-    const rndInt = this.getRndInteger(1, 100)
-    return rndInt < 0 ? 'right' : 'left'
+    const rndInt = this.getRndInteger(1, 100);
+    return rndInt < 0 ? "right" : "left";
+  }
+
+  addDimensions(width, height, index) {
+    var newNotice = this.props.notices[index];
+    newNotice.width = width;
+    newNotice.height = height;
+    this.props.loadDivDim(newNotice);
   }
 
   render() {
@@ -81,6 +91,15 @@ class NoticePreview extends React.Component {
             style={{
               ...defaultStyle,
               ...transitionStyles[state]
+            }}
+            ref={el => {
+              if (el && !notice.width) {
+                this.addDimensions(
+                  el.offsetWidth,
+                  el.offsetHeight,
+                  this.props.indexTrue
+                );
+              }
             }}
           >
             <div

@@ -10,7 +10,8 @@ const mapStateToProps = state => ({
   noticesVisible: state.notices.noticesVisible,
   centerMap: state.map.centerMap,
   notices: state.notices.notices,
-  loggedIn: state.auth.loggedIn
+  loggedIn: state.auth.loggedIn,
+  noticesWithDim: state.notices.noticesWithDim
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -22,7 +23,17 @@ class Home extends React.Component {
     this.props.onLoad(agent.Notices.all(JSON.stringify(this.props.centerMap)));
   }
 
+  withDimOrNotWithDim() {
+    if (this.props.noticesWithDim.length === this.props.notices.length) {
+      return this.props.noticesWithDim;
+    } else {
+      return this.props.notices || [];
+    }
+  }
+
   render() {
+    if (this.props.noticesWithDim.length === this.props.notices.length) {
+    }
     return (
       <div style={{ width: "100%" }}>
         <div style={{ width: "100%", position: "absolute" }}>
@@ -30,7 +41,7 @@ class Home extends React.Component {
           <NewNotice />
           <Notices
             noticesVisible={this.props.noticesVisible}
-            notices={this.props.notices || []}
+            notices={this.withDimOrNotWithDim()}
           />
         </div>
         <MainMap />

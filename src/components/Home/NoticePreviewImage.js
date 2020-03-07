@@ -7,12 +7,14 @@ import NoticeButtons from "./NoticeButtons";
 import NoticePreviewUser from "./NoticePreviewUser";
 
 const mapStateToProps = state => ({
-  currentUser: state.common.currentUser
+  currentUser: state.common.currentUser,
+  notices: state.notices.notices
 });
 
 const mapDispatchToProps = dispatch => ({
   onLoad: payload => dispatch({ type: "NOTICE_PAGE_LOADED", payload }),
-  onUnload: () => dispatch({ type: "NOTICE_PAGE_UNLOADED" })
+  onUnload: () => dispatch({ type: "NOTICE_PAGE_UNLOADED" }),
+  loadDivDim: payload => dispatch({ type: "LOAD_DIV_DIMENSIONS", payload })
 });
 
 class NoticePreviewImage extends React.Component {
@@ -23,6 +25,7 @@ class NoticePreviewImage extends React.Component {
 
     this.getRndInteger = this.getRndInteger.bind(this);
     this.getRndFloat = this.getRndFloat.bind(this);
+    this.addDimensions = this.addDimensions.bind(this);
   }
 
   componentDidMount() {
@@ -38,8 +41,15 @@ class NoticePreviewImage extends React.Component {
     return Math.floor(Math.random() * (max - min)) + min;
   }
   getRndFloat() {
-    const rndInt = this.getRndInteger(1, 100)
-    return rndInt < 0 ? 'right' : 'left'
+    const rndInt = this.getRndInteger(1, 100);
+    return rndInt < 0 ? "right" : "left";
+  }
+
+  addDimensions(width, height, index) {
+    var newNotice = this.props.notices[index];
+    newNotice.width = width;
+    newNotice.height = height;
+    this.props.loadDivDim(newNotice);
   }
 
   render() {
@@ -80,6 +90,15 @@ class NoticePreviewImage extends React.Component {
               ...defaultStyle,
               ...transitionStyles[state]
             }}
+            ref={el => {
+              if (el && !notice.width) {
+                this.addDimensions(
+                  el.offsetWidth,
+                  el.offsetHeight,
+                  this.props.indexTrue
+                );
+              }
+            }}
           >
             <div
               className="card-inner"
@@ -92,9 +111,10 @@ class NoticePreviewImage extends React.Component {
               <div
                 className="card-front"
                 style={{
-                  backgroundColor: "#e4dfc0",
+                  backgroundColor: "transparent",
                   backgroundImage: `url(${notice.image})`,
-                  backgroundSize: "100%"
+                  backgroundSize: "contain",
+                  backgroundRepeat: "no-repeat"
                 }}
               >
                 <img
@@ -146,7 +166,8 @@ class NoticePreviewImage extends React.Component {
                     width: "93%",
                     position: "absolute",
                     margin: "0px",
-                    bottom: "5px"                  }}
+                    bottom: "5px"
+                  }}
                 >
                   <NoticePreviewUser notice={notice} />
                   <NoticeButtons

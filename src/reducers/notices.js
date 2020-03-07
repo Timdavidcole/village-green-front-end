@@ -1,5 +1,10 @@
 export default (
-  state = { notices: [], noticesVisible: true, pinnedEvent: false },
+  state = {
+    notices: [],
+    noticesWithDim: [],
+    noticesVisible: true,
+    pinnedEvent: false
+  },
   action
 ) => {
   // eslint-disable-next-line default-case
@@ -41,6 +46,17 @@ export default (
       return {
         ...state,
         pinnedEvent: false
+      };
+    case "LOAD_DIV_DIMENSIONS":
+      return {
+        ...state,
+        noticesWithDim: [...state.noticesWithDim, action.payload]
+      };
+
+    case "ADD_NOTICES_WINDOW_HEIGHT":
+      return {
+        ...state,
+        noticesWindowHeight: action.payload
       };
   }
 
