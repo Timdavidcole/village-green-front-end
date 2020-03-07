@@ -36,8 +36,6 @@ class Pinned extends React.Component {
       return null;
     }
 
-    console.log(this.props.loggedIn)
-
     return (
       <div className="profile-page">
         <div className="user-info">

@@ -49,13 +49,10 @@ class NoticePreviewImage extends React.Component {
   }
 
   addDimensions(width, height, index) {
-    console.log("addDimensions");
-    console.log(height);
 
     var newNotice = this.props.notices[index];
     newNotice.width = width;
     newNotice.height = height;
-    console.log(newNotice);
     if (newNotice.height > 24) {
       this.props.loadDivDim(newNotice);
     }

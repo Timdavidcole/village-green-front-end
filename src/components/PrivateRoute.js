@@ -2,7 +2,6 @@ import React from 'react'
 import { Redirect, Route } from 'react-router-dom'
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-    console.log(window.localStorage.jwt)
     const isLoggedIn = window.localStorage.jwt !== ""
 
   return (

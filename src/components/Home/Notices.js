@@ -21,17 +21,19 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class Notices extends React.Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
 
     this.state = {
       resize: false
-    }
+    };
   }
   componentDidMount() {
-    window.addEventListener("resize", () => this.setState({resize: !this.state.resize}));
+    window.addEventListener("resize", () =>
+      this.setState({ resize: !this.state.resize })
+    );
   }
-  
+
   newNoticeButton() {
     if (this.props.page === "pinned") {
       return null;
@@ -55,7 +57,6 @@ class Notices extends React.Component {
   }
 
   render() {
-    console.log(this.props.noticesWindowHeight);
     if (!this.props.notices) {
       return (
         <div className="parent">
@@ -75,13 +76,16 @@ class Notices extends React.Component {
     return (
       <div
         style={{
-          zIndex: "1",
-          height: "calc(100vh - 117px)",
+          height: "calc(100vh - 114px)",
           width: "auto",
           overflow: "scroll",
           display: "flex",
           flexDirection: "column",
-          flexWrap: "wrap"
+          flexWrap: "wrap",
+          margin: "0",
+          padding: "0",
+          border: 'none',
+          overflow: "hidden"
         }}
         ref={el => {
           if (
