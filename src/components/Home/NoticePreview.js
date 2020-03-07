@@ -22,6 +22,7 @@ class NoticePreview extends React.Component {
     this.state = { randomTop: 0, randomLeft: 0 };
 
     this.getRndInteger = this.getRndInteger.bind(this);
+    this.getRndFloat = this.getRndFloat.bind(this);
   }
 
   componentDidMount() {
@@ -35,6 +36,11 @@ class NoticePreview extends React.Component {
 
   getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
+  }
+
+  getRndFloat() {
+    const rndInt = this.getRndInteger(1, 100)
+    return rndInt < 0 ? 'right' : 'left'
   }
 
   render() {
@@ -57,10 +63,8 @@ class NoticePreview extends React.Component {
       zIndex: "5000",
       pointerEvents: "auto",
       display: "inline-block",
-      width: "290px",
-      verticalAlign: "top",
-      float: "left"
-
+      width: "250px",
+      verticalAlign: "top"
     };
 
     const transitionStyles = {
@@ -104,11 +108,11 @@ class NoticePreview extends React.Component {
                   <span
                     style={{
                       display: "inline-block",
-                      height: "110px",
                       fontSize: "1.3vh",
                       overflowY: "auto",
                       width: "100%",
-                      textAlign: "center"
+                      textAlign: "center",
+                      marginBottom: "40px"
                     }}
                   >
                     {notice.body}

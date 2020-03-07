@@ -22,6 +22,7 @@ class NoticePreviewImage extends React.Component {
     this.state = { randomTop: 0, randomLeft: 0 };
 
     this.getRndInteger = this.getRndInteger.bind(this);
+    this.getRndFloat = this.getRndFloat.bind(this);
   }
 
   componentDidMount() {
@@ -35,6 +36,10 @@ class NoticePreviewImage extends React.Component {
 
   getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
+  }
+  getRndFloat() {
+    const rndInt = this.getRndInteger(1, 100)
+    return rndInt < 0 ? 'right' : 'left'
   }
 
   render() {
@@ -55,10 +60,9 @@ class NoticePreviewImage extends React.Component {
       zIndex: "5000",
       pointerEvents: "auto",
       display: "inline-block",
-      width: "290px",
+      width: "250px",
       height: "auto",
-      verticalAlign: "top",
-      float: "right"
+      verticalAlign: "top"
     };
 
     const transitionStyles = {
@@ -95,14 +99,14 @@ class NoticePreviewImage extends React.Component {
               >
                 <img
                   src={notice.image}
-                  style={{ visibility: "hidden", maxWidth: "290px" }}
+                  style={{ visibility: "hidden", maxWidth: "250px" }}
                 />
               </div>
               <div
                 className="card-back"
                 style={{
-                  height: "250px",
-                  width: "290px",
+                  height: "100%",
+                  width: "250px",
                   backgroundColor: "#e4dfc0",
                   padding: "10px"
                 }}
@@ -129,7 +133,8 @@ class NoticePreviewImage extends React.Component {
                         fontSize: "1.3vh",
                         overflowY: "auto",
                         width: "100%",
-                        textAlign: "center"
+                        textAlign: "center",
+                        marginBottom: "10px"
                       }}
                     >
                       {notice.body}

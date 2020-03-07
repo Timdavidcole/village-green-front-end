@@ -97,11 +97,10 @@ class NewNoticeButton extends React.Component {
       opacity: "1",
       zIndex: "5000",
       pointerEvents: "auto",
-      height: "250px",
+      height: "209px",
       display: "inline-block",
-      width: "290px",
-      verticalAlign: "top",
-      float: "right"
+      width: "250px",
+      verticalAlign: "top"
     };
 
     const defaultButtonStyle = {

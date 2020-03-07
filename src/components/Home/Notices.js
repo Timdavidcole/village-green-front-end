@@ -5,6 +5,26 @@ import NewNoticeButton from "./NewNoticeButton";
 import "./noticesGrid.css";
 
 class Notices extends React.Component {
+  newNoticeButton() {
+    if (this.props.page === "pinned") {
+      return null;
+    } else {
+      return <NewNoticeButton noticesVisible={this.props.noticesVisible} />;
+    }
+  }
+
+  sortedNotices() {
+    var sortedNotices = [];
+    this.props.notices.forEach(notice => {
+      if (notice.image) {
+        sortedNotices.unshift(notice);
+      } else {
+        sortedNotices.push(notice);
+      }
+    });
+    return sortedNotices;
+  }
+
   render() {
     if (!this.props.notices) {
       return (
@@ -27,11 +47,14 @@ class Notices extends React.Component {
         style={{
           zIndex: "1",
           height: "calc(100vh - 117px)",
-          width: "100vw",
-          overflow: "scroll"
+          width: "auto",
+          overflow: "scroll",
+          display: "flex",
+          flexDirection: "column",
+          flexWrap: "wrap"
         }}
       >
-        <NewNoticeButton noticesVisible={this.props.noticesVisible} />
+        {this.newNoticeButton()}
         {this.props.notices.map((notice, i) => {
           if (!notice.image) {
             return (
