@@ -193,6 +193,20 @@ class NewNotice extends React.Component {
               value={this.state.body}
               onChange={this.setBody}
             />
+            <input
+              style={{
+                border: "0px none",
+                fontFamily: "titillium web,sans-serif",
+                fontSize: "18px",
+                width: "calc(100% - 70px)",
+                padding: "4px",
+                margin: "4px"
+              }}
+              type="description"
+              placeholder="enter image url here..."
+              value={this.state.image}
+              onChange={this.setImage}
+            />
           </fieldset>
           <button
             type="submit"
@@ -210,6 +224,7 @@ class NewNotice extends React.Component {
               outline: 0,
               verticalAlign: "middle"
             }}
+            onClick={this.props.hideNewNoticeWindow}
           >
             Post!
           </button>

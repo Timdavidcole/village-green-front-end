@@ -1,4 +1,5 @@
 import NoticePreview from "./NoticePreview";
+import NoticePreviewImage from "./NoticePreviewImage";
 import React from "react";
 import NewNoticeButton from "./NewNoticeButton";
 import "./noticesGrid.css";
@@ -57,15 +58,29 @@ class Notices extends React.Component {
       >
         <NewNoticeButton noticesVisible={this.props.noticesVisible} />
         {this.props.notices.map((notice, i) => {
-          return (
-            <NoticePreview
-              page={this.props.page}
-              noticesVisible={this.props.noticesVisible}
-              index={i + 2}
-              notice={notice}
-              key={notice.slug}
-            />
-          );
+                    console.log(notice.title);
+          console.log(notice.image);
+          if (!notice.image) {
+            return (
+              <NoticePreview
+                page={this.props.page}
+                noticesVisible={this.props.noticesVisible}
+                index={i + 2}
+                notice={notice}
+                key={notice.slug}
+              />
+            );
+          } else {
+            return (
+              <NoticePreviewImage
+                page={this.props.page}
+                noticesVisible={this.props.noticesVisible}
+                index={i + 2}
+                notice={notice}
+                key={notice.slug}
+              />
+            );
+          }
         })}
       </div>
     );

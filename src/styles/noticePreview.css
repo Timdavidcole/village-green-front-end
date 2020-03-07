@@ -55,7 +55,7 @@
 }
 
 .thumbs-down-button:active {
-    background-color: #96d095;
+    background-color: #e4dfc0;
 }
 
 .thumbs-down-icon {
@@ -103,4 +103,48 @@
     display: inline-block;
     background-size: cover;
     transform: rotate(315deg)
+}
+
+#noticeCard{
+    background-color: transparent;
+}
+
+#noticeCard:hover .card-inner, .card-inner {
+	transform: rotateY(180deg);
+  z-index:555555;
+}
+
+.card:hover {
+  z-index:555555;
+}
+
+.card-inner {
+	transition: 0.6s;
+	transform-style: preserve-3d;
+	position: relative;
+  background-color: transparent !important;
+  transform: scale(0.9);
+}
+
+.card-front, .card-back {
+	backface-visibility: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.card-back-big {
+  transform: rotateY(180deg);
+  box-shadow: 18px 29px 26px +12px rgba(128,128,128,0.53);
+  transform: scale(1.5);
+}
+
+.card-front {
+	transform: rotateY(0deg);
+  box-shadow: 18px 29px 26px -12px rgba(128,128,128,0.53);
+}
+
+.card-back {
+	transform: rotateY(180deg);
+  box-shadow: 18px 29px 26px +12px rgba(128,128,128,0.53);
 }
