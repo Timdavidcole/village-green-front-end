@@ -23,8 +23,7 @@ class NoticePreviewImage extends React.Component {
 
     this.state = {
       randomTop: 0,
-      randomLeft: 0,
-      imageLoaded: false
+      randomLeft: 0
     };
 
     this.getRndInteger = this.getRndInteger.bind(this);
