@@ -90,20 +90,18 @@ class NewNoticeButton extends React.Component {
       boxShadow: "5px 10px 20px 3px rgba(176,176,176,0.79)",
       borderRadius: "6px",
       margin: "10px",
-      padding: "15px",
+      padding: "10px",
       backgroundColor: "white",
       position: "relative",
       transition: `opacity 0.2s linear`,
       opacity: "1",
       zIndex: "5000",
-      top: `${this.state.randomTop}px`,
-      left: `${this.state.randomLeft}px`,
       pointerEvents: "auto",
       height: "250px",
       display: "inline-block",
       width: "290px",
-      verticalAlign: "top"
-
+      verticalAlign: "top",
+      float: "right"
     };
 
     const defaultButtonStyle = {

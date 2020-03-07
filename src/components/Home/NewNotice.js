@@ -100,7 +100,8 @@ class NewNotice extends React.Component {
       width: "60vw",
       height: "60vh",
       zIndex: "5100",
-      display: "inline-block"
+      display: "inline-block",
+      right: "0px"
     };
 
     return (

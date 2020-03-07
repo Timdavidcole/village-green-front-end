@@ -22,47 +22,23 @@ class Notices extends React.Component {
       );
     }
 
-    if (this.props.page === "pinned") {
-      return (
-        <div
-          className="parent"
-          style={{
-            zIndex: "1",
-            height: "auto",
-            width: "auto"
-          }}
-        >
-          {this.props.notices.map((notice, i) => {
-            return (
-              <NoticePreview
-                page={this.props.page}
-                noticesVisible={this.props.noticesVisible}
-                index={i + 1}
-                notice={notice}
-                key={notice.slug}
-              />
-            );
-          })}
-        </div>
-      );
-    }
-
     return (
       <div
         style={{
           zIndex: "1",
-          width: "100vw"
+          height: "calc(100vh - 117px)",
+          width: "100vw",
+          overflow: "scroll"
         }}
       >
         <NewNoticeButton noticesVisible={this.props.noticesVisible} />
         {this.props.notices.map((notice, i) => {
-                    console.log(notice.title);
           if (!notice.image) {
             return (
               <NoticePreview
                 page={this.props.page}
                 noticesVisible={this.props.noticesVisible}
-                index={i + 2}
+                index={i + (this.props.page === "pinned" ? 1 : 2)}
                 notice={notice}
                 key={notice.slug}
               />
@@ -72,7 +48,7 @@ class Notices extends React.Component {
               <NoticePreviewImage
                 page={this.props.page}
                 noticesVisible={this.props.noticesVisible}
-                index={i + 2}
+                index={i + (this.props.page === "pinned" ? 1 : 2)}
                 notice={notice}
                 key={notice.slug}
               />

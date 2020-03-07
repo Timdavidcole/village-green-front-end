@@ -53,13 +53,12 @@ class NoticePreviewImage extends React.Component {
       transition: `opacity 0.2s linear`,
       opacity: "1",
       zIndex: "5000",
-      top: `${this.state.randomTop}px`,
-      left: `${this.state.randomLeft}px`,
       pointerEvents: "auto",
       display: "inline-block",
       width: "290px",
       height: "auto",
-      verticalAlign: "top"
+      verticalAlign: "top",
+      float: "right"
     };
 
     const transitionStyles = {
