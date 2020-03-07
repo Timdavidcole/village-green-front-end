@@ -131,7 +131,9 @@ class NoticePreview extends React.Component {
                       overflowY: "auto",
                       width: "100%",
                       textAlign: "center",
-                      marginBottom: "40px"
+                      marginBottom: "40px",
+                      maxHeight: "121px",
+                      overflow: "scroll"
                     }}
                   >
                     {notice.body}

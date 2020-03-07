@@ -4,6 +4,8 @@ const sortByColumn = function(notices, columnHeight) {
   var oldNotices = [...notices];
   var usedIndexes = [];
 
+  console.log(oldNotices)
+
   function sumHeights(notices) {
     var sum = 0;
     notices.forEach(notice => {
