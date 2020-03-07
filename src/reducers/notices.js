@@ -3,7 +3,8 @@ export default (
     notices: [],
     noticesWithDim: [],
     noticesVisible: true,
-    pinnedEvent: false
+    pinnedEvent: false,
+    noticesCount: 0
   },
   action
 ) => {

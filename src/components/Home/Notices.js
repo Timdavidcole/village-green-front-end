@@ -8,7 +8,8 @@ import sortByHeight from "../../models/sortByHeight";
 import sortByColumn from "../../models/sortByColumn";
 
 const mapStateToProps = state => ({
-  noticesWindowHeight: state.notices.noticesWindowHeight
+  noticesWindowHeight: state.notices.noticesWindowHeight,
+  noticesCount: state.notices.noticesCount
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -67,7 +68,8 @@ class Notices extends React.Component {
         }}
       >
         {this.newNoticeButton()}
-        {(this.props.noticesWindowHeight
+        {(this.props.noticesWindowHeight &&
+        this.props.noticesCount === this.props.notices.length
           ? sortByColumn(
               sortByHeight(this.props.notices),
               this.props.noticesWindowHeight
