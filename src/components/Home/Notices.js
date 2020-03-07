@@ -49,7 +49,6 @@ class Notices extends React.Component {
 
     return (
       <div
-        className="parent"
         style={{
           zIndex: "1",
           height: "calc(100vh - 130px)",
@@ -59,7 +58,6 @@ class Notices extends React.Component {
         <NewNoticeButton noticesVisible={this.props.noticesVisible} />
         {this.props.notices.map((notice, i) => {
                     console.log(notice.title);
-          console.log(notice.image);
           if (!notice.image) {
             return (
               <NoticePreview

@@ -99,7 +99,11 @@ class NewNoticeButton extends React.Component {
       top: `${this.state.randomTop}px`,
       left: `${this.state.randomLeft}px`,
       pointerEvents: "auto",
-      height: "250px"
+      height: "250px",
+      display: "inline-block",
+      width: "290px",
+      verticalAlign: "middle"
+
     };
 
     const defaultButtonStyle = {

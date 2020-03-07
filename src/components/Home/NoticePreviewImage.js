@@ -47,7 +47,6 @@ class NoticePreviewImage extends React.Component {
     };
 
     const defaultStyle = {
-      boxShadow: "5px 10px 20px 3px rgba(176,176,176,0.79)",
       borderRadius: "6px",
       margin: "10px",
       padding: "10px",
@@ -60,7 +59,9 @@ class NoticePreviewImage extends React.Component {
       left: `${this.state.randomLeft}px`,
       pointerEvents: "auto",
       height: "250px",
-      display: "inline-block"
+      display: "inline-block",
+      width: "290px",
+      verticalAlign: "middle"
     };
 
     const transitionStyles = {
