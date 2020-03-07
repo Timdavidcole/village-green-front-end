@@ -51,7 +51,6 @@ class Notices extends React.Component {
       <div
         style={{
           zIndex: "1",
-          height: "calc(100vh - 130px)",
           width: "100vw"
         }}
       >

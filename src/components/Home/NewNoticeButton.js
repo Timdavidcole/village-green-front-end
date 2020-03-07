@@ -102,7 +102,7 @@ class NewNoticeButton extends React.Component {
       height: "250px",
       display: "inline-block",
       width: "290px",
-      verticalAlign: "middle"
+      verticalAlign: "top"
 
     };
 

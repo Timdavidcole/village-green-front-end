@@ -38,7 +38,6 @@ class NoticePreviewImage extends React.Component {
   }
 
   render() {
-    console.log(this.props.notice);
     const notice = this.props.notice;
     const duration = {
       appear: 100,
@@ -49,7 +48,6 @@ class NoticePreviewImage extends React.Component {
     const defaultStyle = {
       borderRadius: "6px",
       margin: "10px",
-      padding: "10px",
       backgroundColor: "transparent",
       position: "relative",
       transition: `opacity 0.2s linear`,
@@ -58,10 +56,10 @@ class NoticePreviewImage extends React.Component {
       top: `${this.state.randomTop}px`,
       left: `${this.state.randomLeft}px`,
       pointerEvents: "auto",
-      display: "inline-flex",
+      display: "inline-block",
       width: "290px",
-      verticalAlign: "middle",
-      height: "100%"
+      height: "auto",
+      verticalAlign: "top"
     };
 
     const transitionStyles = {
@@ -74,8 +72,7 @@ class NoticePreviewImage extends React.Component {
       <Transition in={!this.props.noticesVisible} timeout={duration}>
         {state => (
           <div
-            id={"noticeCard"}
-            className={`div${this.props.index}`}
+            className={"noticeCard"}
             style={{
               ...defaultStyle,
               ...transitionStyles[state]
@@ -84,8 +81,8 @@ class NoticePreviewImage extends React.Component {
             <div
               className="card-inner"
               style={{
-                width: "100%",
-                position: "absolute",
+                width: "auto",
+                height: "auto",
                 backgroundColor: "#e4dfc0"
               }}
             >
@@ -107,7 +104,8 @@ class NoticePreviewImage extends React.Component {
                 style={{
                   height: "250px",
                   width: "290px",
-                  backgroundColor: "#e4dfc0"
+                  backgroundColor: "#e4dfc0",
+                  padding: "10px"
                 }}
               >
                 <Link to={`notice/${notice.slug}`}>
@@ -143,8 +141,7 @@ class NoticePreviewImage extends React.Component {
                   style={{
                     width: "93%",
                     position: "absolute",
-                    margin: "10px",
-                    bottom: "-5px"
+                    bottom: "0px"
                   }}
                 >
                   <NoticePreviewUser notice={notice} />

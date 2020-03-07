@@ -103,11 +103,11 @@
     transform: rotate(315deg)
 }
 
-#noticeCard {
+.noticeCard {
     background-color: transparent;
 }
 
-#noticeCard:hover .card-inner,
+.noticeCard:hover .card-inner,
 .card-inner {
     transform: rotateY(180deg);
     z-index: 555555;
@@ -125,7 +125,12 @@
     transform: scale(1);
 }
 
-.card-front,
+.card-front{
+    backface-visibility: hidden;
+    position: relative;
+    top: 0;
+    left: 0;
+}
 .card-back {
     backface-visibility: hidden;
     position: absolute;
