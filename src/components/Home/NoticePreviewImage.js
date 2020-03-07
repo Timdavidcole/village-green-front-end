@@ -21,7 +21,11 @@ class NoticePreviewImage extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { randomTop: 0, randomLeft: 0 };
+    this.state = {
+      randomTop: 0,
+      randomLeft: 0,
+      imageLoaded: false
+    };
 
     this.getRndInteger = this.getRndInteger.bind(this);
     this.getRndFloat = this.getRndFloat.bind(this);
@@ -46,10 +50,16 @@ class NoticePreviewImage extends React.Component {
   }
 
   addDimensions(width, height, index) {
+    console.log("addDimensions");
+    console.log(height);
+
     var newNotice = this.props.notices[index];
     newNotice.width = width;
     newNotice.height = height;
-    this.props.loadDivDim(newNotice);
+    console.log(newNotice);
+    if (newNotice.height > 24) {
+      this.props.loadDivDim(newNotice);
+    }
   }
 
   render() {
@@ -91,7 +101,7 @@ class NoticePreviewImage extends React.Component {
               ...transitionStyles[state]
             }}
             ref={el => {
-              if (el && !notice.width) {
+              if ((el && !notice.width) || (el && notice.height === 24)) {
                 this.addDimensions(
                   el.offsetWidth,
                   el.offsetHeight,

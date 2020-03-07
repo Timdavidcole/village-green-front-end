@@ -9,7 +9,10 @@ import sortByColumn from "../../models/sortByColumn";
 
 const mapStateToProps = state => ({
   noticesWindowHeight: state.notices.noticesWindowHeight,
-  noticesCount: state.notices.noticesCount
+  noticesCount: state.notices.noticesCount,
+  notices: state.notices.notices,
+  noticesWithDim: state.notices.noticesWithDim,
+  noticesVisible: state.notices.noticesVisible
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -30,7 +33,18 @@ class Notices extends React.Component {
     this.props.addNoticesWindowHeight(height);
   }
 
+  withDimOrNotWithDim() {
+    return (this.props.noticesWindowHeight &&
+    this.props.noticesCount === this.props.noticesWithDim.length
+      ? sortByColumn(
+          sortByHeight(this.props.noticesWithDim),
+          this.props.noticesWindowHeight
+        )
+      : this.props.notices)
+  }
+
   render() {
+    console.log(this.props.noticesWithDim);
     if (!this.props.notices) {
       return (
         <div className="parent">
@@ -68,14 +82,7 @@ class Notices extends React.Component {
         }}
       >
         {this.newNoticeButton()}
-        {(this.props.noticesWindowHeight &&
-        this.props.noticesCount === this.props.notices.length
-          ? sortByColumn(
-              sortByHeight(this.props.notices),
-              this.props.noticesWindowHeight
-            )
-          : this.props.notices
-        ).map((notice, i) => {
+        {this.withDimOrNotWithDim().map((notice, i) => {
           if (!notice.image) {
             return (
               <NoticePreview

@@ -21,7 +21,7 @@ class NoticePreview extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { randomTop: 0, randomLeft: 0 };
+    this.state = { randomTop: 0, randomLeft: 0, loadDim: true };
 
     this.getRndInteger = this.getRndInteger.bind(this);
     this.getRndFloat = this.getRndFloat.bind(this);
@@ -51,6 +51,7 @@ class NoticePreview extends React.Component {
     newNotice.width = width;
     newNotice.height = height;
     this.props.loadDivDim(newNotice);
+    this.setState({loadDim: false})
   }
 
   render() {
@@ -93,7 +94,7 @@ class NoticePreview extends React.Component {
               ...transitionStyles[state]
             }}
             ref={el => {
-              if (el && !notice.width) {
+              if (el && !notice.width && this.state.loadDim) {
                 this.addDimensions(
                   el.offsetWidth,
                   el.offsetHeight,
