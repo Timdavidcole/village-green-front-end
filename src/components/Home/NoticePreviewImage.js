@@ -21,35 +21,10 @@ class NoticePreviewImage extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      randomTop: 0,
-      randomLeft: 0
-    };
-
-    this.getRndInteger = this.getRndInteger.bind(this);
-    this.getRndFloat = this.getRndFloat.bind(this);
     this.addDimensions = this.addDimensions.bind(this);
   }
 
-  componentDidMount() {
-    if (this.props.page !== "pinned") {
-      this.setState({
-        randomTop: this.getRndInteger(-5, 5),
-        randomLeft: this.getRndInteger(-5, 5)
-      });
-    }
-  }
-
-  getRndInteger(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-  }
-  getRndFloat() {
-    const rndInt = this.getRndInteger(1, 100);
-    return rndInt < 0 ? "right" : "left";
-  }
-
   addDimensions(width, height, index) {
-
     var newNotice = this.props.notices[index];
     newNotice.width = width;
     newNotice.height = height;
