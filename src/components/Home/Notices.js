@@ -91,7 +91,8 @@ class Notices extends React.Component {
           margin: "0",
           padding: "0",
           border: "none",
-          overflow: "hidden"
+          overflow: "hidden",
+          opacity: this.props.sorted ? 1 : 0
         }}
         ref={el => {
           if (
