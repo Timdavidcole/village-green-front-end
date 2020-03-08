@@ -13,7 +13,8 @@ const mapStateToProps = state => ({
   notices: state.notices.notices,
   noticesWithDim: state.notices.noticesWithDim,
   noticesVisible: state.notices.noticesVisible,
-  sorted: state.notices.sorted
+  sorted: state.notices.sorted,
+  loggedIn: state.auth.loggedIn
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -54,17 +55,18 @@ class Notices extends React.Component {
         this.props.noticesCount === this.props.noticesWithDim.length) ||
       (this.state.resize && !this.props.sorted)
     ) {
-      console.log("UPDATE SORTED NOTICES")
       this.props.updateSortedNotices(
         sortByColumn(
           sortByHeight(this.props.noticesWithDim),
-          this.props.noticesWindowHeight
+          this.props.noticesWindowHeight,
+          this.props.loggedIn
         )
       );
     }
   }
 
   render() {
+
     if (!this.props.notices) {
       return (
         <div className="parent">
@@ -92,7 +94,7 @@ class Notices extends React.Component {
           padding: "0",
           border: "none",
           overflow: "hidden",
-          opacity: this.props.sorted ? 1 : 0
+          opacity: this.props.sorted ? "1" : "0"
         }}
         ref={el => {
           if (
@@ -103,7 +105,9 @@ class Notices extends React.Component {
           }
         }}
       >
-        <NewNoticeButton noticesVisible={this.props.noticesVisible} />
+        {this.props.loggedIn ? (
+          <NewNoticeButton noticesVisible={this.props.noticesVisible} />
+        ) : null}
         {this.withDimOrNotWithDim().map((notice, i) => {
           if (!notice.image) {
             return (

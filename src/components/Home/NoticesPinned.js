@@ -14,7 +14,6 @@ const mapDispatchToProps = () => ({
 class NoticesPinned extends React.Component {
 
   render() {
-    console.log(this.props.notices)
     return (
       <div
         style={{
@@ -27,9 +26,7 @@ class NoticesPinned extends React.Component {
         }}
       >
         {this.props.notices.map((notice, i) => {
-          console.log(notice)
           if (!notice.image) {
-            console.log('show Notice no image')
             return (
               <NoticePreview
                 page={this.props.page}
@@ -41,7 +38,6 @@ class NoticesPinned extends React.Component {
               />
             );
           } else {
-            console.log('show Notice image')
             return (
               <NoticePreviewImage
                 page={this.props.page}

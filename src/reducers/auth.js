@@ -7,12 +7,22 @@ export default (state = { loggedIn: false }, action) => {
         inProgress: false,
         loggedIn: true
       };
+    case "LOGGED_IN":
+      return {
+        ...state,
+        loggedIn: true
+      };
     case "REGISTER":
       return {
         ...state,
         inProgress: false,
         loggedIn: true,
         errors: action.error ? action.payload.errors : null
+      };
+    case "LOGOUT":
+      return {
+        inProgress: false,
+        loggedIn: false
       };
     case "LOGIN_PAGE_UNLOADED":
       return {

@@ -25,12 +25,6 @@ export default (
           ? null
           : [action.payload.notice].concat(state.notices || [])
       };
-    case "CHANGE_NOTICES":
-      return {
-        ...state,
-        notices: action.payload.notices,
-        noticesVisible: true
-      };
     case "NOTICES_VISIBLE":
       return {
         ...state,
@@ -69,19 +63,25 @@ export default (
       return {
         ...state,
         noticesWithDim: action.payload,
-        sorted: true
+        sorted: true,
+        noticesVisible: true
       };
     case "UPDATE_UNSORTED_NOTICES":
       return {
         ...state,
         notices: action.payload.notices,
+        noticesCount: action.payload.noticesCount,
         noticesWithDim: [],
         sorted: false,
         pinnedEvent: false
       };
-    case "UPDATE_SORTED":
+    case "LOG_OUT_NOTICES":
       return {
-        ...state,
+        notices: [],
+        noticesWithDim: [],
+        noticesVisible: true,
+        pinnedEvent: false,
+        noticesCount: 0,
         sorted: false
       };
   }

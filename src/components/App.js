@@ -6,7 +6,9 @@ import agent from "../agent";
 const mapStateToProps = state => ({
   appName: state.common.appName,
   currentUser: state.common.currentUser,
-  redirectTo: state.common.redirectTo
+  redirectTo: state.common.redirectTo,
+  centerMap: state.map.centerMap,
+  loggedIn: state.auth.loggedIn
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -14,7 +16,13 @@ const mapDispatchToProps = dispatch => ({
   onRedirect: () => dispatch({ type: "REDIRECT" }),
   onClickLogout: () => {
     dispatch({ type: "LOGOUT" });
-  }
+  },
+  logOutNotices: () => {
+    dispatch({ type: "LOG_OUT_NOTICES" });
+  },
+  updateUnsortedNotices: payload =>
+    dispatch({ type: "UPDATE_UNSORTED_NOTICES", payload }),
+    logIn: () => dispatch({type: "LOGGED_IN"})
 });
 
 class App extends React.Component {
@@ -33,13 +41,25 @@ class App extends React.Component {
       this.props.onRedirect();
     }
   }
+
+  logOut() {
+    this.props.onClickLogout();
+    this.props.logOutNotices();
+    this.props.updateUnsortedNotices(
+      agent.Notices.all(JSON.stringify(this.props.centerMap))
+    );
+  }
+
   render() {
+    if (this.props.currentUser && !this.props.loggedIn) {
+      this.props.logIn()
+    }
     return (
       <div>
         <Header
           currentUser={this.props.currentUser}
           appName={this.props.appName}
-          onClickLogout={this.props.onClickLogout}
+          onClickLogout={() => this.logOut()}
         />
         {this.props.children}
       </div>

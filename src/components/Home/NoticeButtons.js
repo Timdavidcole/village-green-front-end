@@ -6,15 +6,15 @@ import agent from "../../agent";
 const mapStateToProps = state => ({
   notices: state.notices.notices,
   noticesWithDim: state.notices.noticesWithDim,
-  noticesPinned: state.pinned.notices
+  noticesPinned: state.pinned.notices,
+  loggedIn: state.auth.loggedIn
 });
 
 const mapDispatchToProps = dispatch => ({
   pinNotice: payload => dispatch({ type: "PIN_NOTICE", payload }),
   onLoad: payload => dispatch({ type: "HOME_PAGE_LOADED", payload }),
   updatePinned: payload => dispatch({ type: "REMOVE_PINNED", payload }),
-  addPinnedEvent: () => dispatch({type: "ADD_PINNED_EVENT" }),
-  updateSorted: () => dispatch({ type: "UPDATE_SORTED" })
+  addPinnedEvent: () => dispatch({ type: "ADD_PINNED_EVENT" })
 });
 
 class NoticeButtons extends React.Component {
@@ -35,7 +35,7 @@ class NoticeButtons extends React.Component {
           var notices = [...this.props.noticesPinned];
           notices.splice(this.props.index + 1, 1);
           this.props.updatePinned(notices);
-          this.props.addPinnedEvent()
+          this.props.addPinnedEvent();
         } else {
           notices = [...this.props.noticesWithDim];
           notices[this.props.index].isPinned = notice.notice.isPinned;
@@ -48,7 +48,7 @@ class NoticeButtons extends React.Component {
           var notices = [...this.props.noticesPinned];
           notices.splice(this.props.index + 1, 1);
           this.props.updatePinned(notices);
-          this.props.addPinnedEvent()
+          this.props.addPinnedEvent();
         } else {
           notices = [...this.props.noticesWithDim];
           notices[this.props.index].isPinned = notice.notice.isPinned;
@@ -56,7 +56,7 @@ class NoticeButtons extends React.Component {
         }
       });
     }
-    this.props.updateSorted()
+    this.props.updateSorted();
   }
 
   pinStyle() {
@@ -80,19 +80,23 @@ class NoticeButtons extends React.Component {
   }
 
   render() {
-    return (
-      <div className="thumb-buttons-container">
-        <button
-          onClick={() => this.pinNotice()}
-          className="pin-notice-button"
-          style={this.pinStyle()}
-          onMouseEnter={this.toggleHoverIn}
-          onMouseLeave={this.toggleHoverOut}
-        >
-          <i className="pin-notice-icon"></i>
-        </button>
-      </div>
-    );
+    if (this.props.loggedIn) {
+      return (
+        <div className="thumb-buttons-container">
+          <button
+            onClick={() => this.pinNotice()}
+            className="pin-notice-button"
+            style={this.pinStyle()}
+            onMouseEnter={this.toggleHoverIn}
+            onMouseLeave={this.toggleHoverOut}
+          >
+            <i className="pin-notice-icon"></i>
+          </button>
+        </div>
+      );
+    } else {
+      return null;
+    }
   }
 }
 
