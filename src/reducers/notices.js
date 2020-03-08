@@ -4,7 +4,8 @@ export default (
     noticesWithDim: [],
     noticesVisible: true,
     pinnedEvent: false,
-    noticesCount: 0
+    noticesCount: 0,
+    sorted: false
   },
   action
 ) => {
@@ -58,6 +59,17 @@ export default (
       return {
         ...state,
         noticesWindowHeight: action.payload
+      };
+    case "UPDATE_SORTED_NOTICES":
+      return {
+        ...state,
+        noticesWithDim: action.payload,
+        sorted: true
+      };
+      case "UPDATE_SORTED":
+      return {
+        ...state,
+        sorted: false
       };
   }
 

@@ -5,6 +5,7 @@ import agent from "../../agent";
 
 const mapStateToProps = state => ({
   notices: state.notices.notices,
+  noticesWithDim: state.notices.noticesWithDim,
   noticesPinned: state.pinned.notices
 });
 
@@ -35,7 +36,7 @@ class NoticeButtons extends React.Component {
             notices.splice(this.props.index + 1, 1);
             return notices;
           } else {
-            notices = [...this.props.notices];
+            notices = [...this.props.noticesWithDim];
             notices[this.props.index] = notice.notice;
             return notices;
           }
@@ -56,7 +57,7 @@ class NoticeButtons extends React.Component {
             notices.splice(this.props.index + 1, 1);
             return notices;
           } else {
-            notices = [...this.props.notices];
+            notices = [...this.props.noticesWithDim];
             notices[this.props.index] = notice.notice;
             return notices;
           }

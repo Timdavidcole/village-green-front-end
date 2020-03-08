@@ -12,12 +12,16 @@ const mapStateToProps = state => ({
   noticesCount: state.notices.noticesCount,
   notices: state.notices.notices,
   noticesWithDim: state.notices.noticesWithDim,
-  noticesVisible: state.notices.noticesVisible
+  noticesVisible: state.notices.noticesVisible,
+  sorted: state.notices.sorted
 });
 
 const mapDispatchToProps = dispatch => ({
   addNoticesWindowHeight: payload =>
-    dispatch({ type: "ADD_NOTICES_WINDOW_HEIGHT", payload })
+    dispatch({ type: "ADD_NOTICES_WINDOW_HEIGHT", payload }),
+  updateSortedNotices: payload =>
+    dispatch({ type: "UPDATE_SORTED_NOTICES", payload }),
+  updateSorted: () => dispatch({ type: "UPDATE_SORTED" })
 });
 
 class Notices extends React.Component {
@@ -29,9 +33,13 @@ class Notices extends React.Component {
     };
   }
   componentDidMount() {
-    window.addEventListener("resize", () =>
-      this.setState({ resize: !this.state.resize })
-    );
+    window.addEventListener("resize", () => {
+      console.log("RESIZE");
+
+      console.log(this.state.resize);
+      this.setState({ resize: !this.state.resize });
+      this.props.updateSorted();
+    });
   }
 
   newNoticeButton() {
@@ -47,13 +55,24 @@ class Notices extends React.Component {
   }
 
   withDimOrNotWithDim() {
-    return this.props.noticesWindowHeight &&
-      this.props.noticesCount === this.props.noticesWithDim.length
-      ? sortByColumn(
+    return this.props.sorted ? this.props.noticesWithDim : this.props.notices;
+  }
+
+  componentDidUpdate() {
+    if (
+      (this.props.noticesWindowHeight &&
+        !this.props.sorted &&
+        this.props.noticesCount === this.props.noticesWithDim.length) ||
+      (this.state.resize && !this.props.sorted)
+    ) {
+      console.log("UPDATE SORTED NOTICES");
+      this.props.updateSortedNotices(
+        sortByColumn(
           sortByHeight(this.props.noticesWithDim),
           this.props.noticesWindowHeight
         )
-      : this.props.notices;
+      );
+    }
   }
 
   render() {
@@ -84,7 +103,7 @@ class Notices extends React.Component {
           flexWrap: "wrap",
           margin: "0",
           padding: "0",
-          border: 'none',
+          border: "none",
           overflow: "hidden"
         }}
         ref={el => {
