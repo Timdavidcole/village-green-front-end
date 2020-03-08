@@ -105,12 +105,6 @@ class NoticeButtons extends React.Component {
         >
           <i className="pin-notice-icon"></i>
         </button>
-        <button className="thumbs-up-button">
-          <i className="thumbs-up-icon"></i>
-        </button>
-        <button className="thumbs-down-button">
-          <i className="thumbs-down-icon"></i>
-        </button>
       </div>
     );
   }

@@ -99,7 +99,8 @@ class NoticePreview extends React.Component {
                     style={{
                       textAlign: "center",
                       display: "inline-block",
-                      width: "100%"
+                      width: "100%",
+                      fontStyle: "italic"
                     }}
                   >
                     {notice.description}
@@ -108,13 +109,12 @@ class NoticePreview extends React.Component {
                   <span
                     style={{
                       display: "inline-block",
-                      fontSize: "1.3vh",
-                      overflowY: "auto",
                       width: "100%",
                       textAlign: "center",
                       marginBottom: "40px",
                       maxHeight: "121px",
-                      overflow: "scroll"
+                      overflowY: "auto",
+                      overflowX: "auto"
                     }}
                   >
                     {notice.body}

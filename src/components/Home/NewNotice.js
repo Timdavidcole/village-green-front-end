@@ -134,7 +134,6 @@ class NewNotice extends React.Component {
             }}
           >
             <label
-              for="title"
               style={{
                 color: "#5cb85c",
                 fontFamily: "titillium web,sans-serif",

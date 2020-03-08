@@ -51,7 +51,6 @@ class Pinned extends React.Component {
 
         <Notices
           noticesVisible={this.props.noticesVisible}
-          notices={this.props.notices}
           page={"pinned"}
         />
       </div>

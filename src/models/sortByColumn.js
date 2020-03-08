@@ -40,6 +40,7 @@ const sortByColumn = function(notices, columnHeight) {
           usedIndexes.push(indexNew);
           return true;
         }
+        return false
       });
     }
     sumHeight = sumHeights(newNotices[columnIndex]);

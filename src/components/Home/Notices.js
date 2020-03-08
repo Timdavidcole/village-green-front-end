@@ -13,7 +13,8 @@ const mapStateToProps = state => ({
   notices: state.notices.notices,
   noticesWithDim: state.notices.noticesWithDim,
   noticesVisible: state.notices.noticesVisible,
-  sorted: state.notices.sorted
+  sorted: state.notices.sorted,
+  noticesPinned: state.pinned.notices
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -52,6 +53,10 @@ class Notices extends React.Component {
   }
 
   withDimOrNotWithDim() {
+    if (this.props.page === "pinned") {
+      console.log(this.props.noticesPinned);
+      return this.props.noticesPinned;
+    }
     return this.props.sorted ? this.props.noticesWithDim : this.props.notices;
   }
 
@@ -87,13 +92,11 @@ class Notices extends React.Component {
         </div>
       );
     }
-
     return (
       <div
         style={{
           height: "calc(100vh - 114px)",
           width: "auto",
-          overflow: "scroll",
           display: "flex",
           flexDirection: "column",
           flexWrap: "wrap",

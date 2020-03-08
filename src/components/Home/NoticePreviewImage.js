@@ -26,9 +26,6 @@ class NoticePreviewImage extends React.Component {
   }
 
   addDimensions(width, height, index) {
-    console.log('LOAD DIV DIMENSIONS')
-    console.log(this.props.notice.title)
-
     var newNotice = this.props.notices[index];
     newNotice.width = width;
     newNotice.height = height;
@@ -102,7 +99,7 @@ class NoticePreviewImage extends React.Component {
                   backgroundRepeat: "no-repeat"
                 }}
               >
-                <img
+                <img alt=""
                   src={notice.image}
                   style={{ visibility: "hidden", maxWidth: "250px" }}
                 />
