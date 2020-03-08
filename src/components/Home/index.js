@@ -16,7 +16,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onLoad: payload => dispatch({ type: "HOME_PAGE_LOADED", payload }),
-  updateUnsortedNotices: payload => dispatch({ type: "UPDATE_UNSORTED_NOTICES", payload })
+  updateUnsortedNotices: payload =>
+    dispatch({ type: "UPDATE_UNSORTED_NOTICES", payload })
 });
 
 class Home extends React.Component {
@@ -26,7 +27,9 @@ class Home extends React.Component {
 
   componentDidUpdate() {
     if (this.props.pinnedEvent) {
-      this.props.updateUnsortedNotices(agent.Notices.all(JSON.stringify(this.props.centerMap)));
+      this.props.updateUnsortedNotices(
+        agent.Notices.all(JSON.stringify(this.props.centerMap))
+      );
     }
   }
 
@@ -36,8 +39,7 @@ class Home extends React.Component {
         <div style={{ width: "100%", position: "absolute" }}>
           <MapNavBar />
           <NewNotice />
-          <Notices
-          />
+          <Notices />
         </div>
         <MainMap />
       </div>

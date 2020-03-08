@@ -5,25 +5,16 @@ import "./noticesGrid.css";
 import { connect } from "react-redux";
 
 const mapStateToProps = state => ({
-  noticesPinned: state.pinned.notices
+  notices: state.pinned.notices
 });
 
 const mapDispatchToProps = () => ({
 });
 
 class NoticesPinned extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      resize: false
-    };
-  }
 
   render() {
-    if (!this.props.noticesPinned) {
-      return [];
-    }
+    console.log(this.props.notices)
     return (
       <div
         style={{
@@ -35,8 +26,10 @@ class NoticesPinned extends React.Component {
           overflow: "auto"
         }}
       >
-        {this.props.noticesPinned.map((notice, i) => {
+        {this.props.notices.map((notice, i) => {
+          console.log(notice)
           if (!notice.image) {
+            console.log('show Notice no image')
             return (
               <NoticePreview
                 page={this.props.page}
@@ -48,6 +41,7 @@ class NoticesPinned extends React.Component {
               />
             );
           } else {
+            console.log('show Notice image')
             return (
               <NoticePreviewImage
                 page={this.props.page}

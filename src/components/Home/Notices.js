@@ -6,7 +6,6 @@ import "./noticesGrid.css";
 import { connect } from "react-redux";
 import sortByHeight from "../../models/sortByHeight";
 import sortByColumn from "../../models/sortByColumn";
-import agent from "../../agent";
 
 const mapStateToProps = state => ({
   noticesWindowHeight: state.notices.noticesWindowHeight,
@@ -45,17 +44,10 @@ class Notices extends React.Component {
   }
 
   withDimOrNotWithDim() {
-    console.log('SORTED?')
-    console.log(this.props.sorted)
     return this.props.sorted ? this.props.noticesWithDim : this.props.notices;
   }
 
   componentDidUpdate() {
-    console.log('SORTED?')
-    console.log(this.props.sorted)
-    console.log(this.props.noticesCount)
-    console.log(this.props.noticesWithDim.length)
-    console.log(this.props.noticesCount === this.props.noticesWithDim.length)
     if (
       (this.props.noticesWindowHeight &&
         !this.props.sorted &&

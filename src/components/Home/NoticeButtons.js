@@ -71,11 +71,11 @@ class NoticeButtons extends React.Component {
     }
   }
 
-  toggleHoverIn(event) {
+  toggleHoverIn() {
     this.setState({ hover: true });
   }
 
-  toggleHoverOut(event) {
+  toggleHoverOut() {
     this.setState({ hover: false });
   }
 

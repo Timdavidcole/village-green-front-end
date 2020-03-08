@@ -1,7 +1,8 @@
-export default (state = {}, action) => {
+export default (state = { notices: [] }, action) => {
   // eslint-disable-next-line default-case
   switch (action.type) {
     case "PINNED_PAGE_LOADED":
+      console.log(action.payload);
       return {
         ...state,
         notices: action.payload[1].notices,
