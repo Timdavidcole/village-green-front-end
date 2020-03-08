@@ -37,7 +37,7 @@ class NoticeButtons extends React.Component {
             return notices;
           } else {
             notices = [...this.props.noticesWithDim];
-            notices[this.props.index] = notice.notice;
+            notices[this.props.index].isPinned = notice.notice.isPinned;
             return notices;
           }
         })
@@ -58,7 +58,7 @@ class NoticeButtons extends React.Component {
             return notices;
           } else {
             notices = [...this.props.noticesWithDim];
-            notices[this.props.index] = notice.notice;
+            notices[this.props.index].isPinned = notice.notice.isPinned;
             return notices;
           }
         })

@@ -34,9 +34,6 @@ class Notices extends React.Component {
   }
   componentDidMount() {
     window.addEventListener("resize", () => {
-      console.log("RESIZE");
-
-      console.log(this.state.resize);
       this.setState({ resize: !this.state.resize });
       this.props.updateSorted();
     });
@@ -65,7 +62,6 @@ class Notices extends React.Component {
         this.props.noticesCount === this.props.noticesWithDim.length) ||
       (this.state.resize && !this.props.sorted)
     ) {
-      console.log("UPDATE SORTED NOTICES");
       this.props.updateSortedNotices(
         sortByColumn(
           sortByHeight(this.props.noticesWithDim),

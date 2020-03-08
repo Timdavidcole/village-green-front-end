@@ -41,7 +41,7 @@ export default (
     case "PIN_NOTICE":
       return {
         ...state,
-        notices: action.payload,
+        noticesWithDim: action.payload,
         pinnedEvent: true
       };
     case "REMOVE_PINNED_EVENT":
@@ -66,7 +66,7 @@ export default (
         noticesWithDim: action.payload,
         sorted: true
       };
-      case "UPDATE_SORTED":
+    case "UPDATE_SORTED":
       return {
         ...state,
         sorted: false

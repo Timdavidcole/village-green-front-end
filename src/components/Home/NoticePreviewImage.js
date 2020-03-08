@@ -8,7 +8,8 @@ import NoticePreviewUser from "./NoticePreviewUser";
 
 const mapStateToProps = state => ({
   currentUser: state.common.currentUser,
-  notices: state.notices.notices
+  notices: state.notices.notices,
+  sorted: state.notices.sorted
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -25,10 +26,13 @@ class NoticePreviewImage extends React.Component {
   }
 
   addDimensions(width, height, index) {
+    console.log('LOAD DIV DIMENSIONS')
+    console.log(this.props.notice.title)
+
     var newNotice = this.props.notices[index];
     newNotice.width = width;
     newNotice.height = height;
-    if (newNotice.height > 24) {
+    if (newNotice.height > 24 && !this.props.sorted) {
       this.props.loadDivDim(newNotice);
     }
   }
