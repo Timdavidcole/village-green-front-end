@@ -13,8 +13,7 @@ const mapStateToProps = state => ({
   notices: state.notices.notices,
   noticesWithDim: state.notices.noticesWithDim,
   noticesVisible: state.notices.noticesVisible,
-  sorted: state.notices.sorted,
-  noticesPinned: state.pinned.notices
+  sorted: state.notices.sorted
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -40,23 +39,11 @@ class Notices extends React.Component {
     });
   }
 
-  newNoticeButton() {
-    if (this.props.page === "pinned") {
-      return null;
-    } else {
-      return <NewNoticeButton noticesVisible={this.props.noticesVisible} />;
-    }
-  }
-
   addNoticesWindowHeight(height) {
     this.props.addNoticesWindowHeight(height);
   }
 
   withDimOrNotWithDim() {
-    if (this.props.page === "pinned") {
-      console.log(this.props.noticesPinned);
-      return this.props.noticesPinned;
-    }
     return this.props.sorted ? this.props.noticesWithDim : this.props.notices;
   }
 
@@ -114,14 +101,14 @@ class Notices extends React.Component {
           }
         }}
       >
-        {this.newNoticeButton()}
+        <NewNoticeButton noticesVisible={this.props.noticesVisible} />
         {this.withDimOrNotWithDim().map((notice, i) => {
           if (!notice.image) {
             return (
               <NoticePreview
                 page={this.props.page}
                 noticesVisible={this.props.noticesVisible}
-                index={i + (this.props.page === "pinned" ? 1 : 2)}
+                index={i + 2}
                 indexTrue={i}
                 notice={notice}
                 key={notice.slug}
@@ -132,7 +119,7 @@ class Notices extends React.Component {
               <NoticePreviewImage
                 page={this.props.page}
                 noticesVisible={this.props.noticesVisible}
-                index={i + (this.props.page === "pinned" ? 1 : 2)}
+                index={i + 2}
                 indexTrue={i}
                 notice={notice}
                 key={notice.slug}

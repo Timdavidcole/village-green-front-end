@@ -1,4 +1,4 @@
-import Notices from "./Home/Notices";
+import NoticesPinned from "./Home/NoticesPinned";
 import React from "react";
 import agent from "../agent";
 import { connect } from "react-redux";
@@ -49,7 +49,7 @@ class Pinned extends React.Component {
           </div>
         </div>
 
-        <Notices
+        <NoticesPinned
           noticesVisible={this.props.noticesVisible}
           page={"pinned"}
         />

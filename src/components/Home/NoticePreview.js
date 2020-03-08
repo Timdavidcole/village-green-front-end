@@ -27,11 +27,15 @@ class NoticePreview extends React.Component {
   }
 
   addDimensions(width, height, index) {
-    var newNotice = this.props.notices[index];
-    newNotice.width = width;
-    newNotice.height = height;
-    this.props.loadDivDim(newNotice);
-    this.setState({ loadDim: false });
+    if (this.props.page === "pinned") {
+      return null;
+    } else {
+      var newNotice = this.props.notices[index];
+      newNotice.width = width;
+      newNotice.height = height;
+      this.props.loadDivDim(newNotice);
+      this.setState({ loadDim: false });
+    }
   }
 
   render() {

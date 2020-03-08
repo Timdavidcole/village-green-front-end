@@ -26,11 +26,15 @@ class NoticePreviewImage extends React.Component {
   }
 
   addDimensions(width, height, index) {
-    var newNotice = this.props.notices[index];
-    newNotice.width = width;
-    newNotice.height = height;
-    if (newNotice.height > 24 && !this.props.sorted) {
-      this.props.loadDivDim(newNotice);
+    if (this.props.page === "pinned") {
+      return null;
+    } else {
+      var newNotice = this.props.notices[index];
+      newNotice.width = width;
+      newNotice.height = height;
+      if (newNotice.height > 24 && !this.props.sorted) {
+        this.props.loadDivDim(newNotice);
+      }
     }
   }
 
@@ -99,7 +103,8 @@ class NoticePreviewImage extends React.Component {
                   backgroundRepeat: "no-repeat"
                 }}
               >
-                <img alt=""
+                <img
+                  alt=""
                   src={notice.image}
                   style={{ visibility: "hidden", maxWidth: "250px" }}
                 />
