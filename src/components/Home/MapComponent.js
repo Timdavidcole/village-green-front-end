@@ -17,7 +17,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   changeMapCenter: payload => dispatch({ type: "CHANGE_CENTER", payload }),
   changeNotices: payload => dispatch({ type: "CHANGE_NOTICES", payload }),
-  noticesVisible: payload => dispatch({ type: "NOTICES_VISIBLE", payload })
+  noticesVisible: payload => dispatch({ type: "NOTICES_VISIBLE", payload }),
+  updateSorted: () => dispatch({ type: "UPDATE_SORTED" })
 });
 
 class MapComponent extends React.Component {
@@ -78,6 +79,7 @@ class MapComponent extends React.Component {
     this.props.changeNotices(
       agent.Notices.all(JSON.stringify({ lat: lat, lng: lng }))
     );
+    this.props.updateSorted()
   }
 
   markerIcon() {

@@ -37,7 +37,7 @@ class NoticePreviewImage extends React.Component {
       var newNotice = this.props.notices[index];
       newNotice.width = width;
       newNotice.height = height;
-      if (newNotice.height > 24 && !this.props.sorted) {
+      if (newNotice.height > 100 && !this.props.sorted) {
         this.props.loadDivDim(newNotice);
       }
     }
@@ -82,7 +82,7 @@ class NoticePreviewImage extends React.Component {
               ...transitionStyles[state]
             }}
             ref={el => {
-              if ((el && !notice.width) || (el && notice.height === 24)) {
+              if ((el && !notice.width) || (el && notice.height < 100)) {
                 this.addDimensions(
                   el.offsetWidth,
                   el.offsetHeight,
