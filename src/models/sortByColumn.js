@@ -51,7 +51,6 @@ const sortByColumn = function(notices, columnHeight) {
     }
   });
   newNotices[0].splice(0, 1);
-  console.log(newNotices)
   return newNotices.flat();
 };
 

@@ -9,7 +9,8 @@ import NoticePreviewUser from "./NoticePreviewUser";
 const mapStateToProps = state => ({
   currentUser: state.common.currentUser,
   notices: state.notices.notices,
-  sorted: state.notices.sorted
+  sorted: state.notices.sorted,
+  noticesWithDim: state.notices.noticesWithDim
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -28,6 +29,10 @@ class NoticePreviewImage extends React.Component {
   addDimensions(width, height, index) {
     if (this.props.page === "pinned") {
       return null;
+    } else if (this.props.noticesWithDim.length === this.props.notices.length) {
+      if (this.props.noticesWithDim[index].height === height) {
+        return null;
+      }
     } else {
       var newNotice = this.props.notices[index];
       newNotice.width = width;

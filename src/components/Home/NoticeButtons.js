@@ -13,7 +13,8 @@ const mapDispatchToProps = dispatch => ({
   pinNotice: payload => dispatch({ type: "PIN_NOTICE", payload }),
   onLoad: payload => dispatch({ type: "HOME_PAGE_LOADED", payload }),
   updatePinned: payload => dispatch({ type: "REMOVE_PINNED", payload }),
-  removePinnedEvent: () => dispatch({ type: "REMOVE_PINNED_EVENT" })
+  addPinnedEvent: () => dispatch({type: "ADD_PINNED_EVENT" }),
+  updateSorted: () => dispatch({ type: "UPDATE_SORTED" })
 });
 
 class NoticeButtons extends React.Component {
@@ -29,48 +30,33 @@ class NoticeButtons extends React.Component {
 
   pinNotice() {
     if (this.props.notice.isPinned) {
-      agent.Pinned.unPinNotice(this.props.notice.slug)
-        .then(notice => {
-          if (this.props.page === "pinned") {
-            var notices = [...this.props.noticesPinned];
-            notices.splice(this.props.index + 1, 1);
-            return notices;
-          } else {
-            notices = [...this.props.noticesWithDim];
-            notices[this.props.index].isPinned = notice.notice.isPinned;
-            return notices;
-          }
-        })
-        .then(newNotices => {
-          if (this.props.page === "pinned") {
-            this.props.updatePinned(newNotices);
-          } else {
-            this.props.pinNotice(newNotices);
-          }
-          setTimeout(() => this.props.removePinnedEvent(), 300);
-        });
+      agent.Pinned.unPinNotice(this.props.notice.slug).then(notice => {
+        if (this.props.page === "pinned") {
+          var notices = [...this.props.noticesPinned];
+          notices.splice(this.props.index + 1, 1);
+          this.props.updatePinned(notices);
+          this.props.addPinnedEvent()
+        } else {
+          notices = [...this.props.noticesWithDim];
+          notices[this.props.index].isPinned = notice.notice.isPinned;
+          this.props.pinNotice(notices);
+        }
+      });
     } else {
-      agent.Pinned.pinNotice(this.props.notice.slug)
-        .then(notice => {
-          if (this.props.page === "pinned") {
-            var notices = [...this.props.noticesPinned];
-            notices.splice(this.props.index + 1, 1);
-            return notices;
-          } else {
-            notices = [...this.props.noticesWithDim];
-            notices[this.props.index].isPinned = notice.notice.isPinned;
-            return notices;
-          }
-        })
-        .then(newNotices => {
-          if (this.props.page === "pinned") {
-            this.props.updatePinned(newNotices);
-          } else {
-            this.props.pinNotice(newNotices);
-          }
-          setTimeout(() => this.props.removePinnedEvent(), 300);
-        });
+      agent.Pinned.pinNotice(this.props.notice.slug).then(notice => {
+        if (this.props.page === "pinned") {
+          var notices = [...this.props.noticesPinned];
+          notices.splice(this.props.index + 1, 1);
+          this.props.updatePinned(notices);
+          this.props.addPinnedEvent()
+        } else {
+          notices = [...this.props.noticesWithDim];
+          notices[this.props.index].isPinned = notice.notice.isPinned;
+          this.props.pinNotice(notices);
+        }
+      });
     }
+    this.props.updateSorted()
   }
 
   pinStyle() {

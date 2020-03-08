@@ -8,7 +8,9 @@ import NoticePreviewUser from "./NoticePreviewUser";
 
 const mapStateToProps = state => ({
   currentUser: state.common.currentUser,
-  notices: state.notices.notices
+  notices: state.notices.notices,
+  sorted: state.notices.sorted,
+  noticesWithDim: state.notices.noticesWithDim
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -21,7 +23,7 @@ class NoticePreview extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { randomTop: 0, randomLeft: 0, loadDim: true };
+    this.state = { randomTop: 0, randomLeft: 0};
 
     this.addDimensions = this.addDimensions.bind(this);
   }
@@ -29,12 +31,17 @@ class NoticePreview extends React.Component {
   addDimensions(width, height, index) {
     if (this.props.page === "pinned") {
       return null;
+    } else if (this.props.noticesWithDim.length === this.props.notices.length) {
+      if (this.props.noticesWithDim[index].height === height) {
+        return null;
+      }
     } else {
       var newNotice = this.props.notices[index];
       newNotice.width = width;
       newNotice.height = height;
-      this.props.loadDivDim(newNotice);
-      this.setState({ loadDim: false });
+      if (!this.props.sorted) {
+        this.props.loadDivDim(newNotice);
+      }
     }
   }
 
@@ -78,7 +85,7 @@ class NoticePreview extends React.Component {
               ...transitionStyles[state]
             }}
             ref={el => {
-              if (el && !notice.width && this.state.loadDim) {
+              if (el && !notice.width && !this.state.sorted) {
                 this.addDimensions(
                   el.offsetWidth,
                   el.offsetHeight,
