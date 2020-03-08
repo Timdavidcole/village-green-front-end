@@ -21,7 +21,7 @@ const sortByColumn = function(notices, columnHeight) {
     var sumHeight = sumHeights(newNotices[columnIndex]);
     var columnRemainder = columnHeight - sumHeight;
     if (
-      (columnRemainder >= (notice.height + 20) && !usedIndexes.includes(index)) ||
+      (columnRemainder > (notice.height + 20) && !usedIndexes.includes(index)) ||
       (columnHeight < (notice.height + 20) && !usedIndexes.includes(index))
     ) {
       newNotices[columnIndex].push(notice);
@@ -51,6 +51,7 @@ const sortByColumn = function(notices, columnHeight) {
     }
   });
   newNotices[0].splice(0, 1);
+  console.log(newNotices)
   return newNotices.flat();
 };
 

@@ -27,8 +27,7 @@ class NoticesPinned extends React.Component {
     return (
       <div
         style={{
-          backgroundImage: `url(require("./cork.jpg"))`,
-          height: "calc(100vh - 114px)",
+          height: "calc(100vh - 250px)",
           width: "auto",
           margin: "0",
           padding: "0",

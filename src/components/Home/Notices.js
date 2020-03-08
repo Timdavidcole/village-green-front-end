@@ -64,6 +64,7 @@ class Notices extends React.Component {
   }
 
   render() {
+    console.log(this.props.noticesWithDim)
     if (!this.props.notices) {
       return (
         <div className="parent">
