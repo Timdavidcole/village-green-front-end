@@ -39,7 +39,6 @@ class Notices extends React.Component {
     window.addEventListener("resize", () => {
       clearTimeout(doit);
       doit = setTimeout(() => {
-        console.log("RESIZE");
         this.setState({ resize: !this.state.resize });
       }, 400);
     });
@@ -58,23 +57,19 @@ class Notices extends React.Component {
       return true;
     }
     if (nextProps.sorted) {
-      console.log(this.props.noticesWithDim)
       return true;
     }
-    if (nextProps.updatedUnsorted && nextProps.noticesWithDim.length === this.props.notices.length) {
-      console.log(this.props.noticesWithDim)
+    if (nextProps.updatedUnsorted && this.props.noticesWithDim.length === this.props.notices.length) {
       return true;
     }
     return false;
   }
 
   componentDidUpdate() {
-    console.log(this.props.noticesWithDim)
     if (
       (!this.props.sorted &&
         this.props.noticesWithDim.length === this.props.notices.length)
     ) {
-      console.log("COMPONENT UPDATING");
       this.props.updateSortedNotices(
         sortByColumn(
           sortByHeight(this.props.noticesWithDim),

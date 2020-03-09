@@ -7,14 +7,13 @@ export default (
     noticesCount: null,
     sorted: false,
     updatedUnsorted: false,
-    noticesWithDimsIDs: [],
+    noticesWithDimsIDs: []
   },
   action
 ) => {
   // eslint-disable-next-line default-case
   switch (action.type) {
     case "HOME_PAGE_LOADED":
-      console.log("HOME_PAGE_LOADED")
       return {
         ...state,
         notices: action.payload.notices,
@@ -52,15 +51,20 @@ export default (
         pinnedEvent: false
       };
     case "LOAD_DIV_DIMENSIONS":
+      console.log(state.noticesWithDimsIDs.includes(action.payload.newNoticeId))
       console.log(action.payload.newNotice.title)
-      return {
-        ...state,
-        noticesWithDim: [...state.noticesWithDim, action.payload.newNotice],
-        noticesWithDimsIDs: [...state.noticesWithDimsIDs, action.payload.newNoticeId]
-      };
+      if (!state.noticesWithDimsIDs.includes(action.payload.newNoticeId)) {
+        return {
+          ...state,
+          noticesWithDim: [...state.noticesWithDim, action.payload.newNotice],
+          noticesWithDimsIDs: [
+            ...state.noticesWithDimsIDs,
+            action.payload.newNoticeId
+          ]
+        };
+      } else return { ...state };
 
     case "ADD_NOTICES_WINDOW_HEIGHT":
-      console.log("ADD_NOTICES_WINDOW_HEIGHT")
       return {
         ...state,
         noticesWindowHeight: action.payload,
@@ -68,8 +72,6 @@ export default (
         pinnedEvent: false
       };
     case "UPDATE_SORTED_NOTICES":
-      console.log("UPDATE_SORTED_NOTICES")
-      console.log(action.payload)
       return {
         ...state,
         noticesWithDim: action.payload,
@@ -78,8 +80,6 @@ export default (
         updatedUnsorted: false
       };
     case "UPDATE_UNSORTED_NOTICES":
-      console.log("UPDATE_UNSORTED_NOTICES")
-      console.log(action.payload.notices)
       return {
         ...state,
         notices: action.payload.notices,
@@ -88,7 +88,8 @@ export default (
         noticesWithDimsIDs: [],
         sorted: false,
         pinnedEvent: false,
-        updatedUnsorted: true
+        updatedUnsorted: true,
+        noticesVisible: true
       };
     case "LOG_OUT_NOTICES":
       return {

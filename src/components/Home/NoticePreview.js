@@ -11,7 +11,7 @@ const mapStateToProps = state => ({
   notices: state.notices.notices,
   sorted: state.notices.sorted,
   noticesWithDim: state.notices.noticesWithDim,
-  noticesWithDimsIDs: state.notices.noticesWithDimsIDs,
+  noticesWithDimsIDs: state.notices.noticesWithDimsIDs
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -24,24 +24,32 @@ class NoticePreview extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { randomTop: 0, randomLeft: 0};
+    this.state = { randomTop: 0, randomLeft: 0 };
 
     this.addDimensions = this.addDimensions.bind(this);
   }
 
-  addDimensions(width, height, index) {
+  addDimensions(width, height) {
     if (this.props.page === "pinned") {
       return null;
     } else if (this.props.noticesWithDim.length === this.props.notices.length) {
-      if (this.props.noticesWithDim[index].height === height) {
+      if (this.props.noticesWithDim[this.props.indexTrue].height === height) {
         return null;
       }
     } else {
-      var newNotice = this.props.notices[index];
+      var newNotice
+      if (this.props.sorted) {
+        newNotice = this.props.noticesWithDim[this.props.indexTrue];
+      } else {
+        newNotice = this.props.notices[this.props.indexTrue];
+      }
       newNotice.width = width;
       newNotice.height = height;
       if (!this.props.noticesWithDimsIDs.includes(this.props.notice.id)) {
-        this.props.loadDivDim({newNotice: newNotice, newNoticeId: newNotice.id});
+        this.props.loadDivDim({
+          newNotice: newNotice,
+          newNoticeId: newNotice.id
+        });
       }
     }
   }
@@ -89,8 +97,7 @@ class NoticePreview extends React.Component {
               if (el && !notice.width && !this.state.sorted) {
                 this.addDimensions(
                   el.offsetWidth,
-                  el.offsetHeight,
-                  this.props.indexTrue
+                  el.offsetHeight
                 );
               }
             }}

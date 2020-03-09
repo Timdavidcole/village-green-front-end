@@ -28,15 +28,20 @@ class NoticePreviewImage extends React.Component {
     this.addDimensions = this.addDimensions.bind(this);
   }
 
-  addDimensions(width, height, index) {
+  addDimensions(width, height) {
     if (this.props.page === "pinned") {
       return null;
     } else if (this.props.noticesWithDim.length === this.props.notices.length) {
-      if (this.props.noticesWithDim[index].height === height) {
+      if (this.props.noticesWithDim[this.props.indexTrue].height === height) {
         return null;
       }
     } else {
-      var newNotice = this.props.notices[index];
+      var newNotice
+      if (this.props.sorted) {
+        newNotice = this.props.noticesWithDim[this.props.indexTrue];
+      } else {
+        newNotice = this.props.notices[this.props.indexTrue];
+      }
       newNotice.width = width;
       newNotice.height = height;
       if (
@@ -57,7 +62,12 @@ class NoticePreviewImage extends React.Component {
       this.props.updatedUnsorted &&
       !this.props.noticesWithDimsIDs.includes(this.props.notice.id)
     ) {
-      newNotice = this.props.notices[this.props.index];
+      if (this.props.sorted) {
+        newNotice = this.props.noticesWithDim[this.props.indexTrue];
+      } else {
+        newNotice = this.props.notices[this.props.indexTrue];
+      }      console.log(this.props.notice);
+      console.log(newNotice);
       newNotice.width = this.divElement.clientWidth;
       newNotice.height = this.divElement.clientHeight;
       if (newNotice.height > 100 && !this.props.sorted) {
@@ -135,8 +145,7 @@ class NoticePreviewImage extends React.Component {
                   onLoad={ev => {
                     this.addDimensions(
                       ev.target.offsetWidth,
-                      ev.target.offsetHeight,
-                      this.props.indexTrue
+                      ev.target.offsetHeight
                     );
                   }}
                 />
