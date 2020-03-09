@@ -5,7 +5,9 @@ This is my first full-stack completely self-made personal project, from concept 
 
 For the time being the best way to check out my work so far is use my Heroku deployment
 
-# https://village-green.herokuapp.com/
+# https://village-green.herokuapp.com/ (not always working!)
+
+# Backend API can be found here https://github.com/Timdavidcole/village-green-backend-api
 
 ## Key Features
 
