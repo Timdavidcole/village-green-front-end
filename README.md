@@ -1,5 +1,7 @@
-# Notice
+# Village Green
   ## The Noticeboard for anyone, anywhere and anything.
+  
+  [Screenshot 2020-03-09 at 14 42 38](https://user-images.githubusercontent.com/45185594/76225341-45509b80-6214-11ea-964c-74ad1fa4fac0.png)
 
 This is my first full-stack completely self-made personal project, from concept to copy.  I came up with the idea while staying with a friend in the countryside staring out the window (as you do!) at the village community/parish noticeboard and wondering why on earth that doesn't exist on the internet.  And why can't we do it better.  We are so focused on globalisation and connecting people far away from each other, we neglect connecting people and services near to each other.  So my plan is to rectify this.
 
