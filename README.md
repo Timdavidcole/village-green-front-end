@@ -1,7 +1,7 @@
 # Village Green
   ## The Noticeboard for anyone, anywhere and anything.
   
-  (https://user-images.githubusercontent.com/45185594/76225341-45509b80-6214-11ea-964c-74ad1fa4fac0.png)
+  https://user-images.githubusercontent.com/45185594/76225341-45509b80-6214-11ea-964c-74ad1fa4fac0.png
   
   [alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
 
