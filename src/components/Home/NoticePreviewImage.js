@@ -36,7 +36,7 @@ class NoticePreviewImage extends React.Component {
         return null;
       }
     } else {
-      var newNotice
+      var newNotice;
       if (this.props.sorted) {
         newNotice = this.props.noticesWithDim[this.props.indexTrue];
       } else {
@@ -66,8 +66,7 @@ class NoticePreviewImage extends React.Component {
         newNotice = this.props.noticesWithDim[this.props.indexTrue];
       } else {
         newNotice = this.props.notices[this.props.indexTrue];
-      }      console.log(this.props.notice);
-      console.log(newNotice);
+      }
       newNotice.width = this.divElement.clientWidth;
       newNotice.height = this.divElement.clientHeight;
       if (newNotice.height > 100 && !this.props.sorted) {

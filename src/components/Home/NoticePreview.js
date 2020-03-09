@@ -37,7 +37,7 @@ class NoticePreview extends React.Component {
         return null;
       }
     } else {
-      var newNotice
+      var newNotice;
       if (this.props.sorted) {
         newNotice = this.props.noticesWithDim[this.props.indexTrue];
       } else {
@@ -95,10 +95,7 @@ class NoticePreview extends React.Component {
             }}
             ref={el => {
               if (el && !notice.width && !this.state.sorted) {
-                this.addDimensions(
-                  el.offsetWidth,
-                  el.offsetHeight
-                );
+                this.addDimensions(el.offsetWidth, el.offsetHeight);
               }
             }}
           >

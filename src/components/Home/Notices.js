@@ -59,7 +59,10 @@ class Notices extends React.Component {
     if (nextProps.sorted) {
       return true;
     }
-    if (nextProps.updatedUnsorted && this.props.noticesWithDim.length === this.props.notices.length) {
+    if (
+      nextProps.updatedUnsorted &&
+      this.props.noticesWithDim.length === this.props.notices.length
+    ) {
       return true;
     }
     return false;
@@ -67,8 +70,9 @@ class Notices extends React.Component {
 
   componentDidUpdate() {
     if (
-      (!this.props.sorted &&
-        this.props.noticesWithDim.length === this.props.notices.length)
+      !this.props.sorted &&
+      this.props.noticesWithDim.length === this.props.notices.length &&
+      this.props.notices.length != 0
     ) {
       this.props.updateSortedNotices(
         sortByColumn(
