@@ -89,7 +89,7 @@ class NoticePreviewImage extends React.Component {
 
     const defaultStyle = {
       borderRadius: "6px",
-      margin: "10px",
+      margin: "auto",
       backgroundColor: "transparent",
       position: "relative",
       transition: `opacity 0.2s linear`,
