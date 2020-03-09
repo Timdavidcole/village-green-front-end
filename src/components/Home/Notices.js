@@ -14,15 +14,15 @@ const mapStateToProps = state => ({
   noticesWithDim: state.notices.noticesWithDim,
   noticesVisible: state.notices.noticesVisible,
   sorted: state.notices.sorted,
-  loggedIn: state.auth.loggedIn
+  loggedIn: state.auth.loggedIn,
+  updatedUnsorted: state.notices.updatedUnsorted
 });
 
 const mapDispatchToProps = dispatch => ({
   addNoticesWindowHeight: payload =>
     dispatch({ type: "ADD_NOTICES_WINDOW_HEIGHT", payload }),
   updateSortedNotices: payload =>
-    dispatch({ type: "UPDATE_SORTED_NOTICES", payload }),
-  updateSorted: () => dispatch({ type: "UPDATE_SORTED" })
+    dispatch({ type: "UPDATE_SORTED_NOTICES", payload })
 });
 
 class Notices extends React.Component {
@@ -33,10 +33,15 @@ class Notices extends React.Component {
       resize: false
     };
   }
+
   componentDidMount() {
+    var doit;
     window.addEventListener("resize", () => {
-      this.setState({ resize: !this.state.resize });
-      this.props.updateSorted();
+      clearTimeout(doit);
+      doit = setTimeout(() => {
+        console.log("RESIZE");
+        this.setState({ resize: !this.state.resize });
+      }, 400);
     });
   }
 
@@ -48,13 +53,28 @@ class Notices extends React.Component {
     return this.props.sorted ? this.props.noticesWithDim : this.props.notices;
   }
 
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.noticesWithDim.length === this.props.notices.length) {
+      return true;
+    }
+    if (nextProps.sorted) {
+      console.log(this.props.noticesWithDim)
+      return true;
+    }
+    if (nextProps.updatedUnsorted && nextProps.noticesWithDim.length === this.props.notices.length) {
+      console.log(this.props.noticesWithDim)
+      return true;
+    }
+    return false;
+  }
+
   componentDidUpdate() {
+    console.log(this.props.noticesWithDim)
     if (
-      (this.props.noticesWindowHeight &&
-        !this.props.sorted &&
-        this.props.noticesCount === this.props.noticesWithDim.length) ||
-      (this.state.resize && !this.props.sorted)
+      (!this.props.sorted &&
+        this.props.noticesWithDim.length === this.props.notices.length)
     ) {
+      console.log("COMPONENT UPDATING");
       this.props.updateSortedNotices(
         sortByColumn(
           sortByHeight(this.props.noticesWithDim),
@@ -66,7 +86,6 @@ class Notices extends React.Component {
   }
 
   render() {
-
     if (!this.props.notices) {
       return (
         <div className="parent">

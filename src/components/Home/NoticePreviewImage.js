@@ -10,7 +10,9 @@ const mapStateToProps = state => ({
   currentUser: state.common.currentUser,
   notices: state.notices.notices,
   sorted: state.notices.sorted,
-  noticesWithDim: state.notices.noticesWithDim
+  noticesWithDim: state.notices.noticesWithDim,
+  noticesWithDimsIDs: state.notices.noticesWithDimsIDs,
+  updatedUnsorted: state.notices.updatedUnsorted
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -37,8 +39,32 @@ class NoticePreviewImage extends React.Component {
       var newNotice = this.props.notices[index];
       newNotice.width = width;
       newNotice.height = height;
+      if (
+        newNotice.height > 100 &&
+        !this.props.noticesWithDimsIDs.includes(this.props.notice.id)
+      ) {
+        this.props.loadDivDim({
+          newNotice: newNotice,
+          newNoticeId: newNotice.id
+        });
+      }
+    }
+  }
+
+  componentDidUpdate() {
+    var newNotice;
+    if (
+      this.props.updatedUnsorted &&
+      !this.props.noticesWithDimsIDs.includes(this.props.notice.id)
+    ) {
+      newNotice = this.props.notices[this.props.index];
+      newNotice.width = this.divElement.clientWidth;
+      newNotice.height = this.divElement.clientHeight;
       if (newNotice.height > 100 && !this.props.sorted) {
-        this.props.loadDivDim(newNotice);
+        this.props.loadDivDim({
+          newNotice: newNotice,
+          newNoticeId: newNotice.id
+        });
       }
     }
   }
@@ -81,14 +107,8 @@ class NoticePreviewImage extends React.Component {
               ...defaultStyle,
               ...transitionStyles[state]
             }}
-            ref={el => {
-              if ((el && !notice.width) || (el && notice.height < 100)) {
-                this.addDimensions(
-                  el.offsetWidth,
-                  el.offsetHeight,
-                  this.props.indexTrue
-                );
-              }
+            ref={divElement => {
+              this.divElement = divElement;
             }}
           >
             <div
@@ -112,6 +132,13 @@ class NoticePreviewImage extends React.Component {
                   alt=""
                   src={notice.image}
                   style={{ visibility: "hidden", maxWidth: "250px" }}
+                  onLoad={ev => {
+                    this.addDimensions(
+                      ev.target.offsetWidth,
+                      ev.target.offsetHeight,
+                      this.props.indexTrue
+                    );
+                  }}
                 />
               </div>
               <div

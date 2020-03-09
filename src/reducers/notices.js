@@ -4,14 +4,17 @@ export default (
     noticesWithDim: [],
     noticesVisible: true,
     pinnedEvent: false,
-    noticesCount: 0,
-    sorted: false
+    noticesCount: null,
+    sorted: false,
+    updatedUnsorted: false,
+    noticesWithDimsIDs: [],
   },
   action
 ) => {
   // eslint-disable-next-line default-case
   switch (action.type) {
     case "HOME_PAGE_LOADED":
+      console.log("HOME_PAGE_LOADED")
       return {
         ...state,
         notices: action.payload.notices,
@@ -49,36 +52,49 @@ export default (
         pinnedEvent: false
       };
     case "LOAD_DIV_DIMENSIONS":
+      console.log(action.payload.newNotice.title)
       return {
         ...state,
-        noticesWithDim: [...state.noticesWithDim, action.payload]
+        noticesWithDim: [...state.noticesWithDim, action.payload.newNotice],
+        noticesWithDimsIDs: [...state.noticesWithDimsIDs, action.payload.newNoticeId]
       };
 
     case "ADD_NOTICES_WINDOW_HEIGHT":
+      console.log("ADD_NOTICES_WINDOW_HEIGHT")
       return {
         ...state,
-        noticesWindowHeight: action.payload
+        noticesWindowHeight: action.payload,
+        sorted: false,
+        pinnedEvent: false
       };
     case "UPDATE_SORTED_NOTICES":
+      console.log("UPDATE_SORTED_NOTICES")
+      console.log(action.payload)
       return {
         ...state,
         noticesWithDim: action.payload,
         sorted: true,
-        noticesVisible: true
+        noticesVisible: true,
+        updatedUnsorted: false
       };
     case "UPDATE_UNSORTED_NOTICES":
+      console.log("UPDATE_UNSORTED_NOTICES")
+      console.log(action.payload.notices)
       return {
         ...state,
         notices: action.payload.notices,
         noticesCount: action.payload.noticesCount,
         noticesWithDim: [],
+        noticesWithDimsIDs: [],
         sorted: false,
-        pinnedEvent: false
+        pinnedEvent: false,
+        updatedUnsorted: true
       };
     case "LOG_OUT_NOTICES":
       return {
         notices: [],
         noticesWithDim: [],
+        noticesWithDimsIDs: [],
         noticesVisible: true,
         pinnedEvent: false,
         noticesCount: 0,

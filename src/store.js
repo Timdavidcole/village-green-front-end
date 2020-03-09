@@ -23,7 +23,7 @@ const reducer = combineReducers({
   pinned
 });
 
-const middleware = applyMiddleware(promiseMiddleware, localStorageMiddleware, createLogger);
+const middleware = applyMiddleware(promiseMiddleware, localStorageMiddleware);
 
 const store = createStore(reducer, middleware);
 

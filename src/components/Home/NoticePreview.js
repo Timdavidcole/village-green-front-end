@@ -10,7 +10,8 @@ const mapStateToProps = state => ({
   currentUser: state.common.currentUser,
   notices: state.notices.notices,
   sorted: state.notices.sorted,
-  noticesWithDim: state.notices.noticesWithDim
+  noticesWithDim: state.notices.noticesWithDim,
+  noticesWithDimsIDs: state.notices.noticesWithDimsIDs,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -39,8 +40,8 @@ class NoticePreview extends React.Component {
       var newNotice = this.props.notices[index];
       newNotice.width = width;
       newNotice.height = height;
-      if (!this.props.sorted) {
-        this.props.loadDivDim(newNotice);
+      if (!this.props.noticesWithDimsIDs.includes(this.props.notice.id)) {
+        this.props.loadDivDim({newNotice: newNotice, newNoticeId: newNotice.id});
       }
     }
   }

@@ -14,7 +14,8 @@ const mapDispatchToProps = dispatch => ({
   pinNotice: payload => dispatch({ type: "PIN_NOTICE", payload }),
   onLoad: payload => dispatch({ type: "HOME_PAGE_LOADED", payload }),
   updatePinned: payload => dispatch({ type: "REMOVE_PINNED", payload }),
-  addPinnedEvent: () => dispatch({ type: "ADD_PINNED_EVENT" })
+  addPinnedEvent: () => dispatch({ type: "ADD_PINNED_EVENT" }),
+  updateSorted: () => dispatch({ type: "UPDATE_SORTED" })
 });
 
 class NoticeButtons extends React.Component {

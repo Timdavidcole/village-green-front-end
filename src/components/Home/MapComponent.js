@@ -17,7 +17,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   changeMapCenter: payload => dispatch({ type: "CHANGE_CENTER", payload }),
   noticesVisible: payload => dispatch({ type: "NOTICES_VISIBLE", payload }),
-  updateSorted: payload =>
+  updateUnsortedNotices: payload =>
     dispatch({ type: "UPDATE_UNSORTED_NOTICES", payload })
 });
 
@@ -76,9 +76,6 @@ class MapComponent extends React.Component {
       coordinates: { lat: lat, lng: lng },
       location: loc
     });
-    this.props.updateSorted(
-      agent.Notices.all(JSON.stringify({ lat: lat, lng: lng }))
-    );
   }
 
   markerIcon() {
@@ -103,7 +100,7 @@ class MapComponent extends React.Component {
       <GoogleMap
         onDragStart={() => this.props.noticesVisible()}
         onDragEnd={() =>
-          this.props.updateSorted(
+          this.props.updateUnsortedNotices(
             agent.Notices.all(JSON.stringify(this.state.map.getCenter()))
           )
         }

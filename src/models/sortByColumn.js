@@ -1,61 +1,68 @@
 const sortByColumn = function(notices, columnHeight, loggedIn) {
   var newNotices;
-  console.log("SORT BY COLUMN");
 
   loggedIn ? (newNotices = [[{ height: 229 }]]) : (newNotices = [[]]);
-  var columnIndex = 0;
-  var oldNotices = [...notices];
-  var usedIndexes = [];
 
-  function sumHeights(notices) {
+  var usedIndexes = [];
+  const margin = 20;
+  var columnWithRoom = 0;
+
+  function sumHeights(noticesToSum) {
     var sum = 0;
-    notices.forEach(notice => {
+    noticesToSum.forEach(notice => {
       if (notice.height) {
-        sum += notice.height + 20;
+        sum += notice.height + margin;
       }
     });
     return sum;
   }
-  oldNotices.forEach((notice, index) => {
-    if (!newNotices[columnIndex]) {
-      newNotices.push([]);
-    }
-    var sumHeight = sumHeights(newNotices[columnIndex]);
-    var columnRemainder = columnHeight - sumHeight;
-    if (
-      (columnRemainder > notice.height + 20 && !usedIndexes.includes(index)) ||
-      (columnHeight < notice.height + 20 && !usedIndexes.includes(index))
-    ) {
-      newNotices[columnIndex].push(notice);
 
-      usedIndexes.push(index);
+  function findColumnWithSpace(notice1, column, index1) {
+    var nextColumn;
+    if (usedIndexes.includes(index1)) {
+      return true;
+    }
+
+    if (columnRemainder(column) - (notice1.height + margin) > 0) {
+      newNotices[column].push(notice1);
+      usedIndexes.push(index1);
+    } else if (!findNoticeThatFits(column)) {
+      newNotices.push([notice1]);
+      usedIndexes.push(index1);
+      nextColumn = column + 1;
+      columnWithRoom++;
     } else {
-      newNotices.push([notice]);
-      usedIndexes.push(index);
-      oldNotices.some((noticeNew, indexNew) => {
-        if (
-          (columnRemainder >= noticeNew.height + 20 &&
-            !usedIndexes.includes(index)) ||
-          columnHeight < noticeNew.height + 20
-        ) {
-          newNotices[columnIndex].push(noticeNew);
-          usedIndexes.push(indexNew);
-          return true;
-        }
-        return false;
-      });
+      nextColumn = column + 1;
+      findColumnWithSpace(notice1, nextColumn);
     }
-    sumHeight = sumHeights(newNotices[columnIndex]);
+  }
 
-    columnRemainder = columnHeight - sumHeight;
-    if (columnRemainder < oldNotices[oldNotices.length - 1].height + 20) {
-      columnIndex++;
-    }
+  function findNoticeThatFits(column) {
+    notices.some((notice2, index2) => {
+      if (
+        columnRemainder(column) - (notice2.height + margin) > 0 &&
+        !usedIndexes.includes(index2)
+      ) {
+        newNotices[column].push(notice2);
+        usedIndexes.push(index2);
+        return true;
+      }
+      return false;
+    });
+  }
+
+  function columnRemainder(column) {
+    return columnHeight - sumHeights(newNotices[column]);
+  }
+
+  notices.forEach((notice, index) => {
+    findColumnWithSpace(notice, columnWithRoom, index);
   });
+
   if (loggedIn) {
     newNotices[0].splice(0, 1);
   }
-  console.log(newNotices.flat());
+  console.log(newNotices)
   return newNotices.flat();
 };
 
