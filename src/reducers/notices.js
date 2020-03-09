@@ -51,6 +51,7 @@ export default (
         pinnedEvent: false
       };
     case "LOAD_DIV_DIMENSIONS":
+      console.log(state.noticesWithDimsIDs.includes(action.payload.newNoticeId))
       if (!state.noticesWithDimsIDs.includes(action.payload.newNoticeId)) {
         return {
           ...state,
