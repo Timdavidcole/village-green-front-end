@@ -3,14 +3,27 @@ import React from "react";
 import agent from "../../agent";
 import { connect } from "react-redux";
 
+const mapStateToProps = state => ({
+  showNewNoticeWindow: state.notice.showNewNoticeWindow,
+  centerMap: state.map.centerMap
+});
+
 const mapDispatchToProps = dispatch => ({
-  onClickDelete: payload => dispatch({ type: "DELETE_NOTICE", payload })
+  onClickDelete: () => dispatch({ type: "DELETE_NOTICE" }),
+  updateUnsortedNotices: payload =>
+    dispatch({ type: "UPDATE_UNSORTED_NOTICES", payload })
 });
 
 const NoticeActions = props => {
   const notice = props.notice;
   const del = () => {
-    props.onClickDelete(agent.Notices.del(notice.slug));
+    agent.Notices.del(notice.slug)
+      .then(() => {
+        props.updateUnsortedNotices(
+          agent.Notices.all(JSON.stringify(props.centerMap))
+        );
+      })
+      .then(() => props.onClickDelete());
   };
   if (props.canModify) {
     return (
@@ -32,7 +45,4 @@ const NoticeActions = props => {
   return <span></span>;
 };
 
-export default connect(
-  () => ({}),
-  mapDispatchToProps
-)(NoticeActions);
+export default connect(mapStateToProps, mapDispatchToProps)(NoticeActions);

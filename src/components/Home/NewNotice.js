@@ -6,11 +6,14 @@ import "../../styles/newNotice.css";
 import ExitButton from "./ExitButton";
 
 const mapStateToProps = state => ({
-  showNewNoticeWindow: state.notice.showNewNoticeWindow
+  showNewNoticeWindow: state.notice.showNewNoticeWindow,
+  centerMap: state.map.centerMap
 });
 
 const mapDispatchToProps = dispatch => ({
   onSubmit: payload => dispatch({ type: "NEW_NOTICE", payload }),
+  updateUnsortedNotices: payload =>
+    dispatch({ type: "UPDATE_UNSORTED_NOTICES", payload }),
   hideNewNoticeWindow: () => dispatch({ type: "HIDE_NEW_NOTICE" })
 });
 
@@ -37,19 +40,25 @@ class NewNotice extends React.Component {
     };
     this.createNotice = ev => {
       ev.preventDefault();
-      const payload = agent.Notices.create({
+      agent.Notices.create({
         title: this.state.title,
         description: this.state.description,
         body: this.state.body,
         image: this.state.image
-      });
-      this.setState({
-        title: "",
-        description: "",
-        body: "",
-        image: ""
-      });
-      this.props.onSubmit(payload);
+      })
+        .then(() => {
+          this.props.updateUnsortedNotices(
+            agent.Notices.all(JSON.stringify(this.props.centerMap))
+          );
+        })
+        .then(() => {
+          this.setState({
+            title: "",
+            description: "",
+            body: "",
+            image: ""
+          });
+        });
     };
   }
 
@@ -102,7 +111,6 @@ class NewNotice extends React.Component {
       zIndex: "5100",
       display: "inline-block",
       left: "0px"
-
     };
 
     return (

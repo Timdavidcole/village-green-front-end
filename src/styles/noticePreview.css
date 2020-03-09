@@ -138,6 +138,7 @@
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 19879812749847981274 !important;
     transform: rotateY(180deg);
     box-shadow: 18px 29px 26px +12px rgba(128, 128, 128, 0.53);
 }

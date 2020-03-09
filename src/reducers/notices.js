@@ -45,11 +45,6 @@ export default (
         ...state,
         pinnedEvent: true
       };
-    case "REMOVE_PINNED_EVENT":
-      return {
-        ...state,
-        pinnedEvent: false
-      };
     case "LOAD_DIV_DIMENSIONS":
       if (!state.noticesWithDimsIDs.includes(action.payload.newNoticeId)) {
         return {

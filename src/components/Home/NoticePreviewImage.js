@@ -57,6 +57,7 @@ class NoticePreviewImage extends React.Component {
   }
 
   componentDidUpdate() {
+
     var newNotice;
     if (
       this.props.updatedUnsorted &&
@@ -88,7 +89,7 @@ class NoticePreviewImage extends React.Component {
 
     const defaultStyle = {
       borderRadius: "6px",
-      margin: "10px",
+      margin: "auto",
       backgroundColor: "transparent",
       position: "relative",
       transition: `opacity 0.2s linear`,
@@ -97,7 +98,7 @@ class NoticePreviewImage extends React.Component {
       pointerEvents: "auto",
       display: "inline-block",
       width: "250px",
-      height: "auto",
+      height: `${notice.height || "auto"}`,
       verticalAlign: "top"
     };
 
@@ -176,12 +177,12 @@ class NoticePreviewImage extends React.Component {
                     <span
                       style={{
                         display: "inline-block",
-                        height: "110px",
-                        fontSize: "1.3vh",
-                        overflowY: "auto",
                         width: "100%",
                         textAlign: "center",
-                        marginBottom: "10px"
+                        marginBottom: "40px",
+                        maxHeight: "121px",
+                        overflowY: "auto",
+                        overflowX: "auto"
                       }}
                     >
                       {notice.body}

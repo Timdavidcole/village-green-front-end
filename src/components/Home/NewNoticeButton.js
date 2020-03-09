@@ -89,7 +89,7 @@ class NewNoticeButton extends React.Component {
     const defaultBoxStyle = {
       boxShadow: "5px 10px 20px 3px rgba(176,176,176,0.79)",
       borderRadius: "6px",
-      margin: "10px",
+      margin: "auto",
       padding: "10px",
       backgroundColor: "white",
       position: "relative",
