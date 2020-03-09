@@ -29,12 +29,9 @@ class NoticePreviewImage extends React.Component {
   }
 
   addDimensions(width, height) {
-    console.log(this.props.notice.title)
-    console.log("ADD DIMENSIONS FUNCTION")
     if (this.props.page === "pinned") {
       return null;
     } else if (this.props.noticesWithDim.length === this.props.notices.length) {
-      console.log("HEIGHTS ARE THE SAME")
       if (this.props.noticesWithDim[this.props.indexTrue].height === height) {
         return null;
       }
@@ -45,15 +42,12 @@ class NoticePreviewImage extends React.Component {
       } else {
         newNotice = this.props.notices[this.props.indexTrue];
       }
-      console.log("UPDATE DIMS INITIAL")
       newNotice.width = width;
       newNotice.height = height;
       if (
         newNotice.height > 100 &&
         !this.props.noticesWithDimsIDs.includes(this.props.notice.id)
       ) {
-        console.log("LOAD DIMS INITIAL")
-        console.log(newNotice)
         this.props.loadDivDim({
           newNotice: newNotice,
           newNoticeId: newNotice.id
@@ -63,8 +57,6 @@ class NoticePreviewImage extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log(this.props.notice.title)
-    console.log("COMPONENT DID UPDATE")
 
     var newNotice;
     if (
@@ -76,11 +68,9 @@ class NoticePreviewImage extends React.Component {
       } else {
         newNotice = this.props.notices[this.props.indexTrue];
       }
-      console.log("UPDATE DIMS")
       newNotice.width = this.divElement.clientWidth;
       newNotice.height = this.divElement.clientHeight;
       if (newNotice.height > 100 && !this.props.sorted) {
-        console.log("LOAD DIMS")
         this.props.loadDivDim({
           newNotice: newNotice,
           newNoticeId: newNotice.id

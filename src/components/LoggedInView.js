@@ -13,7 +13,6 @@ const mapDispatchToProps = dispatch => ({
   pinNotice: payload => dispatch({ type: "PIN_NOTICE", payload }),
   onLoad: payload => dispatch({ type: "HOME_PAGE_LOADED", payload }),
   updatePinned: payload => dispatch({ type: "REMOVE_PINNED", payload }),
-  removePinnedEvent: () => dispatch({ type: "REMOVE_PINNED_EVENT" }),
   onClick: () => dispatch({ type: "DISPLAY_NEW_NOTICE" })
 });
 
@@ -23,7 +22,7 @@ class LoggedInView extends React.Component {
     const duration = {
       appear: 400,
       enter: 400,
-      exit: 0
+      exit: 400
     };
 
     const defaultStyle = {
