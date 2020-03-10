@@ -54,7 +54,7 @@ class NoticePreview extends React.Component {
             id={`noticeCard${this.props.index}`}
             className={`noticeCard`}
             style={{
-              order: this.props.order,
+              order: notice.order,
               ...transitionStyles[state]
             }}
             onLoad={ev => {
@@ -97,7 +97,7 @@ class NoticePreview extends React.Component {
                       marginBottom: "40px",
                       maxHeight: "121px",
                       overflowY: "auto",
-                      overflowX: "scroll"
+                      overflowX: "hidden"
                     }}
                   >
                     {notice.body}

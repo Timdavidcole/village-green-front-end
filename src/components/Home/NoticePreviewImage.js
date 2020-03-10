@@ -56,7 +56,7 @@ class NoticePreviewImage extends React.Component {
               padding: "0px",
               backgroundColor: "transparent",
               boxShadow: "none",
-              order: this.props.order,
+              order: notice.order,
               ...transitionStyles[state]
             }}
             onLoad={ev => {

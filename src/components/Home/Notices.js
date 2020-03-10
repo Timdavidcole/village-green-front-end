@@ -86,7 +86,6 @@ class Notices extends React.Component {
         </div>
       );
     }
-    var orderFlex = 1
     return (
       <div
         className="parent"
@@ -104,10 +103,8 @@ class Notices extends React.Component {
         ) : null}
         {this.props.notices.map((notice, i) => {
           if (!notice.image) {
-            orderFlex === 5 ? orderFlex = 1 : orderFlex ++
             return (
               <NoticePreview
-                order={orderFlex}
                 page={this.props.page}
                 noticesVisible={this.props.noticesVisible}
                 index={i + 2}
@@ -117,10 +114,8 @@ class Notices extends React.Component {
               />
             );
           } else {
-            orderFlex === 5 ? orderFlex = 1 : orderFlex ++
             return (
               <NoticePreviewImage
-                order={orderFlex}
                 page={this.props.page}
                 noticesVisible={this.props.noticesVisible}
                 index={i + 2}

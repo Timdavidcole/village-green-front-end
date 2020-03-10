@@ -22,7 +22,7 @@ class NewNoticeButton extends React.Component {
     this.toggleHoverIn = this.toggleHoverIn.bind(this);
     this.toggleHoverOut = this.toggleHoverOut.bind(this);
     this.toggleClick = this.toggleClick.bind(this);
-    this.openNewNotice = this.openNewNotice.bind(this)
+    this.openNewNotice = this.openNewNotice.bind(this);
   }
   toggleHoverIn() {
     this.setState({ hover: true });
@@ -41,8 +41,8 @@ class NewNoticeButton extends React.Component {
     }
   }
 
-  openNewNotice () {
-    this.props.onClick()
+  openNewNotice() {
+    this.props.onClick();
   }
 
   getRndInteger(min, max) {
@@ -87,7 +87,7 @@ class NewNoticeButton extends React.Component {
     };
 
     const defaultBoxStyle = {
-      margin: 'auto',
+      margin: "auto",
       boxShadow: "5px 10px 20px 3px rgba(176,176,176,0.79)",
       borderRadius: "6px",
       padding: "10px",
@@ -102,7 +102,7 @@ class NewNoticeButton extends React.Component {
       width: "250px",
       verticalAlign: "top",
       order: "1",
-      flexBasis: '1 1 20%'
+      flexBasis: "1 1 20%"
     };
 
     const defaultButtonStyle = {

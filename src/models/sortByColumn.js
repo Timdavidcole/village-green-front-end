@@ -6,8 +6,9 @@ const sortByColumn = function(notices, columnHeight, loggedIn) {
   loggedIn ? (newNotices = [[{ height: 229 }]]) : (newNotices = [[]]);
 
   var usedIndexes = [];
-  const margin = 20;
+  const margin = 10;
   var columnWithRoom = 0;
+  var order = 1
 
   function sumHeights(noticesToSum) {
     var sum = 0;
@@ -26,9 +27,11 @@ const sortByColumn = function(notices, columnHeight, loggedIn) {
     }
 
     if (columnRemainder(column) - (notice1.height + margin) > 0) {
+      notice1.order = column + 1
       newNotices[column].push(notice1);
       usedIndexes.push(index1);
     } else if (!findNoticeThatFits(column)) {
+      notice1.order = column + 2
       newNotices.push([notice1]);
       usedIndexes.push(index1);
       nextColumn = column + 1;
@@ -45,6 +48,7 @@ const sortByColumn = function(notices, columnHeight, loggedIn) {
         columnRemainder(column) - (notice2.height + margin) > 0 &&
         !usedIndexes.includes(index2)
       ) {
+        notice2.order = column + 1
         newNotices[column].push(notice2);
         usedIndexes.push(index2);
         return true;
