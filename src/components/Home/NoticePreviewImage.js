@@ -25,31 +25,52 @@ class NoticePreviewImage extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      top: 0,
+      left: 0
+    };
+
     this.addDimensions = this.addDimensions.bind(this);
   }
 
+  componentDidMount() {
+    this.setState({
+      top: Math.floor(Math.random() * 10),
+      left: Math.floor(Math.random() * 10)
+    });
+  }
+
   addDimensions(width, height) {
+    var newNotices = [...this.props.noticesWithDim];
     if (this.props.page === "pinned") {
       return null;
-    } else if (this.props.noticesWithDim.length === this.props.notices.length) {
-      if (this.props.noticesWithDim[this.props.indexTrue].height === height) {
+    } else if (
+      this.props.noticesWithDim[this.props.indexPage].length ===
+      this.props.notices[this.props.indexPage].length
+    ) {
+      if (
+        this.props.noticesWithDim[this.props.indexPage][this.props.indexTrue]
+          .height === height
+      ) {
         return null;
       }
     } else {
       var newNotice;
       if (this.props.sorted) {
-        newNotice = this.props.noticesWithDim[this.props.indexTrue];
+        newNotice = this.props.noticesWithDim[this.props.indexPage][
+          this.props.indexTrue
+        ];
       } else {
-        newNotice = this.props.notices[this.props.indexTrue];
+        newNotice = this.props.notices[this.props.indexPage][
+          this.props.indexTrue
+        ];
       }
-      newNotice.width = width;
-      newNotice.height = height;
-      if (
-        newNotice.height > 100 &&
-        !this.props.noticesWithDimsIDs.includes(this.props.notice.id)
-      ) {
+      if (!this.props.noticesWithDimsIDs.includes(this.props.notice.id)) {
+        newNotice.width = width;
+        newNotice.height = height;
+        newNotices[this.props.indexPage].push(newNotice);
         this.props.loadDivDim({
-          newNotice: newNotice,
+          newNotices: newNotices,
           newNoticeId: newNotice.id
         });
       }
@@ -57,16 +78,19 @@ class NoticePreviewImage extends React.Component {
   }
 
   componentDidUpdate() {
-
     var newNotice;
     if (
       this.props.updatedUnsorted &&
       !this.props.noticesWithDimsIDs.includes(this.props.notice.id)
     ) {
       if (this.props.sorted) {
-        newNotice = this.props.noticesWithDim[this.props.indexTrue];
+        newNotice = this.props.noticesWithDim[this.props.indexPage][
+          this.props.indexTrue
+        ];
       } else {
-        newNotice = this.props.notices[this.props.indexTrue];
+        newNotice = this.props.notices[this.props.indexPage][
+          this.props.indexTrue
+        ];
       }
       newNotice.width = this.divElement.clientWidth;
       newNotice.height = this.divElement.clientHeight;
@@ -113,97 +137,105 @@ class NoticePreviewImage extends React.Component {
       <Transition in={!this.props.noticesVisible} timeout={duration}>
         {state => (
           <div
-            className={"noticeCard"}
             style={{
-              ...defaultStyle,
-              ...transitionStyles[state]
-            }}
-            ref={divElement => {
-              this.divElement = divElement;
+              position: "relative",
+              top: `${this.state.top}px`,
+              left: `${this.state.left}px`
             }}
           >
             <div
-              className="card-inner"
+              className={"noticeCard"}
               style={{
-                width: "auto",
-                height: "auto",
-                backgroundColor: "#e4dfc0"
+                ...defaultStyle,
+                ...transitionStyles[state]
+              }}
+              ref={divElement => {
+                this.divElement = divElement;
               }}
             >
               <div
-                className="card-front"
+                className="card-inner"
                 style={{
-                  backgroundColor: "transparent",
-                  backgroundImage: `url(${notice.image})`,
-                  backgroundSize: "contain",
-                  backgroundRepeat: "no-repeat"
+                  width: "auto",
+                  height: "auto",
+                  backgroundColor: "#e4dfc0"
                 }}
               >
-                <img
-                  alt=""
-                  src={notice.image}
-                  style={{ visibility: "hidden", maxWidth: "250px" }}
-                  onLoad={ev => {
-                    this.addDimensions(
-                      ev.target.offsetWidth,
-                      ev.target.offsetHeight
-                    );
-                  }}
-                />
-              </div>
-              <div
-                className="card-back"
-                style={{
-                  height: "100%",
-                  width: "250px",
-                  backgroundColor: "#e4dfc0",
-                  padding: "10px"
-                }}
-              >
-                <Link to={`notice/${notice.slug}`}>
-                  <div style={{ width: "100%" }}>
-                    <div style={{ borderBottom: "1px dashed red" }}>
-                      <h3 style={{ textAlign: "center" }}>{notice.title}</h3>
-                    </div>
-                    <span
-                      style={{
-                        textAlign: "center",
-                        display: "inline-block",
-                        width: "100%"
-                      }}
-                    >
-                      {notice.description}
-                    </span>
-                    <br></br>
-                    <span
-                      style={{
-                        display: "inline-block",
-                        width: "100%",
-                        textAlign: "center",
-                        marginBottom: "40px",
-                        maxHeight: "121px",
-                        overflowY: "auto",
-                        overflowX: "auto"
-                      }}
-                    >
-                      {notice.body}
-                    </span>
-                  </div>
-                </Link>
                 <div
+                  className="card-front"
                   style={{
-                    width: "93%",
-                    position: "absolute",
-                    margin: "0px",
-                    bottom: "5px"
+                    backgroundColor: "transparent",
+                    backgroundImage: `url(${notice.image})`,
+                    backgroundSize: "contain",
+                    backgroundRepeat: "no-repeat"
                   }}
                 >
-                  <NoticePreviewUser notice={notice} />
-                  <NoticeButtons
-                    page={this.props.page}
-                    index={this.props.index - 2}
-                    notice={notice}
+                  <img
+                    alt=""
+                    src={notice.image}
+                    style={{ visibility: "hidden", maxWidth: "250px" }}
+                    onLoad={ev => {
+                      this.addDimensions(
+                        ev.target.offsetWidth,
+                        ev.target.offsetHeight
+                      );
+                    }}
                   />
+                </div>
+                <div
+                  className="card-back"
+                  style={{
+                    height: "100%",
+                    width: "250px",
+                    backgroundColor: "#e4dfc0",
+                    padding: "10px"
+                  }}
+                >
+                  <Link to={`notice/${notice.slug}`}>
+                    <div style={{ width: "100%" }}>
+                      <div style={{ borderBottom: "1px dashed red" }}>
+                        <h3 style={{ textAlign: "center" }}>{notice.title}</h3>
+                      </div>
+                      <span
+                        style={{
+                          textAlign: "center",
+                          display: "inline-block",
+                          width: "100%"
+                        }}
+                      >
+                        {notice.description}
+                      </span>
+                      <br></br>
+                      <span
+                        style={{
+                          display: "inline-block",
+                          width: "100%",
+                          textAlign: "center",
+                          marginBottom: "40px",
+                          maxHeight: "121px",
+                          overflowY: "auto",
+                          overflowX: "auto"
+                        }}
+                      >
+                        {notice.body}
+                      </span>
+                    </div>
+                  </Link>
+                  <div
+                    style={{
+                      width: "93%",
+                      position: "absolute",
+                      margin: "0px",
+                      bottom: "5px"
+                    }}
+                  >
+                    <NoticePreviewUser notice={notice} />
+                    <NoticeButtons
+                      page={this.props.page}
+                      index={this.props.index - 2}
+                      notice={notice}
+                    />
+                  </div>
                 </div>
               </div>
             </div>

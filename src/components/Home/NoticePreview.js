@@ -24,34 +24,53 @@ class NoticePreview extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { randomTop: 0, randomLeft: 0 };
+    this.state = { top: 0, left: 0 };
 
     this.addDimensions = this.addDimensions.bind(this);
   }
 
   addDimensions(width, height) {
+    var newNotices = [...this.props.noticesWithDim];
     if (this.props.page === "pinned") {
       return null;
-    } else if (this.props.noticesWithDim.length === this.props.notices.length) {
-      if (this.props.noticesWithDim[this.props.indexTrue].height === height) {
+    } else if (
+      this.props.noticesWithDim[this.props.indexPage].length ===
+      this.props.notices[this.props.indexPage].length
+    ) {
+      if (
+        this.props.noticesWithDim[this.props.indexPage][this.props.indexTrue]
+          .height === height
+      ) {
         return null;
       }
     } else {
       var newNotice;
       if (this.props.sorted) {
-        newNotice = this.props.noticesWithDim[this.props.indexTrue];
+        newNotice = this.props.noticesWithDim[this.props.indexPage][
+          this.props.indexTrue
+        ];
       } else {
-        newNotice = this.props.notices[this.props.indexTrue];
+        newNotice = this.props.notices[this.props.indexPage][
+          this.props.indexTrue
+        ];
       }
-      newNotice.width = width;
-      newNotice.height = height;
       if (!this.props.noticesWithDimsIDs.includes(this.props.notice.id)) {
+        newNotice.width = width;
+        newNotice.height = height;
+        newNotices[this.props.indexPage].push(newNotice);
         this.props.loadDivDim({
-          newNotice: newNotice,
+          newNotices: newNotices,
           newNoticeId: newNotice.id
         });
       }
     }
+  }
+
+  componentDidMount() {
+    this.setState({
+      top: Math.floor(Math.random() * 10),
+      left: Math.floor(Math.random() * 10)
+    });
   }
 
   render() {
@@ -85,73 +104,82 @@ class NoticePreview extends React.Component {
       exiting: { opacity: "1" },
       exited: { opacity: "1", visibility: "visible" }
     };
+
     return (
       <Transition in={!this.props.noticesVisible} timeout={duration}>
         {state => (
           <div
-            className={`div${this.props.index}`}
             style={{
-              ...defaultStyle,
-              ...transitionStyles[state]
-            }}
-            ref={el => {
-              if (el && !notice.width && !this.state.sorted) {
-                this.addDimensions(el.offsetWidth, el.offsetHeight);
-              }
+              position: "relative",
+              top: `${this.state.top}px`,
+              left: `${this.state.left}px`
             }}
           >
             <div
+              className={`div${this.props.index}`}
               style={{
-                width: "100%",
-                height: "100%",
-                position: "relative"
+                ...defaultStyle,
+                ...transitionStyles[state]
+              }}
+              ref={el => {
+                if (el && !notice.width && !this.state.sorted) {
+                  this.addDimensions(el.offsetWidth, el.offsetHeight);
+                }
               }}
             >
-              <Link to={`notice/${notice.slug}`}>
-                <div style={{ width: "100%" }}>
-                  <div style={{ borderBottom: "1px dashed red" }}>
-                    <h3 style={{ textAlign: "center" }}>{notice.title}</h3>
-                  </div>
-                  <span
-                    style={{
-                      textAlign: "center",
-                      display: "inline-block",
-                      width: "100%",
-                      fontStyle: "italic"
-                    }}
-                  >
-                    {notice.description}
-                  </span>
-                  <br></br>
-                  <span
-                    style={{
-                      display: "inline-block",
-                      width: "100%",
-                      textAlign: "center",
-                      marginBottom: "40px",
-                      maxHeight: "121px",
-                      overflowY: "auto",
-                      overflowX: "auto"
-                    }}
-                  >
-                    {notice.body}
-                  </span>
-                </div>
-              </Link>
               <div
                 style={{
                   width: "100%",
-                  position: "absolute",
-                  margin: "0px",
-                  bottom: "-5px"
+                  height: "100%",
+                  position: "relative"
                 }}
               >
-                <NoticePreviewUser notice={notice} />
-                <NoticeButtons
-                  page={this.props.page}
-                  index={this.props.index - 2}
-                  notice={notice}
-                />
+                <Link to={`notice/${notice.slug}`}>
+                  <div style={{ width: "100%" }}>
+                    <div style={{ borderBottom: "1px dashed red" }}>
+                      <h3 style={{ textAlign: "center" }}>{notice.title}</h3>
+                    </div>
+                    <span
+                      style={{
+                        textAlign: "center",
+                        display: "inline-block",
+                        width: "100%",
+                        fontStyle: "italic"
+                      }}
+                    >
+                      {notice.description}
+                    </span>
+                    <br></br>
+                    <span
+                      style={{
+                        display: "inline-block",
+                        width: "100%",
+                        textAlign: "center",
+                        marginBottom: "40px",
+                        maxHeight: "121px",
+                        overflowY: "auto",
+                        overflowX: "auto"
+                      }}
+                    >
+                      {notice.body}
+                    </span>
+                  </div>
+                </Link>
+                <div
+                  style={{
+                    width: "100%",
+                    position: "absolute",
+                    margin: "0px",
+                    bottom: "-5px"
+                  }}
+                >
+                  <NoticePreviewUser notice={notice} />
+                  <NoticeButtons
+                    page={this.props.page}
+                    index={this.props.index - 2}
+                    notice={notice}
+                  />
+                </div>
               </div>
             </div>
           </div>

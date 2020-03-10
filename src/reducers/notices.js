@@ -1,7 +1,7 @@
 export default (
   state = {
-    notices: [],
-    noticesWithDim: [],
+    notices: [[]],
+    noticesWithDim: [[]],
     noticesVisible: true,
     pinnedEvent: false,
     noticesCount: null,
@@ -16,7 +16,7 @@ export default (
     case "HOME_PAGE_LOADED":
       return {
         ...state,
-        notices: action.payload.notices,
+        notices: [[...action.payload.notices]],
         noticesCount: action.payload.noticesCount
       };
     case "NEW_NOTICE":
@@ -46,21 +46,27 @@ export default (
         pinnedEvent: true
       };
     case "LOAD_DIV_DIMENSIONS":
+      console.log(action.payload.newNotices)
       if (!state.noticesWithDimsIDs.includes(action.payload.newNoticeId)) {
         return {
           ...state,
-          noticesWithDim: [...state.noticesWithDim, action.payload.newNotice],
+          noticesWithDim: action.payload.newNotices,
           noticesWithDimsIDs: [
             ...state.noticesWithDimsIDs,
             action.payload.newNoticeId
           ]
         };
       } else return { ...state };
-
+    case "MOVE_LAST_NOTICE":
+      return {
+        ...state,
+        noticesWithDim: action.payload
+      };
     case "ADD_NOTICES_WINDOW_HEIGHT":
       return {
         ...state,
-        noticesWindowHeight: action.payload,
+        noticesWindowWidth: action.payload.width,
+        noticesWindowHeight: action.payload.height,
         sorted: false,
         pinnedEvent: false
       };
@@ -75,9 +81,9 @@ export default (
     case "UPDATE_UNSORTED_NOTICES":
       return {
         ...state,
-        notices: action.payload.notices,
+        notices: [[...action.payload.notices]],
         noticesCount: action.payload.noticesCount,
-        noticesWithDim: [],
+        noticesWithDim: [[]],
         noticesWithDimsIDs: [],
         sorted: false,
         pinnedEvent: false,
@@ -86,8 +92,8 @@ export default (
       };
     case "LOG_OUT_NOTICES":
       return {
-        notices: [],
-        noticesWithDim: [],
+        notices: [[]],
+        noticesWithDim: [[]],
         noticesWithDimsIDs: [],
         noticesVisible: true,
         pinnedEvent: false,
