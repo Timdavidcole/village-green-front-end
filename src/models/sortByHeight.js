@@ -1,4 +1,5 @@
 const sortByHeight = function(notices) {
+  console.log('SORT BY HEIGHT')
   function compareHeights(noticeHeightA, noticeHeightB) {
 
     if (noticeHeightA.height === noticeHeightB.height) {

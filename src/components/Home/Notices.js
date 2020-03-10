@@ -48,40 +48,26 @@ class Notices extends React.Component {
     this.props.addNoticesWindowHeight(height);
   }
 
-  withDimOrNotWithDim() {
-    return this.props.sorted ? this.props.noticesWithDim : this.props.notices;
-  }
-
-  shouldComponentUpdate(nextProps) {
-    if (nextProps.noticesWithDim.length === this.props.notices.length) {
-      return true;
-    }
-    if (nextProps.sorted) {
-      return true;
-    }
-    if (
-      nextProps.updatedUnsorted &&
-      this.props.noticesWithDim.length === this.props.notices.length
-    ) {
-      return true;
-    }
-    return false;
-  }
-
   componentDidUpdate() {
-    if (
-      !this.props.sorted &&
-      this.props.noticesWithDim.length === this.props.notices.length &&
-      this.props.notices.length !== 0
-    ) {
+    if (this.checkNoticesDimensions() && !this.props.sorted) {
       this.props.updateSortedNotices(
         sortByColumn(
-          sortByHeight(this.props.noticesWithDim),
+          sortByHeight(this.props.notices),
           this.props.noticesWindowHeight,
           this.props.loggedIn
         )
       );
     }
+  }
+
+  checkNoticesDimensions(){
+    var allDimsUpdated = true
+    this.props.notices.forEach((notice)=> {
+      if(!notice.height || !notice.width){
+        allDimsUpdated = false
+      }
+    })
+    return allDimsUpdated
   }
 
   render() {

@@ -29,29 +29,7 @@ class NoticePreviewImage extends React.Component {
   }
 
   addDimensions(width, height) {
-    console.log(width, height)
-  }
-
-  componentDidUpdate() {
-    var newNotice;
-    if (
-      this.props.updatedUnsorted &&
-      !this.props.noticesWithDimsIDs.includes(this.props.notice.id)
-    ) {
-      if (this.props.sorted) {
-        newNotice = this.props.noticesWithDim[this.props.indexTrue];
-      } else {
-        newNotice = this.props.notices[this.props.indexTrue];
-      }
-      newNotice.width = this.divElement.clientWidth;
-      newNotice.height = this.divElement.clientHeight;
-      if (newNotice.height > 100 && !this.props.sorted) {
-        this.props.loadDivDim({
-          newNotice: newNotice,
-          newNoticeId: newNotice.id
-        });
-      }
-    }
+    this.props.loadDivDim({width: width, height: height, index: this.props.indexTrue})
   }
 
   render() {
@@ -72,12 +50,12 @@ class NoticePreviewImage extends React.Component {
       <Transition in={!this.props.noticesVisible} timeout={duration}>
         {state => (
           <div
-          id={`noticeCard${this.props.index}`}
+            id={`noticeCard${this.props.index}`}
             className={"noticeCard"}
             style={{
-              padding: '0px',
-              backgroundColor: 'transparent',
-              boxShadow: 'none',
+              padding: "0px",
+              backgroundColor: "transparent",
+              boxShadow: "none",
               order: this.props.order,
               ...transitionStyles[state]
             }}

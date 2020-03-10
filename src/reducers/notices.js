@@ -46,17 +46,13 @@ export default (
         pinnedEvent: true
       };
     case "LOAD_DIV_DIMENSIONS":
-      if (!state.noticesWithDimsIDs.includes(action.payload.newNoticeId)) {
-        return {
-          ...state,
-          noticesWithDim: [...state.noticesWithDim, action.payload.newNotice],
-          noticesWithDimsIDs: [
-            ...state.noticesWithDimsIDs,
-            action.payload.newNoticeId
-          ]
-        };
-      } else return { ...state };
-
+      var newNotices = [...state.notices];
+      newNotices[action.payload.index].height = action.payload.height;
+      newNotices[action.payload.index].width = action.payload.width;
+      return {
+        ...state,
+        notices: newNotices
+      };
     case "ADD_NOTICES_WINDOW_HEIGHT":
       return {
         ...state,
@@ -67,7 +63,7 @@ export default (
     case "UPDATE_SORTED_NOTICES":
       return {
         ...state,
-        noticesWithDim: action.payload,
+        notices: action.payload,
         sorted: true,
         noticesVisible: true,
         updatedUnsorted: false
@@ -76,9 +72,6 @@ export default (
       return {
         ...state,
         notices: action.payload.notices,
-        noticesCount: action.payload.noticesCount,
-        noticesWithDim: [],
-        noticesWithDimsIDs: [],
         sorted: false,
         pinnedEvent: false,
         updatedUnsorted: true,

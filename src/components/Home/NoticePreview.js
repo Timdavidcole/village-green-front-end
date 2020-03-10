@@ -30,7 +30,7 @@ class NoticePreview extends React.Component {
   }
 
   addDimensions(width, height) {
-    console.log(width, height);
+    this.props.loadDivDim({width: width, height: height, index: this.props.indexTrue})
   }
 
   render() {

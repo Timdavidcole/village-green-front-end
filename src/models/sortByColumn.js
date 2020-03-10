@@ -1,5 +1,7 @@
 const sortByColumn = function(notices, columnHeight, loggedIn) {
   var newNotices;
+  console.log('SORT BY COLUMN')
+
 
   loggedIn ? (newNotices = [[{ height: 229 }]]) : (newNotices = [[]]);
 
