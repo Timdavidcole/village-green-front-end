@@ -23,7 +23,4 @@ const DeleteButton = props => {
   return null;
 };
 
-export default connect(
-  () => ({}),
-  mapDispatchToProps
-)(DeleteButton);
+export default connect(() => ({}), mapDispatchToProps)(DeleteButton);

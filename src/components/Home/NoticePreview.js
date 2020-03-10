@@ -75,14 +75,15 @@ class NoticePreview extends React.Component {
       pointerEvents: "auto",
       display: "inline-block",
       width: "250px",
-      verticalAlign: "top"
+      verticalAlign: "top",
+      visibility: "visible"
     };
 
     const transitionStyles = {
       entering: { opacity: "0" },
-      entered: { opacity: "0" },
+      entered: { opacity: "0", visibility: "hidden" },
       exiting: { opacity: "1" },
-      exited: { opacity: "1" }
+      exited: { opacity: "1", visibility: "visible" }
     };
     return (
       <Transition in={!this.props.noticesVisible} timeout={duration}>
