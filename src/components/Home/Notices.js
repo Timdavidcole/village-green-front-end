@@ -69,6 +69,9 @@ class Notices extends React.Component {
   }
 
   componentDidUpdate() {
+    console.log(this.props.notices);
+    console.log(this.props.noticesWithDim);
+
     if (
       !this.props.sorted &&
       this.props.noticesWithDim.length === this.props.notices.length &&
