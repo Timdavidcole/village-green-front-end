@@ -87,9 +87,9 @@ class NewNoticeButton extends React.Component {
     };
 
     const defaultBoxStyle = {
+      margin: 'auto',
       boxShadow: "5px 10px 20px 3px rgba(176,176,176,0.79)",
       borderRadius: "6px",
-      margin: "auto",
       padding: "10px",
       backgroundColor: "white",
       position: "relative",
@@ -100,7 +100,9 @@ class NewNoticeButton extends React.Component {
       height: "209px",
       display: "inline-block",
       width: "250px",
-      verticalAlign: "top"
+      verticalAlign: "top",
+      order: "1",
+      flexBasis: '1 1 20%'
     };
 
     const defaultButtonStyle = {
@@ -127,7 +129,7 @@ class NewNoticeButton extends React.Component {
       <Transition in={!this.props.noticesVisible} timeout={duration}>
         {state => (
           <div
-            className="div1"
+            className="newNoticeButton"
             style={{
               ...defaultBoxStyle,
               ...transitionStyles[state]

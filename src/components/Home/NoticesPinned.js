@@ -1,18 +1,16 @@
 import NoticePreview from "./NoticePreview";
 import NoticePreviewImage from "./NoticePreviewImage";
 import React from "react";
-import "./noticesGrid.css";
+import "../../styles/noticesGrid.css";
 import { connect } from "react-redux";
 
 const mapStateToProps = state => ({
   notices: state.pinned.notices
 });
 
-const mapDispatchToProps = () => ({
-});
+const mapDispatchToProps = () => ({});
 
 class NoticesPinned extends React.Component {
-
   render() {
     return (
       <div

@@ -2,7 +2,7 @@ import NoticePreview from "./NoticePreview";
 import NoticePreviewImage from "./NoticePreviewImage";
 import React from "react";
 import NewNoticeButton from "./NewNoticeButton";
-import "./noticesGrid.css";
+import "../../styles/noticesGrid.css";
 import { connect } from "react-redux";
 import sortByHeight from "../../models/sortByHeight";
 import sortByColumn from "../../models/sortByColumn";
@@ -100,21 +100,10 @@ class Notices extends React.Component {
         </div>
       );
     }
+    var orderFlex = 1
     return (
       <div
-        style={{
-          height: "calc(100vh - 114px)",
-          width: "auto",
-          display: "flex",
-          flexDirection: "column",
-          flexWrap: "wrap",
-          margin: "0",
-          padding: "0",
-          border: "none",
-          overflowX: "scroll",
-          overflowY: "hidden",
-          opacity: this.props.sorted ? "1" : "0"
-        }}
+        className="parent"
         ref={el => {
           if (
             (el && !this.props.noticesWindowHeight) ||
@@ -127,10 +116,12 @@ class Notices extends React.Component {
         {this.props.loggedIn ? (
           <NewNoticeButton noticesVisible={this.props.noticesVisible} />
         ) : null}
-        {this.withDimOrNotWithDim().map((notice, i) => {
+        {this.props.notices.map((notice, i) => {
           if (!notice.image) {
+            orderFlex === 5 ? orderFlex = 1 : orderFlex ++
             return (
               <NoticePreview
+                order={orderFlex}
                 page={this.props.page}
                 noticesVisible={this.props.noticesVisible}
                 index={i + 2}
@@ -140,8 +131,10 @@ class Notices extends React.Component {
               />
             );
           } else {
+            orderFlex === 5 ? orderFlex = 1 : orderFlex ++
             return (
               <NoticePreviewImage
+                order={orderFlex}
                 page={this.props.page}
                 noticesVisible={this.props.noticesVisible}
                 index={i + 2}
