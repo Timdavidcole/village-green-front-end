@@ -45,7 +45,7 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div style={{ width: "100%" }}>
+      <div style={{ width: "100%", overflow: "hidden"}}>
         <div style={{ width: "100%", position: "absolute" }}>
           <MapNavBar />
           <NewNotice />

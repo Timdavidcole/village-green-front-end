@@ -1,13 +1,14 @@
 .parent {
-    height: calc(100vh - 114px);
-    width: 100vw;
+    height: calc(100vh - 129px);
+    background-color: red;
+    width: calc(100vw - 30px);
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    margin: 0;
+    margin: 15px;
     padding: 0;
     border: none;
-    overflow-x: scroll;
+    overflow-x: hidden;
     overflow-y: hidden;
     opacity: 1;
     align-items: stretch;
