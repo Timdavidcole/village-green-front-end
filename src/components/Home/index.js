@@ -11,6 +11,9 @@ const mapStateToProps = state => ({
   centerMap: state.map.centerMap,
   loggedIn: state.auth.loggedIn,
   pinnedEvent: state.notices.pinnedEvent,
+  notices: state.notices.notices,
+  newNoticeArrange: state.notices.newNoticeArrange,
+  newNotice: state.notices.newNotice,
   notices: state.notices.notices
 });
 
@@ -29,23 +32,29 @@ class Home extends React.Component {
       clearTimeout(doit);
       doit = setTimeout(() => {
         console.log("RESIZE");
-        this.props.resize(
-        );
+        this.props.resize();
       }, 400);
     });
   }
 
   componentDidUpdate() {
     if (this.props.pinnedEvent) {
+      console.log("PINNED EVENT")
       this.props.updateUnsortedNotices(
         agent.Notices.all(JSON.stringify(this.props.centerMap))
       );
+    } else if (this.props.newNoticeArrange) {
+      console.log("NOTICES WITH NEW NOTICE");
+      this.props.updateUnsortedNotices({ notices: [
+        this.props.newNotice,
+        ...this.props.notices
+      ]});
     }
   }
 
   render() {
     return (
-      <div style={{ width: "100%", overflow: "hidden"}}>
+      <div style={{ width: "100%", overflow: "hidden" }}>
         <div style={{ width: "100%", position: "absolute" }}>
           <MapNavBar />
           <NewNotice />

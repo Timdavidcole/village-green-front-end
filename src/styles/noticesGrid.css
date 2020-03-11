@@ -1,5 +1,5 @@
 .parent {
-    height: calc(100vh - 129px);
+    height: calc(100vh - 114px);
     width: calc(100vw);
     display: flex;
     flex-direction: column;

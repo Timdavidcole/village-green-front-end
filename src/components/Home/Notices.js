@@ -17,10 +17,13 @@ const mapStateToProps = state => ({
   updatedUnsorted: state.notices.updatedUnsorted,
   update: state.notices.update,
   noticesSorted: state.notices.noticesSorted,
-  waitTillDimUpdate: state.notices.waitTillDimUpdate
+  waitTillDimUpdate: state.notices.waitTillDimUpdate,
+  newNoticeArrange: state.notices.newNoticeArrange,
+  newNotice: state.notices.newNotice
 });
 
 const mapDispatchToProps = dispatch => ({
+  newNoticeDisplayed: () => dispatch({ type: "NEW_NOTICE_DISPLAYED" }),
   addNoticesWindowDims: payload =>
     dispatch({ type: "ADD_NOTICES_WINDOW_DIMS", payload }),
   updateSortedNotices: payload =>
@@ -28,25 +31,23 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class Notices extends React.Component {
-
   componentDidUpdate() {
-    if (this.checkNoticesDimensions() && !this.props.sorted && this.props.noticesWindowDims.height && !this.props.waitTillDimUpdate) {
+    if (
+      this.checkNoticesDimensions() &&
+      !this.props.sorted &&
+      this.props.noticesWindowDims.height &&
+      !this.props.waitTillDimUpdate
+    ) {
+      console.log("sort unsorted");
       this.props.updateSortedNotices(
         sortByColumn(
           sortByHeight(this.props.notices),
           this.props.noticesWindowDims,
-          this.props.loggedIn
+          this.props.loggedIn,
+          this.props.newNoticeArrange
         )
       );
-    }
-    if (this.props.update  && !this.props.waitTillDimUpdate) {
-      this.props.updateSortedNotices(
-        sortByColumn(
-          sortByHeight(this.props.notices),
-          this.props.noticesWindowDims,
-          this.props.loggedIn
-        )
-      );
+      return;
     }
   }
 
@@ -61,7 +62,12 @@ class Notices extends React.Component {
   }
 
   plainOrSortedNotices() {
-    return this.props.sorted ? this.props.noticesSorted : this.props.notices
+    if (this.props.sorted) {
+      return this.props.noticesSorted;
+    } else {
+      return this.props.notices;
+    }
+    // return this.props.sorted ? [this.props.newNotice[0], ...this.props.noticesSorted] : this.props.notices;
   }
 
   render() {
@@ -80,6 +86,7 @@ class Notices extends React.Component {
         </div>
       );
     }
+    console.log("RENDER NOTICES");
     return (
       <div
         className="parent"
@@ -89,6 +96,8 @@ class Notices extends React.Component {
             (el && !this.props.noticesWindowDims.height) ||
             (el && this.props.update)
           ) {
+            console.log(!this.props.noticesWindowDims.height)
+            console.log(this.props.update)
             this.props.addNoticesWindowDims({
               width: document.getElementById("notices").offsetWidth,
               height: document.getElementById("notices").offsetHeight

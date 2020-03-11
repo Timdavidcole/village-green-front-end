@@ -12,8 +12,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onSubmit: payload => dispatch({ type: "NEW_NOTICE", payload }),
-  updateUnsortedNotices: payload =>
-    dispatch({ type: "UPDATE_UNSORTED_NOTICES", payload }),
+  addNewNotice: payload =>
+    dispatch({ type: "ADD_NEW_NOTICE", payload }),
   hideNewNoticeWindow: () => dispatch({ type: "HIDE_NEW_NOTICE" })
 });
 
@@ -46,10 +46,8 @@ class NewNotice extends React.Component {
         body: this.state.body,
         image: this.state.image
       })
-        .then(() => {
-          this.props.updateUnsortedNotices(
-            agent.Notices.all(JSON.stringify(this.props.centerMap))
-          );
+        .then(notice => {
+          this.props.addNewNotice(notice);
         })
         .then(() => {
           this.setState({

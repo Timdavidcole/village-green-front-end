@@ -8,7 +8,9 @@ export default (
     sorted: false,
     updatedUnsorted: false,
     noticesWindowDims: { height: null, width: null },
-    waitTillDimUpdate: true
+    waitTillDimUpdate: true,
+    newNotice: [],
+    newNoticeArrange: false
   },
   action
 ) => {
@@ -20,13 +22,19 @@ export default (
         notices: action.payload.notices,
         noticesCount: action.payload.noticesCount
       };
-    case "NEW_NOTICE":
+    case "ADD_NEW_NOTICE":
       return {
         ...state,
         noticeErrors: action.error ? action.payload.errors : null,
-        notices: action.error
-          ? null
-          : [action.payload.notice].concat(state.notices || [])
+        newNotice: action.payload.notice,
+        newNoticeArrange: true,
+        sorted: false
+      };
+    case "NEW_NOTICE_DISPLAYED":
+      return {
+        ...state,
+        newNotice: [],
+        newNoticeArrange: false
       };
     case "NOTICES_VISIBLE":
       return {
@@ -70,7 +78,8 @@ export default (
         noticesVisible: true,
         updatedUnsorted: false,
         update: false,
-        waitTillDimUpdate: true
+        waitTillDimUpdate: true,
+        newNoticeArrange: false
       };
     case "RESIZE":
       return {
@@ -87,7 +96,8 @@ export default (
         pinnedEvent: false,
         updatedUnsorted: true,
         noticesVisible: true,
-        update: true
+        update: true,
+        newNoticeArrange: false
       };
     case "LOG_OUT_NOTICES":
       return {

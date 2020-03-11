@@ -1,9 +1,13 @@
-const sortByColumn = function(notices, noticesDims, loggedIn) {
+const sortByColumn = function(notices, noticesDims, loggedIn, newNoticeArrange) {
   var newNotices;
   console.log("SORT BY COLUMN");
-  console.log(noticesDims)
+  console.log(newNoticeArrange);
 
-  loggedIn ? (newNotices = [[{ height: 250 }]]) : (newNotices = [[]]);
+  if (loggedIn) {
+    newNotices = [[{ height: 250 }]];
+  } else {
+    newNotices = [[]];
+  }
 
   var usedIndexes = [];
   const margin = 20;
