@@ -69,13 +69,13 @@ export default (
         sorted: true,
         noticesVisible: true,
         updatedUnsorted: false,
-        resize: false,
+        update: false,
         waitTillDimUpdate: true
       };
     case "RESIZE":
       return {
         ...state,
-        resize: true,
+        update: true,
         sorted: false,
         waitTillDimUpdate: true
       };
@@ -86,7 +86,8 @@ export default (
         sorted: false,
         pinnedEvent: false,
         updatedUnsorted: true,
-        noticesVisible: true
+        noticesVisible: true,
+        update: true
       };
     case "LOG_OUT_NOTICES":
       return {
