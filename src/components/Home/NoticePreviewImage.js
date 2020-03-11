@@ -10,8 +10,6 @@ const mapStateToProps = state => ({
   currentUser: state.common.currentUser,
   notices: state.notices.notices,
   sorted: state.notices.sorted,
-  noticesWithDim: state.notices.noticesWithDim,
-  noticesWithDimsIDs: state.notices.noticesWithDimsIDs,
   updatedUnsorted: state.notices.updatedUnsorted
 });
 
@@ -29,7 +27,22 @@ class NoticePreviewImage extends React.Component {
   }
 
   addDimensions(width, height) {
-    this.props.loadDivDim({width: width, height: height, index: this.props.indexTrue})
+    if (!this.props.notice.height) {
+      this.props.loadDivDim({
+        width: width,
+        height: height,
+        index: this.props.indexTrue
+      });
+    }
+  }
+
+  componentDidUpdate() {
+    if (!this.props.notice.height || !this.props.notice.width) {
+      this.addDimensions(
+        document.getElementById(`noticeCard${this.props.index}`).offsetWidth,
+        document.getElementById(`noticeCard${this.props.index}`).offsetHeight
+      );
+    }
   }
 
   render() {
@@ -89,6 +102,14 @@ class NoticePreviewImage extends React.Component {
                   alt=""
                   src={notice.image}
                   style={{ visibility: "hidden", maxWidth: "250px" }}
+                  onLoad={ev => {
+                    this.addDimensions(
+                      document.getElementById(`noticeCard${this.props.index}`)
+                        .offsetWidth,
+                      document.getElementById(`noticeCard${this.props.index}`)
+                        .offsetHeight
+                    );
+                  }}
                 />
               </div>
               <div
@@ -96,7 +117,8 @@ class NoticePreviewImage extends React.Component {
                 style={{
                   width: "250px",
                   backgroundColor: "#e4dfc0",
-                  padding: "10px"
+                  padding: "10px",
+                  minHeight: notice.height
                 }}
               >
                 <Link to={`notice/${notice.slug}`}>

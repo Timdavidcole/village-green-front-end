@@ -1,13 +1,14 @@
 export default (
   state = {
     notices: [],
-    noticesWithDim: [],
+    noticesSorted: [],
     noticesVisible: true,
     pinnedEvent: false,
     noticesCount: null,
     sorted: false,
     updatedUnsorted: false,
-    noticesWithDimsIDs: []
+    noticesWindowDims: { height: null, width: null },
+    waitTillDimUpdate: true
   },
   action
 ) => {
@@ -37,7 +38,7 @@ export default (
     case "PIN_NOTICE":
       return {
         ...state,
-        noticesWithDim: action.payload,
+        notices: action.payload,
         pinnedEvent: true
       };
     case "ADD_PINNED_EVENT":
@@ -53,20 +54,30 @@ export default (
         ...state,
         notices: newNotices
       };
-    case "ADD_NOTICES_WINDOW_HEIGHT":
+    case "ADD_NOTICES_WINDOW_DIMS":
       return {
         ...state,
-        noticesWindowHeight: action.payload,
+        noticesWindowDims: action.payload,
         sorted: false,
-        pinnedEvent: false
+        pinnedEvent: false,
+        waitTillDimUpdate: false
       };
     case "UPDATE_SORTED_NOTICES":
       return {
         ...state,
-        notices: action.payload,
+        noticesSorted: action.payload,
         sorted: true,
         noticesVisible: true,
-        updatedUnsorted: false
+        updatedUnsorted: false,
+        resize: false,
+        waitTillDimUpdate: true
+      };
+    case "RESIZE":
+      return {
+        ...state,
+        resize: true,
+        sorted: false,
+        waitTillDimUpdate: true
       };
     case "UPDATE_UNSORTED_NOTICES":
       return {
@@ -80,8 +91,6 @@ export default (
     case "LOG_OUT_NOTICES":
       return {
         notices: [],
-        noticesWithDim: [],
-        noticesWithDimsIDs: [],
         noticesVisible: true,
         pinnedEvent: false,
         noticesCount: 0,

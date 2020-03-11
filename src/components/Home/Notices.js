@@ -8,72 +8,66 @@ import sortByHeight from "../../models/sortByHeight";
 import sortByColumn from "../../models/sortByColumn";
 
 const mapStateToProps = state => ({
-  noticesWindowHeight: state.notices.noticesWindowHeight,
+  noticesWindowDims: state.notices.noticesWindowDims,
   noticesCount: state.notices.noticesCount,
   notices: state.notices.notices,
-  noticesWithDim: state.notices.noticesWithDim,
   noticesVisible: state.notices.noticesVisible,
   sorted: state.notices.sorted,
   loggedIn: state.auth.loggedIn,
-  updatedUnsorted: state.notices.updatedUnsorted
+  updatedUnsorted: state.notices.updatedUnsorted,
+  resize: state.notices.resize,
+  noticesSorted: state.notices.noticesSorted,
+  waitTillDimUpdate: state.notices.waitTillDimUpdate
 });
 
 const mapDispatchToProps = dispatch => ({
-  addNoticesWindowHeight: payload =>
-    dispatch({ type: "ADD_NOTICES_WINDOW_HEIGHT", payload }),
+  addNoticesWindowDims: payload =>
+    dispatch({ type: "ADD_NOTICES_WINDOW_DIMS", payload }),
   updateSortedNotices: payload =>
     dispatch({ type: "UPDATE_SORTED_NOTICES", payload })
 });
 
 class Notices extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      resize: false
-    };
-  }
-
-  componentDidMount() {
-    var doit;
-    window.addEventListener("resize", () => {
-      clearTimeout(doit);
-      doit = setTimeout(() => {
-        this.setState({ resize: !this.state.resize });
-      }, 400);
-    });
-  }
-
-  addNoticesWindowHeight(height) {
-    this.props.addNoticesWindowHeight(height);
-  }
 
   componentDidUpdate() {
-    if (this.checkNoticesDimensions() && !this.props.sorted) {
+    if (this.checkNoticesDimensions() && !this.props.sorted && this.props.noticesWindowDims.height && !this.props.waitTillDimUpdate) {
       this.props.updateSortedNotices(
         sortByColumn(
           sortByHeight(this.props.notices),
-          this.props.noticesWindowHeight,
+          this.props.noticesWindowDims,
+          this.props.loggedIn
+        )
+      );
+    }
+    if (this.props.resize  && !this.props.waitTillDimUpdate) {
+      this.props.updateSortedNotices(
+        sortByColumn(
+          sortByHeight(this.props.notices),
+          this.props.noticesWindowDims,
           this.props.loggedIn
         )
       );
     }
   }
 
-  checkNoticesDimensions(){
-    var allDimsUpdated = true
-    this.props.notices.forEach((notice)=> {
-      if(!notice.height || !notice.width){
-        allDimsUpdated = false
+  checkNoticesDimensions() {
+    var allDimsUpdated = true;
+    this.props.notices.forEach(notice => {
+      if (!notice.height || !notice.width) {
+        allDimsUpdated = false;
       }
-    })
-    return allDimsUpdated
+    });
+    return allDimsUpdated;
+  }
+
+  plainOrSortedNotices() {
+    return this.props.sorted ? this.props.noticesSorted : this.props.notices
   }
 
   render() {
     if (!this.props.notices) {
       return (
-        <div className="parent">
+        <div id="notices" className="parent">
           <div className="article-preview">Loading...</div>
         </div>
       );
@@ -81,7 +75,7 @@ class Notices extends React.Component {
 
     if (this.props.notices.length === 0) {
       return (
-        <div className="parent">
+        <div id="notices" className="parent">
           <div className="article-preview">No notices are here... yet.</div>
         </div>
       );
@@ -89,19 +83,23 @@ class Notices extends React.Component {
     return (
       <div
         className="parent"
+        id="notices"
         ref={el => {
           if (
-            (el && !this.props.noticesWindowHeight) ||
-            (el && this.props.noticesWindowHeight !== el.offsetHeight)
+            (el && !this.props.noticesWindowDims.height) ||
+            (el && this.props.resize)
           ) {
-            this.addNoticesWindowHeight(el.offsetHeight);
+            this.props.addNoticesWindowDims({
+              width: document.getElementById("notices").offsetWidth,
+              height: document.getElementById("notices").offsetHeight
+            });
           }
         }}
       >
         {this.props.loggedIn ? (
           <NewNoticeButton noticesVisible={this.props.noticesVisible} />
         ) : null}
-        {this.props.notices.map((notice, i) => {
+        {this.plainOrSortedNotices().map((notice, i) => {
           if (!notice.image) {
             return (
               <NoticePreview

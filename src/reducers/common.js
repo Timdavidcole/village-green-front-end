@@ -1,6 +1,7 @@
 const defaultState = {
   appName: "Village Green",
-  token: null
+  token: null,
+  resize: false
 };
 
 export default (state = defaultState, action) => {

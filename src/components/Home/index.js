@@ -17,12 +17,22 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onLoad: payload => dispatch({ type: "HOME_PAGE_LOADED", payload }),
   updateUnsortedNotices: payload =>
-    dispatch({ type: "UPDATE_UNSORTED_NOTICES", payload })
+    dispatch({ type: "UPDATE_UNSORTED_NOTICES", payload }),
+  resize: () => dispatch({ type: "RESIZE" })
 });
 
 class Home extends React.Component {
   componentDidMount() {
     this.props.onLoad(agent.Notices.all(JSON.stringify(this.props.centerMap)));
+    var doit;
+    window.addEventListener("resize", () => {
+      clearTimeout(doit);
+      doit = setTimeout(() => {
+        console.log("RESIZE");
+        this.props.resize(
+        );
+      }, 400);
+    });
   }
 
   componentDidUpdate() {
