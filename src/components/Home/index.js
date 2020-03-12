@@ -11,7 +11,6 @@ const mapStateToProps = state => ({
   centerMap: state.map.centerMap,
   loggedIn: state.auth.loggedIn,
   pinnedEvent: state.notices.pinnedEvent,
-  notices: state.notices.notices,
   newNoticeArrange: state.notices.newNoticeArrange,
   newNotice: state.notices.newNotice,
   notices: state.notices.notices
@@ -51,6 +50,7 @@ class Home extends React.Component {
       ]});
     }
   }
+  
 
   render() {
     return (

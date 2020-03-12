@@ -67,6 +67,8 @@ const Notices = {
   del: slug => requests.del(`/notices/${slug}`)
 };
 
+Notices.del("tree-surgeon-y3xpga")
+
 const Pinned = {
   pinNotice: slug => requests.post(`/notices/${slug}/pin`),
   unPinNotice: slug => requests.del(`/notices/${slug}/pin`)

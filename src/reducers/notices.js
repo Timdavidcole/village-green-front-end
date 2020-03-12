@@ -55,18 +55,23 @@ export default (
         pinnedEvent: true
       };
     case "LOAD_DIV_DIMENSIONS":
-      var newNotices = [...state.notices];
-      newNotices[action.payload.index].height = action.payload.height;
-      newNotices[action.payload.index].width = action.payload.width;
+      console.log(state.notices)
+      var newNotices1 = [...state.notices];
+      console.log(state.notices)
+      console.log(newNotices1)
+      newNotices1[action.payload.index].height = action.payload.height;
+      newNotices1[action.payload.index].width = action.payload.width;
       return {
         ...state,
-        notices: newNotices
+        notices: newNotices1
       };
     case "ADD_NOTICES_WINDOW_DIMS":
       return {
         ...state,
         noticesWindowDims: action.payload,
         sorted: false,
+        resize: false,
+        update: true,
         pinnedEvent: false,
         waitTillDimUpdate: false
       };
@@ -84,6 +89,7 @@ export default (
     case "RESIZE":
       return {
         ...state,
+        resize: true,
         update: true,
         sorted: false,
         waitTillDimUpdate: true

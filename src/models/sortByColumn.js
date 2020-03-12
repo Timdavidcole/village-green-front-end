@@ -6,10 +6,15 @@ const sortByColumn = function(notices, noticesDims, loggedIn, newNotice) {
     firstNotice.order = 1;
   }
 
+  var usedIndexes = [];
+  const margin = 20;
+  var columnWithRoom = 0;
+
   if (loggedIn) {
     if (newNotice) {
       console.log("NEW NOTICES WITH FIRST NOTICE");
       newNotices = [[{ height: 250 }, firstNotice]];
+      usedIndexes.push(0);
     } else {
       newNotices = [[{ height: 250 }]];
     }
@@ -17,9 +22,7 @@ const sortByColumn = function(notices, noticesDims, loggedIn, newNotice) {
     newNotices = [[]];
   }
 
-  var usedIndexes = [];
-  const margin = 20;
-  var columnWithRoom = 0;
+  console.log(newNotices)
 
   function sumHeights(noticesToSum) {
     var sum = 0;
@@ -75,9 +78,12 @@ const sortByColumn = function(notices, noticesDims, loggedIn, newNotice) {
   notices.forEach((notice, index) => {
     if (newNotice && index === 0) {
       console.log("FIRSTNOTICE");
+      console.log(newNotices)
       return null;
     } else {
+      console.log(index)
       findColumnWithSpace(notice, columnWithRoom, index);
+      console.log(newNotices)
     }
   });
 

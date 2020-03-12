@@ -47,6 +47,7 @@ class NewNotice extends React.Component {
         image: this.state.image
       })
         .then(notice => {
+          console.log(notice)
           this.props.addNewNotice(notice);
         })
         .then(() => {

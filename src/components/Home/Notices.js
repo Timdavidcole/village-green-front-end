@@ -39,6 +39,7 @@ class Notices extends React.Component {
       !this.props.waitTillDimUpdate
     ) {
       console.log("sort unsorted");
+      console.log(this.props.notices)
       this.props.updateSortedNotices(
         sortByColumn(
           sortByHeight(this.props.notices),
@@ -47,7 +48,16 @@ class Notices extends React.Component {
           this.props.newNotice
         )
       );
-      return;
+    }
+    if (this.props.updatedUnsorted){
+      this.props.updateSortedNotices(
+        sortByColumn(
+          sortByHeight(this.props.notices),
+          this.props.noticesWindowDims,
+          this.props.loggedIn,
+          this.props.newNotice
+        )
+      );
     }
   }
 
@@ -67,7 +77,6 @@ class Notices extends React.Component {
     } else {
       return this.props.notices;
     }
-    // return this.props.sorted ? [this.props.newNotice[0], ...this.props.noticesSorted] : this.props.notices;
   }
 
   render() {
@@ -93,10 +102,8 @@ class Notices extends React.Component {
         ref={el => {
           if (
             (el && !this.props.noticesWindowDims.height) ||
-            (el && this.props.update)
+            (el && this.props.resize)
           ) {
-            console.log(el && !this.props.noticesWindowDims.height)
-            console.log(el && this.props.update)
             this.props.addNoticesWindowDims({
               width: document.getElementById("notices").offsetWidth,
               height: document.getElementById("notices").offsetHeight
