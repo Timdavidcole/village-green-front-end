@@ -25,6 +25,7 @@ const mapDispatchToProps = dispatch => ({
 
 class Home extends React.Component {
   componentDidMount() {
+    console.log("INDEX MOUNT");
     this.props.onLoad(agent.Notices.all(JSON.stringify(this.props.centerMap)));
     var doit;
     window.addEventListener("resize", () => {
@@ -36,18 +37,22 @@ class Home extends React.Component {
   }
 
   componentDidUpdate() {
+    console.log("INDEX UPDATED")
+    console.log(this.props.newNoticeArrange)
     if (this.props.pinnedEvent) {
+      console.log("PINNED EVENT ARRANGE");
       this.props.updateUnsortedNotices(
         agent.Notices.all(JSON.stringify(this.props.centerMap))
       );
     } else if (this.props.newNoticeArrange) {
-      this.props.updateUnsortedNotices({ notices: [
-        this.props.newNotice,
-        ...this.props.notices
-      ]});
+      console.log("NEW NOTICE ARRANGE");
+      agent.Notices.all(JSON.stringify(this.props.centerMap)).then(notices => {
+        this.props.updateUnsortedNotices({
+          notices: [this.props.newNotice, ...notices.notices]
+        });
+      });
     }
   }
-  
 
   render() {
     return (

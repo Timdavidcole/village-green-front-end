@@ -23,6 +23,8 @@ export default (
         noticesCount: action.payload.noticesCount
       };
     case "ADD_NEW_NOTICE":
+      console.log(state.notices)
+      console.log(action.payload)
       return {
         ...state,
         noticeErrors: action.error ? action.payload.errors : null,
@@ -81,7 +83,8 @@ export default (
         updatedUnsorted: false,
         update: false,
         waitTillDimUpdate: true,
-        newNoticeArrange: false
+        newNoticeArrange: false,
+        sortDelete: false
       };
     case "RESIZE":
       return {
@@ -109,7 +112,20 @@ export default (
         pinnedEvent: false,
         noticesCount: 0,
         sorted: false,
-        noticesWindowDims: {},
+        noticesWindowDims: {}
+      };
+    case "DELETE_NOTICE":
+      var newNotices = [...state.noticesSorted];
+      for (let index = 0; index < newNotices.length; index++) {
+        const element = newNotices[index];
+        if (element.slug === action.payload.slug) {
+          newNotices.splice(index, 1);
+        }
+      }
+      return {
+        ...state,
+        noticesSorted: newNotices,
+        sortDelete: true
       };
   }
 

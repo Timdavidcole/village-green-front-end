@@ -20,7 +20,8 @@ const mapStateToProps = state => ({
   waitTillDimUpdate: state.notices.waitTillDimUpdate,
   newNoticeArrange: state.notices.newNoticeArrange,
   newNotice: state.notices.newNotice,
-  resize: state.notices.resize
+  resize: state.notices.resize,
+  sortDelete: state.notices.sortDelete
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -48,10 +49,20 @@ class Notices extends React.Component {
         )
       );
     }
-    if (this.props.updatedUnsorted){
+    if (this.props.updatedUnsorted) {
       this.props.updateSortedNotices(
         sortByColumn(
           sortByHeight(this.props.notices),
+          this.props.noticesWindowDims,
+          this.props.loggedIn,
+          this.props.newNotice
+        )
+      );
+    }
+    if (this.props.sortDelete) {
+      this.props.updateSortedNotices(
+        sortByColumn(
+          sortByHeight(this.props.noticesSorted),
           this.props.noticesWindowDims,
           this.props.loggedIn,
           this.props.newNotice
@@ -72,8 +83,11 @@ class Notices extends React.Component {
 
   plainOrSortedNotices() {
     if (this.props.sorted) {
+      console.log("NOTICES SORTED ");
       return this.props.noticesSorted;
     } else {
+      console.log("NOTICES UNSORTED ");
+
       return this.props.notices;
     }
   }
@@ -101,7 +115,7 @@ class Notices extends React.Component {
         ref={el => {
           if (
             (el && !this.props.noticesWindowDims.height) ||
-            (this.props.resize)
+            this.props.resize
           ) {
             this.props.addNoticesWindowDims({
               width: document.getElementById("notices").offsetWidth,
@@ -113,27 +127,30 @@ class Notices extends React.Component {
         {this.props.loggedIn ? (
           <NewNoticeButton noticesVisible={this.props.noticesVisible} />
         ) : null}
-        {this.plainOrSortedNotices().map((notice, i) => {
-          if (!notice.image) {
+        {this.plainOrSortedNotices().map((notice1, i) => {
+          console.log(i);
+          if (!notice1.image) {
+            console.log(notice1)
             return (
               <NoticePreview
                 page={this.props.page}
                 noticesVisible={this.props.noticesVisible}
                 index={i + 2}
                 indexTrue={i}
-                notice={notice}
-                key={notice.slug}
+                notice1={notice1}
+                key={notice1.slug}
               />
             );
           } else {
+            console.log(notice1)
             return (
               <NoticePreviewImage
                 page={this.props.page}
                 noticesVisible={this.props.noticesVisible}
                 index={i + 2}
                 indexTrue={i}
-                notice={notice}
-                key={notice.slug}
+                notice1={notice1}
+                key={notice1.slug}
               />
             );
           }

@@ -28,9 +28,9 @@ class NoticePreview extends React.Component {
   }
 
   addDimensions(width, height) {
-    if (!this.props.notice.height) {
+    if (!this.props.notice1.height) {
       this.props.loadDivDim({
-        title: this.props.notice.title,
+        title: this.props.notice1.title,
         width: width,
         height: height,
         index: this.props.indexTrue
@@ -39,7 +39,9 @@ class NoticePreview extends React.Component {
   }
 
   componentDidUpdate() {
-    if (!this.props.notice.height || !this.props.notice.width) {
+    console.log(this.props.notice1)
+    if (!this.props.notice1.height && !this.props.notice1.width) {
+      console.log('ADD DIMENSIONS')
       this.addDimensions(
         document.getElementById(`noticeCard${this.props.index}`).offsetWidth,
         document.getElementById(`noticeCard${this.props.index}`).offsetHeight
@@ -48,7 +50,7 @@ class NoticePreview extends React.Component {
   }
 
   render() {
-    const notice = this.props.notice;
+    const notice1 = this.props.notice1;
     const duration = {
       appear: 100,
       enter: 100,
@@ -68,7 +70,7 @@ class NoticePreview extends React.Component {
             id={`noticeCard${this.props.index}`}
             className={`noticeCard`}
             style={{
-              order: notice.order,
+              order: notice1.order,
               ...transitionStyles[state]
             }}
             onLoad={ev => {
@@ -87,10 +89,10 @@ class NoticePreview extends React.Component {
                 position: "relative"
               }}
             >
-              <Link to={`notice/${notice.slug}`}>
+              <Link to={`notice/${notice1.slug}`}>
                 <div style={{ width: "230px" }}>
                   <div style={{ borderBottom: "1px dashed red" }}>
-                    <h3 style={{ textAlign: "center" }}>{notice.title}</h3>
+                    <h3 style={{ textAlign: "center" }}>{notice1.title}</h3>
                   </div>
                   <span
                     style={{
@@ -100,7 +102,7 @@ class NoticePreview extends React.Component {
                       fontStyle: "italic"
                     }}
                   >
-                    {notice.description}
+                    {notice1.description}
                   </span>
                   <br></br>
                   <span
@@ -114,7 +116,7 @@ class NoticePreview extends React.Component {
                       overflowX: "hidden"
                     }}
                   >
-                    {notice.body}
+                    {notice1.body}
                   </span>
                 </div>
               </Link>
@@ -126,11 +128,11 @@ class NoticePreview extends React.Component {
                   bottom: "-5px"
                 }}
               >
-                <NoticePreviewUser notice={notice} />
+                <NoticePreviewUser notice={notice1} />
                 <NoticeButtons
                   page={this.props.page}
                   index={this.props.index - 2}
-                  notice={notice}
+                  notice={notice1}
                 />
               </div>
             </div>
