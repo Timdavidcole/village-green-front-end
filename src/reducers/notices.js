@@ -108,7 +108,8 @@ export default (
         noticesVisible: true,
         pinnedEvent: false,
         noticesCount: 0,
-        sorted: false
+        sorted: false,
+        noticesWindowDims: {},
       };
   }
 
