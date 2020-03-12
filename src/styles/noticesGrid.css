@@ -1,0 +1,13 @@
+.parent {
+    height: calc(100vh - 114px);
+    width: calc(100vw);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 0;
+    border: none;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    opacity: 1;
+    align-items: stretch;
+}

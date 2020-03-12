@@ -10,8 +10,6 @@ const mapStateToProps = state => ({
   currentUser: state.common.currentUser,
   notices: state.notices.notices,
   sorted: state.notices.sorted,
-  noticesWithDim: state.notices.noticesWithDim,
-  noticesWithDimsIDs: state.notices.noticesWithDimsIDs,
   updatedUnsorted: state.notices.updatedUnsorted
 });
 
@@ -29,53 +27,22 @@ class NoticePreviewImage extends React.Component {
   }
 
   addDimensions(width, height) {
-    if (this.props.page === "pinned") {
-      return null;
-    } else if (this.props.noticesWithDim.length === this.props.notices.length) {
-      if (this.props.noticesWithDim[this.props.indexTrue].height === height) {
-        return null;
-      }
-    } else {
-      var newNotice;
-      if (this.props.sorted) {
-        newNotice = this.props.noticesWithDim[this.props.indexTrue];
-      } else {
-        newNotice = this.props.notices[this.props.indexTrue];
-      }
-      newNotice.width = width;
-      newNotice.height = height;
-      if (
-        newNotice.height > 100 &&
-        !this.props.noticesWithDimsIDs.includes(this.props.notice.id)
-      ) {
-        this.props.loadDivDim({
-          newNotice: newNotice,
-          newNoticeId: newNotice.id
-        });
-      }
+    if (!this.props.notice.height) {
+      this.props.loadDivDim({
+        title: this.props.notice.title,
+        width: width,
+        height: height,
+        index: this.props.indexTrue
+      });
     }
   }
 
   componentDidUpdate() {
-
-    var newNotice;
-    if (
-      this.props.updatedUnsorted &&
-      !this.props.noticesWithDimsIDs.includes(this.props.notice.id)
-    ) {
-      if (this.props.sorted) {
-        newNotice = this.props.noticesWithDim[this.props.indexTrue];
-      } else {
-        newNotice = this.props.notices[this.props.indexTrue];
-      }
-      newNotice.width = this.divElement.clientWidth;
-      newNotice.height = this.divElement.clientHeight;
-      if (newNotice.height > 100 && !this.props.sorted) {
-        this.props.loadDivDim({
-          newNotice: newNotice,
-          newNoticeId: newNotice.id
-        });
-      }
+    if (!this.props.notice.height || !this.props.notice.width) {
+      this.addDimensions(
+        document.getElementById(`noticeCard${this.props.index}`).offsetWidth,
+        document.getElementById(`noticeCard${this.props.index}`).offsetHeight
+      );
     }
   }
 
@@ -85,21 +52,6 @@ class NoticePreviewImage extends React.Component {
       appear: 100,
       enter: 100,
       exit: 100
-    };
-
-    const defaultStyle = {
-      borderRadius: "6px",
-      margin: "auto",
-      backgroundColor: "transparent",
-      position: "relative",
-      transition: `opacity 0.2s linear`,
-      opacity: "1",
-      zIndex: "5000",
-      pointerEvents: "auto",
-      display: "inline-block",
-      width: "250px",
-      height: `${notice.height || "auto"}`,
-      verticalAlign: "top"
     };
 
     const transitionStyles = {
@@ -112,13 +64,22 @@ class NoticePreviewImage extends React.Component {
       <Transition in={!this.props.noticesVisible} timeout={duration}>
         {state => (
           <div
+            id={`noticeCard${this.props.index}`}
             className={"noticeCard"}
             style={{
-              ...defaultStyle,
+              padding: "0px",
+              backgroundColor: "transparent",
+              boxShadow: "none",
+              order: notice.order,
               ...transitionStyles[state]
             }}
-            ref={divElement => {
-              this.divElement = divElement;
+            onLoad={ev => {
+              this.addDimensions(
+                document.getElementById(`noticeCard${this.props.index}`)
+                  .offsetWidth,
+                document.getElementById(`noticeCard${this.props.index}`)
+                  .offsetHeight
+              );
             }}
           >
             <div
@@ -144,8 +105,10 @@ class NoticePreviewImage extends React.Component {
                   style={{ visibility: "hidden", maxWidth: "250px" }}
                   onLoad={ev => {
                     this.addDimensions(
-                      ev.target.offsetWidth,
-                      ev.target.offsetHeight
+                      document.getElementById(`noticeCard${this.props.index}`)
+                        .offsetWidth,
+                      document.getElementById(`noticeCard${this.props.index}`)
+                        .offsetHeight
                     );
                   }}
                 />
@@ -153,10 +116,10 @@ class NoticePreviewImage extends React.Component {
               <div
                 className="card-back"
                 style={{
-                  height: "100%",
                   width: "250px",
                   backgroundColor: "#e4dfc0",
-                  padding: "10px"
+                  padding: "10px",
+                  minHeight: notice.height
                 }}
               >
                 <Link to={`notice/${notice.slug}`}>
@@ -180,7 +143,7 @@ class NoticePreviewImage extends React.Component {
                         width: "100%",
                         textAlign: "center",
                         marginBottom: "40px",
-                        maxHeight: "121px",
+                        height: "121px",
                         overflowY: "auto",
                         overflowX: "auto"
                       }}

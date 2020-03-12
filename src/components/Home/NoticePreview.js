@@ -10,8 +10,6 @@ const mapStateToProps = state => ({
   currentUser: state.common.currentUser,
   notices: state.notices.notices,
   sorted: state.notices.sorted,
-  noticesWithDim: state.notices.noticesWithDim,
-  noticesWithDimsIDs: state.notices.noticesWithDimsIDs
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -30,27 +28,22 @@ class NoticePreview extends React.Component {
   }
 
   addDimensions(width, height) {
-    if (this.props.page === "pinned") {
-      return null;
-    } else if (this.props.noticesWithDim.length === this.props.notices.length) {
-      if (this.props.noticesWithDim[this.props.indexTrue].height === height) {
-        return null;
-      }
-    } else {
-      var newNotice;
-      if (this.props.sorted) {
-        newNotice = this.props.noticesWithDim[this.props.indexTrue];
-      } else {
-        newNotice = this.props.notices[this.props.indexTrue];
-      }
-      newNotice.width = width;
-      newNotice.height = height;
-      if (!this.props.noticesWithDimsIDs.includes(this.props.notice.id)) {
-        this.props.loadDivDim({
-          newNotice: newNotice,
-          newNoticeId: newNotice.id
-        });
-      }
+    if (!this.props.notice.height) {
+      this.props.loadDivDim({
+        title: this.props.notice.title,
+        width: width,
+        height: height,
+        index: this.props.indexTrue
+      });
+    }
+  }
+
+  componentDidUpdate() {
+    if (!this.props.notice.height || !this.props.notice.width) {
+      this.addDimensions(
+        document.getElementById(`noticeCard${this.props.index}`).offsetWidth,
+        document.getElementById(`noticeCard${this.props.index}`).offsetHeight
+      );
     }
   }
 
@@ -60,22 +53,6 @@ class NoticePreview extends React.Component {
       appear: 100,
       enter: 100,
       exit: 100
-    };
-
-    const defaultStyle = {
-      boxShadow: "5px 10px 20px 3px rgba(176,176,176,0.79)",
-      borderRadius: "6px",
-      margin: "auto",
-      padding: "10px",
-      backgroundColor: "#fffbf0",
-      position: "relative",
-      transition: `opacity 0.2s linear`,
-      opacity: "1",
-      zIndex: "5000",
-      pointerEvents: "auto",
-      display: "inline-block",
-      width: "250px",
-      verticalAlign: "top"
     };
 
     const transitionStyles = {
@@ -88,15 +65,19 @@ class NoticePreview extends React.Component {
       <Transition in={!this.props.noticesVisible} timeout={duration}>
         {state => (
           <div
-            className={`div${this.props.index}`}
+            id={`noticeCard${this.props.index}`}
+            className={`noticeCard`}
             style={{
-              ...defaultStyle,
+              order: notice.order,
               ...transitionStyles[state]
             }}
-            ref={el => {
-              if (el && !notice.width && !this.state.sorted) {
-                this.addDimensions(el.offsetWidth, el.offsetHeight);
-              }
+            onLoad={ev => {
+              this.addDimensions(
+                document.getElementById(`noticeCard${this.props.index}`)
+                  .offsetWidth,
+                document.getElementById(`noticeCard${this.props.index}`)
+                  .offsetHeight
+              );
             }}
           >
             <div
@@ -107,7 +88,7 @@ class NoticePreview extends React.Component {
               }}
             >
               <Link to={`notice/${notice.slug}`}>
-                <div style={{ width: "100%" }}>
+                <div style={{ width: "230px" }}>
                   <div style={{ borderBottom: "1px dashed red" }}>
                     <h3 style={{ textAlign: "center" }}>{notice.title}</h3>
                   </div>
@@ -125,12 +106,12 @@ class NoticePreview extends React.Component {
                   <span
                     style={{
                       display: "inline-block",
-                      width: "100%",
+                      width: "230px",
                       textAlign: "center",
                       marginBottom: "40px",
                       maxHeight: "121px",
                       overflowY: "auto",
-                      overflowX: "auto"
+                      overflowX: "hidden"
                     }}
                   >
                     {notice.body}

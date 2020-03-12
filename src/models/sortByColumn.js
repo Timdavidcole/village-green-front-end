@@ -1,11 +1,28 @@
-const sortByColumn = function(notices, columnHeight, loggedIn) {
+const sortByColumn = function(notices, noticesDims, loggedIn, newNotice) {
   var newNotices;
-
-  loggedIn ? (newNotices = [[{ height: 229 }]]) : (newNotices = [[]]);
+  console.log("SORT BY COLUMN");
+  if (newNotice) {
+    var firstNotice = notices[0];
+    firstNotice.order = 1;
+  }
 
   var usedIndexes = [];
   const margin = 20;
   var columnWithRoom = 0;
+
+  if (loggedIn) {
+    if (newNotice) {
+      console.log("NEW NOTICES WITH FIRST NOTICE");
+      newNotices = [[{ height: 250 }, firstNotice]];
+      usedIndexes.push(0);
+    } else {
+      newNotices = [[{ height: 250 }]];
+    }
+  } else {
+    newNotices = [[]];
+  }
+
+  console.log(newNotices)
 
   function sumHeights(noticesToSum) {
     var sum = 0;
@@ -24,9 +41,11 @@ const sortByColumn = function(notices, columnHeight, loggedIn) {
     }
 
     if (columnRemainder(column) - (notice1.height + margin) > 0) {
+      notice1.order = column + 1;
       newNotices[column].push(notice1);
       usedIndexes.push(index1);
     } else if (!findNoticeThatFits(column)) {
+      notice1.order = column + 2;
       newNotices.push([notice1]);
       usedIndexes.push(index1);
       nextColumn = column + 1;
@@ -43,6 +62,7 @@ const sortByColumn = function(notices, columnHeight, loggedIn) {
         columnRemainder(column) - (notice2.height + margin) > 0 &&
         !usedIndexes.includes(index2)
       ) {
+        notice2.order = column + 1;
         newNotices[column].push(notice2);
         usedIndexes.push(index2);
         return true;
@@ -52,17 +72,31 @@ const sortByColumn = function(notices, columnHeight, loggedIn) {
   }
 
   function columnRemainder(column) {
-    return columnHeight - sumHeights(newNotices[column]);
+    return noticesDims.height - sumHeights(newNotices[column]);
   }
 
   notices.forEach((notice, index) => {
-    findColumnWithSpace(notice, columnWithRoom, index);
+    if (newNotice && index === 0) {
+      console.log("FIRSTNOTICE");
+      console.log(newNotices)
+      return null;
+    } else {
+      console.log(index)
+      findColumnWithSpace(notice, columnWithRoom, index);
+      console.log(newNotices)
+    }
   });
+
+  function maxColumns() {
+    return noticesDims.width / 250;
+  }
 
   if (loggedIn) {
     newNotices[0].splice(0, 1);
   }
-  return newNotices.flat();
+
+  console.log(newNotices);
+  return newNotices.slice(0, Math.floor(maxColumns())).flat();
 };
 
 export default sortByColumn;

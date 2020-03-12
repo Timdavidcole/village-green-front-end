@@ -5,7 +5,6 @@ import agent from "../../agent";
 
 const mapStateToProps = state => ({
   notices: state.notices.notices,
-  noticesWithDim: state.notices.noticesWithDim,
   noticesPinned: state.pinned.notices,
   loggedIn: state.auth.loggedIn
 });
@@ -38,7 +37,7 @@ class NoticeButtons extends React.Component {
           this.props.updatePinned(notices);
           this.props.addPinnedEvent();
         } else {
-          notices = [...this.props.noticesWithDim];
+          notices = [...this.props.notices];
           notices[this.props.index].isPinned = notice.notice.isPinned;
           this.props.pinNotice(notices);
         }
@@ -51,7 +50,7 @@ class NoticeButtons extends React.Component {
           this.props.updatePinned(notices);
           this.props.addPinnedEvent();
         } else {
-          notices = [...this.props.noticesWithDim];
+          notices = [...this.props.notices];
           notices[this.props.index].isPinned = notice.notice.isPinned;
           this.props.pinNotice(notices);
         }

@@ -1,13 +1,16 @@
 export default (
   state = {
     notices: [],
-    noticesWithDim: [],
+    noticesSorted: [],
     noticesVisible: true,
     pinnedEvent: false,
     noticesCount: null,
     sorted: false,
     updatedUnsorted: false,
-    noticesWithDimsIDs: []
+    noticesWindowDims: { height: null, width: null },
+    waitTillDimUpdate: true,
+    newNotice: null,
+    newNoticeArrange: false
   },
   action
 ) => {
@@ -19,13 +22,19 @@ export default (
         notices: action.payload.notices,
         noticesCount: action.payload.noticesCount
       };
-    case "NEW_NOTICE":
+    case "ADD_NEW_NOTICE":
       return {
         ...state,
         noticeErrors: action.error ? action.payload.errors : null,
-        notices: action.error
-          ? null
-          : [action.payload.notice].concat(state.notices || [])
+        newNotice: action.payload.notice,
+        newNoticeArrange: true,
+        sorted: false
+      };
+    case "NEW_NOTICE_DISPLAYED":
+      return {
+        ...state,
+        newNotice: [],
+        newNoticeArrange: false
       };
     case "NOTICES_VISIBLE":
       return {
@@ -37,7 +46,7 @@ export default (
     case "PIN_NOTICE":
       return {
         ...state,
-        noticesWithDim: action.payload,
+        notices: action.payload,
         pinnedEvent: true
       };
     case "ADD_PINNED_EVENT":
@@ -46,49 +55,59 @@ export default (
         pinnedEvent: true
       };
     case "LOAD_DIV_DIMENSIONS":
-      if (!state.noticesWithDimsIDs.includes(action.payload.newNoticeId)) {
-        return {
-          ...state,
-          noticesWithDim: [...state.noticesWithDim, action.payload.newNotice],
-          noticesWithDimsIDs: [
-            ...state.noticesWithDimsIDs,
-            action.payload.newNoticeId
-          ]
-        };
-      } else return { ...state };
-
-    case "ADD_NOTICES_WINDOW_HEIGHT":
+      console.log(state.notices)
+      var newNotices1 = [...state.notices];
+      console.log(state.notices)
+      console.log(newNotices1)
+      newNotices1[action.payload.index].height = action.payload.height;
+      newNotices1[action.payload.index].width = action.payload.width;
       return {
         ...state,
-        noticesWindowHeight: action.payload,
+        notices: newNotices1
+      };
+    case "ADD_NOTICES_WINDOW_DIMS":
+      return {
+        ...state,
+        noticesWindowDims: action.payload,
         sorted: false,
-        pinnedEvent: false
+        resize: false,
+        update: true,
+        pinnedEvent: false,
+        waitTillDimUpdate: false
       };
     case "UPDATE_SORTED_NOTICES":
       return {
         ...state,
-        noticesWithDim: action.payload,
+        noticesSorted: action.payload,
         sorted: true,
         noticesVisible: true,
-        updatedUnsorted: false
+        updatedUnsorted: false,
+        update: false,
+        waitTillDimUpdate: true,
+        newNoticeArrange: false
+      };
+    case "RESIZE":
+      return {
+        ...state,
+        resize: true,
+        update: true,
+        sorted: false,
+        waitTillDimUpdate: true
       };
     case "UPDATE_UNSORTED_NOTICES":
       return {
         ...state,
         notices: action.payload.notices,
-        noticesCount: action.payload.noticesCount,
-        noticesWithDim: [],
-        noticesWithDimsIDs: [],
         sorted: false,
         pinnedEvent: false,
         updatedUnsorted: true,
-        noticesVisible: true
+        noticesVisible: true,
+        update: true,
+        newNoticeArrange: false
       };
     case "LOG_OUT_NOTICES":
       return {
         notices: [],
-        noticesWithDim: [],
-        noticesWithDimsIDs: [],
         noticesVisible: true,
         pinnedEvent: false,
         noticesCount: 0,
