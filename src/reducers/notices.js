@@ -9,7 +9,7 @@ export default (
     updatedUnsorted: false,
     noticesWindowDims: { height: null, width: null },
     waitTillDimUpdate: true,
-    newNotice: [],
+    newNotice: null,
     newNoticeArrange: false
   },
   action

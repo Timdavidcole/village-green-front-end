@@ -44,7 +44,7 @@ class Notices extends React.Component {
           sortByHeight(this.props.notices),
           this.props.noticesWindowDims,
           this.props.loggedIn,
-          this.props.newNoticeArrange
+          this.props.newNotice
         )
       );
       return;
@@ -86,7 +86,6 @@ class Notices extends React.Component {
         </div>
       );
     }
-    console.log("RENDER NOTICES");
     return (
       <div
         className="parent"
@@ -96,8 +95,8 @@ class Notices extends React.Component {
             (el && !this.props.noticesWindowDims.height) ||
             (el && this.props.update)
           ) {
-            console.log(!this.props.noticesWindowDims.height)
-            console.log(this.props.update)
+            console.log(el && !this.props.noticesWindowDims.height)
+            console.log(el && this.props.update)
             this.props.addNoticesWindowDims({
               width: document.getElementById("notices").offsetWidth,
               height: document.getElementById("notices").offsetHeight

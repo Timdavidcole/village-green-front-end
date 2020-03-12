@@ -1,10 +1,18 @@
-const sortByColumn = function(notices, noticesDims, loggedIn, newNoticeArrange) {
+const sortByColumn = function(notices, noticesDims, loggedIn, newNotice) {
   var newNotices;
   console.log("SORT BY COLUMN");
-  console.log(newNoticeArrange);
+  if (newNotice) {
+    var firstNotice = notices[0];
+    firstNotice.order = 1;
+  }
 
   if (loggedIn) {
-    newNotices = [[{ height: 250 }]];
+    if (newNotice) {
+      console.log("NEW NOTICES WITH FIRST NOTICE");
+      newNotices = [[{ height: 250 }, firstNotice]];
+    } else {
+      newNotices = [[{ height: 250 }]];
+    }
   } else {
     newNotices = [[]];
   }
@@ -65,7 +73,12 @@ const sortByColumn = function(notices, noticesDims, loggedIn, newNoticeArrange) 
   }
 
   notices.forEach((notice, index) => {
-    findColumnWithSpace(notice, columnWithRoom, index);
+    if (newNotice && index === 0) {
+      console.log("FIRSTNOTICE");
+      return null;
+    } else {
+      findColumnWithSpace(notice, columnWithRoom, index);
+    }
   });
 
   function maxColumns() {
@@ -75,9 +88,8 @@ const sortByColumn = function(notices, noticesDims, loggedIn, newNoticeArrange) 
   if (loggedIn) {
     newNotices[0].splice(0, 1);
   }
-  console.log(maxColumns());
 
-  console.log(Math.floor(maxColumns()));
+  console.log(newNotices);
   return newNotices.slice(0, Math.floor(maxColumns())).flat();
 };
 
