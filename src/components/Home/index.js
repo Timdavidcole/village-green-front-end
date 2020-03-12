@@ -30,20 +30,17 @@ class Home extends React.Component {
     window.addEventListener("resize", () => {
       clearTimeout(doit);
       doit = setTimeout(() => {
-        console.log("RESIZE");
         this.props.resize();
-      }, 400);
+      }, 200);
     });
   }
 
   componentDidUpdate() {
     if (this.props.pinnedEvent) {
-      console.log("PINNED EVENT")
       this.props.updateUnsortedNotices(
         agent.Notices.all(JSON.stringify(this.props.centerMap))
       );
     } else if (this.props.newNoticeArrange) {
-      console.log("NOTICES WITH NEW NOTICE");
       this.props.updateUnsortedNotices({ notices: [
         this.props.newNotice,
         ...this.props.notices

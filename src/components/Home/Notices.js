@@ -19,7 +19,8 @@ const mapStateToProps = state => ({
   noticesSorted: state.notices.noticesSorted,
   waitTillDimUpdate: state.notices.waitTillDimUpdate,
   newNoticeArrange: state.notices.newNoticeArrange,
-  newNotice: state.notices.newNotice
+  newNotice: state.notices.newNotice,
+  resize: state.notices.resize
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -38,8 +39,6 @@ class Notices extends React.Component {
       this.props.noticesWindowDims.height &&
       !this.props.waitTillDimUpdate
     ) {
-      console.log("sort unsorted");
-      console.log(this.props.notices)
       this.props.updateSortedNotices(
         sortByColumn(
           sortByHeight(this.props.notices),
@@ -102,7 +101,7 @@ class Notices extends React.Component {
         ref={el => {
           if (
             (el && !this.props.noticesWindowDims.height) ||
-            (el && this.props.resize)
+            (this.props.resize)
           ) {
             this.props.addNoticesWindowDims({
               width: document.getElementById("notices").offsetWidth,
