@@ -1,18 +1,16 @@
 const sortByColumn = function(notices, noticesDims, loggedIn, newNotice) {
   var newNotices;
-  console.log("SORT BY COLUMN");
   if (newNotice) {
     var firstNotice = notices[0];
     firstNotice.order = 1;
   }
 
   var usedIndexes = [];
-  const margin = 20;
+  const margin = (notice) => notice.image ? 20 : 0;
   var columnWithRoom = 0;
 
   if (loggedIn) {
     if (newNotice) {
-      console.log("NEW NOTICES WITH FIRST NOTICE");
       newNotices = [[{ height: 250 }, firstNotice]];
       usedIndexes.push(0);
     } else {
@@ -22,13 +20,12 @@ const sortByColumn = function(notices, noticesDims, loggedIn, newNotice) {
     newNotices = [[]];
   }
 
-  console.log(newNotices)
 
   function sumHeights(noticesToSum) {
     var sum = 0;
     noticesToSum.forEach(notice => {
       if (notice.height) {
-        sum += notice.height + margin;
+        sum += notice.height + margin(notice);
       }
     });
     return sum;
@@ -40,7 +37,7 @@ const sortByColumn = function(notices, noticesDims, loggedIn, newNotice) {
       return true;
     }
 
-    if (columnRemainder(column) - (notice1.height + margin) > 0) {
+    if (columnRemainder(column) - (notice1.height + margin(notice1)) > 0) {
       notice1.order = column + 1;
       newNotices[column].push(notice1);
       usedIndexes.push(index1);
@@ -59,7 +56,7 @@ const sortByColumn = function(notices, noticesDims, loggedIn, newNotice) {
   function findNoticeThatFits(column) {
     notices.some((notice2, index2) => {
       if (
-        columnRemainder(column) - (notice2.height + margin) > 0 &&
+        columnRemainder(column) - (notice2.height + margin(notice2)) > 0 &&
         !usedIndexes.includes(index2)
       ) {
         notice2.order = column + 1;
@@ -77,13 +74,9 @@ const sortByColumn = function(notices, noticesDims, loggedIn, newNotice) {
 
   notices.forEach((notice, index) => {
     if (newNotice && index === 0) {
-      console.log("FIRSTNOTICE");
-      console.log(newNotices)
       return null;
     } else {
-      console.log(index)
       findColumnWithSpace(notice, columnWithRoom, index);
-      console.log(newNotices)
     }
   });
 
@@ -95,7 +88,10 @@ const sortByColumn = function(notices, noticesDims, loggedIn, newNotice) {
     newNotices[0].splice(0, 1);
   }
 
-  console.log(newNotices);
+  if(sumHeights(newNotices[newNotices.length - 1]) < (noticesDims.height / 2)) {
+    newNotices.splice(newNotices.length - 1, 1);
+  }
+
   return newNotices.slice(0, Math.floor(maxColumns())).flat();
 };
 
