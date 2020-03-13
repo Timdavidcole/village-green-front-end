@@ -1,25 +1,28 @@
 const sortByColumn = function(notices, noticesDims, loggedIn, newNotice) {
+  console.log("sortbyColumn");
   var newNotices;
-  if (newNotice) {
-    var firstNotice = notices[0];
-    firstNotice.order = 1;
-  }
-
+  console.log(notices)
   var usedIndexes = [];
-  const margin = (notice) => notice.image ? 20 : 0;
+  const margin = notice => (notice.image ? 20 : 0);
   var columnWithRoom = 0;
+  const noticesToSort = [...notices]
+  console.log(JSON.stringify(noticesToSort))
 
+  if (newNotice) {
+    var firstNotice = {...notices[0]};
+    firstNotice.order = columnWithRoom + 1;
+  }
   if (loggedIn) {
     if (newNotice) {
       newNotices = [[{ height: 250 }, firstNotice]];
       usedIndexes.push(0);
+      console.log(notices[0])
     } else {
       newNotices = [[{ height: 250 }]];
     }
   } else {
     newNotices = [[]];
   }
-
 
   function sumHeights(noticesToSum) {
     var sum = 0;
@@ -36,16 +39,16 @@ const sortByColumn = function(notices, noticesDims, loggedIn, newNotice) {
     if (usedIndexes.includes(index1)) {
       return true;
     }
-
     if (columnRemainder(column) - (notice1.height + margin(notice1)) > 0) {
       notice1.order = column + 1;
+
       newNotices[column].push(notice1);
       usedIndexes.push(index1);
     } else if (!findNoticeThatFits(column)) {
       notice1.order = column + 2;
       newNotices.push([notice1]);
       usedIndexes.push(index1);
-      nextColumn = column + 1;
+      nextColumn = column;
       columnWithRoom++;
     } else {
       nextColumn = column + 1;
@@ -71,8 +74,10 @@ const sortByColumn = function(notices, noticesDims, loggedIn, newNotice) {
   function columnRemainder(column) {
     return noticesDims.height - sumHeights(newNotices[column]);
   }
+  console.log(JSON.stringify(noticesToSort))
 
-  notices.forEach((notice, index) => {
+  noticesToSort.forEach((notice, index) => {
+
     if (newNotice && index === 0) {
       return null;
     } else {
@@ -88,9 +93,11 @@ const sortByColumn = function(notices, noticesDims, loggedIn, newNotice) {
     newNotices[0].splice(0, 1);
   }
 
-  if(sumHeights(newNotices[newNotices.length - 1]) < (noticesDims.height / 2)) {
+  if (sumHeights(newNotices[newNotices.length - 1]) < noticesDims.height / 2) {
     newNotices.splice(newNotices.length - 1, 1);
   }
+
+  console.log([...newNotices])
 
   return newNotices.slice(0, Math.floor(maxColumns())).flat();
 };

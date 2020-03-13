@@ -23,8 +23,6 @@ export default (
         noticesCount: action.payload.noticesCount
       };
     case "ADD_NEW_NOTICE":
-      console.log(state.notices)
-      console.log(action.payload)
       return {
         ...state,
         noticeErrors: action.error ? action.payload.errors : null,
@@ -57,9 +55,17 @@ export default (
         pinnedEvent: true
       };
     case "LOAD_DIV_DIMENSIONS":
-      var newNotices1 = [...state.notices];
-      newNotices1[action.payload.index].height = action.payload.height;
-      newNotices1[action.payload.index].width = action.payload.width;
+      console.log(action.payload.index);
+      console.log(state.notices)
+      const newNotices1 = [...state.notices];
+      console.log(newNotices1)
+      const newNotice1 = {
+        ...newNotices1[action.payload.index],
+        height: action.payload.height,
+        width: action.payload.width
+      };
+      newNotices1[action.payload.index] = newNotice1;
+      console.log(newNotices1)
       return {
         ...state,
         notices: newNotices1
@@ -77,7 +83,7 @@ export default (
     case "UPDATE_SORTED_NOTICES":
       return {
         ...state,
-        noticesSorted: action.payload,
+        noticesSorted: [...action.payload],
         sorted: true,
         noticesVisible: true,
         updatedUnsorted: false,
@@ -97,7 +103,7 @@ export default (
     case "UPDATE_UNSORTED_NOTICES":
       return {
         ...state,
-        notices: action.payload.notices,
+        notices: [...action.payload.notices],
         sorted: false,
         pinnedEvent: false,
         updatedUnsorted: true,

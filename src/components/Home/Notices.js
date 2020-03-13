@@ -34,35 +34,43 @@ const mapDispatchToProps = dispatch => ({
 
 class Notices extends React.Component {
   componentDidUpdate() {
+    console.log(this.props.notices)
+
     if (
       this.checkNoticesDimensions() &&
       !this.props.sorted &&
       this.props.noticesWindowDims.height &&
       !this.props.waitTillDimUpdate
     ) {
+      console.log('first one')
+
       this.props.updateSortedNotices(
         sortByColumn(
-          sortByHeight(this.props.notices),
+          sortByHeight([...this.props.notices]),
           this.props.noticesWindowDims,
           this.props.loggedIn,
           this.props.newNotice
         )
       );
     }
-    if (this.props.updatedUnsorted) {
+    if (this.props.updatedUnsorted && this.checkNoticesDimensions()) {
+      console.log('this.props.updatedUnsorted && this.checkNoticesDimensions()')
+      console.log(this.props.notices)
       this.props.updateSortedNotices(
         sortByColumn(
-          sortByHeight(this.props.notices),
+          sortByHeight([...this.props.notices], this.props.newNotice),
           this.props.noticesWindowDims,
           this.props.loggedIn,
           this.props.newNotice
         )
       );
     }
-    if (this.props.sortDelete) {
+    if (this.props.sortDelete && this.checkNoticesDimensions()) {
+      console.log('this.props.sortDelete && this.checkNoticesDimensions()')
+
       this.props.updateSortedNotices(
         sortByColumn(
-          sortByHeight(this.props.noticesSorted),
+          sortByHeight([...this.props.noticesSorted]),
           this.props.noticesWindowDims,
           this.props.loggedIn,
           this.props.newNotice
@@ -83,11 +91,8 @@ class Notices extends React.Component {
 
   plainOrSortedNotices() {
     if (this.props.sorted) {
-      console.log("NOTICES SORTED ");
       return this.props.noticesSorted;
     } else {
-      console.log("NOTICES UNSORTED ");
-
       return this.props.notices;
     }
   }
@@ -128,9 +133,7 @@ class Notices extends React.Component {
           <NewNoticeButton noticesVisible={this.props.noticesVisible} />
         ) : null}
         {this.plainOrSortedNotices().map((notice1, i) => {
-          console.log(i);
           if (!notice1.image) {
-            console.log(notice1)
             return (
               <NoticePreview
                 page={this.props.page}
@@ -142,7 +145,6 @@ class Notices extends React.Component {
               />
             );
           } else {
-            console.log(notice1)
             return (
               <NoticePreviewImage
                 page={this.props.page}

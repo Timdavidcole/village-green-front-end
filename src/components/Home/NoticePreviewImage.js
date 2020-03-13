@@ -27,7 +27,7 @@ class NoticePreviewImage extends React.Component {
   }
 
   addDimensions(width, height) {
-    if (!this.props.notice1.height) {
+    if (!this.props.notice1.height || this.props.notice1.height === 24) {
       this.props.loadDivDim({
         title: this.props.notice1.title,
         width: width,
@@ -39,7 +39,6 @@ class NoticePreviewImage extends React.Component {
 
   componentDidUpdate() {
     if (!this.props.notice1.height && !this.props.notice1.width) {
-      console.log('ADD DIMENSIONS')
       this.addDimensions(
         document.getElementById(`noticeCard${this.props.index}`).offsetWidth,
         document.getElementById(`noticeCard${this.props.index}`).offsetHeight
@@ -73,14 +72,6 @@ class NoticePreviewImage extends React.Component {
               boxShadow: "none",
               order: notice1.order,
               ...transitionStyles[state]
-            }}
-            onLoad={ev => {
-              this.addDimensions(
-                document.getElementById(`noticeCard${this.props.index}`)
-                  .offsetWidth,
-                document.getElementById(`noticeCard${this.props.index}`)
-                  .offsetHeight
-              );
             }}
           >
             <div

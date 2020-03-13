@@ -39,9 +39,7 @@ class NoticePreview extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log(this.props.notice1)
     if (!this.props.notice1.height && !this.props.notice1.width) {
-      console.log('ADD DIMENSIONS')
       this.addDimensions(
         document.getElementById(`noticeCard${this.props.index}`).offsetWidth,
         document.getElementById(`noticeCard${this.props.index}`).offsetHeight
