@@ -34,7 +34,6 @@ const mapDispatchToProps = dispatch => ({
 
 class Notices extends React.Component {
   componentDidUpdate() {
-    console.log(this.props.notices)
 
     if (
       this.checkNoticesDimensions() &&
@@ -42,7 +41,6 @@ class Notices extends React.Component {
       this.props.noticesWindowDims.height &&
       !this.props.waitTillDimUpdate
     ) {
-      console.log('first one')
 
       this.props.updateSortedNotices(
         sortByColumn(
@@ -54,8 +52,6 @@ class Notices extends React.Component {
       );
     }
     if (this.props.updatedUnsorted && this.checkNoticesDimensions()) {
-      console.log('this.props.updatedUnsorted && this.checkNoticesDimensions()')
-      console.log(this.props.notices)
       this.props.updateSortedNotices(
         sortByColumn(
           sortByHeight([...this.props.notices], this.props.newNotice),
@@ -66,7 +62,6 @@ class Notices extends React.Component {
       );
     }
     if (this.props.sortDelete && this.checkNoticesDimensions()) {
-      console.log('this.props.sortDelete && this.checkNoticesDimensions()')
 
       this.props.updateSortedNotices(
         sortByColumn(

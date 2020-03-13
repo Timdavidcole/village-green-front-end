@@ -1,12 +1,9 @@
 const sortByColumn = function(notices, noticesDims, loggedIn, newNotice) {
-  console.log("sortbyColumn");
   var newNotices;
-  console.log(notices)
   var usedIndexes = [];
   const margin = notice => (notice.image ? 20 : 0);
   var columnWithRoom = 0;
   const noticesToSort = [...notices]
-  console.log(JSON.stringify(noticesToSort))
 
   if (newNotice) {
     var firstNotice = {...notices[0]};
@@ -16,7 +13,6 @@ const sortByColumn = function(notices, noticesDims, loggedIn, newNotice) {
     if (newNotice) {
       newNotices = [[{ height: 250 }, firstNotice]];
       usedIndexes.push(0);
-      console.log(notices[0])
     } else {
       newNotices = [[{ height: 250 }]];
     }
@@ -74,7 +70,6 @@ const sortByColumn = function(notices, noticesDims, loggedIn, newNotice) {
   function columnRemainder(column) {
     return noticesDims.height - sumHeights(newNotices[column]);
   }
-  console.log(JSON.stringify(noticesToSort))
 
   noticesToSort.forEach((notice, index) => {
 
@@ -97,7 +92,6 @@ const sortByColumn = function(notices, noticesDims, loggedIn, newNotice) {
     newNotices.splice(newNotices.length - 1, 1);
   }
 
-  console.log([...newNotices])
 
   return newNotices.slice(0, Math.floor(maxColumns())).flat();
 };

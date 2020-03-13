@@ -55,17 +55,13 @@ export default (
         pinnedEvent: true
       };
     case "LOAD_DIV_DIMENSIONS":
-      console.log(action.payload.index);
-      console.log(state.notices)
       const newNotices1 = [...state.notices];
-      console.log(newNotices1)
       const newNotice1 = {
         ...newNotices1[action.payload.index],
         height: action.payload.height,
         width: action.payload.width
       };
       newNotices1[action.payload.index] = newNotice1;
-      console.log(newNotices1)
       return {
         ...state,
         notices: newNotices1
