@@ -28,10 +28,9 @@ const NoticesPage = props => {
       </div>
     );
   }
-  console.log(props.noticesByPage)
   return (
     <div
-      className="parent"
+      className="noticesParent"
       id="notices"
       ref={el => {
         if ((el && !props.noticesWindowDims.height) || props.resize) {
@@ -47,7 +46,6 @@ const NoticesPage = props => {
       ) : null}
       {props.noticesByPage.map((notice1, i) => {
         if (!notice1.image) {
-          console.log('NOTICE NORMAL')
           return (
             <NoticePreview
               page={props.page}
@@ -59,7 +57,6 @@ const NoticesPage = props => {
             />
           );
         } else {
-          console.log('NOTICE IMAGE')
           return (
             <NoticePreviewImage
               page={props.page}

@@ -1,3 +1,5 @@
+import { bindActionCreators } from "redux";
+
 export default (
   state = {
     notices: [],
@@ -112,18 +114,28 @@ export default (
     case "LOG_OUT_NOTICES":
       return {
         notices: [],
+        noticesSorted: [],
         noticesVisible: true,
         pinnedEvent: false,
-        noticesCount: 0,
+        noticesCount: null,
         sorted: false,
-        noticesWindowDims: {}
+        updatedUnsorted: false,
+        noticesWindowDims: { height: null, width: null },
+        waitTillDimUpdate: true,
+        newNotice: null,
+        newNoticeArrange: false,
+        pageNumber: 1
       };
     case "DELETE_NOTICE":
       var newNotices = [...state.noticesSorted];
-      for (let index = 0; index < newNotices.length; index++) {
-        const element = newNotices[index];
+      for (
+        let index = 0;
+        index < newNotices[state.pageNumber].length;
+        index++
+      ) {
+        const element = newNotices[state.pageNumber][index];
         if (element.slug === action.payload.slug) {
-          newNotices.splice(index, 1);
+          newNotices[state.pageNumber].splice(index, 1);
         }
       }
       return {

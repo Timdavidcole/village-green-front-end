@@ -1,4 +1,4 @@
-.parent {
+.noticesParent {
     height: calc(100vh - 114px);
     width: calc(100vw);
     display: flex;

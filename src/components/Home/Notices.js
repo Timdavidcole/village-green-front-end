@@ -8,14 +8,12 @@ import sortByColumn from "../../models/sortByColumn";
 const mapStateToProps = state => ({
   noticesWindowDims: state.notices.noticesWindowDims,
   notices: state.notices.notices,
-  noticesVisible: state.notices.noticesVisible,
   sorted: state.notices.sorted,
   loggedIn: state.auth.loggedIn,
   updatedUnsorted: state.notices.updatedUnsorted,
   noticesSorted: state.notices.noticesSorted,
   waitTillDimUpdate: state.notices.waitTillDimUpdate,
   newNotice: state.notices.newNotice,
-  resize: state.notices.resize,
   sortDelete: state.notices.sortDelete,
   pageNumber: state.notices.pageNumber,
 });
@@ -87,9 +85,6 @@ class Notices extends React.Component {
     }
 
     if (this.props.sorted) {
-      console.log('return Notices Sorted')
-      console.log(this.props.noticesSorted)
-      console.log(this.props.pageNumber)
       return (
         <NoticesPage
           noticesByPage={this.props.noticesSorted[this.props.pageNumber - 1]}
