@@ -92,8 +92,12 @@ const sortByColumn = function(notices, noticesDims, loggedIn, newNotice) {
     newNotices.splice(newNotices.length - 1, 1);
   }
 
+  var noticesFirstPage = newNotices.slice(0, Math.floor(maxColumns())).flat();
+  var noticesSecondPage = newNotices.flat();
 
-  return newNotices.slice(0, Math.floor(maxColumns())).flat();
+  return [[...noticesFirstPage], [...noticesSecondPage]]
+
+
 };
 
 export default sortByColumn;

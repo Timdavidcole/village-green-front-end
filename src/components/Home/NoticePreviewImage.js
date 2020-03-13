@@ -47,6 +47,8 @@ class NoticePreviewImage extends React.Component {
   }
 
   render() {
+    console.log("NOTICE RENDERING")
+    console.log(this.props.notice1.title)
     const notice1 = this.props.notice1;
     const duration = {
       appear: 100,

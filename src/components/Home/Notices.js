@@ -1,7 +1,5 @@
-import NoticePreview from "./NoticePreview";
-import NoticePreviewImage from "./NoticePreviewImage";
 import React from "react";
-import NewNoticeButton from "./NewNoticeButton";
+import NoticesPage from "./NoticesPage";
 import "../../styles/noticesGrid.css";
 import { connect } from "react-redux";
 import sortByHeight from "../../models/sortByHeight";
@@ -9,19 +7,17 @@ import sortByColumn from "../../models/sortByColumn";
 
 const mapStateToProps = state => ({
   noticesWindowDims: state.notices.noticesWindowDims,
-  noticesCount: state.notices.noticesCount,
   notices: state.notices.notices,
   noticesVisible: state.notices.noticesVisible,
   sorted: state.notices.sorted,
   loggedIn: state.auth.loggedIn,
   updatedUnsorted: state.notices.updatedUnsorted,
-  update: state.notices.update,
   noticesSorted: state.notices.noticesSorted,
   waitTillDimUpdate: state.notices.waitTillDimUpdate,
-  newNoticeArrange: state.notices.newNoticeArrange,
   newNotice: state.notices.newNotice,
   resize: state.notices.resize,
-  sortDelete: state.notices.sortDelete
+  sortDelete: state.notices.sortDelete,
+  pageNumber: state.notices.pageNumber,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -34,14 +30,12 @@ const mapDispatchToProps = dispatch => ({
 
 class Notices extends React.Component {
   componentDidUpdate() {
-
     if (
       this.checkNoticesDimensions() &&
       !this.props.sorted &&
       this.props.noticesWindowDims.height &&
       !this.props.waitTillDimUpdate
     ) {
-
       this.props.updateSortedNotices(
         sortByColumn(
           sortByHeight([...this.props.notices]),
@@ -62,7 +56,6 @@ class Notices extends React.Component {
       );
     }
     if (this.props.sortDelete && this.checkNoticesDimensions()) {
-
       this.props.updateSortedNotices(
         sortByColumn(
           sortByHeight([...this.props.noticesSorted]),
@@ -84,23 +77,7 @@ class Notices extends React.Component {
     return allDimsUpdated;
   }
 
-  plainOrSortedNotices() {
-    if (this.props.sorted) {
-      return this.props.noticesSorted;
-    } else {
-      return this.props.notices;
-    }
-  }
-
   render() {
-    if (!this.props.notices) {
-      return (
-        <div id="notices" className="parent">
-          <div className="article-preview">Loading...</div>
-        </div>
-      );
-    }
-
     if (this.props.notices.length === 0) {
       return (
         <div id="notices" className="parent">
@@ -108,52 +85,21 @@ class Notices extends React.Component {
         </div>
       );
     }
-    return (
-      <div
-        className="parent"
-        id="notices"
-        ref={el => {
-          if (
-            (el && !this.props.noticesWindowDims.height) ||
-            this.props.resize
-          ) {
-            this.props.addNoticesWindowDims({
-              width: document.getElementById("notices").offsetWidth,
-              height: document.getElementById("notices").offsetHeight
-            });
-          }
-        }}
-      >
-        {this.props.loggedIn ? (
-          <NewNoticeButton noticesVisible={this.props.noticesVisible} />
-        ) : null}
-        {this.plainOrSortedNotices().map((notice1, i) => {
-          if (!notice1.image) {
-            return (
-              <NoticePreview
-                page={this.props.page}
-                noticesVisible={this.props.noticesVisible}
-                index={i + 2}
-                indexTrue={i}
-                notice1={notice1}
-                key={notice1.slug}
-              />
-            );
-          } else {
-            return (
-              <NoticePreviewImage
-                page={this.props.page}
-                noticesVisible={this.props.noticesVisible}
-                index={i + 2}
-                indexTrue={i}
-                notice1={notice1}
-                key={notice1.slug}
-              />
-            );
-          }
-        })}
-      </div>
-    );
+
+    if (this.props.sorted) {
+      console.log('return Notices Sorted')
+      console.log(this.props.noticesSorted)
+      console.log(this.props.pageNumber)
+      return (
+        <NoticesPage
+          noticesByPage={this.props.noticesSorted[this.props.pageNumber - 1]}
+        />
+      );
+    }
+
+    if (!this.props.sorted) {
+      return <NoticesPage noticesByPage={this.props.notices} />;
+    }
   }
 }
 

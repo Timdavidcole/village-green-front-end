@@ -10,4 +10,5 @@
     overflow-y: hidden;
     opacity: 1;
     align-items: stretch;
+    z-index: 70000;
 }

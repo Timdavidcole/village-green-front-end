@@ -10,7 +10,8 @@ export default (
     noticesWindowDims: { height: null, width: null },
     waitTillDimUpdate: true,
     newNotice: null,
-    newNoticeArrange: false
+    newNoticeArrange: false,
+    pageNumber: 1
   },
   action
 ) => {
@@ -28,7 +29,8 @@ export default (
         noticeErrors: action.error ? action.payload.errors : null,
         newNotice: action.payload.notice,
         newNoticeArrange: true,
-        sorted: false
+        sorted: false,
+        pageNumber: 1
       };
     case "NEW_NOTICE_DISPLAYED":
       return {
