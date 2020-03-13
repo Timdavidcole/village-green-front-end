@@ -20,7 +20,8 @@ const mapStateToProps = state => ({
   waitTillDimUpdate: state.notices.waitTillDimUpdate,
   newNoticeArrange: state.notices.newNoticeArrange,
   newNotice: state.notices.newNotice,
-  resize: state.notices.resize
+  resize: state.notices.resize,
+  sortDelete: state.notices.sortDelete
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -33,25 +34,38 @@ const mapDispatchToProps = dispatch => ({
 
 class Notices extends React.Component {
   componentDidUpdate() {
+
     if (
       this.checkNoticesDimensions() &&
       !this.props.sorted &&
       this.props.noticesWindowDims.height &&
       !this.props.waitTillDimUpdate
     ) {
+
       this.props.updateSortedNotices(
         sortByColumn(
-          sortByHeight(this.props.notices),
+          sortByHeight([...this.props.notices]),
           this.props.noticesWindowDims,
           this.props.loggedIn,
           this.props.newNotice
         )
       );
     }
-    if (this.props.updatedUnsorted){
+    if (this.props.updatedUnsorted && this.checkNoticesDimensions()) {
       this.props.updateSortedNotices(
         sortByColumn(
-          sortByHeight(this.props.notices),
+          sortByHeight([...this.props.notices], this.props.newNotice),
+          this.props.noticesWindowDims,
+          this.props.loggedIn,
+          this.props.newNotice
+        )
+      );
+    }
+    if (this.props.sortDelete && this.checkNoticesDimensions()) {
+
+      this.props.updateSortedNotices(
+        sortByColumn(
+          sortByHeight([...this.props.noticesSorted]),
           this.props.noticesWindowDims,
           this.props.loggedIn,
           this.props.newNotice
@@ -101,7 +115,7 @@ class Notices extends React.Component {
         ref={el => {
           if (
             (el && !this.props.noticesWindowDims.height) ||
-            (this.props.resize)
+            this.props.resize
           ) {
             this.props.addNoticesWindowDims({
               width: document.getElementById("notices").offsetWidth,
@@ -113,16 +127,16 @@ class Notices extends React.Component {
         {this.props.loggedIn ? (
           <NewNoticeButton noticesVisible={this.props.noticesVisible} />
         ) : null}
-        {this.plainOrSortedNotices().map((notice, i) => {
-          if (!notice.image) {
+        {this.plainOrSortedNotices().map((notice1, i) => {
+          if (!notice1.image) {
             return (
               <NoticePreview
                 page={this.props.page}
                 noticesVisible={this.props.noticesVisible}
                 index={i + 2}
                 indexTrue={i}
-                notice={notice}
-                key={notice.slug}
+                notice1={notice1}
+                key={notice1.slug}
               />
             );
           } else {
@@ -132,8 +146,8 @@ class Notices extends React.Component {
                 noticesVisible={this.props.noticesVisible}
                 index={i + 2}
                 indexTrue={i}
-                notice={notice}
-                key={notice.slug}
+                notice1={notice1}
+                key={notice1.slug}
               />
             );
           }

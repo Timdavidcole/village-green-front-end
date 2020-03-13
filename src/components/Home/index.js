@@ -41,13 +41,11 @@ class Home extends React.Component {
         agent.Notices.all(JSON.stringify(this.props.centerMap))
       );
     } else if (this.props.newNoticeArrange) {
-      this.props.updateUnsortedNotices({ notices: [
-        this.props.newNotice,
-        ...this.props.notices
-      ]});
+      this.props.updateUnsortedNotices({
+        notices: [this.props.newNotice, ...this.props.notices]
+      });
     }
   }
-  
 
   render() {
     return (

@@ -5,11 +5,13 @@ import { connect } from "react-redux";
 
 const mapStateToProps = state => ({
   showNewNoticeWindow: state.notice.showNewNoticeWindow,
-  centerMap: state.map.centerMap
+  centerMap: state.map.centerMap,
+  noticesSorted: state.notices.noticesSorted,
+  notice: state.notice.notice
 });
 
 const mapDispatchToProps = dispatch => ({
-  onClickDelete: () => dispatch({ type: "DELETE_NOTICE" }),
+  onClickDelete: payload => dispatch({ type: "DELETE_NOTICE", payload }),
   updateUnsortedNotices: payload =>
     dispatch({ type: "UPDATE_UNSORTED_NOTICES", payload })
 });
@@ -23,7 +25,7 @@ const NoticeActions = props => {
           agent.Notices.all(JSON.stringify(props.centerMap))
         );
       })
-      .then(() => props.onClickDelete());
+      .then(() => props.onClickDelete(notice));
   };
   if (props.canModify) {
     return (

@@ -4,7 +4,7 @@ import _superagent from "superagent";
 const superagent = superagentPromise(_superagent, global.Promise);
 
 // const API_ROOT = "http://localhost:3000/api";
-const API_ROOT = "https://village-green-backend-api.herokuapp.com/api";
+  const API_ROOT = "https://village-green-backend-api.herokuapp.com/api";
 
 const responseBody = res => res.body;
 
@@ -58,7 +58,7 @@ const Profile = {
 
 const Notices = {
   create: notice => requests.post(`/notices/`, { notice }),
-  all: coords => requests.get(`/notices?limit=20&coords=${coords}`),
+  all: coords => requests.get(`/notices?limit=50&coords=${coords}`),
   byAuthor: author =>
     requests.get(`/notices?author=${encodeURIComponent(author)}&limit=10`),
   pinned: author =>

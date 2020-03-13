@@ -27,9 +27,9 @@ class NoticePreviewImage extends React.Component {
   }
 
   addDimensions(width, height) {
-    if (!this.props.notice.height) {
+    if (!this.props.notice1.height || this.props.notice1.height === 24) {
       this.props.loadDivDim({
-        title: this.props.notice.title,
+        title: this.props.notice1.title,
         width: width,
         height: height,
         index: this.props.indexTrue
@@ -38,7 +38,7 @@ class NoticePreviewImage extends React.Component {
   }
 
   componentDidUpdate() {
-    if (!this.props.notice.height || !this.props.notice.width) {
+    if (!this.props.notice1.height && !this.props.notice1.width) {
       this.addDimensions(
         document.getElementById(`noticeCard${this.props.index}`).offsetWidth,
         document.getElementById(`noticeCard${this.props.index}`).offsetHeight
@@ -47,7 +47,7 @@ class NoticePreviewImage extends React.Component {
   }
 
   render() {
-    const notice = this.props.notice;
+    const notice1 = this.props.notice1;
     const duration = {
       appear: 100,
       enter: 100,
@@ -70,16 +70,8 @@ class NoticePreviewImage extends React.Component {
               padding: "0px",
               backgroundColor: "transparent",
               boxShadow: "none",
-              order: notice.order,
+              order: notice1.order,
               ...transitionStyles[state]
-            }}
-            onLoad={ev => {
-              this.addDimensions(
-                document.getElementById(`noticeCard${this.props.index}`)
-                  .offsetWidth,
-                document.getElementById(`noticeCard${this.props.index}`)
-                  .offsetHeight
-              );
             }}
           >
             <div
@@ -94,14 +86,14 @@ class NoticePreviewImage extends React.Component {
                 className="card-front"
                 style={{
                   backgroundColor: "transparent",
-                  backgroundImage: `url(${notice.image})`,
+                  backgroundImage: `url(${notice1.image})`,
                   backgroundSize: "contain",
                   backgroundRepeat: "no-repeat"
                 }}
               >
                 <img
                   alt=""
-                  src={notice.image}
+                  src={notice1.image}
                   style={{ visibility: "hidden", maxWidth: "250px" }}
                   onLoad={ev => {
                     this.addDimensions(
@@ -119,13 +111,13 @@ class NoticePreviewImage extends React.Component {
                   width: "250px",
                   backgroundColor: "#e4dfc0",
                   padding: "10px",
-                  minHeight: notice.height
+                  minHeight: notice1.height
                 }}
               >
-                <Link to={`notice/${notice.slug}`}>
+                <Link to={`notice/${notice1.slug}`}>
                   <div style={{ width: "100%" }}>
                     <div style={{ borderBottom: "1px dashed red" }}>
-                      <h3 style={{ textAlign: "center" }}>{notice.title}</h3>
+                      <h3 style={{ textAlign: "center" }}>{notice1.title}</h3>
                     </div>
                     <span
                       style={{
@@ -134,7 +126,7 @@ class NoticePreviewImage extends React.Component {
                         width: "100%"
                       }}
                     >
-                      {notice.description}
+                      {notice1.description}
                     </span>
                     <br></br>
                     <span
@@ -148,7 +140,7 @@ class NoticePreviewImage extends React.Component {
                         overflowX: "auto"
                       }}
                     >
-                      {notice.body}
+                      {notice1.body}
                     </span>
                   </div>
                 </Link>
@@ -160,11 +152,11 @@ class NoticePreviewImage extends React.Component {
                     bottom: "5px"
                   }}
                 >
-                  <NoticePreviewUser notice={notice} />
+                  <NoticePreviewUser notice={notice1} />
                   <NoticeButtons
                     page={this.props.page}
                     index={this.props.index - 2}
-                    notice={notice}
+                    notice={notice1}
                   />
                 </div>
               </div>

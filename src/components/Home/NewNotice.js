@@ -11,9 +11,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onSubmit: payload => dispatch({ type: "NEW_NOTICE", payload }),
-  addNewNotice: payload =>
-    dispatch({ type: "ADD_NEW_NOTICE", payload }),
+  addNewNotice: payload => dispatch({ type: "ADD_NEW_NOTICE", payload }),
   hideNewNoticeWindow: () => dispatch({ type: "HIDE_NEW_NOTICE" })
 });
 

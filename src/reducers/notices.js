@@ -55,9 +55,13 @@ export default (
         pinnedEvent: true
       };
     case "LOAD_DIV_DIMENSIONS":
-      var newNotices1 = [...state.notices];
-      newNotices1[action.payload.index].height = action.payload.height;
-      newNotices1[action.payload.index].width = action.payload.width;
+      const newNotices1 = [...state.notices];
+      const newNotice1 = {
+        ...newNotices1[action.payload.index],
+        height: action.payload.height,
+        width: action.payload.width
+      };
+      newNotices1[action.payload.index] = newNotice1;
       return {
         ...state,
         notices: newNotices1
@@ -75,13 +79,14 @@ export default (
     case "UPDATE_SORTED_NOTICES":
       return {
         ...state,
-        noticesSorted: action.payload,
+        noticesSorted: [...action.payload],
         sorted: true,
         noticesVisible: true,
         updatedUnsorted: false,
         update: false,
         waitTillDimUpdate: true,
-        newNoticeArrange: false
+        newNoticeArrange: false,
+        sortDelete: false
       };
     case "RESIZE":
       return {
@@ -94,7 +99,7 @@ export default (
     case "UPDATE_UNSORTED_NOTICES":
       return {
         ...state,
-        notices: action.payload.notices,
+        notices: [...action.payload.notices],
         sorted: false,
         pinnedEvent: false,
         updatedUnsorted: true,
@@ -109,7 +114,20 @@ export default (
         pinnedEvent: false,
         noticesCount: 0,
         sorted: false,
-        noticesWindowDims: {},
+        noticesWindowDims: {}
+      };
+    case "DELETE_NOTICE":
+      var newNotices = [...state.noticesSorted];
+      for (let index = 0; index < newNotices.length; index++) {
+        const element = newNotices[index];
+        if (element.slug === action.payload.slug) {
+          newNotices.splice(index, 1);
+        }
+      }
+      return {
+        ...state,
+        noticesSorted: newNotices,
+        sortDelete: true
       };
   }
 
