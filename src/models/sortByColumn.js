@@ -72,7 +72,6 @@ const sortByColumn = function(notices, noticesDims, loggedIn, newNotice) {
   }
 
   noticesToSort.forEach((notice, index) => {
-
     if (newNotice && index === 0) {
       return null;
     } else {
