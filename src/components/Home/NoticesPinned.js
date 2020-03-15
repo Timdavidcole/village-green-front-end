@@ -1,7 +1,7 @@
 import NoticePreview from "./NoticePreview";
 import NoticePreviewImage from "./NoticePreviewImage";
 import React from "react";
-import "../../styles/noticesGrid.css";
+import "../../styles/notices.css";
 import { connect } from "react-redux";
 
 const mapStateToProps = state => ({

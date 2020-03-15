@@ -1,6 +1,6 @@
 import React from "react";
 import NoticesPage from "./NoticesPage";
-import "../../styles/noticesGrid.css";
+import "../../styles/notices.css";
 import { connect } from "react-redux";
 import sortByHeight from "../../models/sortByHeight";
 import sortByColumn from "../../models/sortByColumn";
@@ -11,11 +11,11 @@ const mapStateToProps = state => ({
   sorted: state.notices.sorted,
   loggedIn: state.auth.loggedIn,
   updatedUnsorted: state.notices.updatedUnsorted,
-  noticesSorted: state.notices.noticesSorted,
   waitTillDimUpdate: state.notices.waitTillDimUpdate,
   newNotice: state.notices.newNotice,
   sortDelete: state.notices.sortDelete,
-  pageNumber: state.notices.pageNumber,
+  noticesSorted: state.notices.noticesSorted,
+  pageNumber: state.notices.pageNumber
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -56,7 +56,9 @@ class Notices extends React.Component {
     if (this.props.sortDelete && this.checkNoticesDimensions()) {
       this.props.updateSortedNotices(
         sortByColumn(
-          sortByHeight([...this.props.noticesSorted[this.props.pageNumber - 1]]),
+          sortByHeight([
+            ...this.props.noticesSorted[this.props.pageNumber - 1]
+          ]),
           this.props.noticesWindowDims,
           this.props.loggedIn,
           this.props.newNotice

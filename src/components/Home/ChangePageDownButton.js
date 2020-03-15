@@ -13,11 +13,13 @@ const mapDispatchToProps = dispatch => ({
   changePageNumber: payload => dispatch({ type: "CHANGE_PAGE_NUMBER", payload })
 });
 
-class ChangePageButton extends React.Component {
+class ChangePageDownButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       hover: false,
+      randomTop: 0,
+      randomLeft: 0,
       clicked: false
     };
 
@@ -28,7 +30,6 @@ class ChangePageButton extends React.Component {
     this.changePageNumber = this.changePageNumber.bind(this);
   }
   toggleHoverIn() {
-    console.log("hover in");
     this.setState({ hover: true });
   }
 
@@ -64,6 +65,7 @@ class ChangePageButton extends React.Component {
     if (this.state.hover) {
       return {
         backgroundColor: "#d8ebd9",
+        boxShadow: "0px 1px 5px 0px rgb(106, 106, 106)",
         color: "#5cb85c",
         width: "60%",
         left: "20%",
@@ -97,7 +99,6 @@ class ChangePageButton extends React.Component {
       opacity: "1",
       width: "100%",
       left: "0%",
-      pointerEvents: "all",
       transition:
         "transform 0.2s, box-shadow 0.2s, width 0.2s, left 0.2s, border-radius 0.2s"
     };
@@ -108,21 +109,17 @@ class ChangePageButton extends React.Component {
       exiting: { opacity: "1" },
       exited: { opacity: "1" }
     };
-    console.log(`${this.props.direction}-arrow-container`);
     return (
       <Transition in={!this.props.noticesVisible} timeout={duration}>
         {state => (
-          <Link
-            style={{ pointerEvents: "all" }}
-            to={`/${this.props.pageNumber}`}
-          >
+          <Link to={`/${this.props.pageNumber}`}>
             <div
-              className={`${this.props.direction}-arrow-container`}
+              className="down-arrow-container"
               onMouseEnter={this.toggleHoverIn}
               onMouseLeave={this.toggleHoverOut}
             >
               <button
-                style={{ ...defaultButtonStyle, ...this.buttonStyle(), ...transitionStyles[state] }}
+                style={{ ...defaultButtonStyle, ...transitionStyles[state] }}
                 onClick={this.changePageNumber}
                 onMouseDown={this.toggleClick}
                 onMouseUp={this.toggleClick}
@@ -132,11 +129,10 @@ class ChangePageButton extends React.Component {
                     width: "100%",
                     height: "40px",
                     padding: "0px",
-                    marginTop: "0px",
-                    pointerEvents: "all"
+                    marginTop: "0px"
                   }}
                 >
-                  <i className={`${this.props.direction}-arrow-icon`}></i>
+                  <i className="down-arrow-icon"></i>
                 </div>
               </button>
             </div>
@@ -147,4 +143,7 @@ class ChangePageButton extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChangePageButton);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ChangePageDownButton);

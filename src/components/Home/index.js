@@ -5,7 +5,6 @@ import agent from "../../agent";
 import { connect } from "react-redux";
 import Notices from "./Notices";
 import NewNotice from "./NewNotice";
-import ChangePageButton from "./ChangePageButton"
 
 const mapStateToProps = state => ({
   noticesVisible: state.notices.noticesVisible,
@@ -50,27 +49,12 @@ class Home extends React.Component {
     }
   }
 
-  whichPageNumberButton(direction) {
-    const pageNumber = this.props.pageNumber
-    const noticesSorted = this.props.noticesSorted
-    if(direction === 'up'){
-      if (pageNumber < noticesSorted.length - 1){
-        return <ChangePageButton direction="up"/>
-      }
-    } else if (direction === 'down') {
-      if (pageNumber > 0){
-        return <ChangePageButton direction="down"/>
-      }
-    }
-  }
-
   render() {
+    console.log("HOME")
     return (
-      <div style={{ width: "100%", overflow: "hidden" }}>
+      <div style={{ width: "100vw", height: "calc(100vh - 56px)", overflow: "hidden" }}>
         <div style={{ width: "100%", position: "absolute" }}>
           <MapNavBar />
-          {this.whichPageNumberButton('up')}
-          {this.whichPageNumberButton('down')}
           <NewNotice />
           <Notices />
         </div>
