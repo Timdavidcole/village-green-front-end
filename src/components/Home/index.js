@@ -14,7 +14,6 @@ const mapStateToProps = state => ({
   newNoticeArrange: state.notices.newNoticeArrange,
   newNotice: state.notices.newNotice,
   notices: state.notices.notices,
-  pageNumber: state.notices.pageNumber,
   noticesSorted: state.notices.noticesSorted
 });
 
@@ -50,7 +49,6 @@ class Home extends React.Component {
   }
 
   render() {
-    console.log("HOME")
     return (
       <div style={{ width: "100vw", height: "calc(100vh - 56px)", overflow: "hidden" }}>
         <div style={{ width: "100%", position: "absolute" }}>

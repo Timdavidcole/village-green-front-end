@@ -1,5 +1,3 @@
-import { bindActionCreators } from "redux";
-
 export default (
   state = {
     notices: [],
@@ -99,6 +97,11 @@ export default (
         update: true,
         sorted: false,
         waitTillDimUpdate: true
+      };
+    case "UPDATE_PAGE_NUMBER":
+      return {
+        ...state,
+        pageNumber: action.payload
       };
     case "UPDATE_UNSORTED_NOTICES":
       return {

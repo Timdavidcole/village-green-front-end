@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Transition } from "react-transition-group";
-import { Link } from "react-router-dom";
 import "../../styles/notices.css";
 
 const mapStateToProps = state => ({
@@ -10,7 +9,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  changePageNumber: payload => dispatch({ type: "CHANGE_PAGE_NUMBER", payload })
+  updatePageNumber: payload => dispatch({ type: "UPDATE_PAGE_NUMBER", payload })
 });
 
 class ChangePageButton extends React.Component {
@@ -37,7 +36,11 @@ class ChangePageButton extends React.Component {
   }
 
   changePageNumber() {
-    this.props.changePageNumber();
+    this.props.updatePageNumber(
+      this.props.direction === "up"
+        ? this.props.pageNumber - 1
+        : this.props.pageNumber + 1
+    );
   }
 
   getRndInteger(min, max) {
@@ -56,17 +59,14 @@ class ChangePageButton extends React.Component {
         backgroundColor: "#6bbf87",
         color: "#0e460c",
         boxShadow: "0px 0.5px 5px 0px rgb(0, 0, 0)",
-        width: "40%",
-        left: "30%",
         borderRadius: "10px"
       };
     }
     if (this.state.hover) {
       return {
+        boxShadow: "0px 1px 5px 0px rgb(106, 106, 106)",
         backgroundColor: "#d8ebd9",
         color: "#5cb85c",
-        width: "60%",
-        left: "20%",
         borderRadius: "10px"
       };
     } else {
@@ -95,11 +95,10 @@ class ChangePageButton extends React.Component {
       outline: "none",
       border: "none",
       opacity: "1",
-      width: "100%",
-      left: "0%",
+      width: "40%",
+      left: "30%",
       pointerEvents: "all",
-      transition:
-        "transform 0.2s, box-shadow 0.2s, width 0.2s, left 0.2s, border-radius 0.2s"
+      transition: "transform 0.2s, box-shadow 0.2s, border-radius 0.2s"
     };
 
     const transitionStyles = {
@@ -112,35 +111,34 @@ class ChangePageButton extends React.Component {
     return (
       <Transition in={!this.props.noticesVisible} timeout={duration}>
         {state => (
-          <Link
-            style={{ pointerEvents: "all" }}
-            to={`/${this.props.pageNumber}`}
+          <div
+            className={`${this.props.direction}-arrow-container`}
+            onMouseEnter={this.toggleHoverIn}
+            onMouseLeave={this.toggleHoverOut}
           >
-            <div
-              className={`${this.props.direction}-arrow-container`}
-              onMouseEnter={this.toggleHoverIn}
-              onMouseLeave={this.toggleHoverOut}
+            <button
+              style={{
+                ...defaultButtonStyle,
+                ...this.buttonStyle(),
+                ...transitionStyles[state]
+              }}
+              onClick={this.changePageNumber}
+              onMouseDown={this.toggleClick}
+              onMouseUp={this.toggleClick}
             >
-              <button
-                style={{ ...defaultButtonStyle, ...this.buttonStyle(), ...transitionStyles[state] }}
-                onClick={this.changePageNumber}
-                onMouseDown={this.toggleClick}
-                onMouseUp={this.toggleClick}
+              <div
+                style={{
+                  width: "100%",
+                  height: "40px",
+                  padding: "0px",
+                  marginTop: "0px",
+                  pointerEvents: "all"
+                }}
               >
-                <div
-                  style={{
-                    width: "100%",
-                    height: "40px",
-                    padding: "0px",
-                    marginTop: "0px",
-                    pointerEvents: "all"
-                  }}
-                >
-                  <i className={`${this.props.direction}-arrow-icon`}></i>
-                </div>
-              </button>
-            </div>
-          </Link>
+                <i className={`${this.props.direction}-arrow-icon`}></i>
+              </div>
+            </button>
+          </div>
         )}
       </Transition>
     );

@@ -18,8 +18,8 @@ ReactDOM.render(
     <BrowserRouter>
       <Route path="/" component={App} />
       <Switch>
-        <Route path="/notices/:pageNumber" component={Home} />
-        <Redirect from="/" to="/notices/1" />
+        <Route path="/globalboard" component={Home} />
+        <Redirect exact from="/" to="/globalboard" />
         <Route path="/login" component={Login} />
         <PrivateRoute path="/@:username/pinned" component={Pinned} />
         <Route path="/register" component={Register} />
