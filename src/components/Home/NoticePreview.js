@@ -9,7 +9,7 @@ import NoticePreviewUser from "./NoticePreviewUser";
 const mapStateToProps = state => ({
   currentUser: state.common.currentUser,
   notices: state.notices.notices,
-  sorted: state.notices.sorted,
+  sorted: state.notices.sorted
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -28,7 +28,7 @@ class NoticePreview extends React.Component {
   }
 
   addDimensions(width, height) {
-    if (!this.props.notice1.height) {
+    if (!this.props.notice1.height && this.props.page !== "pinnned") {
       this.props.loadDivDim({
         title: this.props.notice1.title,
         width: width,
@@ -40,10 +40,12 @@ class NoticePreview extends React.Component {
 
   componentDidUpdate() {
     if (!this.props.notice1.height && !this.props.notice1.width) {
-      this.addDimensions(
-        document.getElementById(`noticeCard${this.props.index}`).offsetWidth,
-        document.getElementById(`noticeCard${this.props.index}`).offsetHeight
-      );
+      if (this.props.page !== "pinned") {
+        this.addDimensions(
+          document.getElementById(`noticeCard${this.props.index}`).offsetWidth,
+          document.getElementById(`noticeCard${this.props.index}`).offsetHeight
+        );
+      }
     }
   }
 
@@ -72,12 +74,14 @@ class NoticePreview extends React.Component {
               ...transitionStyles[state]
             }}
             onLoad={ev => {
-              this.addDimensions(
-                document.getElementById(`noticeCard${this.props.index}`)
-                  .offsetWidth,
-                document.getElementById(`noticeCard${this.props.index}`)
-                  .offsetHeight
-              );
+              if (this.props.page !== "pinned") {
+                this.addDimensions(
+                  document.getElementById(`noticeCard${this.props.index}`)
+                    .offsetWidth,
+                  document.getElementById(`noticeCard${this.props.index}`)
+                    .offsetHeight
+                );
+              }
             }}
           >
             <div

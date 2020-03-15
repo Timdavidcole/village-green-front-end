@@ -27,7 +27,6 @@ class ChangePageButton extends React.Component {
     this.changePageNumber = this.changePageNumber.bind(this);
   }
   toggleHoverIn() {
-    console.log("hover in");
     this.setState({ hover: true });
   }
 
