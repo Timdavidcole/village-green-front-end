@@ -56,7 +56,7 @@ class Notices extends React.Component {
     if (this.props.sortDelete && this.checkNoticesDimensions()) {
       this.props.updateSortedNotices(
         sortByColumn(
-          sortByHeight([...this.props.noticesSorted]),
+          sortByHeight([...this.props.noticesSorted[this.props.pageNumber - 1]]),
           this.props.noticesWindowDims,
           this.props.loggedIn,
           this.props.newNotice
