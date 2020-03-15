@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import React from "react";
-import LoggedInView from "./LoggedInView"
+import LoggedInView from "./LoggedInView";
 
 const LoggedOutView = props => {
   if (!props.currentUser) {
@@ -33,13 +33,23 @@ class Header extends React.Component {
   render() {
     return (
       <nav className="navbar navbar-light">
-        <div >
+        <div>
           <Link to="/" className="navbar-brand">
             {this.props.appName.toLowerCase()}
           </Link>
-          <Link to="/" style={{position: "relative", top: "6px", fontSize: "18px", fontStyle: "italic"}}>
-            the noticeboard for anyone, anywhere and anything...
-          </Link>
+          {window.innerWidth > 1095 ? (
+            <Link
+              to="/"
+              style={{
+                position: "relative",
+                top: "6px",
+                fontSize: "18px",
+                fontStyle: "italic"
+              }}
+            >
+              the noticeboard for anyone, anywhere and anything...
+            </Link>
+          ) : null}
           <LoggedOutView currentUser={this.props.currentUser} />
           <LoggedInView
             onClickLogout={this.props.onClickLogout}

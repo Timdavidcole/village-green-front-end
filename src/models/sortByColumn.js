@@ -1,23 +1,17 @@
 const sortByColumn = function(notices, noticesDims, loggedIn, newNotice) {
-  var newNotices;
-  var usedIndexes = [];
+  let newNotices = [[]]
+  let usedIndexes = [];
   const margin = notice => (notice.image ? 20 : 0);
-  var columnWithRoom = 0;
-  const noticesToSort = [...notices]
+  let columnWithRoom = 0;
+  const noticesToSort = [...notices];
+  let sortedNotices = [];
+  let freePage = 0;
+  const maxColumns = Math.floor(noticesDims.width / 250);
 
   if (newNotice) {
-    var firstNotice = {...notices[0]};
+    var firstNotice = { ...notices[0] };
     firstNotice.order = columnWithRoom + 1;
-  }
-  if (loggedIn) {
-    if (newNotice) {
-      newNotices = [[{ height: 250 }, firstNotice]];
-      usedIndexes.push(0);
-    } else {
-      newNotices = [[{ height: 250 }]];
-    }
-  } else {
-    newNotices = [[]];
+    newNotices = [[firstNotice]]
   }
 
   function sumHeights(noticesToSum) {
@@ -68,11 +62,10 @@ const sortByColumn = function(notices, noticesDims, loggedIn, newNotice) {
   }
 
   function columnRemainder(column) {
-    return noticesDims.height - sumHeights(newNotices[column]);
+    return noticesDims.height - 40 - sumHeights(newNotices[column]);
   }
 
   noticesToSort.forEach((notice, index) => {
-
     if (newNotice && index === 0) {
       return null;
     } else {
@@ -80,20 +73,29 @@ const sortByColumn = function(notices, noticesDims, loggedIn, newNotice) {
     }
   });
 
-  function maxColumns() {
-    return noticesDims.width / 250;
-  }
+  const sortByPage = function(noticesInColumns) {
+    noticesInColumns.forEach(noticeColumn => {
+      if (!sortedNotices[freePage]) {
+        sortedNotices.push([]);
+      }
+      if (sumHeights(noticeColumn) > (noticesDims.height - 40) / 3) {
+        if (sortedNotices[freePage].length < maxColumns) {
+          sortedNotices[freePage].push(noticeColumn);
+        } else {
+          sortedNotices.push([]);
+          freePage++;
+          sortedNotices[freePage].push(noticeColumn);
+        }
+      }
+    });
 
-  if (loggedIn) {
-    newNotices[0].splice(0, 1);
-  }
+    sortedNotices = sortedNotices.map(page => {
+      return page.flat();
+    });
+  };
 
-  if (sumHeights(newNotices[newNotices.length - 1]) < noticesDims.height / 2) {
-    newNotices.splice(newNotices.length - 1, 1);
-  }
-
-
-  return newNotices.slice(0, Math.floor(maxColumns())).flat();
+  sortByPage(newNotices);
+  return sortedNotices;
 };
 
 export default sortByColumn;

@@ -83,7 +83,8 @@ class MapNavBar extends React.Component {
             margin: "0px",
             zIndex: "50",
             width: "100%",
-            visibility: "hidden"
+            visibility: "hidden",
+            paddingBottom: "0px"
           }}
         >
           {this.homeButton()}

@@ -37,13 +37,31 @@ class LoggedInView extends React.Component {
       exited: { transform: "scale(1)" }
     };
 
+    const newNoticeMenu = () => {
+      if (!window.location.href.includes("globalboard")) {
+        return (
+          <li onClick={this.props.onClick} className="nav-item">
+            <Link to="/" className="nav-link">
+              <i className="ion-compose"></i>&nbsp;New Notice
+            </Link>
+          </li>
+        );
+      } else
+        return (
+          <li onClick={this.props.onClick} className="nav-item">
+          <Link className="nav-link">
+            <i className="ion-compose"></i>&nbsp;New Notice
+            </Link>
+          </li>
+        );
+    };
+
     const pinColor = {
       entering: "#2e962a",
       entered: "#2e962a",
       exiting: "#aeaeae",
-      exited: "#aeaeae" 
+      exited: "#aeaeae"
     };
-
     if (this.props.currentUser) {
       return (
         <ul className="nav navbar-nav pull-xs-right">
@@ -53,11 +71,7 @@ class LoggedInView extends React.Component {
             </Link>
           </li>
 
-          <li onClick={this.props.onClick} className="nav-item">
-            <Link to="/" className="nav-link">
-              <i className="ion-compose"></i>&nbsp;New Notice
-            </Link>
-          </li>
+          {newNoticeMenu()}
 
           <li className="nav-item">
             <Transition in={this.props.pinnedEvent} timeout={duration}>
@@ -70,8 +84,8 @@ class LoggedInView extends React.Component {
                     ...transitionStyles[state]
                   }}
                 >
-                  
-                  <MenuIcon class={"pinSVGMain"} stroke={pinColor[state]}/>Pinned Notices
+                  <MenuIcon class={"pinSVGMain"} stroke={pinColor[state]} />
+                  Pinned Notices
                 </Link>
               )}
             </Transition>

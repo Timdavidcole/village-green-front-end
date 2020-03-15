@@ -13,7 +13,8 @@ const mapStateToProps = state => ({
   pinnedEvent: state.notices.pinnedEvent,
   newNoticeArrange: state.notices.newNoticeArrange,
   newNotice: state.notices.newNotice,
-  notices: state.notices.notices
+  notices: state.notices.notices,
+  noticesSorted: state.notices.noticesSorted
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -49,7 +50,7 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div style={{ width: "100%", overflow: "hidden" }}>
+      <div style={{ width: "100vw", height: "calc(100vh - 56px)", overflow: "hidden" }}>
         <div style={{ width: "100%", position: "absolute" }}>
           <MapNavBar />
           <NewNotice />

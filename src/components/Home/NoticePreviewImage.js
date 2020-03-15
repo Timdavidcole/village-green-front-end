@@ -39,10 +39,12 @@ class NoticePreviewImage extends React.Component {
 
   componentDidUpdate() {
     if (!this.props.notice1.height && !this.props.notice1.width) {
-      this.addDimensions(
-        document.getElementById(`noticeCard${this.props.index}`).offsetWidth,
-        document.getElementById(`noticeCard${this.props.index}`).offsetHeight
-      );
+      if (this.props.page !== "pinned") {
+        this.addDimensions(
+          document.getElementById(`noticeCard${this.props.index}`).offsetWidth,
+          document.getElementById(`noticeCard${this.props.index}`).offsetHeight
+        );
+      }
     }
   }
 
@@ -96,12 +98,14 @@ class NoticePreviewImage extends React.Component {
                   src={notice1.image}
                   style={{ visibility: "hidden", maxWidth: "250px" }}
                   onLoad={ev => {
-                    this.addDimensions(
-                      document.getElementById(`noticeCard${this.props.index}`)
-                        .offsetWidth,
-                      document.getElementById(`noticeCard${this.props.index}`)
-                        .offsetHeight
-                    );
+                    if (this.props.page !== "pinned") {
+                      this.addDimensions(
+                        document.getElementById(`noticeCard${this.props.index}`)
+                          .offsetWidth,
+                        document.getElementById(`noticeCard${this.props.index}`)
+                          .offsetHeight
+                      );
+                    }
                   }}
                 />
               </div>

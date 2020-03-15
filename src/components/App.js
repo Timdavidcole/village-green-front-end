@@ -55,7 +55,7 @@ class App extends React.Component {
       this.props.logIn()
     }
     return (
-      <div>
+      <div style={{overflow: "hidden"}}>
         <Header
           currentUser={this.props.currentUser}
           appName={this.props.appName}

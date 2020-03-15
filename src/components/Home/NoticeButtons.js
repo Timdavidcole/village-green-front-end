@@ -4,65 +4,45 @@ import "../../styles/noticePreview.css";
 import agent from "../../agent";
 
 const mapStateToProps = state => ({
-  notices: state.notices.notices,
-  noticesPinned: state.pinned.notices,
   loggedIn: state.auth.loggedIn
 });
 
 const mapDispatchToProps = dispatch => ({
   pinNotice: payload => dispatch({ type: "PIN_NOTICE", payload }),
   onLoad: payload => dispatch({ type: "HOME_PAGE_LOADED", payload }),
-  updatePinned: payload => dispatch({ type: "REMOVE_PINNED", payload }),
-  addPinnedEvent: () => dispatch({ type: "ADD_PINNED_EVENT" }),
-  updateSorted: () => dispatch({ type: "UPDATE_SORTED" })
+  addPinnedEvent: () => dispatch({ type: "ADD_PINNED_EVENT" })
 });
 
 class NoticeButtons extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hover: false
+      hover: false,
+      pinned: false
     };
     this.pinNotice = this.pinNotice.bind(this);
     this.toggleHoverIn = this.toggleHoverIn.bind(this);
     this.toggleHoverOut = this.toggleHoverOut.bind(this);
   }
 
+  componentDidMount() {
+    this.setState({ pinned: this.props.notice.isPinned });
+  }
+
   pinNotice() {
-    if (this.props.notice.isPinned) {
-      agent.Pinned.unPinNotice(this.props.notice.slug).then(notice => {
-        if (this.props.page === "pinned") {
-          var notices = [...this.props.noticesPinned];
-          notices.splice(this.props.index + 1, 1);
-          this.props.updatePinned(notices);
-          this.props.addPinnedEvent();
-        } else {
-          notices = [...this.props.notices];
-          notices[this.props.index].isPinned = notice.notice.isPinned;
-          this.props.pinNotice(notices);
-        }
-      });
+    if (this.state.pinned) {
+      agent.Pinned.unPinNotice(this.props.notice.slug);
+      this.setState({ pinned: false });
     } else {
-      agent.Pinned.pinNotice(this.props.notice.slug).then(notice => {
-        if (this.props.page === "pinned") {
-          var notices = [...this.props.noticesPinned];
-          notices.splice(this.props.index + 1, 1);
-          this.props.updatePinned(notices);
-          this.props.addPinnedEvent();
-        } else {
-          notices = [...this.props.notices];
-          notices[this.props.index].isPinned = notice.notice.isPinned;
-          this.props.pinNotice(notices);
-        }
-      });
+      agent.Pinned.pinNotice(this.props.notice.slug);
+      this.setState({ pinned: true });
     }
-    this.props.updateSorted();
   }
 
   pinStyle() {
     if (this.state.hover) {
       return { backgroundColor: "#c9eec7" };
-    } else if (this.props.notice.isPinned) {
+    } else if (this.state.pinned) {
       return {
         backgroundColor: "#96d095"
       };

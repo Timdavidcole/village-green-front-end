@@ -3,22 +3,23 @@ import { Provider } from "react-redux";
 import ReactDOM from "react-dom";
 import React from "react";
 import store from "./store";
-import { Route, BrowserRouter, Switch } from "react-router-dom";
+import { Route, BrowserRouter, Switch, Redirect } from "react-router-dom";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Settings from './components/Settings';
-import Notice from './components/Notice';
-import Profile from './components/Profile';
-import Pinned from './components/Pinned';
-import PrivateRoute from './components/PrivateRoute';
+import Settings from "./components/Settings";
+import Notice from "./components/Notice";
+import Profile from "./components/Profile";
+import Pinned from "./components/Pinned";
+import PrivateRoute from "./components/PrivateRoute";
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <Route path="/" component={App} />
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route path="/globalboard" component={Home} />
+        <Redirect exact from="/" to="/globalboard" />
         <Route path="/login" component={Login} />
         <PrivateRoute path="/@:username/pinned" component={Pinned} />
         <Route path="/register" component={Register} />

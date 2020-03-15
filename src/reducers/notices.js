@@ -10,7 +10,8 @@ export default (
     noticesWindowDims: { height: null, width: null },
     waitTillDimUpdate: true,
     newNotice: null,
-    newNoticeArrange: false
+    newNoticeArrange: false,
+    pageNumber: 1
   },
   action
 ) => {
@@ -28,7 +29,8 @@ export default (
         noticeErrors: action.error ? action.payload.errors : null,
         newNotice: action.payload.notice,
         newNoticeArrange: true,
-        sorted: false
+        sorted: false,
+        pageNumber: 1
       };
     case "NEW_NOTICE_DISPLAYED":
       return {
@@ -94,7 +96,13 @@ export default (
         resize: true,
         update: true,
         sorted: false,
-        waitTillDimUpdate: true
+        waitTillDimUpdate: true,
+        pageNumber: 1
+      };
+    case "UPDATE_PAGE_NUMBER":
+      return {
+        ...state,
+        pageNumber: action.payload
       };
     case "UPDATE_UNSORTED_NOTICES":
       return {
@@ -110,18 +118,28 @@ export default (
     case "LOG_OUT_NOTICES":
       return {
         notices: [],
+        noticesSorted: [],
         noticesVisible: true,
         pinnedEvent: false,
-        noticesCount: 0,
+        noticesCount: null,
         sorted: false,
-        noticesWindowDims: {}
+        updatedUnsorted: false,
+        noticesWindowDims: { height: null, width: null },
+        waitTillDimUpdate: true,
+        newNotice: null,
+        newNoticeArrange: false,
+        pageNumber: 1
       };
     case "DELETE_NOTICE":
       var newNotices = [...state.noticesSorted];
-      for (let index = 0; index < newNotices.length; index++) {
-        const element = newNotices[index];
+      for (
+        let index = 0;
+        index < newNotices[state.pageNumber].length;
+        index++
+      ) {
+        const element = newNotices[state.pageNumber][index];
         if (element.slug === action.payload.slug) {
-          newNotices.splice(index, 1);
+          newNotices[state.pageNumber].splice(index, 1);
         }
       }
       return {
