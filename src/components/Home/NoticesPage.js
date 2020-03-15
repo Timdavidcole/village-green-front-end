@@ -1,7 +1,6 @@
 import NoticePreview from "./NoticePreview";
 import NoticePreviewImage from "./NoticePreviewImage";
 import React from "react";
-import NewNoticeButton from "./NewNoticeButton";
 import "../../styles/notices.css";
 import { connect } from "react-redux";
 import ChangePageButton from "./ChangePageButton";
@@ -14,7 +13,6 @@ const mapStateToProps = state => ({
   noticesVisible: state.notices.noticesVisible,
   updatedUnsorted: state.notices.updatedUnsorted,
   noticesWindowDims: state.notices.noticesWindowDims,
-  pageNumber: state.notices.pageNumber,
   noticesSorted: state.notices.noticesSorted
 });
 
@@ -83,7 +81,6 @@ const NoticesPage = props => {
               props.noticesWindowDims.height !==
                 document.getElementById("notices").offsetHeight)
           ) {
-            console.log(document.getElementById("notices").offsetHeight);
             props.addNoticesWindowDims({
               width: document.getElementById("notices").offsetWidth,
               height: document.getElementById("notices").offsetHeight
@@ -91,9 +88,6 @@ const NoticesPage = props => {
           }
         }}
       >
-        {props.loggedIn ? (
-          <NewNoticeButton noticesVisible={props.noticesVisible} />
-        ) : null}
         {props.noticesByPage.map((notice1, i) => {
           if (!notice1.image) {
             return (

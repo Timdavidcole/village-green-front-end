@@ -96,7 +96,8 @@ export default (
         resize: true,
         update: true,
         sorted: false,
-        waitTillDimUpdate: true
+        waitTillDimUpdate: true,
+        pageNumber: 1
       };
     case "UPDATE_PAGE_NUMBER":
       return {

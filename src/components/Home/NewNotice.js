@@ -104,7 +104,7 @@ class NewNotice extends React.Component {
       backgroundColor: "white",
       width: "60vw",
       height: "60vh",
-      zIndex: "5100",
+      zIndex: "19823754928374",
       display: "inline-block",
       left: "0px"
     };

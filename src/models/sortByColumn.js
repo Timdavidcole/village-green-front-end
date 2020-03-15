@@ -1,5 +1,5 @@
 const sortByColumn = function(notices, noticesDims, loggedIn, newNotice) {
-  let newNotices;
+  let newNotices = [[]]
   let usedIndexes = [];
   const margin = notice => (notice.image ? 20 : 0);
   let columnWithRoom = 0;
@@ -11,16 +11,7 @@ const sortByColumn = function(notices, noticesDims, loggedIn, newNotice) {
   if (newNotice) {
     var firstNotice = { ...notices[0] };
     firstNotice.order = columnWithRoom + 1;
-  }
-  if (loggedIn) {
-    if (newNotice) {
-      newNotices = [[{ height: 250 }, firstNotice]];
-      usedIndexes.push(0);
-    } else {
-      newNotices = [[{ height: 250 }]];
-    }
-  } else {
-    newNotices = [[]];
+    newNotices = [[firstNotice]]
   }
 
   function sumHeights(noticesToSum) {
@@ -81,10 +72,6 @@ const sortByColumn = function(notices, noticesDims, loggedIn, newNotice) {
       findColumnWithSpace(notice, columnWithRoom, index);
     }
   });
-
-  if (loggedIn) {
-    newNotices[0].splice(0, 1);
-  }
 
   const sortByPage = function(noticesInColumns) {
     noticesInColumns.forEach(noticeColumn => {

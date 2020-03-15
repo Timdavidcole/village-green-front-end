@@ -107,7 +107,6 @@ class ChangePageButton extends React.Component {
       exiting: { opacity: "1" },
       exited: { opacity: "1" }
     };
-    console.log(`${this.props.direction}-arrow-container`);
     return (
       <Transition in={!this.props.noticesVisible} timeout={duration}>
         {state => (
