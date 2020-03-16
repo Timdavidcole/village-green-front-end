@@ -10,7 +10,8 @@ const mapStateToProps = state => ({
   currentUser: state.common.currentUser,
   notices: state.notices.notices,
   sorted: state.notices.sorted,
-  updatedUnsorted: state.notices.updatedUnsorted
+  updatedUnsorted: state.notices.updatedUnsorted,
+  noticesHidden: state.notices.noticesHidden
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -69,6 +70,7 @@ class NoticePreviewImage extends React.Component {
             id={`noticeCard${this.props.index}`}
             className={"noticeCard"}
             style={{
+              display: this.props.noticesHidden ? "none" : "inline-block",
               padding: "0px",
               backgroundColor: "transparent",
               boxShadow: "none",

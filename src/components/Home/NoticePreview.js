@@ -9,7 +9,8 @@ import NoticePreviewUser from "./NoticePreviewUser";
 const mapStateToProps = state => ({
   currentUser: state.common.currentUser,
   notices: state.notices.notices,
-  sorted: state.notices.sorted
+  sorted: state.notices.sorted,
+  noticesHidden: state.notices.noticesHidden
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -73,6 +74,7 @@ class NoticePreview extends React.Component {
             id={`noticeCard${this.props.index}`}
             className={"noticeCard"}
             style={{
+              display: this.props.noticesHidden ? "none" : "inline-block",
               order: notice1.order,
               ...transitionStyles[state]
             }}

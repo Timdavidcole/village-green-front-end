@@ -109,7 +109,10 @@ const NoticesPage = props => {
       {state => (
         <div
           className="noticesSwipeAnimation"
-          style={{ pointerEvents: "none", ...transitionStyles()[state] }}
+          style={{
+            pointerEvents: "none",
+            ...transitionStyles()[state]
+          }}
         >
           {props.loading ? <Loader /> : null}
           {whichPageNumberButton("up")}

@@ -1,0 +1,39 @@
+.home-button {
+    margin: 3px;
+    padding: 5px;
+    padding-right: 8px;
+    border-radius: 5px;
+    background-color: #70bf6d;
+    color: white;
+    outline: none;
+    box-shadow: 10px 10px 20px 3px rgba(176, 176, 176, 0.79);
+    visibility: visible;
+}
+
+.home-button:hover {
+    background-color: #9dd59b;
+}
+
+.home-button:active {
+    background-color: #2e812b;
+}
+
+.current-location-button {
+    margin: 3px;
+    padding: 5px;
+    padding-right: 8px;
+    border-radius: 5px;
+    background-color: #70bf6d;
+    color: white;
+    outline: none;
+    box-shadow: 10px 10px 20px 3px rgba(176, 176, 176, 0.79);
+    visibility: visible;
+}
+
+.current-location-button:hover {
+    background-color: #9dd59b;
+}
+
+.current-location-button:active {
+    background-color: #2e812b;
+}

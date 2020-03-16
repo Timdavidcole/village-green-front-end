@@ -11,7 +11,8 @@ export default (
     newNotice: null,
     newNoticeArrange: false,
     pageNumber: 1,
-    loading: true
+    loading: true,
+    noticesHidden: false
   },
   action
 ) => {
@@ -43,6 +44,16 @@ export default (
         ...state,
         noticesVisible: false,
         loading: true
+      };
+    case "NOTICES_HIDDEN":
+      return {
+        ...state,
+        noticesHidden: true
+      };
+      case "NOTICES_SHOWN":
+      return {
+        ...state,
+        noticesHidden: false
       };
     case "HOME_PAGE_UNLOADED":
       return {};
@@ -99,13 +110,13 @@ export default (
         pageNumberChanged: true,
         pageChangeDirection: action.payload.direction
       };
-      case "START_PAGE_NUMBER_ANIMATION":
+    case "START_PAGE_NUMBER_ANIMATION":
       return {
         ...state,
         pageNumberAnimation: true,
         pageChangeDirection: action.payload
       };
-      case "STOP_PAGE_NUMBER_ANIMATION":
+    case "STOP_PAGE_NUMBER_ANIMATION":
       return {
         ...state,
         pageNumberAnimation: false
