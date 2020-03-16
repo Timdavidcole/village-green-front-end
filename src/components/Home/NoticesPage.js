@@ -4,6 +4,7 @@ import React from "react";
 import "../../styles/notices.css";
 import { connect } from "react-redux";
 import ChangePageButton from "./ChangePageButton";
+import Loader from "./Loader";
 
 const mapStateToProps = state => ({
   loggedIn: state.auth.loggedIn,
@@ -13,7 +14,8 @@ const mapStateToProps = state => ({
   noticesVisible: state.notices.noticesVisible,
   updatedUnsorted: state.notices.updatedUnsorted,
   noticesWindowDims: state.notices.noticesWindowDims,
-  noticesSorted: state.notices.noticesSorted
+  noticesSorted: state.notices.noticesSorted,
+  loading: state.notices.loading
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -11,7 +11,8 @@ export default (
     waitTillDimUpdate: true,
     newNotice: null,
     newNoticeArrange: false,
-    pageNumber: 1
+    pageNumber: 1,
+    loading: true
   },
   action
 ) => {
@@ -88,7 +89,8 @@ export default (
         update: false,
         waitTillDimUpdate: true,
         newNoticeArrange: false,
-        sortDelete: false
+        sortDelete: false,
+        loading: false
       };
     case "RESIZE":
       return {

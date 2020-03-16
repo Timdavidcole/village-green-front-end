@@ -27,7 +27,7 @@ class NoticePreviewImage extends React.Component {
   }
 
   addDimensions(width, height) {
-    if (!this.props.notice1.height || this.props.notice1.height === 24) {
+    if (!this.props.notice1.height || this.props.notice1.height === 23) {
       this.props.loadDivDim({
         title: this.props.notice1.title,
         width: width,
@@ -63,7 +63,7 @@ class NoticePreviewImage extends React.Component {
       exited: { opacity: "1" }
     };
     return (
-      <Transition in={!this.props.noticesVisible} timeout={duration}>
+      <Transition in={!this.props.noticesVisible || !this.props.sorted} timeout={duration}>
         {state => (
           <div
             id={`noticeCard${this.props.index}`}
@@ -99,11 +99,12 @@ class NoticePreviewImage extends React.Component {
                   style={{ visibility: "hidden", maxWidth: "250px" }}
                   onLoad={ev => {
                     if (this.props.page !== "pinned") {
+                      console.log('add dim of image')
+                      console.log(ev.target.offsetHeight)
+                      console.log(ev.target.offsetWidth)
                       this.addDimensions(
-                        document.getElementById(`noticeCard${this.props.index}`)
-                          .offsetWidth,
-                        document.getElementById(`noticeCard${this.props.index}`)
-                          .offsetHeight
+                        ev.target.offsetWidth,
+                          ev.target.offsetHeight
                       );
                     }
                   }}
