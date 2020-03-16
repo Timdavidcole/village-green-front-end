@@ -3,7 +3,6 @@ export default (
     notices: [],
     noticesSorted: [],
     noticesVisible: true,
-    pinnedEvent: false,
     noticesCount: null,
     sorted: false,
     updatedUnsorted: false,
@@ -46,17 +45,6 @@ export default (
       };
     case "HOME_PAGE_UNLOADED":
       return {};
-    case "PIN_NOTICE":
-      return {
-        ...state,
-        notices: action.payload,
-        pinnedEvent: true
-      };
-    case "ADD_PINNED_EVENT":
-      return {
-        ...state,
-        pinnedEvent: true
-      };
     case "LOAD_DIV_DIMENSIONS":
       const newNotices1 = [...state.notices];
       const newNotice1 = {
@@ -76,8 +64,8 @@ export default (
         sorted: false,
         resize: false,
         update: true,
-        pinnedEvent: false,
-        waitTillDimUpdate: false
+        waitTillDimUpdate: false,
+        loading: true
       };
     case "UPDATE_SORTED_NOTICES":
       return {
@@ -99,20 +87,19 @@ export default (
         update: true,
         sorted: false,
         waitTillDimUpdate: true,
-        pageNumber: 1
+        pageNumber: 1,
+        loading: true
       };
     case "UPDATE_PAGE_NUMBER":
       return {
         ...state,
-        pageNumber: action.payload,
-        loading: true
+        pageNumber: action.payload
       };
     case "UPDATE_UNSORTED_NOTICES":
       return {
         ...state,
         notices: [...action.payload.notices],
         sorted: false,
-        pinnedEvent: false,
         updatedUnsorted: true,
         noticesVisible: true,
         update: true,
@@ -124,7 +111,6 @@ export default (
         notices: [],
         noticesSorted: [],
         noticesVisible: true,
-        pinnedEvent: false,
         noticesCount: null,
         sorted: false,
         updatedUnsorted: false,
@@ -149,7 +135,8 @@ export default (
       return {
         ...state,
         noticesSorted: newNotices,
-        sortDelete: true
+        sortDelete: true,
+        loading: true
       };
   }
 
