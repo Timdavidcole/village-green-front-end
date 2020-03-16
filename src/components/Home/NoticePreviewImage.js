@@ -99,9 +99,6 @@ class NoticePreviewImage extends React.Component {
                   style={{ visibility: "hidden", maxWidth: "250px" }}
                   onLoad={ev => {
                     if (this.props.page !== "pinned") {
-                      console.log('add dim of image')
-                      console.log(ev.target.offsetHeight)
-                      console.log(ev.target.offsetWidth)
                       this.addDimensions(
                         ev.target.offsetWidth,
                           ev.target.offsetHeight

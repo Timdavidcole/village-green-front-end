@@ -1,6 +1,13 @@
 import { Link } from "react-router-dom";
 import React from "react";
 import LoggedInView from "./LoggedInView";
+import { connect } from "react-redux";
+
+const mapStateToProps = state => ({
+  noticesWindowDims: state.notices.noticesWindowDims
+});
+
+const mapDispatchToProps = dispatch => ({});
 
 const LoggedOutView = props => {
   if (!props.currentUser) {
@@ -37,7 +44,7 @@ class Header extends React.Component {
           <Link to="/" className="navbar-brand">
             {this.props.appName.toLowerCase()}
           </Link>
-          {window.innerWidth > 1095 ? (
+          {this.props.noticesWindowDims.width > 1095 ? (
             <Link
               to="/"
               style={{
@@ -61,4 +68,4 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

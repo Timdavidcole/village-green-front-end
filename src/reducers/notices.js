@@ -43,6 +43,11 @@ export default (
         ...state,
         noticesVisible: false
       };
+    case "NOTICES_VISIBLE":
+      return {
+        ...state,
+        loading: true
+      };
     case "HOME_PAGE_UNLOADED":
       return {};
     case "LOAD_DIV_DIMENSIONS":
@@ -78,7 +83,8 @@ export default (
         waitTillDimUpdate: true,
         newNoticeArrange: false,
         sortDelete: false,
-        loading: false
+        loading: false,
+        pageNumberChanged: false
       };
     case "RESIZE":
       return {
@@ -93,7 +99,8 @@ export default (
     case "UPDATE_PAGE_NUMBER":
       return {
         ...state,
-        pageNumber: action.payload
+        pageNumber: action.payload,
+        pageNumberChanged: true
       };
     case "UPDATE_UNSORTED_NOTICES":
       return {

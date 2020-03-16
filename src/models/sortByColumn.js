@@ -7,7 +7,7 @@ const sortByColumn = function(notices, noticesDims, loggedIn, newNotice) {
   let sortedNotices = [];
   let freePage = 0;
   const maxColumns = Math.floor(noticesDims.width / 250);
-  const maxHeight = noticesDims.height - 50;
+  const maxHeight = noticesDims.height - 100;
 
 
 
@@ -75,6 +75,7 @@ const sortByColumn = function(notices, noticesDims, loggedIn, newNotice) {
       findColumnWithSpace(notice, columnWithRoom, index);
     }
   });
+  console.log(maxHeight)
 
   const sortByPage = function(noticesInColumns) {
     noticesInColumns.forEach(noticeColumn => {
