@@ -70,6 +70,7 @@ const NoticesPage = props => {
   }
   return (
     <div style={{ pointerEvents: "none" }}>
+    {props.loading ? <Loader/> : null}
       {whichPageNumberButton("up")}
       <div
         className="noticesParent"

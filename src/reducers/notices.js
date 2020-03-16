@@ -104,7 +104,8 @@ export default (
     case "UPDATE_PAGE_NUMBER":
       return {
         ...state,
-        pageNumber: action.payload
+        pageNumber: action.payload,
+        loading: true
       };
     case "UPDATE_UNSORTED_NOTICES":
       return {
@@ -115,7 +116,8 @@ export default (
         updatedUnsorted: true,
         noticesVisible: true,
         update: true,
-        newNoticeArrange: false
+        newNoticeArrange: false,
+        loading: true
       };
     case "LOG_OUT_NOTICES":
       return {
