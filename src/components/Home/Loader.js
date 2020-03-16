@@ -6,7 +6,7 @@ const Loader = props => {
     <div>
       <div className="loader"></div>
       <div className="loader-text">
-        <span style={{position: "relative", top: "40%"}}>loading...</span>
+        <span style={{position: "relative", top: "40%"}}>arranging...</span>
       </div>
     </div>
   );

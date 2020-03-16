@@ -1,3 +1,29 @@
+.noticeCard {
+    margin: auto;
+    box-shadow: 5px 10px 20px 3px rgba(176, 176, 176, 0.79);
+    border-radius: 6px;
+    padding: 10px;
+    background-color: #fffbf0;
+    position: relative;
+    transition: opacity 0.2s linear;
+    opacity: 1;
+    z-index: 5000;
+    pointer-events: auto;
+    display: inline-block;
+    vertical-align: top;
+    flex-Basis: "1 1 20%";
+}
+
+.noticeCard:hover .card-inner,
+.card-inner {
+    transform: rotateY(180deg);
+    z-index: 555555;
+}
+
+.card:hover {
+    z-index: 555555;
+}
+
 .thumb-buttons-container {
     position: absolute;
     right: 0px;
@@ -101,32 +127,6 @@
     display: inline-block;
     background-size: cover;
     transform: rotate(315deg)
-}
-
-.noticeCard {
-    margin: auto;
-    box-shadow: 5px 10px 20px 3px rgba(176, 176, 176, 0.79);
-    border-radius: 6px;
-    padding: 10px;
-    background-color: #fffbf0;
-    position: relative;
-    transition: opacity 0.2s linear;
-    opacity: 1;
-    z-index: 5000;
-    pointer-events: auto;
-    display: inline-block;
-    vertical-align: top;
-    flex-Basis: "1 1 20%";
-}
-
-.noticeCard:hover .card-inner,
-.card-inner {
-    transform: rotateY(180deg);
-    z-index: 555555;
-}
-
-.card:hover {
-    z-index: 555555;
 }
 
 .card-inner {

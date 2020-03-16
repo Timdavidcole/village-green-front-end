@@ -86,13 +86,7 @@ class MapComponent extends React.Component {
           scaledSize: { width: 64, height: 64 }
         }
       };
-    } else
-      return {
-        icon: {
-          url: require("./noticeboardIconGreen.png"),
-          scaledSize: { width: 64, height: 64 }
-        }
-      };
+    }
   }
 
   render() {
@@ -115,9 +109,9 @@ class MapComponent extends React.Component {
           })
         }
       >
-        {this.props.isMarkerShown && (
+        {this.props.isMarkerShown && this.props.currentUser && this.props.centerLocation === "HOME" ? (
           <Marker options={this.markerIcon()} position={this.props.centerMap} />
-        )}
+        ) : null}
       </GoogleMap>
     );
   }

@@ -41,11 +41,7 @@ export default (
     case "NOTICES_VISIBLE":
       return {
         ...state,
-        noticesVisible: false
-      };
-    case "NOTICES_VISIBLE":
-      return {
-        ...state,
+        noticesVisible: false,
         loading: true
       };
     case "HOME_PAGE_UNLOADED":
@@ -99,8 +95,20 @@ export default (
     case "UPDATE_PAGE_NUMBER":
       return {
         ...state,
-        pageNumber: action.payload,
-        pageNumberChanged: true
+        pageNumber: action.payload.pageNumber,
+        pageNumberChanged: true,
+        pageChangeDirection: action.payload.direction
+      };
+      case "START_PAGE_NUMBER_ANIMATION":
+      return {
+        ...state,
+        pageNumberAnimation: true,
+        pageChangeDirection: action.payload
+      };
+      case "STOP_PAGE_NUMBER_ANIMATION":
+      return {
+        ...state,
+        pageNumberAnimation: false
       };
     case "UPDATE_UNSORTED_NOTICES":
       return {

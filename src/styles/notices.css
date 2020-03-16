@@ -14,6 +14,13 @@
     position: relative
 }
 
+.noticesSwipeAnimation {
+    opacity: 1;
+    transition: opacity 0.1s linear, transform 0.1s ease-in;
+    position: relative;
+    z-index: 700001;
+}
+
 .up-arrow-container {
     width: 100vw;
     height: 40px;

@@ -5,22 +5,28 @@ import "../../styles/notices.css";
 import { connect } from "react-redux";
 import ChangePageButton from "./ChangePageButton";
 import Loader from "./Loader";
+import { Transition } from "react-transition-group";
 
 const mapStateToProps = state => ({
   loggedIn: state.auth.loggedIn,
   page: state.notices.page,
   resize: state.notices.resize,
   pageNumber: state.notices.pageNumber,
+  pageNumberChanged: state.notices.pageNumberChanged,
+  pageNumberAnimation: state.notices.pageNumberAnimation,
   noticesVisible: state.notices.noticesVisible,
   updatedUnsorted: state.notices.updatedUnsorted,
   noticesWindowDims: state.notices.noticesWindowDims,
   noticesSorted: state.notices.noticesSorted,
-  loading: state.notices.loading
+  loading: state.notices.loading,
+  pageChangeDirection: state.notices.pageChangeDirection
 });
 
 const mapDispatchToProps = dispatch => ({
   addNoticesWindowDims: payload =>
-    dispatch({ type: "ADD_NOTICES_WINDOW_DIMS", payload })
+    dispatch({ type: "ADD_NOTICES_WINDOW_DIMS", payload }),
+  stopPageNumberAnimation: () =>
+    dispatch({ type: "STOP_PAGE_NUMBER_ANIMATION" })
 });
 
 const NoticesPage = props => {
@@ -33,6 +39,10 @@ const NoticesPage = props => {
     if (pageNumber < noticesSorted.length && direction === "down") {
       return <ChangePageButton direction="down" />;
     }
+  };
+
+  const stopPageNumberAnimation = function() {
+    props.stopPageNumberAnimation();
   };
 
   const checkPageStyle = function() {
@@ -61,6 +71,25 @@ const NoticesPage = props => {
     }
   };
 
+  const duration = 200;
+
+  const transitionStyles = function() {
+    if (props.pageChangeDirection === "up") {
+      return {
+        entering: { opacity: "0", transform: "translate(0px, -500px)" },
+        entered: { opacity: "0", transform: "translate(0px, 500px)" },
+        exiting: { opacity: "0", transform: "translate(0px, 500px)" },
+        exited: { opacity: "1" }
+      };
+    } else
+      return {
+        entering: { opacity: "0", transform: "translate(0px, 500px)" },
+        entered: { opacity: "0", transform: "translate(0px, -500px)" },
+        exiting: { opacity: "0", transform: "translate(0px, -500px)" },
+        exited: { opacity: "1" }
+      };
+  };
+
   if (!props.noticesByPage) {
     return (
       <div id="notices">
@@ -68,57 +97,71 @@ const NoticesPage = props => {
       </div>
     );
   }
+  if (props.pageNumberAnimation) {
+    setTimeout(stopPageNumberAnimation, duration);
+  }
   return (
-    <div style={{ pointerEvents: "none" }}>
-    {props.loading ? <Loader/> : null}
-      {whichPageNumberButton("up")}
-      <div
-        className="noticesParent"
-        id="notices"
-        style={checkPageStyle()}
-        ref={el => {
-          if (
-            (el && !props.noticesWindowDims.height) ||
-            props.resize ||
-            (el &&
-              props.noticesWindowDims.height !==
-                document.getElementById("notices").offsetHeight)
-          ) {
-            props.addNoticesWindowDims({
-              width: document.getElementById("notices").offsetWidth,
-              height: document.getElementById("notices").offsetHeight
-            });
-          }
-        }}
-      >
-        {props.noticesByPage.map((notice1, i) => {
-          if (!notice1.image) {
-            return (
-              <NoticePreview
-                page={props.page}
-                noticesVisible={props.noticesVisible}
-                index={i + 2}
-                indexTrue={i}
-                notice1={notice1}
-                key={notice1.slug}
-              />
-            );
-          } else {
-            return (
-              <NoticePreviewImage
-                page={props.page}
-                noticesVisible={props.noticesVisible}
-                index={i + 2}
-                indexTrue={i}
-                notice1={notice1}
-                key={notice1.slug}
-              />
-            );
-          }
-        })}
-      </div>
-      {whichPageNumberButton("down")}
-    </div>
+    <Transition
+      in={props.pageNumberAnimation}
+      out={!props.pageNumberAnimation}
+      timeout={duration}
+    >
+      {state => (
+        <div
+          className="noticesSwipeAnimation"
+          style={{ pointerEvents: "none", ...transitionStyles()[state] }}
+        >
+          {props.loading ? <Loader /> : null}
+          {whichPageNumberButton("up")}
+          <div
+            className="noticesParent"
+            id="notices"
+            style={checkPageStyle()}
+            ref={el => {
+              if (
+                (el && !props.noticesWindowDims.height) ||
+                props.resize ||
+                (el &&
+                  props.noticesWindowDims.height !==
+                    document.getElementById("notices").offsetHeight)
+              ) {
+                props.addNoticesWindowDims({
+                  width: document.getElementById("notices").offsetWidth,
+                  height: document.getElementById("notices").offsetHeight
+                });
+              }
+            }}
+          >
+            {props.noticesByPage.map((notice1, i) => {
+              if (!notice1.image) {
+                return (
+                  <NoticePreview
+                    page={props.page}
+                    noticesVisible={props.noticesVisible}
+                    index={i + 2}
+                    indexTrue={i}
+                    notice1={notice1}
+                    key={notice1.slug}
+                  />
+                );
+              } else {
+                return (
+                  <NoticePreviewImage
+                    page={props.page}
+                    noticesVisible={props.noticesVisible}
+                    index={i + 2}
+                    indexTrue={i}
+                    notice1={notice1}
+                    key={notice1.slug}
+                  />
+                );
+              }
+            })}
+          </div>
+          {whichPageNumberButton("down")}
+        </div>
+      )}
+    </Transition>
   );
 };
 
