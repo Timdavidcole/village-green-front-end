@@ -22,8 +22,8 @@
 }
 
 .up-arrow-container {
-    width: 100vw;
     height: 40px;
+    left: 30%;
     bottom: 15px;
     position: relative;
     margin-top: 20px;
@@ -56,9 +56,9 @@
 }
 
 .down-arrow-container {
-    width: 100vw;
     height: 40px;
     bottom: 0px;
+    left: 30%;
     position: absolute;
     z-index: 700031209;
     pointer-events: all;

@@ -119,7 +119,8 @@ export default (
         noticesVisible: true,
         update: true,
         newNoticeArrange: false,
-        loading: true
+        loading: true,
+        pageNumber: 1
       };
     case "LOG_OUT_NOTICES":
       return {

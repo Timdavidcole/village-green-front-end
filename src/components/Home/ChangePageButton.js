@@ -102,8 +102,7 @@ class ChangePageButton extends React.Component {
       outline: "none",
       border: "none",
       opacity: "1",
-      width: "40%",
-      left: "30%",
+      width: "40vw",
       pointerEvents: "all",
       transition: "transform 0.2s, box-shadow 0.2s, border-radius 0.2s"
     };
