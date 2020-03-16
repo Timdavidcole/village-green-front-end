@@ -15,7 +15,8 @@ const mapStateToProps = state => ({
   newNotice: state.notices.newNotice,
   sortDelete: state.notices.sortDelete,
   noticesSorted: state.notices.noticesSorted,
-  pageNumber: state.notices.pageNumber
+  pageNumber: state.notices.pageNumber,
+  pageNumberChanged: state.notices.pageNumberChanged
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -59,6 +60,16 @@ class Notices extends React.Component {
           sortByHeight([
             ...this.props.noticesSorted[this.props.pageNumber - 1]
           ]),
+          this.props.noticesWindowDims,
+          this.props.loggedIn,
+          this.props.newNotice
+        )
+      );
+    }
+    if (this.props.pageNumberChanged) {
+      this.props.updateSortedNotices(
+        sortByColumn(
+          sortByHeight([...this.props.notices]),
           this.props.noticesWindowDims,
           this.props.loggedIn,
           this.props.newNotice

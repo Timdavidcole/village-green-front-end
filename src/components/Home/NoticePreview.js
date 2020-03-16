@@ -64,11 +64,14 @@ class NoticePreview extends React.Component {
       exited: { opacity: "1" }
     };
     return (
-      <Transition in={!this.props.noticesVisible} timeout={duration}>
+      <Transition
+        in={!this.props.noticesVisible || !this.props.sorted}
+        timeout={duration}
+      >
         {state => (
           <div
             id={`noticeCard${this.props.index}`}
-            className={`noticeCard`}
+            className={"noticeCard"}
             style={{
               order: notice1.order,
               ...transitionStyles[state]

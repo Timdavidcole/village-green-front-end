@@ -9,7 +9,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updatePageNumber: payload => dispatch({ type: "UPDATE_PAGE_NUMBER", payload })
+  updatePageNumber: payload =>
+    dispatch({ type: "UPDATE_PAGE_NUMBER", payload }),
+  startPageNumberAnimation: payload =>
+    dispatch({ type: "START_PAGE_NUMBER_ANIMATION", payload })
 });
 
 class ChangePageButton extends React.Component {
@@ -35,11 +38,16 @@ class ChangePageButton extends React.Component {
   }
 
   changePageNumber() {
-    this.props.updatePageNumber(
-      this.props.direction === "up"
-        ? this.props.pageNumber - 1
-        : this.props.pageNumber + 1
-    );
+    this.props.startPageNumberAnimation(this.props.direction);
+    setTimeout(() => {
+      this.props.updatePageNumber({
+        direction: this.props.direction,
+        pageNumber:
+          this.props.direction === "up"
+            ? this.props.pageNumber - 1
+            : this.props.pageNumber + 1
+      });
+    }, 120);
   }
 
   getRndInteger(min, max) {

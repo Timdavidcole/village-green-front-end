@@ -8,9 +8,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  pinNotice: payload => dispatch({ type: "PIN_NOTICE", payload }),
-  onLoad: payload => dispatch({ type: "HOME_PAGE_LOADED", payload }),
-  addPinnedEvent: () => dispatch({ type: "ADD_PINNED_EVENT" })
 });
 
 class NoticeButtons extends React.Component {

@@ -5,7 +5,6 @@
     flex-direction: column;
     flex-wrap: wrap;
     padding-bottom: 50px;
-
     border: none;
     overflow-x: hidden;
     overflow-y: hidden;
@@ -13,6 +12,13 @@
     align-items: stretch;
     z-index: 70000;
     position: relative
+}
+
+.noticesSwipeAnimation {
+    opacity: 1;
+    transition: opacity 0.1s linear, transform 0.1s ease-in;
+    position: relative;
+    z-index: 700001;
 }
 
 .up-arrow-container {

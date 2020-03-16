@@ -6,7 +6,8 @@ import { Transition } from "react-transition-group";
 import "../styles/menuStyles.css";
 
 const mapStateToProps = state => ({
-  pinnedEvent: state.notices.pinnedEvent
+  pinnedEvent: state.notices.pinnedEvent,
+  noticesWindowDims: state.notices.noticesWindowDims
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -17,7 +18,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class LoggedInView extends React.Component {
-
   render() {
     const duration = {
       appear: 400,
@@ -42,15 +42,17 @@ class LoggedInView extends React.Component {
         return (
           <li onClick={this.props.onClick} className="nav-item">
             <Link to="/" className="nav-link">
-              <i className="ion-compose"></i>&nbsp;New Notice
+              <i className="ion-compose"></i>
+              {this.props.noticesWindowDims.width > 640 ? " New Notice" : null}
             </Link>
           </li>
         );
       } else
         return (
           <li onClick={this.props.onClick} className="nav-item">
-          <Link className="nav-link">
-            <i className="ion-compose"></i>&nbsp;New Notice
+            <Link className="nav-link">
+              <i className="ion-compose"></i>{" "}
+              {this.props.noticesWindowDims.width > 640 ? " New Notice" : null}
             </Link>
           </li>
         );
@@ -85,7 +87,9 @@ class LoggedInView extends React.Component {
                   }}
                 >
                   <MenuIcon class={"pinSVGMain"} stroke={pinColor[state]} />
-                  Pinned Notices
+                  {this.props.noticesWindowDims.width > 640
+                    ? "Pinned Notices"
+                    : null}
                 </Link>
               )}
             </Transition>
@@ -93,7 +97,8 @@ class LoggedInView extends React.Component {
 
           <li className="nav-item">
             <Link to="/settings" className="nav-link">
-              <i className="ion-gear-a"></i>&nbsp;Settings
+              <i className="ion-gear-a"></i>
+              {this.props.noticesWindowDims.width > 640 ? " Settings" : null}
             </Link>
           </li>
 

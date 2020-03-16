@@ -3,7 +3,6 @@ export default (
     notices: [],
     noticesSorted: [],
     noticesVisible: true,
-    pinnedEvent: false,
     noticesCount: null,
     sorted: false,
     updatedUnsorted: false,
@@ -11,7 +10,8 @@ export default (
     waitTillDimUpdate: true,
     newNotice: null,
     newNoticeArrange: false,
-    pageNumber: 1
+    pageNumber: 1,
+    loading: true
   },
   action
 ) => {
@@ -41,21 +41,11 @@ export default (
     case "NOTICES_VISIBLE":
       return {
         ...state,
-        noticesVisible: false
+        noticesVisible: false,
+        loading: true
       };
     case "HOME_PAGE_UNLOADED":
       return {};
-    case "PIN_NOTICE":
-      return {
-        ...state,
-        notices: action.payload,
-        pinnedEvent: true
-      };
-    case "ADD_PINNED_EVENT":
-      return {
-        ...state,
-        pinnedEvent: true
-      };
     case "LOAD_DIV_DIMENSIONS":
       const newNotices1 = [...state.notices];
       const newNotice1 = {
@@ -75,8 +65,8 @@ export default (
         sorted: false,
         resize: false,
         update: true,
-        pinnedEvent: false,
-        waitTillDimUpdate: false
+        waitTillDimUpdate: false,
+        loading: true
       };
     case "UPDATE_SORTED_NOTICES":
       return {
@@ -88,7 +78,9 @@ export default (
         update: false,
         waitTillDimUpdate: true,
         newNoticeArrange: false,
-        sortDelete: false
+        sortDelete: false,
+        loading: false,
+        pageNumberChanged: false
       };
     case "RESIZE":
       return {
@@ -97,30 +89,43 @@ export default (
         update: true,
         sorted: false,
         waitTillDimUpdate: true,
-        pageNumber: 1
+        pageNumber: 1,
+        loading: true
       };
     case "UPDATE_PAGE_NUMBER":
       return {
         ...state,
-        pageNumber: action.payload
+        pageNumber: action.payload.pageNumber,
+        pageNumberChanged: true,
+        pageChangeDirection: action.payload.direction
+      };
+      case "START_PAGE_NUMBER_ANIMATION":
+      return {
+        ...state,
+        pageNumberAnimation: true,
+        pageChangeDirection: action.payload
+      };
+      case "STOP_PAGE_NUMBER_ANIMATION":
+      return {
+        ...state,
+        pageNumberAnimation: false
       };
     case "UPDATE_UNSORTED_NOTICES":
       return {
         ...state,
         notices: [...action.payload.notices],
         sorted: false,
-        pinnedEvent: false,
         updatedUnsorted: true,
         noticesVisible: true,
         update: true,
-        newNoticeArrange: false
+        newNoticeArrange: false,
+        loading: true
       };
     case "LOG_OUT_NOTICES":
       return {
         notices: [],
         noticesSorted: [],
         noticesVisible: true,
-        pinnedEvent: false,
         noticesCount: null,
         sorted: false,
         updatedUnsorted: false,
@@ -145,7 +150,8 @@ export default (
       return {
         ...state,
         noticesSorted: newNotices,
-        sortDelete: true
+        sortDelete: true,
+        loading: true
       };
   }
 

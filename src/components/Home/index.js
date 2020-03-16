@@ -21,7 +21,8 @@ const mapDispatchToProps = dispatch => ({
   onLoad: payload => dispatch({ type: "HOME_PAGE_LOADED", payload }),
   updateUnsortedNotices: payload =>
     dispatch({ type: "UPDATE_UNSORTED_NOTICES", payload }),
-  resize: () => dispatch({ type: "RESIZE" })
+  resize: () => dispatch({ type: "RESIZE" }),
+  loading: () => dispatch({ type: "LOADING" })
 });
 
 class Home extends React.Component {
@@ -29,6 +30,7 @@ class Home extends React.Component {
     this.props.onLoad(agent.Notices.all(JSON.stringify(this.props.centerMap)));
     var doit;
     window.addEventListener("resize", () => {
+      this.props.loading();
       clearTimeout(doit);
       doit = setTimeout(() => {
         this.props.resize();
@@ -50,7 +52,13 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div style={{ width: "100vw", height: "calc(100vh - 56px)", overflow: "hidden" }}>
+      <div
+        style={{
+          width: "100vw",
+          height: "calc(100vh - 56px)",
+          overflow: "hidden"
+        }}
+      >
         <div style={{ width: "100%", position: "absolute" }}>
           <MapNavBar />
           <NewNotice />
