@@ -7,7 +7,7 @@ This is my first full-stack completely self-made personal project, from concept 
 
 For the time being the best way to check out the deployed site is top visit my Heroku app.
 
-# https://village-green-fr.herokuapp.com/ (not always working!)
+# https://village-green-fr.herokuapp.com/ (bit slow to load the first time)
 
 # Backend API can be found here https://github.com/Timdavidcole/village-green-backend-api
 
