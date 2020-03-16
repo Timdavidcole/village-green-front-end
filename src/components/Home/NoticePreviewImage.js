@@ -27,7 +27,7 @@ class NoticePreviewImage extends React.Component {
   }
 
   addDimensions(width, height) {
-    if (!this.props.notice1.height || this.props.notice1.height === 23) {
+    if (!this.props.notice1.height || this.props.notice1.height < 50) {
       this.props.loadDivDim({
         title: this.props.notice1.title,
         width: width,
