@@ -9,7 +9,6 @@
     opacity: 1;
     z-index: 5000;
     pointer-events: auto;
-    display: inline-block;
     vertical-align: top;
     flex-Basis: "1 1 20%";
 }

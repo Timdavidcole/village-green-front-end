@@ -11,7 +11,9 @@ export default (
     newNotice: null,
     newNoticeArrange: false,
     pageNumber: 1,
-    loading: true
+    loading: true,
+    noticesHidden: false,
+    noticeWidth: '240'
   },
   action
 ) => {
@@ -44,6 +46,34 @@ export default (
         noticesVisible: false,
         loading: true
       };
+    case "LOADING":
+      return {
+        ...state,
+        loading: true,
+        noticesVisible: false
+      };
+    case "NOTICES_HIDDEN":
+      if (action.payload === "toggle") {
+        return {
+          ...state,
+          noticesHidden: !state.noticesHidden
+        };
+      } else {
+        return {
+          ...state,
+          noticesHidden: true
+        };
+      }
+    case "NOTICES_SHOWN":
+      return {
+        ...state,
+        noticesHidden: false
+      };
+    case "UPDATE_NOTICE_WIDTH":
+      return {
+        ...state,
+        noticeWidth: action.payload
+      };
     case "HOME_PAGE_UNLOADED":
       return {};
     case "LOAD_DIV_DIMENSIONS":
@@ -56,7 +86,8 @@ export default (
       newNotices1[action.payload.index] = newNotice1;
       return {
         ...state,
-        notices: newNotices1
+        notices: newNotices1,
+        noticesVisible: false
       };
     case "ADD_NOTICES_WINDOW_DIMS":
       return {
@@ -66,7 +97,7 @@ export default (
         resize: false,
         update: true,
         waitTillDimUpdate: false,
-        loading: true
+        noticesVisible: false
       };
     case "UPDATE_SORTED_NOTICES":
       return {
@@ -99,13 +130,13 @@ export default (
         pageNumberChanged: true,
         pageChangeDirection: action.payload.direction
       };
-      case "START_PAGE_NUMBER_ANIMATION":
+    case "START_PAGE_NUMBER_ANIMATION":
       return {
         ...state,
         pageNumberAnimation: true,
         pageChangeDirection: action.payload
       };
-      case "STOP_PAGE_NUMBER_ANIMATION":
+    case "STOP_PAGE_NUMBER_ANIMATION":
       return {
         ...state,
         pageNumberAnimation: false
@@ -116,7 +147,7 @@ export default (
         notices: [...action.payload.notices],
         sorted: false,
         updatedUnsorted: true,
-        noticesVisible: true,
+        noticesVisible: false,
         update: true,
         newNoticeArrange: false,
         loading: true,

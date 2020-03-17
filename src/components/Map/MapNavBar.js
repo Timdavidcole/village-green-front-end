@@ -1,9 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import MapSearchBox from "./MapSearchBox";
+import MapHomeButton from "./MapHomeButton";
+import MapCurrentLocationButton from "./MapCurrentLocationButton";
+import HideNoticesButton from "./HideNoticesButton";
+import NoticeSizeSlider from "./NoticeSizeSlider";
 
 const mapStateToProps = state => ({
-  currentUser: state.common.currentUser
+  currentUser: state.common.currentUser,
+  noticesHidden: state.notices.noticesHidden
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -17,7 +22,6 @@ class MapNavBar extends React.Component {
     this.buttonStyle = this.buttonStyle.bind(this);
     this.homeOnClick = this.homeOnClick.bind(this);
     this.currLocOnClick = this.currLocOnClick.bind(this);
-    this.homeButton = this.homeButton.bind(this);
   }
   buttonStyle() {
     return {
@@ -59,21 +63,6 @@ class MapNavBar extends React.Component {
       });
   }
 
-  homeButton() {
-    if (this.props.currentUser) {
-      return (
-        <button
-          onClick={this.homeOnClick()}
-          className="active"
-          style={this.buttonStyle()}
-          href="#"
-        >
-          <i className="fa fa-fw fa-home"></i> Home
-        </button>
-      );
-    } else return null;
-  }
-
   render() {
     return (
       <div>
@@ -87,14 +76,10 @@ class MapNavBar extends React.Component {
             paddingBottom: "0px"
           }}
         >
-          {this.homeButton()}
-          <button
-            onClick={this.currLocOnClick()}
-            href="#"
-            style={this.buttonStyle()}
-          >
-            <i className="fa fa-fw fa-location-arrow"></i> Current Location
-          </button>
+          <MapHomeButton />
+          <MapCurrentLocationButton/>
+          {!this.props.noticesHidden ? <HideNoticesButton/> : null}
+          <NoticeSizeSlider/>
           <MapSearchBox />
         </div>
       </div>
@@ -102,7 +87,4 @@ class MapNavBar extends React.Component {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MapNavBar);
+export default connect(mapStateToProps, mapDispatchToProps)(MapNavBar);

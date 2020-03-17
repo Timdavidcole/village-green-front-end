@@ -1,5 +1,5 @@
-import MapNavBar from "./MapNavBar";
-import MainMap from "./MainMap";
+import MapNavBar from "../Map/MapNavBar";
+import MainMap from "../Map/MainMap";
 import React from "react";
 import agent from "../../agent";
 import { connect } from "react-redux";

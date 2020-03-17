@@ -5,7 +5,8 @@ import "../../styles/notices.css";
 import { connect } from "react-redux";
 
 const mapStateToProps = state => ({
-  noticesPinned: state.pinned.notices
+  noticesPinned: state.pinned.notices,
+  noticeWidth: state.notices.noticeWidth
 });
 
 const mapDispatchToProps = () => ({});
@@ -16,7 +17,7 @@ class NoticesPinned extends React.Component {
       return (
         <div
           style={{
-            height: "calc(100vh - 250px)",
+            height: `calc(100vh - ${this.props.noticeWidth}px)`,
             width: "auto",
             margin: "0",
             padding: "0",

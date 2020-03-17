@@ -10,7 +10,9 @@ const mapStateToProps = state => ({
   currentUser: state.common.currentUser,
   notices: state.notices.notices,
   sorted: state.notices.sorted,
-  updatedUnsorted: state.notices.updatedUnsorted
+  updatedUnsorted: state.notices.updatedUnsorted,
+  noticesHidden: state.notices.noticesHidden,
+  noticeWidth: state.notices.noticeWidth
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -63,12 +65,16 @@ class NoticePreviewImage extends React.Component {
       exited: { opacity: "1" }
     };
     return (
-      <Transition in={!this.props.noticesVisible || !this.props.sorted} timeout={duration}>
+      <Transition
+        in={!this.props.noticesVisible || !this.props.sorted}
+        timeout={duration}
+      >
         {state => (
           <div
             id={`noticeCard${this.props.index}`}
             className={"noticeCard"}
             style={{
+              display: this.props.noticesHidden ? "none" : "inline-block",
               padding: "0px",
               backgroundColor: "transparent",
               boxShadow: "none",
@@ -96,12 +102,15 @@ class NoticePreviewImage extends React.Component {
                 <img
                   alt=""
                   src={notice1.image}
-                  style={{ visibility: "hidden", maxWidth: "250px" }}
+                  style={{
+                    visibility: "hidden",
+                    maxWidth: `${this.props.noticeWidth}px`
+                  }}
                   onLoad={ev => {
                     if (this.props.page !== "pinned") {
                       this.addDimensions(
                         ev.target.offsetWidth,
-                          ev.target.offsetHeight
+                        ev.target.offsetHeight
                       );
                     }
                   }}
@@ -110,7 +119,7 @@ class NoticePreviewImage extends React.Component {
               <div
                 className="card-back"
                 style={{
-                  width: "250px",
+                  width: `${this.props.noticeWidth}px`,
                   backgroundColor: "#e4dfc0",
                   padding: "10px",
                   minHeight: notice1.height
