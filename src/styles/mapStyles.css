@@ -41,9 +41,10 @@
 }
 
 .slidecontainer {
-    margin-left: 10px;
-    width: 30%;
-    display: inline-block;
+    margin-top: 8px;
+    margin-right: 10px;
+    width: 20%;
+    float: right;
     visibility: visible;
     pointer-events: all;
 }
