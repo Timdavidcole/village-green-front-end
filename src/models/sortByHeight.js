@@ -1,6 +1,6 @@
 const sortByHeight = function(notices, newNotice) {
   const noticesHeight = [...notices];
-  const newNotice1 = noticesHeight[0]
+  const newNotice1 = noticesHeight[0];
   if (newNotice) {
     noticesHeight.shift();
   }
