@@ -45,18 +45,25 @@ export default (
         noticesVisible: false,
         loading: true
       };
-      case "LOADING":
+    case "LOADING":
       return {
         ...state,
         loading: true,
         noticesVisible: false
       };
     case "NOTICES_HIDDEN":
-      return {
-        ...state,
-        noticesHidden: true
-      };
-      case "NOTICES_SHOWN":
+      if (action.payload === "toggle") {
+        return {
+          ...state,
+          noticesHidden: !state.noticesHidden
+        };
+      } else {
+        return {
+          ...state,
+          noticesHidden: true
+        };
+      }
+    case "NOTICES_SHOWN":
       return {
         ...state,
         noticesHidden: false

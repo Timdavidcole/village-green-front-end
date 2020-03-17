@@ -3,9 +3,11 @@ import { connect } from "react-redux";
 import MapSearchBox from "./MapSearchBox";
 import MapHomeButton from "./MapHomeButton";
 import MapCurrentLocationButton from "./MapCurrentLocationButton";
+import HideNoticesButton from "./HideNoticesButton";
 
 const mapStateToProps = state => ({
-  currentUser: state.common.currentUser
+  currentUser: state.common.currentUser,
+  noticesHidden: state.notices.noticesHidden
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -75,6 +77,7 @@ class MapNavBar extends React.Component {
         >
           <MapHomeButton />
           <MapCurrentLocationButton/>
+          {!this.props.noticesHidden ? <HideNoticesButton/> : null}
           <MapSearchBox />
         </div>
       </div>
