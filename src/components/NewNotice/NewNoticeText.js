@@ -1,7 +1,6 @@
 import React from "react";
 import agent from "../../agent";
 import { connect } from "react-redux";
-import ReactDOM from "react-dom";
 import "../../styles/newNotice.css";
 import ExitButton from "./ExitButton";
 
@@ -15,7 +14,7 @@ const mapDispatchToProps = dispatch => ({
   hideNewNoticeWindow: () => dispatch({ type: "HIDE_NEW_NOTICE" })
 });
 
-class NewNotice extends React.Component {
+class NewNoticeText extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -66,56 +65,10 @@ class NewNotice extends React.Component {
     document.removeEventListener("click", this.handleClickOutside, true);
   }
 
-  handleClickOutside = event => {
-    const domNode = ReactDOM.findDOMNode(this);
-
-    if (!domNode || !domNode.contains(event.target)) {
-      if (this.props.showNewNoticeWindow) {
-        event.preventDefault();
-      }
-      this.props.hideNewNoticeWindow();
-    }
-  };
-
-  visible() {
-    if (this.props.showNewNoticeWindow) {
-      return {
-        visibility: "visible",
-        transform: "scale(1)",
-        opacity: "1",
-        transition: "transform 0.2s ease-in, opacity 0.2s ease-in"
-      };
-    } else
-      return {
-        visibility: "hidden",
-        opacity: "0",
-        transform: "scale(0.1)"
-      };
-  }
-
   render() {
-    const defaultStyle = {
-      position: "absolute",
-      pointerEvents: "auto",
-      boxShadow: "5px 10px 20px 3px rgba(176,176,176,0.79)",
-      borderRadius: "6px",
-      margin: "10px",
-      padding: "10px",
-      backgroundColor: "white",
-      width: "60vw",
-      height: "60vh",
-      zIndex: "19823754928374",
-      display: "inline-block",
-      left: "0px"
-    };
 
     return (
-      <div
-        style={{
-          ...defaultStyle,
-          ...this.visible()
-        }}
-      >
+      <div>
         <div
           style={{ textAlign: "right", position: "relative", width: "100%" }}
         >
@@ -240,4 +193,4 @@ class NewNotice extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewNotice);
+export default connect(mapStateToProps, mapDispatchToProps)(NewNoticeText);

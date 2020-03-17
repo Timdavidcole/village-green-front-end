@@ -4,7 +4,7 @@ import React from "react";
 import agent from "../../agent";
 import { connect } from "react-redux";
 import Notices from "./Notices";
-import NewNotice from "./NewNotice";
+import NewNoticeWindow from "../NewNotice/NewNoticeWindow";
 
 const mapStateToProps = state => ({
   noticesVisible: state.notices.noticesVisible,
@@ -61,7 +61,7 @@ class Home extends React.Component {
       >
         <div style={{ width: "100%", position: "absolute" }}>
           <MapNavBar />
-          <NewNotice />
+          <NewNoticeWindow />
           <Notices />
         </div>
         <MainMap />

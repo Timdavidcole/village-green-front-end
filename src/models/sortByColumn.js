@@ -9,8 +9,6 @@ const sortByColumn = function(notices, noticesDims, newNotice, noticeWidth) {
   const maxColumns = Math.floor(noticesDims.width / noticeWidth);
   const maxHeight = noticesDims.height - 100;
 
-
-
   if (newNotice) {
     var firstNotice = { ...notices[0] };
     firstNotice.order = columnWithRoom + 1;
@@ -81,7 +79,7 @@ const sortByColumn = function(notices, noticesDims, newNotice, noticeWidth) {
       if (!sortedNotices[freePage]) {
         sortedNotices.push([]);
       }
-      if (sumHeights(noticeColumn) > (maxHeight) / 3) {
+      if (sumHeights(noticeColumn) > maxHeight / 3) {
         if (sortedNotices[freePage].length < maxColumns) {
           sortedNotices[freePage].push(noticeColumn);
         } else {

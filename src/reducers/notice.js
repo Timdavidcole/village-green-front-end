@@ -1,4 +1,4 @@
-export default (state = {}, action) => {
+export default (state = { showNewNoticeWindow: true }, action) => {
   // eslint-disable-next-line default-case
   switch (action.type) {
     case "NOTICE_PAGE_LOADED":
