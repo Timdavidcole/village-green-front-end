@@ -45,6 +45,12 @@ export default (
         noticesVisible: false,
         loading: true
       };
+      case "LOADING":
+      return {
+        ...state,
+        loading: true,
+        noticesVisible: false
+      };
     case "NOTICES_HIDDEN":
       return {
         ...state,
@@ -67,7 +73,8 @@ export default (
       newNotices1[action.payload.index] = newNotice1;
       return {
         ...state,
-        notices: newNotices1
+        notices: newNotices1,
+        noticesVisible: false
       };
     case "ADD_NOTICES_WINDOW_DIMS":
       return {
@@ -77,7 +84,7 @@ export default (
         resize: false,
         update: true,
         waitTillDimUpdate: false,
-        loading: true
+        noticesVisible: false
       };
     case "UPDATE_SORTED_NOTICES":
       return {
@@ -127,7 +134,7 @@ export default (
         notices: [...action.payload.notices],
         sorted: false,
         updatedUnsorted: true,
-        noticesVisible: true,
+        noticesVisible: false,
         update: true,
         newNoticeArrange: false,
         loading: true,

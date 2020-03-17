@@ -100,6 +100,8 @@ const NoticesPage = props => {
   if (props.pageNumberAnimation) {
     setTimeout(stopPageNumberAnimation, duration);
   }
+  console.log(props.loading)
+  console.log(props.noticesVisible)
   return (
     <Transition
       in={props.pageNumberAnimation}

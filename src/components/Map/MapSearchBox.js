@@ -15,7 +15,8 @@ const mapDispatchToProps = dispatch => ({
   updateUnsortedNotices: payload =>
     dispatch({ type: "UPDATE_UNSORTED_NOTICES", payload }),
   noticesHidden: () => dispatch({ type: "NOTICES_HIDDEN" }),
-  noticesShown: () => dispatch({ type: "NOTICES_SHOWN" })
+  noticesShown: () => dispatch({ type: "NOTICES_SHOWN" }),
+  loading: () => dispatch({ type: "LOADING" })
 });
 
 class MapSearchBox extends React.Component {
@@ -30,7 +31,6 @@ class MapSearchBox extends React.Component {
   }
 
   handleClickOutside = event => {
-    console.log('CLICK OUTSIDE')
     const domNode = ReactDOM.findDOMNode(this);
 
     if (!domNode || !domNode.contains(event.target)) {
@@ -40,6 +40,8 @@ class MapSearchBox extends React.Component {
   };
 
   getCoords(place) {
+    this.props.loading();
+    this.props.noticesShown();
     Geocode.fromAddress(place.formatted_address)
       .then(
         response => {
