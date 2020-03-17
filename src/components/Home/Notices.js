@@ -9,14 +9,14 @@ const mapStateToProps = state => ({
   noticesWindowDims: state.notices.noticesWindowDims,
   notices: state.notices.notices,
   sorted: state.notices.sorted,
-  loggedIn: state.auth.loggedIn,
   updatedUnsorted: state.notices.updatedUnsorted,
   waitTillDimUpdate: state.notices.waitTillDimUpdate,
   newNotice: state.notices.newNotice,
   sortDelete: state.notices.sortDelete,
   noticesSorted: state.notices.noticesSorted,
   pageNumber: state.notices.pageNumber,
-  pageNumberChanged: state.notices.pageNumberChanged
+  pageNumberChanged: state.notices.pageNumberChanged,
+  noticeWidth: state.notices.noticeWidth
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -39,8 +39,8 @@ class Notices extends React.Component {
         sortByColumn(
           sortByHeight([...this.props.notices]),
           this.props.noticesWindowDims,
-          this.props.loggedIn,
-          this.props.newNotice
+          this.props.newNotice,
+          this.props.noticeWidth
         )
       );
     }
@@ -49,8 +49,8 @@ class Notices extends React.Component {
         sortByColumn(
           sortByHeight([...this.props.notices], this.props.newNotice),
           this.props.noticesWindowDims,
-          this.props.loggedIn,
-          this.props.newNotice
+          this.props.newNotice,
+          this.props.noticeWidth
         )
       );
     }
@@ -61,8 +61,8 @@ class Notices extends React.Component {
             ...this.props.noticesSorted[this.props.pageNumber - 1]
           ]),
           this.props.noticesWindowDims,
-          this.props.loggedIn,
-          this.props.newNotice
+          this.props.newNotice,
+          this.props.noticeWidth
         )
       );
     }
@@ -71,8 +71,8 @@ class Notices extends React.Component {
         sortByColumn(
           sortByHeight([...this.props.notices]),
           this.props.noticesWindowDims,
-          this.props.loggedIn,
-          this.props.newNotice
+          this.props.newNotice,
+          this.props.noticeWidth
         )
       );
     }

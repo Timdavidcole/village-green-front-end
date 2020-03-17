@@ -12,7 +12,8 @@ export default (
     newNoticeArrange: false,
     pageNumber: 1,
     loading: true,
-    noticesHidden: false
+    noticesHidden: false,
+    noticeWidth: '240'
   },
   action
 ) => {
@@ -67,6 +68,11 @@ export default (
       return {
         ...state,
         noticesHidden: false
+      };
+    case "UPDATE_NOTICE_WIDTH":
+      return {
+        ...state,
+        noticeWidth: action.payload
       };
     case "HOME_PAGE_UNLOADED":
       return {};

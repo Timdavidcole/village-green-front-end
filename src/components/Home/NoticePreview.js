@@ -10,7 +10,8 @@ const mapStateToProps = state => ({
   currentUser: state.common.currentUser,
   notices: state.notices.notices,
   sorted: state.notices.sorted,
-  noticesHidden: state.notices.noticesHidden
+  noticesHidden: state.notices.noticesHidden,
+  noticeWidth: state.notices.noticeWidth
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -64,6 +65,7 @@ class NoticePreview extends React.Component {
       exiting: { opacity: "1" },
       exited: { opacity: "1" }
     };
+
     return (
       <Transition
         in={!this.props.noticesVisible || !this.props.sorted}
@@ -97,7 +99,7 @@ class NoticePreview extends React.Component {
               }}
             >
               <Link to={`notice/${notice1.slug}`}>
-                <div style={{ width: "230px" }}>
+                <div style={{ width: `${this.props.noticeWidth - 20}px` }}>
                   <div style={{ borderBottom: "1px dashed red" }}>
                     <h3 style={{ textAlign: "center" }}>{notice1.title}</h3>
                   </div>
@@ -115,7 +117,7 @@ class NoticePreview extends React.Component {
                   <span
                     style={{
                       display: "inline-block",
-                      width: "230px",
+                      width: `${this.props.noticeWidth - 20}px`,
                       textAlign: "center",
                       marginBottom: "40px",
                       maxHeight: "121px",
