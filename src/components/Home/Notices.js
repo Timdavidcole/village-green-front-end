@@ -90,6 +90,7 @@ class Notices extends React.Component {
   }
 
   render() {
+
     if (this.props.notices.length === 0) {
       return (
         <div id="notices" className="parent">
