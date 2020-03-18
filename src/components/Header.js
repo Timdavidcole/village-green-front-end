@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import React from "react";
 import LoggedInView from "./LoggedInView";
 import { connect } from "react-redux";
+import "../styles/header.css"
 
 const mapStateToProps = state => ({
   noticesWindowDims: state.notices.noticesWindowDims
@@ -12,24 +13,18 @@ const mapDispatchToProps = dispatch => ({});
 const LoggedOutView = props => {
   if (!props.currentUser) {
     return (
-      <ul className="nav navbar-nav pull-xs-right">
-        <li className="nav-item">
-          <Link to="/" className="nav-link">
+      <ul className="header-items-right">
+          <Link to="/" className="header-link">
             Home
           </Link>
-        </li>
 
-        <li className="nav-item">
-          <Link to="/login" className="nav-link">
+          <Link to="/login" className="header-link">
             Sign in
           </Link>
-        </li>
 
-        <li className="nav-item">
-          <Link to="/register" className="nav-link">
+          <Link to="/register" className="header-link">
             Sign up
           </Link>
-        </li>
       </ul>
     );
   }
@@ -39,20 +34,14 @@ const LoggedOutView = props => {
 class Header extends React.Component {
   render() {
     return (
-      <nav className="navbar navbar-light">
-        <div>
-          <Link to="/" className="navbar-brand">
+      <menu className="header-bar">
+          <Link to="/" className="logo">
             {this.props.appName.toLowerCase()}
           </Link>
           {this.props.noticesWindowDims.width > 1095 ? (
             <Link
               to="/"
-              style={{
-                position: "relative",
-                top: "6px",
-                fontSize: "18px",
-                fontStyle: "italic"
-              }}
+              className='tag-line'
             >
               the noticeboard for anyone, anywhere and anything...
             </Link>
@@ -62,8 +51,7 @@ class Header extends React.Component {
             onClickLogout={this.props.onClickLogout}
             currentUser={this.props.currentUser}
           />
-        </div>
-      </nav>
+      </menu>
     );
   }
 }

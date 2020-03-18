@@ -78,7 +78,7 @@ class MapNavBar extends React.Component {
         >
           <MapHomeButton />
           <MapCurrentLocationButton/>
-          {!this.props.noticesHidden ? <HideNoticesButton/> : null}
+          <HideNoticesButton/>
           <MapSearchBox />
           <NoticeSizeSlider/>
         </div>

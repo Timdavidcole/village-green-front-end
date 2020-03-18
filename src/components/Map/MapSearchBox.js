@@ -7,7 +7,8 @@ import ReactDOM from "react-dom";
 
 const mapStateToProps = state => ({
   currentUser: state.common.currentUser,
-  centerMap: state.map.centerMap
+  centerMap: state.map.centerMap,
+  noticesHidden: state.notices.noticesHidden
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -31,11 +32,13 @@ class MapSearchBox extends React.Component {
   }
 
   handleClickOutside = event => {
-    const domNode = ReactDOM.findDOMNode(this);
+    if (!this.props.noticesHidden) {
+      const domNode = ReactDOM.findDOMNode(this);
 
-    if (!domNode || !domNode.contains(event.target)) {
-      event.preventDefault();
-      this.props.noticesShown();
+      if (!domNode || !domNode.contains(event.target)) {
+        event.preventDefault();
+        this.props.noticesShown();
+      }
     }
   };
 

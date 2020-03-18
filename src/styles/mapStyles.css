@@ -76,12 +76,60 @@
     width: 25px;
     height: 25px;
     border-radius: 100%;
-    background-color: rgb(132, 202, 135);
+    background-color: rgb(160, 215, 162);
+    background-image: url('./resize.png');
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
+    background-position: center;
     cursor: pointer;
     box-shadow: 2px 2px 10px 0px rgba(109, 109, 109, 0.79);
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, transform 0.2s;
+    transform: scale(1)
 }
 
 .slider:hover::-webkit-slider-thumb:hover {
-    background-color: #4CAF50;
+    background-image: none;
+    background-color: rgb(160, 215, 162);
+    background-image: url('./resize.png');
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
+    background-position: center;
+    transform: scale(1.2)
+}
+
+.slider:hover::-webkit-slider-thumb:active {
+    background-image: none;
+    background-color: rgb(103, 184, 106);
+    background-image: url('./resize.png');
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
+    background-position: center;
+    transform: scale(1.2)
+}
+
+.slider::-moz-range-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
+    background-color: rgb(160, 215, 162);
+    background-image: url('./resize.png');
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
+    background-position: center;
+    cursor: pointer;
+    box-shadow: 2px 2px 10px 0px rgba(109, 109, 109, 0.79);
+    transition: background-color 0.2s, transform 0.2s;
+    transform: scale(1)
+}
+
+.slider:hover::-moz-range-thumb:active {
+    background-image: none;
+    background-color: rgb(103, 184, 106);
+    background-image: url('./resize.png');
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
+    background-position: center;
+    transform: scale(1.2)
 }

@@ -26,7 +26,6 @@ const NoticeSizeSlider = props => {
     );
   };
 
-  console.log(props.noticeWidth);
   return (
     <div className="slidecontainer">
       <input

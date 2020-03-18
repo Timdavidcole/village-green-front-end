@@ -13,7 +13,8 @@ export default (
     pageNumber: 1,
     loading: true,
     noticesHidden: false,
-    noticeWidth: '240'
+    noticeWidth: '240',
+    mapBlur: true
   },
   action
 ) => {
@@ -22,8 +23,16 @@ export default (
     case "HOME_PAGE_LOADED":
       return {
         ...state,
-        notices: action.payload.notices,
-        noticesCount: action.payload.noticesCount
+        noticesSorted: [],
+        notices: [...action.payload.notices],
+        sorted: false,
+        updatedUnsorted: true,
+        noticesVisible: false,
+        update: true,
+        newNoticeArrange: false,
+        loading: true,
+        pageNumber: 1,
+        noticesHidden: false
       };
     case "ADD_NEW_NOTICE":
       return {
@@ -44,30 +53,35 @@ export default (
       return {
         ...state,
         noticesVisible: false,
-        loading: true
+        loading: true,
+        mapBlur: false
       };
     case "LOADING":
       return {
         ...state,
         loading: true,
-        noticesVisible: false
+        noticesVisible: false,
+        mapBlur: false
       };
     case "NOTICES_HIDDEN":
       if (action.payload === "toggle") {
         return {
           ...state,
-          noticesHidden: !state.noticesHidden
+          noticesHidden: !state.noticesHidden,
+          mapBlur: !state.mapBlur
         };
       } else {
         return {
           ...state,
-          noticesHidden: true
+          noticesHidden: true,
+          mapBlur: false
         };
       }
     case "NOTICES_SHOWN":
       return {
         ...state,
-        noticesHidden: false
+        noticesHidden: false,
+        mapBlur: true
       };
     case "UPDATE_NOTICE_WIDTH":
       return {
@@ -104,6 +118,7 @@ export default (
         ...state,
         noticesSorted: [...action.payload],
         sorted: true,
+        mapBlur: true,
         noticesVisible: true,
         updatedUnsorted: false,
         update: false,
@@ -111,7 +126,8 @@ export default (
         newNoticeArrange: false,
         sortDelete: false,
         loading: false,
-        pageNumberChanged: false
+        pageNumberChanged: false,
+        noticesHidden: false
       };
     case "RESIZE":
       return {
@@ -121,7 +137,8 @@ export default (
         sorted: false,
         waitTillDimUpdate: true,
         pageNumber: 1,
-        loading: true
+        loading: true,
+        mapBlur: false
       };
     case "UPDATE_PAGE_NUMBER":
       return {
@@ -144,6 +161,7 @@ export default (
     case "UPDATE_UNSORTED_NOTICES":
       return {
         ...state,
+        noticesSorted: [],
         notices: [...action.payload.notices],
         sorted: false,
         updatedUnsorted: true,
@@ -151,39 +169,14 @@ export default (
         update: true,
         newNoticeArrange: false,
         loading: true,
-        pageNumber: 1
+        pageNumber: 1,
+        noticesHidden: false
       };
-    case "LOG_OUT_NOTICES":
-      return {
-        notices: [],
-        noticesSorted: [],
-        noticesVisible: true,
-        noticesCount: null,
-        sorted: false,
-        updatedUnsorted: false,
-        noticesWindowDims: { height: null, width: null },
-        waitTillDimUpdate: true,
-        newNotice: null,
-        newNoticeArrange: false,
-        pageNumber: 1
-      };
-    case "DELETE_NOTICE":
-      var newNotices = [...state.noticesSorted];
-      for (
-        let index = 0;
-        index < newNotices[state.pageNumber].length;
-        index++
-      ) {
-        const element = newNotices[state.pageNumber][index];
-        if (element.slug === action.payload.slug) {
-          newNotices[state.pageNumber].splice(index, 1);
-        }
-      }
+    case "LOGOUT":
       return {
         ...state,
-        noticesSorted: newNotices,
-        sortDelete: true,
-        loading: true
+        notices: [],
+        noticesSorted: [],
       };
   }
 

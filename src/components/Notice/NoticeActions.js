@@ -27,6 +27,7 @@ const NoticeActions = props => {
       })
       .then(() => props.onClickDelete(notice));
   };
+
   if (props.canModify) {
     return (
       <span>

@@ -1,30 +1,17 @@
-const sortByColumn = function(notices, noticesDims, newNotice, noticeWidth) {
-  let newNotices = [[]];
+import sumHeights from "./sumHeights";
+
+const sortByColumn = function(notices, noticesWindowDims, newNotice) {
+  let sortedByColumn = [[]];
   let usedIndexes = [];
   const margin = notice => (notice.image ? 20 : 0);
   let columnWithRoom = 0;
   const noticesToSort = [...notices];
-  let sortedNotices = [];
-  let freePage = 0;
-  const maxColumns = Math.floor(noticesDims.width / noticeWidth);
-  const maxHeight = noticesDims.height - 100;
-
-
+  const maxHeight = noticesWindowDims.height - 100;
 
   if (newNotice) {
     var firstNotice = { ...notices[0] };
     firstNotice.order = columnWithRoom + 1;
-    newNotices = [[firstNotice]];
-  }
-
-  function sumHeights(noticesToSum) {
-    var sum = 0;
-    noticesToSum.forEach(notice => {
-      if (notice.height) {
-        sum += notice.height + margin(notice);
-      }
-    });
-    return sum;
+    sortedByColumn = [[firstNotice]];
   }
 
   function findColumnWithSpace(notice1, column, index1) {
@@ -35,11 +22,11 @@ const sortByColumn = function(notices, noticesDims, newNotice, noticeWidth) {
     if (columnRemainder(column) - (notice1.height + margin(notice1)) > 0) {
       notice1.order = column + 1;
 
-      newNotices[column].push(notice1);
+      sortedByColumn[column].push(notice1);
       usedIndexes.push(index1);
     } else if (!findNoticeThatFits(column)) {
       notice1.order = column + 2;
-      newNotices.push([notice1]);
+      sortedByColumn.push([notice1]);
       usedIndexes.push(index1);
       nextColumn = column;
       columnWithRoom++;
@@ -56,7 +43,7 @@ const sortByColumn = function(notices, noticesDims, newNotice, noticeWidth) {
         !usedIndexes.includes(index2)
       ) {
         notice2.order = column + 1;
-        newNotices[column].push(notice2);
+        sortedByColumn[column].push(notice2);
         usedIndexes.push(index2);
         return true;
       }
@@ -65,7 +52,7 @@ const sortByColumn = function(notices, noticesDims, newNotice, noticeWidth) {
   }
 
   function columnRemainder(column) {
-    return maxHeight - sumHeights(newNotices[column]);
+    return maxHeight - sumHeights(sortedByColumn[column]);
   }
 
   noticesToSort.forEach((notice, index) => {
@@ -76,29 +63,7 @@ const sortByColumn = function(notices, noticesDims, newNotice, noticeWidth) {
     }
   });
 
-  const sortByPage = function(noticesInColumns) {
-    noticesInColumns.forEach(noticeColumn => {
-      if (!sortedNotices[freePage]) {
-        sortedNotices.push([]);
-      }
-      if (sumHeights(noticeColumn) > (maxHeight) / 3) {
-        if (sortedNotices[freePage].length < maxColumns) {
-          sortedNotices[freePage].push(noticeColumn);
-        } else {
-          sortedNotices.push([]);
-          freePage++;
-          sortedNotices[freePage].push(noticeColumn);
-        }
-      }
-    });
-
-    sortedNotices = sortedNotices.map(page => {
-      return page.flat();
-    });
-  };
-
-  sortByPage(newNotices);
-  return sortedNotices;
+  return sortedByColumn;
 };
 
 export default sortByColumn;
