@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import ReactDOM from "react-dom";
 import "../../styles/newNotice.css";
 import NewNoticeText from './NewNoticeText';
-import NewNoticeSelector from './NewNoticeSelector'
+import NewNoticeMenu from './NewNoticeMenu'
 
 
 const mapStateToProps = state => ({
@@ -55,11 +55,11 @@ class NewNoticeWindow extends React.Component {
   render() {
     const defaultStyle = {
       position: "absolute",
+      borderRadius: "10px",
       pointerEvents: "auto",
       boxShadow: "5px 10px 20px 3px rgba(176,176,176,0.79)",
       borderRadius: "6px",
       margin: "10px",
-      padding: "10px",
       backgroundColor: "white",
       width: "60vw",
       height: "80vh",
@@ -75,7 +75,7 @@ class NewNoticeWindow extends React.Component {
           ...this.visible()
         }}
       >
-        <NewNoticeSelector />
+        <NewNoticeMenu />
       </div>
     );
   }

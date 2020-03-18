@@ -4,54 +4,50 @@
     width: 30px;
     display: inline-block;
     background-size: cover;
+    box-sizing: border-box
 }
 
-.new-notice-selector-text {
+.new-notice-menu-container {
+    position: relative;
+    height: 100%;
+    width: 20%;
+    display: inline-block;
+    background-color: #318d31;
+    border-radius: 10px 0px 0px 10px;
+}
+
+.new-notice-menu-text {
     font-family: titillium web, sans-serif;
     font-size: 1.5rem;
-    color: #5cb85c;
-    position: relative;
-    display: inline-block
+    color: white;
+    text-align: center;
+    display: inline-block;
+    width: 100%
 }
 
-.new-notice-radio-list {
-    position: absolute;
-    bottom: 30%;
-    font-size: larger;
-    width: 30%
-}
-
-.new-notice-type-container {
-    color: #318d31;
+.new-notice-menu-item {
+    overflow: auto;
+    color: white;
+    text-align: center;
     position: relative;
-    width: 100%;
+    min-width: 125px;
     background-color: rgb(191, 233, 174);
     border-radius: 10px;
     margin: 20px;
     padding: 5px;
-    box-shadow: 0px 1px 5px 1px rgb(106, 106, 106);
+    box-shadow: 1px 2px 5px 1px rgb(106, 106, 106);
     transition: transform 0.1s, background-color 0.1s, box-shadow 0.1s;
-    transform: scale(1.0)
+    transform: scale(1.0);
+    box-sizing: border-box
 }
 
-.new-notice-type-container:hover {
+.new-notice-type:hover {
     box-shadow: 3px 4px 10px 1px rgb(106, 106, 106);
     background-color: rgb(229, 244, 224);
     transform: scale(1.05)
 }
 
-.new-notice-type-container:active {
+.new-notice-type:active {
     background-color: rgb(191, 233, 174);
     transform: scale(0.95)
-}
-
-.new-notice-type-radio {
-    display: none
-}
-
-.new-notice-type-label {
-    margin: 0px;
-    padding: 0px;
-    width: 100%;
-    text-align: center;
 }
