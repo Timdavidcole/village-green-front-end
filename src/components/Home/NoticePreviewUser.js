@@ -16,7 +16,7 @@ const NoticePreviewUser = function(props) {
           overflow: "hidden"
         }}
       >
-        <Link to={`@${notice.author.username}`}>
+        <Link to={`@${notice.author.username}`} style={{ color: "#4faa4f" }}>
           <img
             style={{
               borderRadius: "6px",
