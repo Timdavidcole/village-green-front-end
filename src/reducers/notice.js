@@ -32,7 +32,7 @@ export default (
     case "DISPLAY_NEW_NOTICE":
       return {
         ...state,
-        showNewNoticeWindow: true
+        showNewNoticeWindow: !state.showNewNoticeWindow
       };
     case "HIDE_NEW_NOTICE":
       return {

@@ -16,7 +16,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  hideNewNoticeWindow: () => dispatch({ type: "HIDE_NEW_NOTICE" })
 });
 
 class NewNoticeWindow extends React.Component {
@@ -27,17 +26,6 @@ class NewNoticeWindow extends React.Component {
   componentWillUnmount() {
     document.removeEventListener("click", this.handleClickOutside, true);
   }
-
-  handleClickOutside = event => {
-    const domNode = ReactDOM.findDOMNode(this);
-
-    if (!domNode || !domNode.contains(event.target)) {
-      if (this.props.showNewNoticeWindow) {
-        event.preventDefault();
-      }
-      this.props.hideNewNoticeWindow();
-    }
-  };
 
   visible() {
     if (this.props.showNewNoticeWindow) {
@@ -96,7 +84,6 @@ class NewNoticeWindow extends React.Component {
       width: "60vw",
       height: "80vh",
       zIndex: "19823754928374",
-      display: "inline-block",
       left: "20%"
     };
 

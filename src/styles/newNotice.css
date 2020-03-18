@@ -11,9 +11,8 @@
     vertical-align: top;
     position: relative;
     height: 100%;
-    width: 20%;
-    min-width: 155px;
-    background-color: #4faa4f;
+    width: 155px;
+    background-color:rgb(103, 184, 106);
     border-radius: 10px 0px 0px 10px;
     display: inline-block;
     pointer-events: all;
@@ -36,7 +35,6 @@
     width: 100%;
     margin-bottom: 50%;
     margin-top: 40%;
-
 }
 
 .new-notice-menu-item {
@@ -53,7 +51,7 @@
     position: relative;
     width: 100%;
     min-width: 100px;
-    background-color: rgb(129, 194, 103);
+    background-color: rgb(157, 206, 137);
     padding: 8%;
 }
 
@@ -69,5 +67,13 @@
     background-color: rgb(255, 255, 255);
     text-decoration: none;
     border: none;
+    outline: none
+}
+
+.new-notice-input {
+    margin-bottom: 40px;
+    width: 100%;
+    border: none;
+    line-height: 100px;
     outline: none
 }

@@ -178,24 +178,6 @@ export default (
         notices: [],
         noticesSorted: [],
       };
-    case "DELETE_NOTICE":
-      var newNotices = [...state.noticesSorted];
-      for (
-        let index = 0;
-        index < newNotices[state.pageNumber].length;
-        index++
-      ) {
-        const element = newNotices[state.pageNumber][index];
-        if (element.slug === action.payload.slug) {
-          newNotices[state.pageNumber].splice(index, 1);
-        }
-      }
-      return {
-        ...state,
-        noticesSorted: newNotices,
-        sortDelete: true,
-        loading: true
-      };
   }
 
   return state;
