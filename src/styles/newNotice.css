@@ -1,3 +1,8 @@
+a {text-decoration: none;}
+a:link { 
+    text-decoration: none; 
+}
+
 .exit-green-x {
     background: url('./oie_3DbQ9ZpxIp6a.png');
     height: 30px;
@@ -8,46 +13,50 @@
 }
 
 .new-notice-menu-container {
+    display: flex;
+    flex-direction: column;
     position: relative;
     height: 100%;
     width: 20%;
-    display: inline-block;
-    background-color: #318d31;
+    min-width: 140px;
+    background-color: #4faa4f;
     border-radius: 10px 0px 0px 10px;
 }
 
 .new-notice-menu-text {
     font-family: titillium web, sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: white;
     text-align: center;
     display: inline-block;
-    width: 100%
+    width: 100%;
+    margin-bottom: 50%;
+    margin-top: 10%;
+
 }
 
 .new-notice-menu-item {
-    overflow: auto;
+    font-family: titillium web, sans-serif;
+    margin-bottom: auto;
+    display: inline-block;
     color: white;
+    font-weight: 900;
     text-align: center;
     position: relative;
-    min-width: 125px;
-    background-color: rgb(191, 233, 174);
-    border-radius: 10px;
-    margin: 20px;
-    padding: 5px;
-    box-shadow: 1px 2px 5px 1px rgb(106, 106, 106);
-    transition: transform 0.1s, background-color 0.1s, box-shadow 0.1s;
-    transform: scale(1.0);
+    width: 100%;
+    min-width: 100px;
+    background-color: rgb(129, 194, 103);
+    padding: 20px;
+    transition: background-color 0.1s;
     box-sizing: border-box
 }
 
-.new-notice-type:hover {
-    box-shadow: 3px 4px 10px 1px rgb(106, 106, 106);
+.new-notice-menu-item:hover {
     background-color: rgb(229, 244, 224);
-    transform: scale(1.05)
+    text-decoration: none;
 }
 
-.new-notice-type:active {
+.new-notice-menu-item:active {
     background-color: rgb(191, 233, 174);
-    transform: scale(0.95)
+    text-decoration: none;
 }

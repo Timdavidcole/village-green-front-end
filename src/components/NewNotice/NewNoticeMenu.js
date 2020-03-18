@@ -17,25 +17,43 @@ class NewNoticeMenu extends React.Component {
 
   render() {
     return (
-      <div
-        id="new-notice-menu-container"
-        className="new-notice-menu-container"
-      >
+      <div id="new-notice-menu-container" className="new-notice-menu-container">
         <div style={{ position: "relative" }}>
           <span id="new-notice-menu-text" className="new-notice-menu-text">
             pick notice type
           </span>
         </div>
-        <div
-          id="new-notice-menu"
-          className="new-notice-menu"
+        <a
+          href="#"
+          id="new-notice-menu-poster"
+          className="new-notice-menu-item"
         >
-          <a id="new-notice-menu-poster" className="new-notice-menu-item">Poster</a>
-          <a id="new-notice-menu-event" className="new-notice-menu-item">Event</a>
-          <a id="new-notice-menu-discussion" className="new-notice-menu-item">Discussion</a>
-          <a id="new-notice-menu-proclamation" className="new-notice-menu-item">Proclamation</a>
-          <a id="new-notice-menu-business-card" className="new-notice-menu-item">Business Card</a>
-        </div>
+          poster
+        </a>
+        <a href="#" id="new-notice-menu-event" className="new-notice-menu-item">
+          event
+        </a>
+        <a
+          href="#"
+          id="new-notice-menu-discussion"
+          className="new-notice-menu-item"
+        >
+          discussion
+        </a>
+        <a
+          href="#"
+          id="new-notice-menu-proclamation"
+          className="new-notice-menu-item"
+        >
+          proclamation
+        </a>
+        <a
+          href="#"
+          id="new-notice-menu-business-card"
+          className="new-notice-menu-item"
+        >
+          business Card
+        </a>
       </div>
     );
   }
