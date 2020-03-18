@@ -13,7 +13,8 @@ export default (
     pageNumber: 1,
     loading: true,
     noticesHidden: false,
-    noticeWidth: '240'
+    noticeWidth: '240',
+    mapBlur: true
   },
   action
 ) => {
@@ -44,30 +45,35 @@ export default (
       return {
         ...state,
         noticesVisible: false,
-        loading: true
+        loading: true,
+        mapBlur: false
       };
     case "LOADING":
       return {
         ...state,
         loading: true,
-        noticesVisible: false
+        noticesVisible: false,
+        mapBlur: false
       };
     case "NOTICES_HIDDEN":
       if (action.payload === "toggle") {
         return {
           ...state,
-          noticesHidden: !state.noticesHidden
+          noticesHidden: !state.noticesHidden,
+          mapBlur: !state.mapBlur
         };
       } else {
         return {
           ...state,
-          noticesHidden: true
+          noticesHidden: true,
+          mapBlur: false
         };
       }
     case "NOTICES_SHOWN":
       return {
         ...state,
-        noticesHidden: false
+        noticesHidden: false,
+        mapBlur: true
       };
     case "UPDATE_NOTICE_WIDTH":
       return {
@@ -104,6 +110,7 @@ export default (
         ...state,
         noticesSorted: [...action.payload],
         sorted: true,
+        mapBlur: true,
         noticesVisible: true,
         updatedUnsorted: false,
         update: false,
@@ -121,7 +128,8 @@ export default (
         sorted: false,
         waitTillDimUpdate: true,
         pageNumber: 1,
-        loading: true
+        loading: true,
+        mapBlur: false
       };
     case "UPDATE_PAGE_NUMBER":
       return {
@@ -158,6 +166,7 @@ export default (
         notices: [],
         noticesSorted: [],
         noticesVisible: true,
+        mapBlur: true,
         noticesCount: null,
         sorted: false,
         updatedUnsorted: false,
