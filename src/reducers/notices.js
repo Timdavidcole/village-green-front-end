@@ -152,6 +152,7 @@ export default (
     case "UPDATE_UNSORTED_NOTICES":
       return {
         ...state,
+        noticesSorted: [],
         notices: [...action.payload.notices],
         sorted: false,
         updatedUnsorted: true,
@@ -159,7 +160,8 @@ export default (
         update: true,
         newNoticeArrange: false,
         loading: true,
-        pageNumber: 1
+        pageNumber: 1,
+        noticesHidden: false
       };
     case "LOG_OUT_NOTICES":
       return {
