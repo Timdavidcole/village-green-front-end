@@ -2,9 +2,15 @@ import React from "react";
 import { connect } from "react-redux";
 import "../../styles/newNotice.css";
 
-const mapStateToProps = state => ({ resize: state.notices.resize });
+const mapStateToProps = state => ({
+  resize: state.notices.resize,
+  newNoticeMenuItem: state.notice.newNoticeMenuItem
+});
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+  newNoticeMenuItemSelected: payload =>
+    dispatch({ type: "NEW_NOTICE_MENU_ITEM_SELECTED", payload })
+});
 
 class NewNoticeMenu extends React.Component {
   constructor(props) {
@@ -13,47 +19,48 @@ class NewNoticeMenu extends React.Component {
     this.state = {
       containerWidth: null
     };
+
+    this.menuItemClick = this.menuItemClick.bind(this);
+  }
+
+  menuItemClick(ev) {
+    this.props.newNoticeMenuItemSelected(ev.target.id);
+  }
+
+  itemStyle(id) {
+    if (this.props.newNoticeMenuItem === id)
+      return {
+        backgroundColor: "white",
+        color: "#4faa4f",
+        border: "none",
+        outline: "none"
+      };
   }
 
   render() {
+    const itemTypes = ["poster", "event", "discussion", "proclamation", "card"];
+
     return (
       <div id="new-notice-menu-container" className="new-notice-menu-container">
-        <div style={{ position: "relative" }}>
-          <span id="new-notice-menu-text" className="new-notice-menu-text">
-            pick notice type
-          </span>
+        <div className="new-notice-menu-flex">
+          <div style={{ position: "relative" }}>
+            <span id="new-notice-menu-text" className="new-notice-menu-text">
+              pick notice type
+            </span>
+          </div>
+          {itemTypes.map(item => {
+            return (
+              <button
+                onClick={this.menuItemClick}
+                id={`new-notice-menu-${item}`}
+                className="new-notice-menu-item"
+                style={this.itemStyle(`new-notice-menu-${item}`)}
+              >
+                {`${item}`}
+              </button>
+            );
+          })}
         </div>
-        <a
-          href="#"
-          id="new-notice-menu-poster"
-          className="new-notice-menu-item"
-        >
-          poster
-        </a>
-        <a href="#" id="new-notice-menu-event" className="new-notice-menu-item">
-          event
-        </a>
-        <a
-          href="#"
-          id="new-notice-menu-discussion"
-          className="new-notice-menu-item"
-        >
-          discussion
-        </a>
-        <a
-          href="#"
-          id="new-notice-menu-proclamation"
-          className="new-notice-menu-item"
-        >
-          proclamation
-        </a>
-        <a
-          href="#"
-          id="new-notice-menu-business-card"
-          className="new-notice-menu-item"
-        >
-          business Card
-        </a>
       </div>
     );
   }

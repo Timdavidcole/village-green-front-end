@@ -1,8 +1,3 @@
-a {text-decoration: none;}
-a:link { 
-    text-decoration: none; 
-}
-
 .exit-green-x {
     background: url('./oie_3DbQ9ZpxIp6a.png');
     height: 30px;
@@ -13,14 +8,23 @@ a:link {
 }
 
 .new-notice-menu-container {
+    vertical-align: top;
+    position: relative;
+    height: 100%;
+    width: 20%;
+    min-width: 155px;
+    background-color: #4faa4f;
+    border-radius: 10px 0px 0px 10px;
+    display: inline-block;
+    pointer-events: all;
+}
+
+.new-notice-menu-flex {
     display: flex;
     flex-direction: column;
     position: relative;
     height: 100%;
-    width: 20%;
-    min-width: 140px;
-    background-color: #4faa4f;
-    border-radius: 10px 0px 0px 10px;
+    width: 100%;
 }
 
 .new-notice-menu-text {
@@ -31,13 +35,17 @@ a:link {
     display: inline-block;
     width: 100%;
     margin-bottom: 50%;
-    margin-top: 10%;
+    margin-top: 40%;
 
 }
 
 .new-notice-menu-item {
+    pointer-events: all;
+    border: none;
+    outline: none;
     font-family: titillium web, sans-serif;
     margin-bottom: auto;
+    font-size: 1.2rem;
     display: inline-block;
     color: white;
     font-weight: 900;
@@ -46,17 +54,20 @@ a:link {
     width: 100%;
     min-width: 100px;
     background-color: rgb(129, 194, 103);
-    padding: 20px;
-    transition: background-color 0.1s;
-    box-sizing: border-box
+    padding: 8%;
 }
 
 .new-notice-menu-item:hover {
     background-color: rgb(229, 244, 224);
+    color: #4faa4f;
     text-decoration: none;
+    border: none;
+    outline: none
 }
 
 .new-notice-menu-item:active {
-    background-color: rgb(191, 233, 174);
+    background-color: rgb(255, 255, 255);
     text-decoration: none;
+    border: none;
+    outline: none
 }

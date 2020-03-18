@@ -1,4 +1,4 @@
-export default (state = { showNewNoticeWindow: true }, action) => {
+export default (state = { showNewNoticeWindow: true, newNoticeMenuItem: 'new-notice-menu-poster' }, action) => {
   // eslint-disable-next-line default-case
   switch (action.type) {
     case "NOTICE_PAGE_LOADED":
@@ -32,6 +32,11 @@ export default (state = { showNewNoticeWindow: true }, action) => {
       return {
         ...state,
         showNewNoticeWindow: false
+      };
+    case "NEW_NOTICE_MENU_ITEM_SELECTED":
+      return {
+        ...state,
+        newNoticeMenuItem: action.payload
       };
   }
 

@@ -14,7 +14,7 @@ const mapDispatchToProps = dispatch => ({
   hideNewNoticeWindow: () => dispatch({ type: "HIDE_NEW_NOTICE" })
 });
 
-class NewNoticeText extends React.Component {
+class NewNoticePoster extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -66,55 +66,26 @@ class NewNoticeText extends React.Component {
   }
 
   render() {
-
     return (
-      <div>
-        <div
-          style={{ textAlign: "right", position: "relative", width: "100%" }}
-        >
+      <div
+        style={{
+          display: "inline-block",
+          backgroundColor: "white",
+          verticalAlign: "top",
+          height: "100%",
+          width: "80%",
+          padding: "10%"
+        }}
+      >
+        <div>
           <ExitButton onClick={this.props.hideNewNoticeWindow} />
         </div>
 
-        <form
-          style={{
-            position: "relative",
-            height: "93%",
-            width: "100%"
-          }}
-          onSubmit={this.createNotice}
-        >
-          <fieldset
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              height: "100%"
-            }}
-          >
-            <label
-              style={{
-                color: "#5cb85c",
-                fontFamily: "titillium web,sans-serif",
-                fontSize: "21px",
-                padding: "4px",
-                position: "absolute",
-                right: "0px"
-              }}
-            >
-              post a new notice
-            </label>
-            <div
-              style={{
-                borderBottom: "1px dashed red"
-              }}
-            >
+        <form onSubmit={this.createNotice}>
+          <fieldset>
+            <label>post a new notice</label>
+            <div>
               <input
-                style={{
-                  border: "0px none",
-                  fontFamily: "titillium web,sans-serif",
-                  fontSize: "21px",
-                  padding: "4px",
-                  width: "60%"
-                }}
                 type="title"
                 id="title"
                 placeholder="enter title here..."
@@ -123,44 +94,18 @@ class NewNoticeText extends React.Component {
               />
             </div>
             <input
-              style={{
-                border: "0px none",
-                fontFamily: "titillium web,sans-serif",
-                fontSize: "18px",
-                width: "100%",
-                padding: "4px"
-              }}
               type="description"
               placeholder="enter description here..."
               value={this.state.description}
               onChange={this.setDescription}
             />
             <textarea
-              style={{
-                display: "inline",
-                border: "0px none",
-                fontFamily: "titillium web,sans-serif",
-                fontSize: "18px",
-                marginTop: "4px",
-                boxShadow: "none",
-                padding: "4px",
-                height: "calc(100% - 140px)",
-                width: "calc(100% - 70px)"
-              }}
               type="body"
               placeholder="enter body here..."
               value={this.state.body}
               onChange={this.setBody}
             />
             <input
-              style={{
-                border: "0px none",
-                fontFamily: "titillium web,sans-serif",
-                fontSize: "18px",
-                width: "calc(100% - 70px)",
-                padding: "4px",
-                margin: "4px"
-              }}
               type="description"
               placeholder="enter image url here..."
               value={this.state.image}
@@ -170,19 +115,6 @@ class NewNoticeText extends React.Component {
           <button
             type="submit"
             disabled={this.props.inProgress}
-            style={{
-              position: "absolute",
-              bottom: "0px",
-              right: "0px",
-              display: "inline",
-              padding: "10px",
-              margin: "5px",
-              borderRadius: "10px",
-              backgroundColor: "#70bf6d",
-              color: "white",
-              outline: 0,
-              verticalAlign: "middle"
-            }}
             onClick={this.props.hideNewNoticeWindow}
           >
             Post!
@@ -193,4 +125,4 @@ class NewNoticeText extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewNoticeText);
+export default connect(mapStateToProps, mapDispatchToProps)(NewNoticePoster);
