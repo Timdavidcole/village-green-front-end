@@ -73,7 +73,7 @@ class NewNoticeEvent extends React.Component {
           backgroundColor: "white",
           verticalAlign: "top",
           height: "100%",
-          width: "80%",
+          width: "calc(100%-)",
           padding: "10%"
         }}
       >

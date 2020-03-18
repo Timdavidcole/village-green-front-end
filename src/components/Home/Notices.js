@@ -4,6 +4,7 @@ import "../../styles/notices.css";
 import { connect } from "react-redux";
 import sortByHeight from "../../models/sortByHeight";
 import sortByColumn from "../../models/sortByColumn";
+import sortByPage from "../../models/sortByPage";
 
 const mapStateToProps = state => ({
   noticesWindowDims: state.notices.noticesWindowDims,
@@ -30,48 +31,48 @@ const mapDispatchToProps = dispatch => ({
 class Notices extends React.Component {
   componentDidUpdate() {
     if (
-      this.checkNoticesDimensions() &&
-      !this.props.sorted &&
-      this.props.noticesWindowDims.height &&
-      !this.props.waitTillDimUpdate
+      (this.checkNoticesDimensions() &&
+        !this.props.sorted &&
+        this.props.noticesWindowDims.height &&
+        !this.props.waitTillDimUpdate) ||
+      this.props.pageNumberChanged
     ) {
       this.props.updateSortedNotices(
-        sortByColumn(
-          sortByHeight([...this.props.notices]),
+        sortByPage(
+          sortByColumn(
+            sortByHeight([...this.props.notices]),
+            this.props.noticesWindowDims,
+            this.props.newNotice
+          ),
           this.props.noticesWindowDims,
-          this.props.newNotice,
           this.props.noticeWidth
         )
       );
     }
     if (this.props.updatedUnsorted && this.checkNoticesDimensions()) {
       this.props.updateSortedNotices(
-        sortByColumn(
-          sortByHeight([...this.props.notices], this.props.newNotice),
+        sortByPage(
+          sortByColumn(
+            sortByHeight([...this.props.notices], this.props.newNotice),
+            this.props.noticesWindowDims,
+            this.props.newNotice
+          ),
           this.props.noticesWindowDims,
-          this.props.newNotice,
           this.props.noticeWidth
         )
       );
     }
     if (this.props.sortDelete && this.checkNoticesDimensions()) {
       this.props.updateSortedNotices(
-        sortByColumn(
-          sortByHeight([
-            ...this.props.noticesSorted[this.props.pageNumber - 1]
-          ]),
+        sortByPage(
+          sortByColumn(
+            sortByHeight([
+              ...this.props.noticesSorted[this.props.pageNumber - 1]
+            ]),
+            this.props.noticesWindowDims,
+            this.props.newNotice
+          ),
           this.props.noticesWindowDims,
-          this.props.newNotice,
-          this.props.noticeWidth
-        )
-      );
-    }
-    if (this.props.pageNumberChanged) {
-      this.props.updateSortedNotices(
-        sortByColumn(
-          sortByHeight([...this.props.notices]),
-          this.props.noticesWindowDims,
-          this.props.newNotice,
           this.props.noticeWidth
         )
       );
@@ -89,6 +90,8 @@ class Notices extends React.Component {
   }
 
   render() {
+    console.log(this.props.noticesSorted)
+    console.log(this.props.pageNumber - 1)
     if (this.props.notices.length === 0) {
       return (
         <div id="notices" className="parent">
