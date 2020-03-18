@@ -15,7 +15,6 @@ const sortByColumn = function(notices, noticesWindowDims, newNotice) {
   }
 
   function findColumnWithSpace(notice1, column, index1) {
-    console.log()
     var nextColumn;
     if (usedIndexes.includes(index1)) {
       return true;

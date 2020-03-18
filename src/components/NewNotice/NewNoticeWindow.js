@@ -56,7 +56,6 @@ class NewNoticeWindow extends React.Component {
   }
 
   menuItem() {
-    console.log(this.props.newNoticeMenuItem);
     let menuItem = null;
     switch (
       this.props.newNoticeMenuItem.split("-")[
@@ -86,7 +85,6 @@ class NewNoticeWindow extends React.Component {
   }
 
   render() {
-    console.log(this.menuItem());
     const defaultStyle = {
       alignItems: "top",
       position: "absolute",

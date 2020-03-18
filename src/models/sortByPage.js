@@ -8,15 +8,12 @@ const sortByPage = function(noticesInColumns, noticesDims, noticeWidth) {
 
   noticesInColumns.forEach(noticeColumn => {
     if (!sortedByPage[freePage]) {
-      console.log("make new page");
       sortedByPage.push([]);
     }
     if (sumHeights(noticeColumn) > maxHeight / 3) {
       if (sortedByPage[freePage].length < maxColumns) {
         sortedByPage[freePage].push(noticeColumn);
-        console.log("push column to page");
       } else {
-        console.log("page full, creating new one");
         sortedByPage.push([]);
         freePage++;
         sortedByPage[freePage].push(noticeColumn);

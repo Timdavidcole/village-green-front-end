@@ -90,8 +90,6 @@ class Notices extends React.Component {
   }
 
   render() {
-    console.log(this.props.noticesSorted)
-    console.log(this.props.pageNumber - 1)
     if (this.props.notices.length === 0) {
       return (
         <div id="notices" className="parent">
