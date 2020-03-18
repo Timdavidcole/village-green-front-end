@@ -14,7 +14,8 @@ const mapDispatchToProps = dispatch => ({
   pinNotice: payload => dispatch({ type: "PIN_NOTICE", payload }),
   onLoad: payload => dispatch({ type: "HOME_PAGE_LOADED", payload }),
   updatePinned: payload => dispatch({ type: "REMOVE_PINNED", payload }),
-  onClick: () => dispatch({ type: "DISPLAY_NEW_NOTICE" })
+  onClick: () => dispatch({ type: "DISPLAY_NEW_NOTICE" }),
+  onClickLogout: () => dispatch({ type: "LOGOUT"})
 });
 
 class LoggedInView extends React.Component {
@@ -40,21 +41,15 @@ class LoggedInView extends React.Component {
     const newNoticeMenu = () => {
       if (!window.location.href.includes("globalboard")) {
         return (
-          <li onClick={this.props.onClick} className="nav-item">
-            <Link to="/" className="nav-link">
-              <i className="ion-compose"></i>
-              {this.props.noticesWindowDims.width > 640 ? " New Notice" : null}
-            </Link>
-          </li>
+          <Link onClick={this.props.onClick} to="/" className="header-link">
+            {this.props.noticesWindowDims.width > 640 ? " New Notice" : null}
+          </Link>
         );
       } else
         return (
-          <li onClick={this.props.onClick} className="nav-item">
-            <Link className="nav-link">
-              <i className="ion-compose"></i>{" "}
-              {this.props.noticesWindowDims.width > 640 ? " New Notice" : null}
-            </Link>
-          </li>
+          <a onClick={this.props.onClick} className="header-link">
+            {this.props.noticesWindowDims.width > 640 ? " New Notice" : null}
+          </a>
         );
     };
 
@@ -66,65 +61,53 @@ class LoggedInView extends React.Component {
     };
     if (this.props.currentUser) {
       return (
-        <ul className="nav navbar-nav pull-xs-right">
-          <li className="nav-item">
-            <Link to="/" className="nav-link">
-              Home
-            </Link>
-          </li>
+        <ul className="header-items-right">
+          <Link to="/" className="header-link">
+            Home
+          </Link>
 
           {newNoticeMenu()}
 
-          <li className="nav-item">
-            <Transition in={this.props.pinnedEvent} timeout={duration}>
-              {state => (
-                <Link
-                  to={`/@${this.props.currentUser.username}/pinned`}
-                  className="nav-link"
-                  style={{
-                    ...defaultStyle,
-                    ...transitionStyles[state]
-                  }}
-                >
-                  <MenuIcon class={"pinSVGMain"} stroke={pinColor[state]} />
-                  {this.props.noticesWindowDims.width > 640
-                    ? "Pinned Notices"
-                    : null}
-                </Link>
-              )}
-            </Transition>
-          </li>
+          <Transition in={this.props.pinnedEvent} timeout={duration}>
+            {state => (
+              <Link
+                to={`/@${this.props.currentUser.username}/pinned`}
+                className="header-link"
+                style={{
+                  ...defaultStyle,
+                  ...transitionStyles[state]
+                }}
+              >
+                {this.props.noticesWindowDims.width > 640
+                  ? "Pinned Notices"
+                  : null}
+              </Link>
+            )}
+          </Transition>
 
-          <li className="nav-item">
-            <Link to="/settings" className="nav-link">
-              <i className="ion-gear-a"></i>
-              {this.props.noticesWindowDims.width > 640 ? " Settings" : null}
-            </Link>
-          </li>
+          <Link to="/settings" className="header-link">
+            {this.props.noticesWindowDims.width > 640 ? " Settings" : null}
+          </Link>
 
-          <li className="nav-item">
-            <div
-              onClick={this.props.onClickLogout}
-              className="nav-link"
-              style={{ cursor: "pointer" }}
-            >
-              Log Out
-            </div>
-          </li>
+          <a
+            onClick={this.props.onClickLogout}
+            className="header-link"
+            style={{ cursor: "pointer" }}
+          >
+            Log Out
+          </a>
 
-          <li className="nav-item">
-            <Link
-              to={`/@${this.props.currentUser.username}`}
-              className="nav-link"
-            >
-              <img
-                alt="User Profile"
-                src={this.props.currentUser.image}
-                className="user-pic"
-              />
-              {this.props.currentUser.username}
-            </Link>
-          </li>
+          <Link
+            to={`/@${this.props.currentUser.username}`}
+            className="header-link"
+          >
+            {this.props.currentUser.username}
+            <img
+              alt="User Profile"
+              src={this.props.currentUser.image}
+              className="user-profile-pic"
+            />
+          </Link>
         </ul>
       );
     } else return null;

@@ -2,7 +2,7 @@
     background-color: rgb(103, 184, 106);
     color: white;
     margin: 0px;
-    height: 70px;
+    height: 55px;
 }
 
 .logo {
@@ -10,7 +10,7 @@
     font-family: titillium web, sans-serif;
     font-size: 2rem;
     color: white;
-    line-height: 70px;
+    line-height: 55px;
     margin-right: 40px;
 }
 
@@ -22,8 +22,13 @@ a:active {
     color: white;
 }
 
+a:not([href]):hover {
+    text-decoration: none;
+    color: #4faa4f;
+}
+
 .tag-line {
-    line-height: 70px;
+    line-height: 55px;
     color: white;
     float: left;
     top: 7px;
@@ -34,13 +39,13 @@ a:active {
 .header-items-right {
     float: right;
     color: white;
-    height: 70px;
+    height: 55px;
     margin: 0px;
     padding: 0px
 }
 
 .header-link {
-    line-height: 70px;
+    line-height: 55px;
     color: white;
     display: inline-block;
     padding-right: 20px;
@@ -50,4 +55,16 @@ a:active {
 .header-link:hover {
     background-color: rgb(229, 244, 224);
     color: #4faa4f;
+}
+
+.user-profile-pic {
+    position: relative;
+    bottom: 3px;
+    background-color: white;
+    padding: 1px;
+    border-radius: 6px;
+    width: 35px;
+    height: 35px;
+    object-fit: cover;
+    margin-left: 15px;
 }

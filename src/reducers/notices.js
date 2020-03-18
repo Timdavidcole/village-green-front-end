@@ -23,8 +23,16 @@ export default (
     case "HOME_PAGE_LOADED":
       return {
         ...state,
-        notices: action.payload.notices,
-        noticesCount: action.payload.noticesCount
+        noticesSorted: [],
+        notices: [...action.payload.notices],
+        sorted: false,
+        updatedUnsorted: true,
+        noticesVisible: false,
+        update: true,
+        newNoticeArrange: false,
+        loading: true,
+        pageNumber: 1,
+        noticesHidden: false
       };
     case "ADD_NEW_NOTICE":
       return {
@@ -118,7 +126,8 @@ export default (
         newNoticeArrange: false,
         sortDelete: false,
         loading: false,
-        pageNumberChanged: false
+        pageNumberChanged: false,
+        noticesHidden: false
       };
     case "RESIZE":
       return {
@@ -163,20 +172,11 @@ export default (
         pageNumber: 1,
         noticesHidden: false
       };
-    case "LOG_OUT_NOTICES":
+    case "LOGOUT":
       return {
+        ...state,
         notices: [],
         noticesSorted: [],
-        noticesVisible: true,
-        mapBlur: true,
-        noticesCount: null,
-        sorted: false,
-        updatedUnsorted: false,
-        noticesWindowDims: { height: null, width: null },
-        waitTillDimUpdate: true,
-        newNotice: null,
-        newNoticeArrange: false,
-        pageNumber: 1
       };
     case "DELETE_NOTICE":
       var newNotices = [...state.noticesSorted];

@@ -65,7 +65,7 @@ class NoticePreview extends React.Component {
       exiting: { opacity: "1" },
       exited: { opacity: "1" }
     };
-
+    console.log('render notice')
     return (
       <Transition
         in={!this.props.noticesVisible || !this.props.sorted}

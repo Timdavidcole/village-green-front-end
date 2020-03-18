@@ -14,7 +14,6 @@ const HideNoticesButton = props => {
   const onClick = function() {
     props.noticesHidden("toggle");
   };
-console.log(props.noticesHiddenBol)
   return (
     <button onClick={onClick} className="home-button">
       {props.noticesHiddenBol ? "Show Notices" : "Hide Notices"}
