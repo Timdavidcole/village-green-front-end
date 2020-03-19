@@ -1,7 +1,7 @@
 import sortByColumn from "../models/sortByColumn";
 
-const noticesWindowDims = { height: 500, width: 250 };
-const noticesWindowDims2 = { height: 460, width: 250 };
+const noticesWindowDims = { height: 600, width: 250 };
+const noticesWindowDims2 = { height: 800, width: 250 };
 
 const heightSortedNotices = [
   { height: 450, image: true },
@@ -15,39 +15,38 @@ const heightSortedNotices = [
 ];
 
 const columnSortedNotices = [
-  [{ height: 350, image: true, order: 1 }],
-  [{ height: 450, image: true, order: 2 }],
+  [{ height: 450, image: true, order: 1 }],
+  [
+    { height: 350, image: true, order: 2 },
+    { height: 100, image: true, order: 2 }
+  ],
   [
     { height: 250, image: true, order: 3 },
-    { height: 100, image: true, order: 3 }
+    { height: 150, image: false, order: 3 }
   ],
   [
     { height: 250, image: false, order: 4 },
+    { height: 50, image: false, order: 4 },
     { height: 50, image: false, order: 4 }
-  ],
-  [
-    { height: 150, image: false, order: 5 },
-    { height: 50, image: false, order: 5 }
   ]
 ];
 
 const columnSortedNotices2 = [
-  [{ height: 350, image: true, order: 1 }],
-  [{ height: 450, image: true, order: 2 }],
   [
-    { height: 250, image: true, order: 3 },
-    { height: 100, image: true, order: 3 }
+    { height: 450, image: true, order: 1 },
+    { height: 250, image: true, order: 1 }
   ],
   [
-    { height: 250, image: false, order: 4 },
-    { height: 50, image: false, order: 4 }
+    { height: 350, image: true, order: 2 },
+    { height: 250, image: false, order: 2 },
+    { height: 50, image: false, order: 2 }
   ],
   [
-    { height: 150, image: false, order: 5 },
-    { height: 50, image: false, order: 5 }
+    { height: 150, image: false, order: 3 },
+    { height: 100, image: true, order: 3 },
+    { height: 50, image: false, order: 3 }
   ]
 ];
-
 const newNotice = { height: 280, image: true };
 
 const heightSortedNoticesWithNewNotice = [
@@ -65,10 +64,13 @@ const heightSortedNoticesWithNewNotice = [
 const columnSortedNoticesWithNewNotice = [
   [
     { height: 280, image: true, order: 1 },
-    { height: 100, image: true, order: 1 }
+    { height: 150, image: false, order: 1 }
   ],
   [{ height: 450, image: true, order: 2 }],
-  [{ height: 350, image: true, order: 3 }],
+  [
+    { height: 350, image: true, order: 3 },
+    { height: 100, image: true, order: 3 }
+  ],
   [
     { height: 250, image: true, order: 4 },
     { height: 50, image: false, order: 4 }
@@ -76,13 +78,12 @@ const columnSortedNoticesWithNewNotice = [
   [
     { height: 250, image: false, order: 5 },
     { height: 50, image: false, order: 5 }
-  ],
-  [{ height: 150, image: false, order: 6 }]
+  ]
 ];
 
 describe("sortByColumn()", () => {
   it("should return an array of objects arranged into columns", () => {
-    expect(sortByColumn(heightSortedNotices, noticesWindowDims, null)).toEqual(
+    expect(sortByColumn(heightSortedNotices, noticesWindowDims, false)).toEqual(
       columnSortedNotices
     );
   });
@@ -98,7 +99,11 @@ describe("sortByColumn()", () => {
 
   it("should return an array of objects arranged into columns in height order with a new notice first", () => {
     expect(
-      sortByColumn(heightSortedNoticesWithNewNotice, noticesWindowDims, null)
+      sortByColumn(
+        heightSortedNoticesWithNewNotice,
+        noticesWindowDims,
+        newNotice
+      )
     ).toEqual(columnSortedNoticesWithNewNotice);
   });
 });

@@ -21,7 +21,6 @@ const sortByColumn = function(notices, noticesWindowDims, newNotice) {
     }
     if (columnRemainder(column) - (notice1.height + margin(notice1)) > 0) {
       notice1.order = column + 1;
-
       sortedByColumn[column].push(notice1);
       usedIndexes.push(index1);
     } else if (!findNoticeThatFits(column)) {
@@ -62,7 +61,6 @@ const sortByColumn = function(notices, noticesWindowDims, newNotice) {
       findColumnWithSpace(notice, columnWithRoom, index);
     }
   });
-
   return sortedByColumn;
 };
 
