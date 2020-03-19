@@ -22,7 +22,7 @@ describe("sortByHeight()", () => {
     expect(sortByHeight(unsortedNotices)).toEqual(sortedNotices);
   });
 
-  it("should return an sorted array but leave first Notice alone if a newNotice is present", () => {
+  it("should return an sorted array but leave first Notice at start if a newNotice is present", () => {
     expect(sortByHeight(unsortedNoticesWithNewNotice, newNotice)).toEqual(
       sortedNoticesWithNewNotice
     );
