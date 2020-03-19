@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import agent from "../../agent";
 
 const mapStateToProps = state => ({
-  currentUser: state.common.currentUser
+  currentUser: state.common.currentUser,
+  location: state.map.location
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -40,6 +41,10 @@ const MapHomeButton = props => {
 
   return (
     <button
+    style={{
+      backgroundColor: props.location ? "white" : "#70bf6d",
+      color: props.location ? "#70bf6d" : "white"
+    }}
       onClick={homeOnClick()}
       onMouseUp={onMouseUp}
       className="home-button"

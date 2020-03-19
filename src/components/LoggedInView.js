@@ -27,7 +27,7 @@ class LoggedInView extends React.Component {
       } else
         return (
           <button onClick={this.props.onClick} className="header-link">
-            {this.props.noticesWindowDims.width > 640 ? " New Notice" : null}
+            New Notice
           </button>
         );
     };
@@ -39,7 +39,7 @@ class LoggedInView extends React.Component {
             to="/"
             style={{
               fontFamily: "titillium web, sans-serif",
-              fontSize: "1.2rem"
+              fontSize: "1rem"
             }}
             className="header-link"
           >
@@ -53,20 +53,14 @@ class LoggedInView extends React.Component {
             to={`/@${this.props.currentUser.username}/pinned`}
             className="header-link"
           >
-            {this.props.noticesWindowDims.width > 640 ? "Pinned Notices" : null}
+            <i class="fas fa-thumbtack"></i>
+            <span> </span>
+            Notices
           </Link>
 
           <Link to="/settings" className="header-link">
-            {this.props.noticesWindowDims.width > 640 ? " Settings" : null}
+            Settings
           </Link>
-
-          <button
-            onClick={this.props.onClickLogout}
-            className="header-link"
-            style={{ cursor: "pointer" }}
-          >
-            Log Out
-          </button>
 
           <Link
             to={`/@${this.props.currentUser.username}`}
@@ -79,6 +73,14 @@ class LoggedInView extends React.Component {
               className="user-profile-pic"
             />
           </Link>
+
+          <button
+            onClick={this.props.onClickLogout}
+            className="header-link"
+            style={{ cursor: "pointer" }}
+          >
+            Log Out
+          </button>
         </ul>
       );
     } else return null;

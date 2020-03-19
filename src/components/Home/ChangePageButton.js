@@ -5,14 +5,17 @@ import "../../styles/notices.css";
 
 const mapStateToProps = state => ({
   pageNumber: state.notices.pageNumber,
-  noticesVisible: state.notices.noticesVisible
+  noticesVisible: state.notices.noticesVisible,
+  notices: state.notices.notices
 });
 
 const mapDispatchToProps = dispatch => ({
   updatePageNumber: payload =>
     dispatch({ type: "UPDATE_PAGE_NUMBER", payload }),
   startPageNumberAnimation: payload =>
-    dispatch({ type: "START_PAGE_NUMBER_ANIMATION", payload })
+    dispatch({ type: "START_PAGE_NUMBER_ANIMATION", payload }),
+  updateUnsortedNotices: payload =>
+    dispatch({ type: "UPDATE_UNSORTED_NOTICES", payload })
 });
 
 class ChangePageButton extends React.Component {
@@ -40,6 +43,9 @@ class ChangePageButton extends React.Component {
   changePageNumber() {
     this.props.startPageNumberAnimation(this.props.direction);
     setTimeout(() => {
+      if (this.props.direction === "up" && this.props.pageNumber === 2) {
+        this.props.updateUnsortedNotices({ notices: this.props.notices });
+      }
       this.props.updatePageNumber({
         direction: this.props.direction,
         pageNumber:

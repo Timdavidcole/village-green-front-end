@@ -74,24 +74,12 @@ class MapSearchBox extends React.Component {
     Geocode.setLanguage("en");
     return (
       <Autocomplete
-        style={{
-          margin: "3px",
-          marginLeft: "10px",
-          border: "none",
-          lineHeight: "24px",
-          padding: "6px",
-          borderRadius: "5px",
-          width: "25%",
-          float: "right",
-          paddingLeft: "10px",
-          boxShadow: "5px 5px 0px 0px rgba(220, 220, 220, 0.79)",
-          visibility: "visible"
-        }}
         onPlaceSelected={place => this.getCoords(place)}
         types={["geocode"]}
         location={`${this.props.centerMap.lat},${this.props.centerMap.lng}`}
         placeholder={"Explore a location..."}
         onClick={this.onClick}
+        className="autoComplete"
       />
     );
   }

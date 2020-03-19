@@ -96,6 +96,7 @@
 .pin-notice-button {
     height: 35px;
     width: 35px;
+    color: rgba(47, 147, 47, 0.79);
     background-color: white;
     position: relative;
     right: 3px;

@@ -44,15 +44,18 @@ a:not([href]):hover {
     color: white;
     height: 55px;
     margin: 0px;
-    padding: 0px
+    padding: 0px;
+    vertical-align:top
 }
 
 .header-link {
     background-color: rgb(103, 184, 106);
     font-weight: 600;
+    height: 100%;
     line-height: 55px;
     color: white;
     display: inline-block;
+    padding-top: 0px;
     padding-right: 15px;
     padding-left: 15px;
     border: none;

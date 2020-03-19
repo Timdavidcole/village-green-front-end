@@ -16,6 +16,29 @@
 
 }
 
+.autoComplete {
+    margin: 3px;
+    margin-left: 10px;
+    border: none;
+    line-height: 24px;
+    padding: 6px;
+    border-radius: 5px;
+    width: 25%;
+    float: right;
+    padding-left: 10px;
+    box-shadow: 5px 5px 0px 0px rgba(220, 220, 220, 0.79);
+    visibility: visible;
+    border-bottom: 3px solid rgb(197, 230, 184);
+    border-right: 3px solid rgb(197, 230, 184);
+    transition: width 0.3s;
+}
+
+.autoComplete:focus {
+    outline: none;
+    width: 30%;
+
+}
+
 .home-button:hover {
     background-color: #9dd59b;
 }
@@ -127,8 +150,7 @@
     background-repeat: no-repeat;
     background-size: 15px 15px;
     background-position: center;
-    transform: scale(1.1) rotate(-90deg) translate(1px,0px)
-    ;
+    transform: scale(1.1) rotate(-90deg) translate(1px, 0px);
 }
 
 .slider::-moz-range-thumb {

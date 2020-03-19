@@ -67,7 +67,7 @@ class NoticeButtons extends React.Component {
             onMouseEnter={this.toggleHoverIn}
             onMouseLeave={this.toggleHoverOut}
           >
-            <i className="pin-notice-icon"></i>
+          <i class="fas fa-thumbtack"></i>
           </button>
         </div>
       );

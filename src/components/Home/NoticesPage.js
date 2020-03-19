@@ -49,24 +49,28 @@ const NoticesPage = props => {
     const pageNumber = props.pageNumber;
     const noticesSorted = props.noticesSorted;
     if (noticesSorted.length === 1) {
+      console.log('1')
       return {
-        height: "calc(100vh - 80px)"
+        height: "calc(100vh - 85px)"
       };
     }
     if (pageNumber === 1 && noticesSorted.length > 1) {
+      console.log('2')
       return {
-        height: "calc(100vh - 120px)"
+        height: "calc(100vh - 125px)"
       };
     } else if (pageNumber > 1 && pageNumber < noticesSorted.length) {
+      console.log('3')
       return {
-        height: "calc(100vh - 180px)"
+        height: "calc(100vh - 185px)"
       };
     } else if (
       pageNumber === noticesSorted.length &&
       noticesSorted.length > 1
     ) {
+      console.log('4')
       return {
-        height: "calc(100vh - 120px)"
+        height: "calc(100vh - 125px)"
       };
     }
   };
@@ -128,6 +132,7 @@ const NoticesPage = props => {
                   props.noticesWindowDims.height !==
                     document.getElementById("notices").offsetHeight)
               ) {
+                console.log(document.getElementById("notices").offsetHeight)
                 props.addNoticesWindowDims({
                   width: document.getElementById("notices").offsetWidth,
                   height: document.getElementById("notices").offsetHeight
