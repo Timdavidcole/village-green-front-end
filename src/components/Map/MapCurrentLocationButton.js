@@ -45,7 +45,7 @@ const MapHomeButton = props => {
       href="#"
       className="current-location-button"
     >
-      <i className="fa fa-fw fa-location-arrow"></i> Current Location
+      <i className="fa fa-fw fa-location-arrow"></i>
     </button>
   );
 };

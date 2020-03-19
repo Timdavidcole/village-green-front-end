@@ -43,8 +43,6 @@ class MapSearchBox extends React.Component {
   };
 
   getCoords(place) {
-    this.props.loading();
-    this.props.noticesShown();
     Geocode.fromAddress(place.formatted_address)
       .then(
         response => {
@@ -78,17 +76,21 @@ class MapSearchBox extends React.Component {
       <Autocomplete
         style={{
           margin: "3px",
-          padding: "4px",
+          marginLeft: "10px",
+          border: "none",
+          lineHeight: "24px",
+          padding: "6px",
           borderRadius: "5px",
-          width: "20%",
+          width: "25%",
           float: "right",
-          boxShadow: "5px 5px 10px 3px rgba(176,176,176,0.79)",
+          paddingLeft: "10px",
+          boxShadow: "5px 5px 0px 0px rgba(220, 220, 220, 0.79)",
           visibility: "visible"
         }}
         onPlaceSelected={place => this.getCoords(place)}
         types={["geocode"]}
         location={`${this.props.centerMap.lat},${this.props.centerMap.lng}`}
-        placeholder={"Search a location..."}
+        placeholder={"Explore a location..."}
         onClick={this.onClick}
       />
     );

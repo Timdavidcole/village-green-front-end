@@ -44,7 +44,7 @@ const MapHomeButton = props => {
       onMouseUp={onMouseUp}
       className="home-button"
     >
-      <i className="fa fa-fw fa-home"></i> Home
+      <i class="fas fa-home"></i>
     </button>
   );
 };

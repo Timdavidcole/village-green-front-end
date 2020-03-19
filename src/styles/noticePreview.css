@@ -98,6 +98,7 @@
     width: 35px;
     background-color: white;
     position: relative;
+    right: 3px;
     vertical-align: top;
     border-radius: 100%;
     border: none !important;

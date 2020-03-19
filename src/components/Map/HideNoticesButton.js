@@ -16,7 +16,11 @@ const HideNoticesButton = props => {
   };
   return (
     <button onClick={onClick} className="home-button">
-      {props.noticesHiddenBol ? "Show Notices" : "Hide Notices"}
+      {props.noticesHiddenBol ? <i class="fas fa-sticky-note"></i>
+
+      : <i class="fas fa-sticky-note"></i>
+
+    }
     </button>
   );
 };

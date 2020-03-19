@@ -14,8 +14,15 @@ const LoggedOutView = props => {
   if (!props.currentUser) {
     return (
       <ul className="header-items-right">
-        <Link to="/" className="header-link">
-          Home
+        <Link
+          to="/"
+          className="header-link"
+          style={{
+            fontFamily: "titillium web, sans-serif",
+            fontSize: "1.2  rem"
+          }}
+        >
+          Noticeboard
         </Link>
 
         <Link to="/login" className="header-link">
@@ -35,7 +42,7 @@ class Header extends React.Component {
   render() {
     return (
       <menu className="header-bar">
-        {this.props.noticesWindowDims.width > 900 ? ( 
+        {this.props.noticesWindowDims.width > 900 ? (
           <Link to="/" className="logo">
             {this.props.appName.toLowerCase()}
           </Link>

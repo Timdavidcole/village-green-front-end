@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import React from "react";
 import { connect } from "react-redux";
-import "../styles/menuStyles.css";
 
 const mapStateToProps = state => ({
   pinnedEvent: state.notices.pinnedEvent,
@@ -18,7 +17,6 @@ const mapDispatchToProps = dispatch => ({
 
 class LoggedInView extends React.Component {
   render() {
-
     const newNoticeMenu = () => {
       if (!window.location.href.includes("globalboard")) {
         return (
@@ -37,8 +35,16 @@ class LoggedInView extends React.Component {
     if (this.props.currentUser) {
       return (
         <ul className="header-items-right">
-          <Link to="/" className="header-link">
-            Home
+          <Link
+            to="/"
+            style={{
+              fontFamily: "titillium web, sans-serif",
+              fontSize: "1.2rem"
+            }}
+            className="header-link"
+          >
+            <i class="fas fa-globe"></i>
+            <span> </span>Noticeboard
           </Link>
 
           {newNoticeMenu()}
