@@ -71,9 +71,14 @@
 }
 
 .new-notice-input {
+    line-height: 40px;
     margin-bottom: 40px;
     width: 100%;
     border: none;
-    line-height: 100px;
-    outline: none
+    outline: none;
+    border-bottom: 2px outset rgb(201, 201, 201);
+    border-right: 2px outset rgb(201, 201, 201);
+    box-shadow: 5px 5px 0px 0px rgba(220, 220, 220, 0.79)
+
+
 }

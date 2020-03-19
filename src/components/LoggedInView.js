@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import React from "react";
 import { connect } from "react-redux";
-import { Transition } from "react-transition-group";
 import "../styles/menuStyles.css";
 
 const mapStateToProps = state => ({
@@ -19,11 +18,6 @@ const mapDispatchToProps = dispatch => ({
 
 class LoggedInView extends React.Component {
   render() {
-    const duration = {
-      appear: 400,
-      enter: 400,
-      exit: 400
-    };
 
     const newNoticeMenu = () => {
       if (!window.location.href.includes("globalboard")) {
@@ -60,13 +54,13 @@ class LoggedInView extends React.Component {
             {this.props.noticesWindowDims.width > 640 ? " Settings" : null}
           </Link>
 
-          <a
+          <button
             onClick={this.props.onClickLogout}
             className="header-link"
             style={{ cursor: "pointer" }}
           >
             Log Out
-          </a>
+          </button>
 
           <Link
             to={`/@${this.props.currentUser.username}`}

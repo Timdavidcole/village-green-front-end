@@ -13,7 +13,7 @@
     font-size: 2rem;
     color: white;
     line-height: 55px;
-    margin-right: 40px;
+    margin-right: 20px;
     margin-left: 40px
 }
 
@@ -33,8 +33,8 @@ a:not([href]):hover {
 .tag-line {
     color: white;
     float: left;
-    margin-top: 17px;
-    font-size: 18px;
+    margin-top: 23px;
+    font-size: 14px;
     font-style: italic;
 }
 
