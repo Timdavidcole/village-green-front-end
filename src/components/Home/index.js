@@ -5,6 +5,7 @@ import agent from "../../agent";
 import { connect } from "react-redux";
 import Notices from "./Notices";
 import NewNoticeWindow from "../NewNotice/NewNoticeWindow";
+import Loader from "./Loader";
 
 const mapStateToProps = state => ({
   noticesVisible: state.notices.noticesVisible,
@@ -14,7 +15,8 @@ const mapStateToProps = state => ({
   newNoticeArrange: state.notices.newNoticeArrange,
   newNotice: state.notices.newNotice,
   notices: state.notices.notices,
-  noticesSorted: state.notices.noticesSorted
+  noticesSorted: state.notices.noticesSorted,
+  loadingNotices: state.notices.loading,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -51,6 +53,7 @@ class Home extends React.Component {
   }
 
   render() {
+    console.log(this.props.loadingNotices)
     return (
       <div
         style={{
@@ -61,6 +64,7 @@ class Home extends React.Component {
       >
         <div style={{ width: "100%", position: "absolute" }}>
           <MapNavBar />
+          {this.props.loadingNotices ? <Loader /> : null}
           <NewNoticeWindow />
           <Notices />
         </div>

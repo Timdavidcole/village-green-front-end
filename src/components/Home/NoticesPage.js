@@ -18,7 +18,6 @@ const mapStateToProps = state => ({
   updatedUnsorted: state.notices.updatedUnsorted,
   noticesWindowDims: state.notices.noticesWindowDims,
   noticesSorted: state.notices.noticesSorted,
-  loading: state.notices.loading,
   pageChangeDirection: state.notices.pageChangeDirection
 });
 
@@ -96,9 +95,7 @@ const NoticesPage = props => {
 
   if (!props.noticesByPage) {
     return (
-      <div id="notices">
-        <div className="article-preview">Loading...</div>
-      </div>
+      null
     );
   }
   if (props.pageNumberAnimation) {
@@ -118,7 +115,6 @@ const NoticesPage = props => {
             ...transitionStyles()[state]
           }}
         >
-          {props.loading ? <Loader /> : null}
           {whichPageNumberButton("up")}
           <div
             className="noticesParent"
