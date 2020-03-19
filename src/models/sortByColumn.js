@@ -3,7 +3,7 @@ import sumHeights from "./sumHeights";
 const sortByColumn = function(notices, noticesWindowDims, newNotice) {
   let sortedByColumn = [[]];
   let usedIndexes = [];
-  const margin = notice => (notice.image ? 20 : 0);
+  const margin = notice => (notice.image ? 0 : 20);
   let columnWithRoom = 0;
   const noticesToSort = [...notices];
   const maxHeight = noticesWindowDims.height - 90;
