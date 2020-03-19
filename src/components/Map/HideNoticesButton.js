@@ -24,10 +24,10 @@ const HideNoticesButton = props => {
       className="home-button"
     >
       {props.noticesHiddenBol ? (
-        <i class="fas fa-sticky-note"></i>
-      ) : (
-        <i class="fas fa-sticky-note"></i>
-      )}
+        <i class="fas fa-map-marked-alt"></i>
+        ) : (
+        <i class="fas fa-map-marked-alt"></i>
+        )}
     </button>
   );
 };
