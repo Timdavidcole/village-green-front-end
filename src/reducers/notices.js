@@ -104,6 +104,7 @@ export default (
         noticesVisible: false
       };
     case "ADD_NOTICES_WINDOW_DIMS":
+      console.log(action.payload)
       return {
         ...state,
         noticesWindowDims: action.payload,

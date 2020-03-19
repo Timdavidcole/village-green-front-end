@@ -1,9 +1,6 @@
 import { Link } from "react-router-dom";
 import React from "react";
-import MenuIcon from "./MenuIcon";
 import { connect } from "react-redux";
-import { Transition } from "react-transition-group";
-import "../styles/menuStyles.css";
 
 const mapStateToProps = state => ({
   pinnedEvent: state.notices.pinnedEvent,
@@ -15,29 +12,11 @@ const mapDispatchToProps = dispatch => ({
   onLoad: payload => dispatch({ type: "HOME_PAGE_LOADED", payload }),
   updatePinned: payload => dispatch({ type: "REMOVE_PINNED", payload }),
   onClick: () => dispatch({ type: "DISPLAY_NEW_NOTICE" }),
-  onClickLogout: () => dispatch({ type: "LOGOUT"})
+  onClickLogout: () => dispatch({ type: "LOGOUT" })
 });
 
 class LoggedInView extends React.Component {
   render() {
-    const duration = {
-      appear: 400,
-      enter: 400,
-      exit: 400
-    };
-
-    const defaultStyle = {
-      transform: "scale(1)",
-      transition: "transform 0.2s ease-in, color 0.2s ease-in"
-    };
-
-    const transitionStyles = {
-      entering: { transform: "scale(1.15)", color: "#2e962a", fill: "#2e962a" },
-      entered: { transform: "scale(1.15)", color: "#2e962a", fill: "#2e962a" },
-      exiting: { transform: "scale(1)" },
-      exited: { transform: "scale(1)" }
-    };
-
     const newNoticeMenu = () => {
       if (!window.location.href.includes("globalboard")) {
         return (
@@ -47,55 +26,41 @@ class LoggedInView extends React.Component {
         );
       } else
         return (
-          <a onClick={this.props.onClick} className="header-link">
-            {this.props.noticesWindowDims.width > 640 ? " New Notice" : null}
-          </a>
+          <button onClick={this.props.onClick} className="header-link">
+            New Notice
+          </button>
         );
     };
 
-    const pinColor = {
-      entering: "#2e962a",
-      entered: "#2e962a",
-      exiting: "#aeaeae",
-      exited: "#aeaeae"
-    };
     if (this.props.currentUser) {
       return (
         <ul className="header-items-right">
-          <Link to="/" className="header-link">
-            Home
+          <Link
+            to="/"
+            style={{
+              fontFamily: "titillium web, sans-serif",
+              fontSize: "1rem"
+            }}
+            className="header-link"
+          >
+            <i class="fas fa-globe"></i>
+            <span> </span>Noticeboard
           </Link>
 
           {newNoticeMenu()}
 
-          <Transition in={this.props.pinnedEvent} timeout={duration}>
-            {state => (
-              <Link
-                to={`/@${this.props.currentUser.username}/pinned`}
-                className="header-link"
-                style={{
-                  ...defaultStyle,
-                  ...transitionStyles[state]
-                }}
-              >
-                {this.props.noticesWindowDims.width > 640
-                  ? "Pinned Notices"
-                  : null}
-              </Link>
-            )}
-          </Transition>
-
-          <Link to="/settings" className="header-link">
-            {this.props.noticesWindowDims.width > 640 ? " Settings" : null}
+          <Link
+            to={`/@${this.props.currentUser.username}/pinned`}
+            className="header-link"
+          >
+            <i class="fas fa-thumbtack"></i>
+            <span> </span>
+            Notices
           </Link>
 
-          <a
-            onClick={this.props.onClickLogout}
-            className="header-link"
-            style={{ cursor: "pointer" }}
-          >
-            Log Out
-          </a>
+          <Link to="/settings" className="header-link">
+            Settings
+          </Link>
 
           <Link
             to={`/@${this.props.currentUser.username}`}
@@ -108,6 +73,14 @@ class LoggedInView extends React.Component {
               className="user-profile-pic"
             />
           </Link>
+
+          <button
+            onClick={this.props.onClickLogout}
+            className="header-link"
+            style={{ cursor: "pointer" }}
+          >
+            Log Out
+          </button>
         </ul>
       );
     } else return null;

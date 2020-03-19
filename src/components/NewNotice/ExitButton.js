@@ -9,8 +9,8 @@ const ExitButton = props => {
         border: "none",
         padding: "0",
         position: "absolute",
-        top: "5px",
-        right: "5px"
+        top: "7px",
+        right: "7px"
       }}
       onClick={props.onClick}
     >

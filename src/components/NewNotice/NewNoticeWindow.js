@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import ReactDOM from "react-dom";
 import "../../styles/newNotice.css";
 import NewNoticePoster from "./NewNoticePoster";
 import NewNoticeEvent from "./NewNoticeEvent";

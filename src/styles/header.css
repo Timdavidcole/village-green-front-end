@@ -12,9 +12,18 @@
     font-family: titillium web, sans-serif;
     font-size: 2rem;
     color: white;
-    line-height: 55px;
-    margin-right: 40px;
-    margin-left: 40px
+    line-height: 52px;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-bottom: 3px
+}
+
+.tag-line {
+    color: white;
+    float: left;
+    margin-top: 19px;
+    font-size: 14px;
+    font-style: italic;
 }
 
 a:hover,
@@ -30,35 +39,41 @@ a:not([href]):hover {
     color: #4faa4f;
 }
 
-.tag-line {
-    line-height: 55px;
-    color: white;
-    float: left;
-    top: 7px;
-    font-size: 18px;
-    font-style: italic;
-}
-
 .header-items-right {
     float: right;
     color: white;
     height: 55px;
     margin: 0px;
-    padding: 0px
+    padding: 0px;
+    vertical-align:top
 }
 
 .header-link {
+    background-color: rgb(103, 184, 106);
+    font-weight: 600;
+    height: 100%;
     line-height: 55px;
     color: white;
     display: inline-block;
-    padding-right: 20px;
-    padding-left: 20px;
+    padding-top: 0px;
+    padding-right: 15px;
+    padding-left: 15px;
+    border: none;
+    outline: none;
+    transform: scale(1);
+    transition: transform 0.2s ease-in, color 0.2s ease-in;
 }
 
 .header-link:hover {
     background-color: rgb(229, 244, 224);
-    color: #4faa4f;
+    color: #2e962a;
 }
+
+.header-link:focus {
+    border: none;
+    outline: none;
+}
+
 
 .user-profile-pic {
     position: relative;
@@ -69,5 +84,5 @@ a:not([href]):hover {
     width: 35px;
     height: 35px;
     object-fit: cover;
-    margin-left: 15px;
+    margin-left: 10px;
 }
