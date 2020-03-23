@@ -73,10 +73,11 @@ class NewNoticeTextInput extends React.Component {
           backgroundColor: "white",
           verticalAlign: "top",
           height: "100%",
-          paddingTop: "171px",
+          paddingTop: "15%",
           paddingLeft: "10%",
           paddingRight: "10%",
-          width: "calc(100% - 155px)"
+          width: "calc(100% - 155px)",
+          overflow: "scroll"
         }}
       >
         <div
@@ -134,26 +135,17 @@ class NewNoticeTextInput extends React.Component {
               placeholder="enter optional image url here"
               value={this.state.image}
               onChange={this.setImage}
+              style={{marginBottom: "85px"}}
             />
+            <button
+              className="post-button"
+              type="submit"
+              disabled={this.props.inProgress}
+              onClick={this.props.hideNewNoticeWindow}
+            >
+              post!
+            </button>
           </fieldset>
-          <button
-            className="home-button"
-            style={{
-              position: "relative",
-              bottom: "0px",
-              left: "90.5%",
-              padding: "10px",
-              fontFamily: "titillium web, sans-serif",
-              fontSize: "1.3rem",
-              color: "white",
-              boxShadow: "5px 5px 0px 0px rgba(220, 220, 220, 0.79)"
-            }}
-            type="submit"
-            disabled={this.props.inProgress}
-            onClick={this.props.hideNewNoticeWindow}
-          >
-            post
-          </button>
         </form>
       </div>
     );

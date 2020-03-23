@@ -12,7 +12,7 @@
     position: relative;
     height: 100%;
     width: 155px;
-    background-color:rgb(103, 184, 106);
+    background-color: rgb(103, 184, 106);
     border-radius: 10px 0px 0px 10px;
     display: inline-block;
     pointer-events: all;
@@ -70,13 +70,43 @@
     outline: none
 }
 
+.new-notice-form {
+    overflow: scroll;
+}
+
 .new-notice-input {
     line-height: 40px;
-    margin-bottom: 40px;
+    margin-bottom: 10%;
     width: 100%;
     border: none;
     outline: none;
     border-bottom: 2px outset rgb(201, 201, 201);
     border-right: 2px outset rgb(201, 201, 201);
-    box-shadow: 5px 5px 0px 0px rgba(220, 220, 220, 0.79)
+    box-shadow: 5px 5px 0px 0px rgba(220, 220, 220, 0.79);
+}
+
+.post-button {
+    margin: 3px;
+    height: 55px;
+    width: 70px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #70bf6d;
+    color: white;
+    outline: none;
+    border: none;
+    box-shadow: 5px 5px 0px 0px rgba(220, 220, 220, 0.79);
+    visibility: visible;
+    transform: translate(0px, 0px);
+    transition: transform 0.1s linear, box-shadow 0.1s linear;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    font-family: titillium web, sans-serif;
+    font-size: 1.4rem;
+}
+
+.post-button:hover {
+    box-shadow: 5px 5px 0px 0px rgba(220, 220, 220, 0.79);
+    background-color: #9dd59b;
 }
