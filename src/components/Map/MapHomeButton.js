@@ -23,7 +23,7 @@ const MapHomeButton = props => {
             lat: props.currentUser.location.coordinates[0],
             lng: props.currentUser.location.coordinates[1]
           },
-          location: "HOME"
+          location: "home"
         });
     } else return null;
   };
@@ -42,8 +42,8 @@ const MapHomeButton = props => {
   return (
     <button
     style={{
-      backgroundColor: props.location ? "white" : "#70bf6d",
-      color: props.location ? "#70bf6d" : "white"
+      backgroundColor: props.location === 'home' ? "white" : "#70bf6d",
+      color: props.location === 'home' ? "#70bf6d" : "white"
     }}
       onClick={homeOnClick()}
       onMouseUp={onMouseUp}

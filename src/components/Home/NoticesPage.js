@@ -4,7 +4,6 @@ import React from "react";
 import "../../styles/notices.css";
 import { connect } from "react-redux";
 import ChangePageButton from "./ChangePageButton";
-import Loader from "./Loader";
 import { Transition } from "react-transition-group";
 
 const mapStateToProps = state => ({

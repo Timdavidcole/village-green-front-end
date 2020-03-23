@@ -1,10 +1,10 @@
 import sumHeights from "./sumHeights";
 
-const sortByPage = function(noticesInColumns, noticesDims, noticeWidth) {
+const sortByPage = function(noticesInColumns, noticesWindowDims, noticeWidth) {
   let sortedByPage = [];
   let freePage = 0;
-  const maxHeight = noticesDims.height - 100;
-  const maxColumns = Math.floor(noticesDims.width / noticeWidth);
+  const maxHeight = noticesWindowDims.height - 90;
+  const maxColumns = Math.floor(noticesWindowDims.width / noticeWidth);
 
   noticesInColumns.forEach(noticeColumn => {
     if (!sortedByPage[freePage]) {
@@ -21,8 +21,16 @@ const sortByPage = function(noticesInColumns, noticesDims, noticeWidth) {
     }
   });
 
+  function flatten(array) {
+    return array.reduce(function(flat, toFlatten) {
+      return flat.concat(
+        Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten
+      );
+    }, []);
+  }
+
   sortedByPage = sortedByPage.map(page => {
-    return page.flat();
+    return flatten(page);
   });
 
   return sortedByPage;

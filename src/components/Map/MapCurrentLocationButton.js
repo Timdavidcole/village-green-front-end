@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import agent from "../../agent";
 
 const mapStateToProps = state => ({
-  currentUser: state.common.currentUser
+  currentUser: state.common.currentUser,
+  location: state.map.location
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -22,7 +23,7 @@ const MapHomeButton = props => {
             lat: position.coords.latitude,
             lng: position.coords.longitude
           },
-          location: ""
+          location: "current"
         });
       });
   };
@@ -40,6 +41,10 @@ const MapHomeButton = props => {
 
   return (
     <button
+    style={{
+      backgroundColor: props.location === 'current' ? "white" : "#70bf6d",
+      color: props.location === 'current' ? "#70bf6d" : "white"
+    }}
       onClick={currLocOnClick()}
       onMouseUp={onMouseUp}
       href="#"
