@@ -9,7 +9,7 @@ const mapDispatchToProps = dispatch => ({});
 
 class NewNoticeProclamation extends React.Component {
   render() {
-    return <NewNoticeTextInput />;
+    return <div>TBA</div>
   }
 }
 

@@ -9,11 +9,24 @@ const mapDispatchToProps = dispatch => ({});
 
 class NewNoticeEvent extends React.Component {
   render() {
-    return <NewNoticeTextInput />;
+    return (
+      <div
+        style={{
+          display: "inline-block",
+          backgroundColor: "white",
+          verticalAlign: "top",
+          height: "100%",
+          paddingTop: "15%",
+          paddingLeft: "10%",
+          paddingRight: "10%",
+          width: "calc(100% - 155px)",
+          overflow: "scroll"
+        }}
+      >
+        TBA
+      </div>
+    );
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(NewNoticeEvent);
+export default connect(mapStateToProps, mapDispatchToProps)(NewNoticeEvent);

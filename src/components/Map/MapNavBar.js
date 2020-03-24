@@ -6,6 +6,7 @@ import MapCurrentLocationButton from "./MapCurrentLocationButton";
 import HideNoticesButton from "./HideNoticesButton";
 import NoticeSizeSlider from "./NoticeSizeSlider";
 import NewNoticeButton from "./NewNoticeButton";
+import "../../styles/mapStyles.css";
 
 const mapStateToProps = state => ({
   currentUser: state.common.currentUser,
@@ -78,10 +79,10 @@ class MapNavBar extends React.Component {
           }}
         >
           <MapHomeButton />
-          <MapCurrentLocationButton/>
-          <HideNoticesButton/>
-          <NewNoticeButton/>
-          <NoticeSizeSlider/>
+          <MapCurrentLocationButton />
+          <HideNoticesButton />
+          <NewNoticeButton />
+          <NoticeSizeSlider />
           <MapSearchBox />
         </div>
       </div>

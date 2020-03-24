@@ -14,8 +14,7 @@ const mapStateToProps = state => ({
   newNoticeMenuItem: state.notice.newNoticeMenuItem
 });
 
-const mapDispatchToProps = dispatch => ({
-});
+const mapDispatchToProps = dispatch => ({});
 
 class NewNoticeWindow extends React.Component {
   componentDidMount() {
@@ -44,15 +43,15 @@ class NewNoticeWindow extends React.Component {
 
   menuItem() {
     let menuItem = null;
-    switch (
-      this.props.newNoticeMenuItem.split("-")[
-        this.props.newNoticeMenuItem.length - 1
-      ]
-    ) {
+    let menuItemArray = this.props.newNoticeMenuItem.split("-");
+    menuItemArray = menuItemArray[menuItemArray.length - 1];
+    console.log(menuItemArray)
+    switch (menuItemArray) {
       case "poster":
         menuItem = <NewNoticePoster />;
         break;
       case "event":
+        console.log("EVENT")
         menuItem = <NewNoticeEvent />;
         break;
       case "discussion":
