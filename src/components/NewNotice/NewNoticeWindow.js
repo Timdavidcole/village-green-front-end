@@ -45,7 +45,6 @@ class NewNoticeWindow extends React.Component {
     let menuItem = null;
     let menuItemArray = this.props.newNoticeMenuItem.split("-");
     menuItemArray = menuItemArray[menuItemArray.length - 1];
-    console.log(menuItemArray)
     switch (menuItemArray) {
       case "poster":
         menuItem = <NewNoticePoster />;

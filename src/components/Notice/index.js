@@ -33,7 +33,7 @@ class Notice extends React.Component {
     if (!this.props.notice) {
       return null;
     }
-
+    console.log(this.props.notice.body)
     const markup = { __html: marked(this.props.notice.body) };
     const canModify =
       this.props.currentUser &&

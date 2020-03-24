@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import "../../styles/newNotice.css";
-import NewNoticeTextInput from "./NewNoticeTextInput";
+// import NewNoticeTextInput from "./NewNoticeTextInput";
 
 const mapStateToProps = state => ({});
 
