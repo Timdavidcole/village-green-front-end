@@ -22,7 +22,8 @@ const LoggedOutView = props => {
             fontSize: "1.2  rem"
           }}
         >
-          Noticeboard
+        <i className="fas fa-globe"></i>
+        <span> </span>Noticeboard
         </Link>
 
         <Link to="/login" className="header-link">
