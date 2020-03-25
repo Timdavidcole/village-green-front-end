@@ -33,8 +33,6 @@ class Notice extends React.Component {
     if (!this.props.notice) {
       return null;
     }
-    console.log(this.props.notice.body)
-    const markup = { __html: marked(this.props.notice.body) };
     const canModify =
       this.props.currentUser &&
       this.props.currentUser.username === this.props.notice.author.username;
@@ -50,7 +48,9 @@ class Notice extends React.Component {
         <div className="container page">
           <div className="row article-content">
             <div className="col-xs-12">
-              <div dangerouslySetInnerHTML={markup}></div>
+            {this.props.notice.body.split('\n').map((item, key) => {
+              return <span key={key}>{item}<br/></span>
+            })}
 
               <ul className="tag-list">
                 {this.props.notice.tagList.map(tag => {
