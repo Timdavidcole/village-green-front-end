@@ -37,18 +37,7 @@ class Pinned extends React.Component {
     }
 
     return (
-      <div className="profile-page">
-        <div className="user-info">
-          <div className="container">
-            <div className="row">
-              <div className="col-xs-12 col-md-10 offset-md-1">
-                <img src={profile.image} alt="user" className="user-img" />
-                <h4>{profile.username}</h4>
-              </div>
-            </div>
-          </div>
-        </div>
-
+      <div>
         <NoticesPinned
           noticesVisible={this.props.noticesVisible}
           page={"pinned"}
