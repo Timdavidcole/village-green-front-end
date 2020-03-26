@@ -1,19 +1,26 @@
 .notice-page {
-    display: flex;
     height: calc(100vh - 55px)
 }
 
 .notice-container {
-    flex-basis: 40%;
-    flex-grow: 0;
-    flex-shrink: 0;
+    width: 40%;
     padding: 20px;
     height: calc(100vh - 55px);
+    display: inline-flex;
+    flex-direction: column;
+    vertical-align: top;
 }
 
 .notice-details {
+    flex: 1 1 fill;
     background-color: #fffbf0;
     box-shadow: 5px 10px 20px 3px rgba(176, 176, 176, 0.79);
+}
+
+.notice-image {
+    flex: 1;  /* 1 and it will fill whole space left if no flex value are set to other children*/
+    overflow: auto;
+    object-fit: contain;
 }
 
 .notice-banner {
@@ -55,17 +62,16 @@
     float: right
 }
 
-.notice-image {
-    width: calc(40vw - 40px);
+.notice-image-container {
     margin-top: 20px;
-    object-fit: cover;
-    box-shadow: 5px 10px 20px 3px rgba(176, 176, 176, 0.79);
+    flex: 1 1 auto;
 }
 
 .comment-container {
-    flex-basis: 60%;
-    flex-grow: 0;
-    flex-shrink: 0;
+    padding: 20px;
+    vertical-align: top;
+    display: inline-block;
+    width: 60%
 }
 
 .comment-list {}

@@ -37,11 +37,7 @@ class Notice extends React.Component {
 
   noticeImage() {
     return this.props.notice.image ? (
-      <img
-        className="notice-image"
-        alt="notice-image"
-        src={this.props.notice.image}
-      ></img>
+        <img className="notice-image" src={this.props.notice.image}></img>
     ) : null;
   }
 
