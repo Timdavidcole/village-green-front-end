@@ -4,7 +4,8 @@
     margin: 0px;
     height: 55px;
     padding: 0px;
-    width: 100%
+    width: 100%;
+    overflow: hidden;
 }
 
 .logo {

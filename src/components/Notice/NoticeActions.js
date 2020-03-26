@@ -28,17 +28,17 @@ const NoticeActions = props => {
       .then(() => props.onClickDelete(notice));
   };
 
+  const edit = () => {
+    console.log("edit");
+  };
+
   if (props.canModify) {
     return (
-      <span>
-        <Link
-          to={`/editor/${notice.slug}`}
-          className="btn btn-outline-secondary btn-sm"
-        >
+      <span className="notice-actions">
+        <button className="notice-edit-button" onClick={edit}>
           <i className="ion-edit"></i> Edit Notice
-        </Link>
-
-        <button className="btn btn-outline-danger btn-sm" onClick={del}>
+        </button>
+        <button className="notice-delete-button" onClick={del}>
           <i className="ion-trash-a"></i> Delete Notice
         </button>
       </span>

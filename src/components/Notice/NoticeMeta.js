@@ -5,20 +5,28 @@ import React from "react";
 const NoticeMeta = props => {
   const notice = props.notice;
   return (
-    <div className="article-meta">
-      <Link to={`@${notice.author.username}`}>
-        <img alt="author" src={notice.author.image} />
-      </Link>
-
-      <div className="info">
-        <Link to={`@${notice.author.username}`} className="author">
-          {notice.author.username}
+    <div className="notice-meta">
+      <div className="notice-author-container">
+        <Link to={`@${notice.author.username}`}>
+          <img
+            className="notice-author-image"
+            alt="author"
+            src={notice.author.image}
+          />
         </Link>
-        <span className="date">
-          {new Date(notice.createdAt).toDateString()}
-        </span>
-      </div>
 
+        <div className="notice-username">
+          <Link
+            className="notice-username-link"
+            to={`@${notice.author.username}`}
+          >
+            {notice.author.username}
+          </Link>
+        </div>
+      </div>
+      <span className="notice-date">
+        {new Date(notice.createdAt).toDateString()}
+      </span>
       <NoticeActions canModify={props.canModify} notice={notice} />
     </div>
   );

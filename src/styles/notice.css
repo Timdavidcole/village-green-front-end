@@ -1,23 +1,71 @@
 .notice-page {
     display: flex;
+    height: calc(100vh - 55px)
 }
 
 .notice-container {
-    flex-basis: 30%;
+    flex-basis: 40%;
     flex-grow: 0;
+    flex-shrink: 0;
+    padding: 20px;
+    height: calc(100vh - 55px);
 }
 
-.notice-banner {}
+.notice-details {
+    background-color: #fffbf0;
+    box-shadow: 5px 10px 20px 3px rgba(176, 176, 176, 0.79);
+}
 
-.notice-title-container {}
+.notice-banner {
+    border-bottom: 1px dashed red;
+}
+
+.notice-title-container {
+    text-align: center;
+}
 
 .notice-body-container {}
 
-.notice-body {}
+.notice-body {
+    padding: 20px;
+}
+
+.notice-username {
+    display: inline-block;
+}
+
+.notice-username a {
+    color: black
+}
+
+.notice-meta {
+    width: 100%
+}
+
+.notice-author-container {
+    display: inline-block;
+}
+
+.notice-author-image {
+    height: 35px;
+    width: 35px;
+}
+
+.notice-actions {
+    float: right
+}
+
+.notice-image {
+    width: calc(40vw - 40px);
+    margin-top: 20px;
+    object-fit: cover;
+    box-shadow: 5px 10px 20px 3px rgba(176, 176, 176, 0.79);
+}
 
 .comment-container {
-    flex-basis: 70%;
+    flex-basis: 60%;
     flex-grow: 0;
+    flex-shrink: 0;
 }
 
 .comment-list {}
