@@ -12,15 +12,22 @@
 }
 
 .notice-details {
+    padding: 20px;
     flex: 1 1 fill;
     background-color: #fffbf0;
     box-shadow: 5px 10px 20px 3px rgba(176, 176, 176, 0.79);
 }
 
-.notice-image {
+.notice-image-container {
+    padding-top: 20px;  
     flex: 1;  /* 1 and it will fill whole space left if no flex value are set to other children*/
     overflow: auto;
-    object-fit: contain;
+}
+
+.notice-image {
+    max-height: 100%;
+    max-width: 100%;
+    box-shadow: 5px 10px 20px 3px rgba(176, 176, 176, 0.79);
 }
 
 .notice-banner {
@@ -62,10 +69,6 @@
     float: right
 }
 
-.notice-image-container {
-    margin-top: 20px;
-    flex: 1 1 auto;
-}
 
 .comment-container {
     padding: 20px;
