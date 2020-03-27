@@ -8,7 +8,7 @@ const NoticeMeta = props => {
   return (
     <div className="notice-meta">
       <div className="notice-date">
-        {timeSince(new Date(notice.createdAt))}
+        
       </div>
       <div className="notice-author-container">
         <Link to={`@${notice.author.username}`}>
@@ -24,7 +24,7 @@ const NoticeMeta = props => {
             className="notice-username-link"
             to={`@${notice.author.username}`}
           >
-            {notice.author.username}
+            {notice.author.username} - {timeSince(new Date(notice.createdAt))} ago
           </Link>
         </div>
       </div>
