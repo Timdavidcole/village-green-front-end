@@ -10,31 +10,27 @@ const mapStateToProps = state => ({
   currentUser: state.common.currentUser
 });
 
-const mapDispatchToProps = dispatch => ({
-  onLoad: payload => dispatch({ type: "NOTICE_PAGE_LOADED", payload }),
-  onUnload: () => dispatch({ type: "NOTICE_PAGE_UNLOADED" }),
-  addNoticesWindowDims: payload =>
-    dispatch({ type: "ADD_NOTICES_WINDOW_DIMS", payload })
-});
+const mapDispatchToProps = dispatch => ({});
 
 class NoticeContainerEdit extends React.Component {
-  componentWillMount() {
-    this.props.addNoticesWindowDims({
-      width: document.body.clientWidth,
-      height: document.body.clientHeight
-    });
-    this.props.onLoad(
-      Promise.all([
-        agent.Notices.get(this.props.match.params.id),
-        agent.Comments.forNotice(this.props.match.params.id)
-      ])
-    );
+  constructor(props){
+    super(props)
+    this.state = {
+      title: '',
+      description: '',
+      body: '',
+      image: ''
+    }
   }
 
-  componentWillUnmount() {
-    this.props.onUnload();
+  componentDidMount( ) {
+    this.setState({
+      title: this.props.notice.title,
+      description: this.props.notice.description,
+      body: this.props.notice.body,
+      image: this.props.notice.image
+    })
   }
-
   noticeImage() {
     return this.props.notice.image ? (
       <div className="notice-image-container">
@@ -51,43 +47,62 @@ class NoticeContainerEdit extends React.Component {
       this.props.currentUser &&
       this.props.currentUser.username === this.props.notice.author.username;
     return (
-      <div className="notice-page">
-        <div className="notice-container">
-          <div className="notice-details">
-            <div className="notice-banner">
-              <div className="notice-title-container">
-                <h1>{this.props.notice.title}</h1>
-              </div>
-            </div>
-            <div className="notice-description-container">
-              <h4>{this.props.notice.description}</h4>
-            </div>
-            <div className="notice-body-container">
-              <div className="notice-body">
-                {this.props.notice.body.split("\n").map((item, key) => {
-                  return (
-                    <span key={key}>
-                      {item}
-                      <br />
-                    </span>
-                  );
-                })}
-              </div>
-            </div>
-            <NoticeMeta notice={this.props.notice} canModify={canModify} />
-          </div>
-          {this.noticeImage()}
+      <div className="notice-container">
+        <div className="notice-details">
+          <form style={{ position: "relative" }} onSubmit={this.createNotice}>
+            <fieldset className="new-notice-form">
+              <input
+                className="notice-banner"
+                type="title"
+                id="title"
+                maxLength="50"
+                style={{ textAlign: "center" }}
+                value={this.state.title}
+                onChange={this.setTitle}
+              />
+              <input
+                className="notice-description"
+                type="description"
+                maxLength="75"
+                style={{ textAlign: "center" }}
+                value={this.state.description}
+                onChange={this.setDescription}
+              />
+              <textarea
+                className="notice-body"
+                rows="4"
+                maxLength="240"
+                type="body"
+                value={this.state.body}
+                onChange={this.setBody}
+              />
+              <input
+                className="notice-description"
+                type="description"
+                placeholder="enter optional image url here"
+                value={this.state.image}
+                onChange={this.setImage}
+                style={{ marginBottom: "85px" }}
+              />
+              <button
+                className="post-button"
+                type="submit"
+                disabled={this.props.inProgress}
+                onClick={this.props.hideNewNoticeWindow}
+              >
+                post!
+              </button>
+            </fieldset>
+          </form>
+          <NoticeMeta notice={this.props.notice} canModify={canModify} />
         </div>
-
-        <CommentContainer
-          comments={this.props.comments || []}
-          errors={this.props.commentErrors}
-          slug={this.props.match.params.id}
-          currentUser={this.props.currentUser}
-        />
+        {this.noticeImage()}
       </div>
     );
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NoticeContainerEdit);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NoticeContainerEdit);

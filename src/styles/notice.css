@@ -38,18 +38,13 @@
 
 .notice-banner {
     border-bottom: 1px dashed red;
-}
-
-.notice-title-container {
     text-align: center;
 }
 
-.notice-description-container {
+.notice-description {
     text-align: center;
     padding-top: 10px
 }
-
-.notice-body-container {}
 
 .notice-body {}
 

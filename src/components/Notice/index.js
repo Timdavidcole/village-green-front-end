@@ -8,7 +8,8 @@ import "../../styles/notice.css";
 
 const mapStateToProps = state => ({
   ...state.notice,
-  currentUser: state.common.currentUser
+  currentUser: state.common.currentUser,
+  editNotice: state.notice.editNotice
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -36,21 +37,18 @@ class Notice extends React.Component {
     this.props.onUnload();
   }
 
-  noticeImage() {
-    return this.props.notice.image ? (
-      <div className="notice-image-container">
-        <img className="notice-image" src={this.props.notice.image}></img>
-      </div>
-    ) : null;
-  }
-
   render() {
+    console.log(this.props.editNotice)
     if (!this.props.notice) {
       return null;
     }
     return (
       <div className="notice-page">
-        {this.props.notice.editNotice ? <NoticeContainerEdit /> : <NoticeContainer />}
+        {this.props.editNotice ? (
+          <NoticeContainerEdit />
+        ) : (
+          <NoticeContainer />
+        )}
 
         <CommentContainer
           comments={this.props.comments || []}

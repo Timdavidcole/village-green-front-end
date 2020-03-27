@@ -30,7 +30,7 @@ const NoticeActions = props => {
   };
 
   const edit = () => {
-    this.props.editNoticeToggle();
+    props.editNoticeToggle();
   };
 
   if (props.canModify) {
