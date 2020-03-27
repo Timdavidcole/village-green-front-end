@@ -1,13 +1,14 @@
 import NoticeActions from "./NoticeActions";
 import { Link } from "react-router-dom";
 import React from "react";
+import timeSince from "../../models/timeSince"
 
 const NoticeMeta = props => {
   const notice = props.notice;
   return (
     <div className="notice-meta">
       <div className="notice-date">
-        Posted: {new Date(notice.createdAt).toDateString()}
+        {timeSince(new Date(notice.createdAt))}
       </div>
       <div className="notice-author-container">
         <Link to={`@${notice.author.username}`}>

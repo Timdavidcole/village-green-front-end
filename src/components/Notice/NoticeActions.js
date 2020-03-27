@@ -36,10 +36,10 @@ const NoticeActions = props => {
     return (
       <div className="notice-actions">
         <button className="notice-edit-button" onClick={edit}>
-          <i className="ion-edit"></i> Edit Notice
+          <i className="ion-edit"></i> Edit
         </button>
         <button className="notice-delete-button" onClick={del}>
-          <i className="ion-trash-a"></i> Delete Notice
+          <i className="ion-trash-a"></i> Delete
         </button>
       </div>
     );

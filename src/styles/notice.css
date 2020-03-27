@@ -15,20 +15,22 @@
     padding: 20px;
     flex: 1 1 fill;
     background-color: #fffbf0;
-    box-shadow: 5px 10px 20px 3px rgba(176, 176, 176, 0.79);
+    box-shadow: 5px 5px 10px 0px rgba(220, 220, 220, 0.79);
 }
 
 .notice-image-container {
-    padding-top: 20px;
+    padding-top: 5px;
     flex: 1;
     overflow: auto;
     position: relative;
+    text-align: center;
 }
 
 .notice-image {
-    max-height: 95%;
-    max-width: 95%;
-    box-shadow: 5px 10px 20px 3px rgba(176, 176, 176, 0.79);
+    height: 100%;
+    max-height: 100%;
+    max-width: 100%;
+    box-shadow: 5px 5px 10px 0px rgba(220, 220, 220, 0.79);
     margin-left: auto;
     margin-right: auto;
     display: block;
@@ -42,11 +44,14 @@
     text-align: center;
 }
 
+.notice-description-container {
+    text-align: center;
+    padding-top: 10px
+}
+
 .notice-body-container {}
 
-.notice-body {
-    padding: 20px;
-}
+.notice-body {}
 
 .notice-username {
     display: inline-block;
@@ -59,7 +64,6 @@
 .notice-meta {
     width: 100%;
     position: relative;
-    background-color: white;
 }
 
 .notice-author-container {
@@ -69,7 +73,7 @@
 .notice-author-image {
     height: 35px;
     width: 35px;
-    margin: 10px;
+    margin-right: 10px;
     margin-left: 0px;
     margin-top: 0px;
 }
@@ -77,7 +81,7 @@
 .notice-actions {
     position: absolute;
     right: 0px;
-    width: 126px;
+    width: 86px;
     bottom: 0px;
 }
 
@@ -89,7 +93,7 @@
 .notice-edit-button {
     pointer-events: all;
     margin: 3px;
-    width: 120px;
+    width: 80px;
     padding: 5px;
     border-radius: 5px;
     background-color: #70bf6d;
@@ -114,13 +118,19 @@
     background-color: #9dd59b;
 }
 
+.notice-edit-button:active {
+    background-color: #4fa04e;
+    transform: translate(2px, 2px);
+    box-shadow: 3px 3px 0px 0px rgba(191, 191, 191, 0.79);
+}
+
 .notice-delete-button {
     pointer-events: all;
     margin: 3px;
-    width: 120px;
+    width: 80px;
     padding: 5px;
     border-radius: 5px;
-    background-color: #70bf6d;
+    background-color: #ff2f2f;
     color: white;
     outline: none;
     border: none;
@@ -139,13 +149,13 @@
 
 .notice-delete-button:hover {
     box-shadow: 5px 5px 0px 0px rgba(220, 220, 220, 0.79);
-    background-color: #9dd59b;
+    background-color: #ff8a8a;
 }
 
 .notice-delete-button:active {
-    background-color: #2e812b;
+    background-color: #d30909;
     transform: translate(2px, 2px);
-    box-shadow: 3px 3px 0px 0px rgba(125, 125, 125, 0.79);
+    box-shadow: 3px 3px 0px 0px rgba(191, 191, 191, 0.79);
 }
 
 .comment-container {
@@ -156,3 +166,9 @@
 }
 
 .comment-list {}
+
+.notice-front-image-title {
+    font-family: titillium web, sans-serif;
+    color: #70bf6d;
+    line-height: 40px;
+}

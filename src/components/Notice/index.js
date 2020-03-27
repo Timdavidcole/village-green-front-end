@@ -18,7 +18,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class Notice extends React.Component {
-
   componentWillMount() {
     this.props.addNoticesWindowDims({
       width: document.body.clientWidth,
@@ -39,10 +38,8 @@ class Notice extends React.Component {
   noticeImage() {
     return this.props.notice.image ? (
       <div className="notice-image-container">
-        <img
-          className="notice-image"
-          src={this.props.notice.image}
-        ></img>
+        <span className="notice-image-title">front image</span>
+        <img className="notice-image" src={this.props.notice.image}></img>
       </div>
     ) : null;
   }
@@ -63,7 +60,9 @@ class Notice extends React.Component {
                 <h1>{this.props.notice.title}</h1>
               </div>
             </div>
-
+            <div className="notice-description-container">
+              <h4>{this.props.notice.description}</h4>
+            </div>
             <div className="notice-body-container">
               <div className="notice-body">
                 {this.props.notice.body.split("\n").map((item, key) => {
