@@ -19,8 +19,9 @@
 }
 
 .notice-image-container {
-    padding-top: 20px;  
-    flex: 1;  /* 1 and it will fill whole space left if no flex value are set to other children*/
+    padding-top: 20px;
+    flex: 1;
+    /* 1 and it will fill whole space left if no flex value are set to other children*/
     overflow: auto;
 }
 
@@ -53,7 +54,9 @@
 }
 
 .notice-meta {
-    width: 100%
+    width: 100%;
+    position: relative;
+    background-color: white;
 }
 
 .notice-author-container {
@@ -63,12 +66,84 @@
 .notice-author-image {
     height: 35px;
     width: 35px;
+    margin: 10px;
+    margin-left: 0px;
+    margin-top: 0px;
 }
 
 .notice-actions {
-    float: right
+    position: absolute;
+    right: 0px;
+    width: 126px;
+    bottom: 0px;
 }
 
+.notice-date {
+    margin: 10px;
+    margin-left: 0px;
+}
+
+.notice-edit-button {
+    pointer-events: all;
+    margin: 3px;
+    width: 120px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #70bf6d;
+    color: white;
+    outline: none;
+    border: none;
+    box-shadow: 5px 5px 0px 0px rgba(220, 220, 220, 0.79);
+    visibility: visible;
+    transform: translate(0px, 0px);
+    transition: transform 0.1s linear, box-shadow 0.1s linear;
+    font-family: titillium web, sans-serif;
+    font-size: 1rem;
+}
+
+.notice-edit-button:focus {
+    outline: none;
+    border: none;
+}
+
+.notice-edit-button:hover {
+    box-shadow: 5px 5px 0px 0px rgba(220, 220, 220, 0.79);
+    background-color: #9dd59b;
+}
+
+.notice-delete-button {
+    pointer-events: all;
+    margin: 3px;
+    width: 120px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #70bf6d;
+    color: white;
+    outline: none;
+    border: none;
+    box-shadow: 5px 5px 0px 0px rgba(220, 220, 220, 0.79);
+    visibility: visible;
+    transform: translate(0px, 0px);
+    transition: transform 0.1s linear, box-shadow 0.1s linear;
+    font-family: titillium web, sans-serif;
+    font-size: 1rem;
+}
+
+.notice-delete-button:focus {
+    outline: none;
+    border: none;
+}
+
+.notice-delete-button:hover {
+    box-shadow: 5px 5px 0px 0px rgba(220, 220, 220, 0.79);
+    background-color: #9dd59b;
+}
+
+.notice-delete-button:active {
+    background-color: #2e812b;
+    transform: translate(2px, 2px);
+    box-shadow: 3px 3px 0px 0px rgba(125, 125, 125, 0.79);
+}
 
 .comment-container {
     padding: 20px;

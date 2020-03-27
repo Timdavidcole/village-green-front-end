@@ -34,14 +34,14 @@ const NoticeActions = props => {
 
   if (props.canModify) {
     return (
-      <span className="notice-actions">
+      <div className="notice-actions">
         <button className="notice-edit-button" onClick={edit}>
           <i className="ion-edit"></i> Edit Notice
         </button>
         <button className="notice-delete-button" onClick={del}>
           <i className="ion-trash-a"></i> Delete Notice
         </button>
-      </span>
+      </div>
     );
   }
 

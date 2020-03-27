@@ -6,6 +6,9 @@ const NoticeMeta = props => {
   const notice = props.notice;
   return (
     <div className="notice-meta">
+      <div className="notice-date">
+        Posted: {new Date(notice.createdAt).toDateString()}
+      </div>
       <div className="notice-author-container">
         <Link to={`@${notice.author.username}`}>
           <img
@@ -24,9 +27,6 @@ const NoticeMeta = props => {
           </Link>
         </div>
       </div>
-      <span className="notice-date">
-        {new Date(notice.createdAt).toDateString()}
-      </span>
       <NoticeActions canModify={props.canModify} notice={notice} />
     </div>
   );
