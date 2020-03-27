@@ -1,5 +1,4 @@
-import NoticeContainerEdit from "./NoticeContainerEdit";
-import NoticeContainer from "./NoticeContainer";
+import NoticeMeta from "./NoticeMeta";
 import CommentContainer from "./CommentContainer";
 import React from "react";
 import agent from "../../agent";
@@ -18,7 +17,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type: "ADD_NOTICES_WINDOW_DIMS", payload })
 });
 
-class Notice extends React.Component {
+class NoticeContainerEdit extends React.Component {
   componentWillMount() {
     this.props.addNoticesWindowDims({
       width: document.body.clientWidth,
@@ -48,9 +47,37 @@ class Notice extends React.Component {
     if (!this.props.notice) {
       return null;
     }
+    const canModify =
+      this.props.currentUser &&
+      this.props.currentUser.username === this.props.notice.author.username;
     return (
       <div className="notice-page">
-        {this.props.notice.editNotice ? <NoticeContainerEdit /> : <NoticeContainer />}
+        <div className="notice-container">
+          <div className="notice-details">
+            <div className="notice-banner">
+              <div className="notice-title-container">
+                <h1>{this.props.notice.title}</h1>
+              </div>
+            </div>
+            <div className="notice-description-container">
+              <h4>{this.props.notice.description}</h4>
+            </div>
+            <div className="notice-body-container">
+              <div className="notice-body">
+                {this.props.notice.body.split("\n").map((item, key) => {
+                  return (
+                    <span key={key}>
+                      {item}
+                      <br />
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+            <NoticeMeta notice={this.props.notice} canModify={canModify} />
+          </div>
+          {this.noticeImage()}
+        </div>
 
         <CommentContainer
           comments={this.props.comments || []}
@@ -63,4 +90,4 @@ class Notice extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Notice);
+export default connect(mapStateToProps, mapDispatchToProps)(NoticeContainerEdit);

@@ -1,15 +1,13 @@
 import NoticeActions from "./NoticeActions";
 import { Link } from "react-router-dom";
 import React from "react";
-import timeSince from "../../models/timeSince"
+import timeSince from "../../models/timeSince";
 
 const NoticeMeta = props => {
   const notice = props.notice;
   return (
     <div className="notice-meta">
-      <div className="notice-date">
-        
-      </div>
+      <div className="notice-date"></div>
       <div className="notice-author-container">
         <Link to={`@${notice.author.username}`}>
           <img
@@ -24,7 +22,8 @@ const NoticeMeta = props => {
             className="notice-username-link"
             to={`@${notice.author.username}`}
           >
-            {notice.author.username} - {timeSince(new Date(notice.createdAt))} ago
+            {notice.author.username} - {timeSince(new Date(notice.createdAt))}{" "}
+            ago
           </Link>
         </div>
       </div>

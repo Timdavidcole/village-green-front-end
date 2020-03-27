@@ -13,7 +13,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onClickDelete: payload => dispatch({ type: "DELETE_NOTICE", payload }),
   updateUnsortedNotices: payload =>
-    dispatch({ type: "UPDATE_UNSORTED_NOTICES", payload })
+    dispatch({ type: "UPDATE_UNSORTED_NOTICES", payload }),
+  editNoticeToggle: () => dispatch({ type: "EDIT_NOTICE_TOGGLE" })
 });
 
 const NoticeActions = props => {
@@ -29,7 +30,7 @@ const NoticeActions = props => {
   };
 
   const edit = () => {
-    console.log("edit");
+    this.props.editNoticeToggle();
   };
 
   if (props.canModify) {

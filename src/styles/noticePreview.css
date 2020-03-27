@@ -1,6 +1,6 @@
 .noticeCard {
     margin: auto;
-    box-shadow: 5px 10px 20px 3px rgba(176, 176, 176, 0.79);
+    box-shadow: 5px 5px 10px 0px rgba(167, 167, 167, 0.79);
     border-radius: 6px;
     padding: 10px;
     background-color: #fffbf0;
@@ -144,7 +144,7 @@
     top: 0;
     left: 0;
     transform: rotateY(0deg);
-    box-shadow: 18px 29px 26px -12px rgba(128, 128, 128, 0.53);
+    box-shadow: 5px 5px 10px 0px rgba(167, 167, 167, 0.79);
 }
 
 .card-back {
@@ -154,5 +154,5 @@
     left: 0;
     z-index: 19879812749847981274 !important;
     transform: rotateY(180deg);
-    box-shadow: 18px 29px 26px +12px rgba(128, 128, 128, 0.53);
+    box-shadow: 5px 5px 10px 0px rgba(167, 167, 167, 0.79);
 }

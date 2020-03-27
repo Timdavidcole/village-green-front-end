@@ -1,14 +1,13 @@
 export default (
   state = {
     showNewNoticeWindow: false,
-    newNoticeMenuItem: "new-notice-menu-poster"
+    newNoticeMenuItem: "new-notice-menu-poster",
+    editNotice: false
   },
   action
 ) => {
-  // eslint-disable-next-line default-case
   switch (action.type) {
     case "NOTICE_PAGE_LOADED":
-      console.log(action.payload[0].notice)
       return {
         ...state,
         notice: action.payload[0].notice,
@@ -44,6 +43,11 @@ export default (
       return {
         ...state,
         newNoticeMenuItem: action.payload
+      };
+      case "EDIT_NOTICE_TOGGLE":
+      return {
+        ...state,
+        editNotice: !state.editNotice
       };
   }
 
