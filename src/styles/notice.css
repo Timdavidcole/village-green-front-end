@@ -65,7 +65,8 @@
 .notice-author-container {
     display: inline-block;
     position: absolute;
-    bottom: 0px;}
+    bottom: 0px;
+}
 
 .notice-author-image {
     height: 35px;
@@ -168,4 +169,102 @@
     font-family: titillium web, sans-serif;
     color: #70bf6d;
     line-height: 40px;
+}
+
+.edit-notice-form {
+    padding-bottom: 50px;
+}
+
+.edit-banner {
+    border-radius: 5px;
+    border: none;
+    border-bottom: 1px dashed red;
+    text-align: center;
+    outline: none;
+    width: 100%;
+    font-size: 2.5rem;
+    padding-bottom: 8px;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+}
+
+.edit-description {
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+    outline: none;
+    width: 100%;
+    font-size: 1.5rem;
+    padding-top: 10px;
+    padding-bottom: 8px;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+}
+
+.edit-body {
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 1rem;
+    line-height: 1.5;
+    padding-bottom: 8px;
+    font-family: inherit;
+    font-weight: 500;
+    color: inherit;
+    user-select: all;
+}
+
+.edit-image {
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 1rem;
+    padding-top: 10px;
+    padding-bottom: 8px;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+}
+
+.post-edit-button {
+    pointer-events: all;
+    margin: 3px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #70bf6d;
+    color: white;
+    outline: none;
+    border: none;
+    box-shadow: 5px 5px 0px 0px rgba(220, 220, 220, 0.79);
+    visibility: visible;
+    transform: translate(0px, 0px);
+    transition: transform 0.1s linear, box-shadow 0.1s linear;
+    font-family: titillium web, sans-serif;
+    font-size: 1rem;
+    position: absolute;
+    right: 0px;
+    bottom: 0px
+}
+
+.post-edit-button:focus {
+    outline: none;
+    border: none;
+}
+
+.post-edit-button:hover {
+    box-shadow: 5px 5px 0px 0px rgba(220, 220, 220, 0.79);
+    background-color: #9dd59b;
+}
+
+.post-edit-button:active {
+    background-color: #4fa04e;
+    transform: translate(2px, 2px);
+    box-shadow: 3px 3px 0px 0px rgba(191, 191, 191, 0.79);
 }

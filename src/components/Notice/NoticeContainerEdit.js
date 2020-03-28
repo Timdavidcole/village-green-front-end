@@ -1,5 +1,4 @@
 import NoticeMeta from "./NoticeMeta";
-import CommentContainer from "./CommentContainer";
 import React from "react";
 import agent from "../../agent";
 import { connect } from "react-redux";
@@ -13,28 +12,28 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({});
 
 class NoticeContainerEdit extends React.Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
-      title: '',
-      description: '',
-      body: '',
-      image: ''
-    }
+      title: "",
+      description: "",
+      body: "",
+      image: ""
+    };
   }
 
-  componentDidMount( ) {
+  componentDidMount() {
     this.setState({
       title: this.props.notice.title,
       description: this.props.notice.description,
       body: this.props.notice.body,
       image: this.props.notice.image
-    })
+    });
   }
   noticeImage() {
     return this.props.notice.image ? (
       <div className="notice-image-container">
-        <img className="notice-image" src={this.props.notice.image}></img>
+        <img className="notice-image" src={this.state.image}></img>
       </div>
     ) : null;
   }
@@ -50,47 +49,55 @@ class NoticeContainerEdit extends React.Component {
       <div className="notice-container">
         <div className="notice-details">
           <form style={{ position: "relative" }} onSubmit={this.createNotice}>
-            <fieldset className="new-notice-form">
+            <fieldset className="edit-notice-form">
               <input
-                className="notice-banner"
-                type="title"
+                className="edit-banner"
+                type="text"
                 id="title"
                 maxLength="50"
                 style={{ textAlign: "center" }}
                 value={this.state.title}
-                onChange={this.setTitle}
+                onChange={ev => {
+                  this.setState({ title: ev.target.value });
+                }}
               />
               <input
-                className="notice-description"
-                type="description"
+                className="edit-description"
+                type="text"
                 maxLength="75"
                 style={{ textAlign: "center" }}
                 value={this.state.description}
-                onChange={this.setDescription}
+                onChange={ev => {
+                  this.setState({ description: ev.target.value });
+                }}
               />
               <textarea
-                className="notice-body"
+                className="edit-body"
                 rows="4"
                 maxLength="240"
-                type="body"
+                type="text"
+                autofocus="autofocus"
                 value={this.state.body}
-                onChange={this.setBody}
+                onChange={ev => {
+                  this.setState({ body: ev.target.value });
+                }}
               />
               <input
-                className="notice-description"
-                type="description"
+                className="edit-image"
+                type="text"
                 placeholder="enter optional image url here"
                 value={this.state.image}
-                onChange={this.setImage}
-                style={{ marginBottom: "85px" }}
+                onChange={ev => {
+                  this.setState({ image: ev.target.value });
+                }}
               />
               <button
-                className="post-button"
+                className="post-edit-button"
                 type="submit"
                 disabled={this.props.inProgress}
                 onClick={this.props.hideNewNoticeWindow}
               >
-                post!
+                confirm
               </button>
             </fieldset>
           </form>
