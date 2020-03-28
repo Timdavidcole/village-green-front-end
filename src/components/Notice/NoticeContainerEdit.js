@@ -22,7 +22,7 @@ class NoticeContainerEdit extends React.Component {
       body: "",
       image: ""
     };
-    this.editNotice = this.editNotice.bind(this)
+    this.editNotice = this.editNotice.bind(this);
   }
 
   componentDidMount() {
@@ -32,7 +32,9 @@ class NoticeContainerEdit extends React.Component {
       body: this.props.notice.body,
       image: this.props.notice.image
     });
+    document.getElementById("edit-body").focus();
   }
+  
   noticeImage() {
     return this.props.notice.image ? (
       <div className="notice-image-container">
@@ -41,13 +43,9 @@ class NoticeContainerEdit extends React.Component {
     ) : null;
   }
 
-  componentDidUpdate() {
-    document.getElementById('edit-body').focus()
-  }
-
   editNotice(ev) {
     ev.preventDefault();
-    console.log(this.props.notice.slug)
+    console.log(this.props.notice.slug);
     agent.Notices.edit(this.props.notice.slug, {
       title: this.state.title,
       description: this.state.description,
