@@ -28,7 +28,6 @@ class Notice extends React.Component {
     });
     this.props.onLoad(
       Promise.all([
-        agent.Notices.get(this.props.match.params.id),
         agent.Notices.childNotices(this.props.match.params.id)
       ])
     );

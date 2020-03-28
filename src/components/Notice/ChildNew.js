@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import "../../styles/newNotice.css";
 
 const mapStateToProps = state => ({
-  parentNotice: state.notice
+  parentNotice: state.notice.notice
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -29,6 +29,7 @@ class ChildNew extends React.Component {
       this.setState({ image: ev.target.value });
     };
     this.createNotice = ev => {
+        console.log(this.props.parentNotice)
       ev.preventDefault();
       agent.Notices.create({
         title: this.state.title,
