@@ -22,7 +22,7 @@ const mapDispatchToProps = dispatch => ({
   },
   updateUnsortedNotices: payload =>
     dispatch({ type: "UPDATE_UNSORTED_NOTICES", payload }),
-    logIn: () => dispatch({type: "LOGGED_IN"})
+  logIn: () => dispatch({ type: "LOGGED_IN" })
 });
 
 class App extends React.Component {
@@ -52,10 +52,10 @@ class App extends React.Component {
 
   render() {
     if (this.props.currentUser && !this.props.loggedIn) {
-      this.props.logIn()
+      this.props.logIn();
     }
     return (
-      <div style={{overflow: "hidden"}}>
+      <div style={{ overflow: "hidden" }}>
         <Header
           currentUser={this.props.currentUser}
           appName={this.props.appName}

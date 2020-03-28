@@ -43,7 +43,7 @@ class LoggedInView extends React.Component {
             }}
             className="header-link"
           >
-            <i class="fas fa-globe"></i>
+            <i className="fas fa-globe"></i>
             <span> </span>Noticeboard
           </Link>
 
@@ -53,7 +53,7 @@ class LoggedInView extends React.Component {
             to={`/@${this.props.currentUser.username}/pinned`}
             className="header-link"
           >
-            <i class="fas fa-thumbtack"></i>
+            <i className="fas fa-thumbtack"></i>
             <span> </span>
             Notices
           </Link>

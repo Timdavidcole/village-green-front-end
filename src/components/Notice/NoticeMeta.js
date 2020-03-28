@@ -1,24 +1,32 @@
 import NoticeActions from "./NoticeActions";
 import { Link } from "react-router-dom";
 import React from "react";
+import timeSince from "../../models/timeSince";
 
 const NoticeMeta = props => {
   const notice = props.notice;
   return (
-    <div className="article-meta">
-      <Link to={`@${notice.author.username}`}>
-        <img alt="author" src={notice.author.image} />
-      </Link>
-
-      <div className="info">
-        <Link to={`@${notice.author.username}`} className="author">
-          {notice.author.username}
+    <div className="notice-meta">
+      <div className="notice-date"></div>
+      <div className="notice-author-container">
+        <Link to={`@${notice.author.username}`}>
+          <img
+            className="notice-author-image"
+            alt="author"
+            src={notice.author.image}
+          />
         </Link>
-        <span className="date">
-          {new Date(notice.createdAt).toDateString()}
-        </span>
-      </div>
 
+        <div className="notice-username">
+          <Link
+            className="notice-username-link"
+            to={`@${notice.author.username}`}
+          >
+            {notice.author.username} - {timeSince(new Date(notice.createdAt))}{" "}
+            ago
+          </Link>
+        </div>
+      </div>
       <NoticeActions canModify={props.canModify} notice={notice} />
     </div>
   );

@@ -7,7 +7,7 @@ import ListErrors from "../ListErrors";
 const CommentContainer = props => {
   if (props.currentUser) {
     return (
-      <div className="col-xs-12 col-md-8 offset-md-2">
+      <div className="comment-container">
         <div>
           <ListErrors errors={props.errors}></ListErrors>
           <CommentInput slug={props.slug} currentUser={props.currentUser} />
@@ -21,14 +21,7 @@ const CommentContainer = props => {
     );
   } else {
     return (
-      <div className="col-xs-12 col-md-8 offset-md-2">
-        <p>
-          <Link to="login">Sign in</Link>
-          &nbsp;or&nbsp;
-          <Link to="register">sign up</Link>
-          &nbsp;to add comments on this Notice.
-        </p>
-
+      <div className="comment-container">
         <CommentList
           comments={props.comments}
           slug={props.slug}

@@ -13,7 +13,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onClickDelete: payload => dispatch({ type: "DELETE_NOTICE", payload }),
   updateUnsortedNotices: payload =>
-    dispatch({ type: "UPDATE_UNSORTED_NOTICES", payload })
+    dispatch({ type: "UPDATE_UNSORTED_NOTICES", payload }),
+  editNoticeToggle: () => dispatch({ type: "EDIT_NOTICE_TOGGLE" })
 });
 
 const NoticeActions = props => {
@@ -28,20 +29,20 @@ const NoticeActions = props => {
       .then(() => props.onClickDelete(notice));
   };
 
+  const edit = () => {
+    props.editNoticeToggle();
+  };
+
   if (props.canModify) {
     return (
-      <span>
-        <Link
-          to={`/editor/${notice.slug}`}
-          className="btn btn-outline-secondary btn-sm"
-        >
-          <i className="ion-edit"></i> Edit Notice
-        </Link>
-
-        <button className="btn btn-outline-danger btn-sm" onClick={del}>
-          <i className="ion-trash-a"></i> Delete Notice
+      <div className="notice-actions">
+        <button className="notice-edit-button" onClick={edit}>
+          <i className="ion-edit"></i> Edit
         </button>
-      </span>
+        <button className="notice-delete-button" onClick={del}>
+          <i className="ion-trash-a"></i> Delete
+        </button>
+      </div>
     );
   }
 

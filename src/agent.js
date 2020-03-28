@@ -64,7 +64,8 @@ const Notices = {
   pinned: author =>
     requests.get(`/notices?pinned=${encodeURIComponent(author)}&limit=10`),
   get: slug => requests.get(`/notices/${slug}`),
-  del: slug => requests.del(`/notices/${slug}`)
+  del: slug => requests.del(`/notices/${slug}`),
+  edit: (slug, notice) => requests.put(`/notices/${slug}`, { notice })
 };
 
 const Pinned = {
