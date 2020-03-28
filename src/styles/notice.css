@@ -172,10 +172,12 @@
 }
 
 .edit-notice-form {
+    background-color: #fffbf0;
     padding-bottom: 50px;
 }
 
 .edit-banner {
+    background-color: #fffbf0;
     border-radius: 5px;
     border: none;
     border-bottom: 1px dashed red;
@@ -191,6 +193,7 @@
 }
 
 .edit-description {
+    background-color: #fffbf0;
     border-radius: 5px;
     border: none;
     text-align: center;
@@ -206,6 +209,7 @@
 }
 
 .edit-body {
+    background-color: #fffbf0;
     border-radius: 5px;
     border: none;
     outline: none;
@@ -220,6 +224,7 @@
 }
 
 .edit-image {
+    background-color: #fffbf0;
     border-radius: 5px;
     border: none;
     outline: none;

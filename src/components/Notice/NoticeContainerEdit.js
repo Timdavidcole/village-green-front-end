@@ -41,6 +41,10 @@ class NoticeContainerEdit extends React.Component {
     ) : null;
   }
 
+  componentDidUpdate() {
+    document.getElementById('edit-body').focus()
+  }
+
   editNotice(ev) {
     ev.preventDefault();
     console.log(this.props.notice.slug)
@@ -89,6 +93,7 @@ class NoticeContainerEdit extends React.Component {
               />
               <textarea
                 className="edit-body"
+                id="edit-body"
                 rows="4"
                 maxLength="240"
                 type="text"
