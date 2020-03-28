@@ -9,17 +9,20 @@ const mapStateToProps = state => ({
   currentUser: state.common.currentUser
 });
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+  editNotice: payload => dispatch({ type: "EDIT_NOTICE", payload })
+});
 
 class NoticeContainerEdit extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       title: "",
       description: "",
       body: "",
       image: ""
     };
+    this.editNotice = this.editNotice.bind(this)
   }
 
   componentDidMount() {
@@ -38,6 +41,19 @@ class NoticeContainerEdit extends React.Component {
     ) : null;
   }
 
+  editNotice(ev) {
+    ev.preventDefault();
+    console.log(this.props.notice.slug)
+    agent.Notices.edit(this.props.notice.slug, {
+      title: this.state.title,
+      description: this.state.description,
+      body: this.state.body,
+      image: this.state.image
+    }).then(notice => {
+      this.props.editNotice(notice);
+    });
+  }
+
   render() {
     if (!this.props.notice) {
       return null;
@@ -48,7 +64,7 @@ class NoticeContainerEdit extends React.Component {
     return (
       <div className="notice-container">
         <div className="notice-details">
-          <form style={{ position: "relative" }} onSubmit={this.createNotice}>
+          <form style={{ position: "relative" }} onSubmit={this.editNotice}>
             <fieldset className="edit-notice-form">
               <input
                 className="edit-banner"

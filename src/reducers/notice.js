@@ -13,6 +13,12 @@ export default (
         notice: action.payload[0].notice,
         comments: action.payload[1].comments
       };
+    case "EDIT_NOTICE":
+      return {
+        ...state,
+        notice: action.payload.notice,
+        editNotice: false
+      };
     case "NOTICE_PAGE_UNLOADED":
       return { newNoticeMenuItem: "new-notice-menu-poster" };
     case "ADD_COMMENT":
@@ -44,7 +50,7 @@ export default (
         ...state,
         newNoticeMenuItem: action.payload
       };
-      case "EDIT_NOTICE_TOGGLE":
+    case "EDIT_NOTICE_TOGGLE":
       return {
         ...state,
         editNotice: !state.editNotice
