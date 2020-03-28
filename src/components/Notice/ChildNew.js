@@ -2,32 +2,25 @@ import React from "react";
 import agent from "../../agent";
 import { connect } from "react-redux";
 import "../../styles/newNotice.css";
-import ExitButton from "./ExitButton";
 
 const mapStateToProps = state => ({
-  showNewNoticeWindow: state.notice.showNewNoticeWindow,
-  centerMap: state.map.centerMap
+  parentNotice: state.notice
 });
 
 const mapDispatchToProps = dispatch => ({
-  addNewNotice: payload => dispatch({ type: "ADD_NEW_NOTICE", payload }),
-  hideNewNoticeWindow: () => dispatch({ type: "HIDE_NEW_NOTICE" })
+  addNewNotice: payload => dispatch({ type: "ADD_CHILD_NOTICE", payload })
 });
 
-class NewNoticeTextInput extends React.Component {
+class ChildNew extends React.Component {
   constructor() {
     super();
     this.state = {
       title: "",
-      description: "",
       body: "",
       image: ""
     };
     this.setTitle = ev => {
       this.setState({ title: ev.target.value });
-    };
-    this.setDescription = ev => {
-      this.setState({ description: ev.target.value });
     };
     this.setBody = ev => {
       this.setState({ body: ev.target.value });
@@ -39,9 +32,9 @@ class NewNoticeTextInput extends React.Component {
       ev.preventDefault();
       agent.Notices.create({
         title: this.state.title,
-        description: this.state.description,
         body: this.state.body,
-        image: this.state.image
+        image: this.state.image,
+        parentNotice: this.props.parentNotice.slug
       })
         .then(notice => {
           this.props.addNewNotice(notice);
@@ -49,20 +42,11 @@ class NewNoticeTextInput extends React.Component {
         .then(() => {
           this.setState({
             title: "",
-            description: "",
             body: "",
             image: ""
           });
         });
     };
-  }
-
-  componentDidMount() {
-    document.addEventListener("click", this.handleClickOutside, true);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener("click", this.handleClickOutside, true);
   }
 
   render() {
@@ -76,29 +60,10 @@ class NewNoticeTextInput extends React.Component {
           paddingTop: "15%",
           paddingLeft: "10%",
           paddingRight: "10%",
-          width: "calc(100% - 155px)",
-          overflow: "none"
+          width: "60%",
+          overflow: "hidden"
         }}
       >
-        <div
-          style={{
-            fontFamily: "titillium web, sans-serif",
-            fontSize: "1.3rem",
-            textAlign: "center",
-            position: "absolute",
-            width: "auto",
-            color: "#4faa4f",
-            top: "62px",
-            left: "160px"
-          }}
-        >
-          post a new notice
-        </div>
-
-        <div>
-          <ExitButton onClick={this.props.hideNewNoticeWindow} />
-        </div>
-
         <form
           style={{ overflow: "none", position: "relative" }}
           onSubmit={this.createNotice}
@@ -113,15 +78,6 @@ class NewNoticeTextInput extends React.Component {
               placeholder="enter title here"
               value={this.state.title}
               onChange={this.setTitle}
-            />
-            <input
-              className="new-notice-input"
-              type="description"
-              maxLength="75"
-              style={{ textAlign: "center" }}
-              placeholder="enter description here"
-              value={this.state.description}
-              onChange={this.setDescription}
             />
             <textarea
               className="new-notice-input"
@@ -155,4 +111,4 @@ class NewNoticeTextInput extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewNoticeTextInput);
+export default connect(mapStateToProps, mapDispatchToProps)(ChildNew);

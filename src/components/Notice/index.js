@@ -5,6 +5,7 @@ import React from "react";
 import agent from "../../agent";
 import { connect } from "react-redux";
 import "../../styles/notice.css";
+import ChildNew from "./ChildNew";
 
 const mapStateToProps = state => ({
   ...state.notice,
@@ -28,7 +29,7 @@ class Notice extends React.Component {
     this.props.onLoad(
       Promise.all([
         agent.Notices.get(this.props.match.params.id),
-        agent.Comments.forNotice(this.props.match.params.id)
+        agent.Notices.childNotices(this.props.match.params.id)
       ])
     );
   }
@@ -38,24 +39,14 @@ class Notice extends React.Component {
   }
 
   render() {
-    console.log(this.props.editNotice)
+    console.log(this.props.editNotice);
     if (!this.props.notice) {
       return null;
     }
     return (
       <div className="notice-page">
-        {this.props.editNotice ? (
-          <NoticeContainerEdit />
-        ) : (
-          <NoticeContainer />
-        )}
-
-        <CommentContainer
-          comments={this.props.comments || []}
-          errors={this.props.commentErrors}
-          slug={this.props.match.params.id}
-          currentUser={this.props.currentUser}
-        />
+        {this.props.editNotice ? <NoticeContainerEdit /> : <NoticeContainer />}
+        <ChildNew />
       </div>
     );
   }

@@ -71,7 +71,6 @@
 }
 
 .new-notice-form {
-    overflow: scroll;
 }
 
 .new-notice-input {
@@ -102,7 +101,7 @@
     transition: transform 0.1s linear, box-shadow 0.1s linear;
     position: absolute;
     bottom: 0px;
-    right: 0px;
+    right: -4px;
     font-family: titillium web, sans-serif;
     font-size: 1.4rem;
 }

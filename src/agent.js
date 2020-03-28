@@ -3,8 +3,8 @@ import _superagent from "superagent";
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
-// const API_ROOT = "http://localhost:3001/api";
-const API_ROOT = "https://village-green-backend-api.herokuapp.com/api";
+const API_ROOT = "http://localhost:3001/api";
+// const API_ROOT = "https://village-green-backend-api.herokuapp.com/api";
 
 const responseBody = res => res.body;
 
@@ -65,7 +65,8 @@ const Notices = {
     requests.get(`/notices?pinned=${encodeURIComponent(author)}&limit=10`),
   get: slug => requests.get(`/notices/${slug}`),
   del: slug => requests.del(`/notices/${slug}`),
-  edit: (slug, notice) => requests.put(`/notices/${slug}`, { notice })
+  edit: (slug, notice) => requests.put(`/notices/${slug}`, { notice }),
+  childNotices: slug => requests.get(`/notices/${slug}/children`)
 };
 
 const Pinned = {
