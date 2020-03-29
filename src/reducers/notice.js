@@ -11,8 +11,8 @@ export default (
     case "NOTICE_PAGE_LOADED":
       return {
         ...state,
-        notice: action.payload[0].notice,
-        childNotices: action.payload[0].childNotices
+        notice: action.payload.notice,
+        childNotices: action.payload.childNotices
       };
     case "EDIT_NOTICE":
       return {

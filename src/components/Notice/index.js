@@ -29,9 +29,17 @@ class Notice extends React.Component {
       width: document.body.clientWidth,
       height: document.body.clientHeight
     });
-    this.props.onLoad(
-      Promise.all([agent.Notices.childNotices(this.props.match.params.id)])
-    );
+    this.props.onLoad(agent.Notices.childNotices(this.props.match.params.id));
+  }
+
+  componentDidUpdate() {
+    if (this.props.notice.slug) {
+      if (this.props.match.params.id !== this.props.notice.slug) {
+        this.props.onLoad(
+          agent.Notices.childNotices(this.props.match.params.id)
+        );
+      }
+    }
   }
 
   componentWillUnmount() {
@@ -47,20 +55,10 @@ class Notice extends React.Component {
         {this.props.editNotice ? <NoticeContainerEdit /> : <NoticeContainer />}
         {this.props.childNotices.map((notice, i) => {
           if (!notice.image) {
-            return (
-              <NoticeChild
-                index={i}
-                notice={notice}
-                key={notice.slug}
-              />
-            );
+            return <NoticeChild index={i} notice={notice} key={notice.slug} />;
           } else {
             return (
-              <NoticeChildImage
-                index={i}
-                notice={notice}
-                key={notice.slug}
-              />
+              <NoticeChildImage index={i} notice={notice} key={notice.slug} />
             );
           }
         })}
