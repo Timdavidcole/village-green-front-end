@@ -1,6 +1,7 @@
 .noticeCard {
     margin: auto;
     box-shadow: 5px 5px 10px 0px rgba(167, 167, 167, 0.79);
+    font-size: 1rem;
     border-radius: 6px;
     padding: 10px;
     background-color: #fffbf0;
