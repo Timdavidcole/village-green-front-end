@@ -5,10 +5,20 @@
 .notice-container {
     width: 40%;
     padding: 20px;
-    height: calc(100vh - 55px);
     display: inline-flex;
     flex-direction: column;
+    flex-wrap: wrap;
     vertical-align: top;
+}
+
+.notes-container {
+    display: inline-flex;
+    flex-direction: row;
+    width: 60%;
+    height: calc(100vh - 55px);
+    padding: 10px;
+    align-items: flex-start;
+    align-content: flex-start;
 }
 
 .notice-details {
@@ -275,6 +285,7 @@
 }
 
 .note-container {
+    max-width: 240px;
     background-color: #ffff75;
     display: inline-block;
     padding: 10px;

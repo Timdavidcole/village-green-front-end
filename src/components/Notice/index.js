@@ -53,14 +53,16 @@ class Notice extends React.Component {
     return (
       <div className="notice-page">
         {this.props.editNotice ? <NoticeContainerEdit /> : <NoticeContainer />}
-        {this.props.childNotices.map((notice, i) => {
-          if (!notice.image) {
-            return <NoteText index={i} notice={notice} key={notice.slug} />;
-          } else {
-            return <NoteImage index={i} notice={notice} key={notice.slug} />;
-          }
-        })}
-        <NoteNew />
+        <div className="notes-container">
+          {this.props.childNotices.map((notice, i) => {
+            if (!notice.image) {
+              return <NoteText index={i} notice={notice} key={notice.slug} />;
+            } else {
+              return <NoteImage index={i} notice={notice} key={notice.slug} />;
+            }
+          })}
+          <NoteNew />
+        </div>
       </div>
     );
   }
