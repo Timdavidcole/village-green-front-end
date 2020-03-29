@@ -1,7 +1,6 @@
 import React from "react";
 import agent from "../../agent";
 import { connect } from "react-redux";
-import "../../styles/newNotice.css";
 
 const mapStateToProps = state => ({
   parentNotice: state.notice.notice
@@ -11,7 +10,7 @@ const mapDispatchToProps = dispatch => ({
   addNewNotice: payload => dispatch({ type: "ADD_CHILD_NOTICE", payload })
 });
 
-class ChildNew extends React.Component {
+class NoteNew extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -55,17 +54,16 @@ class ChildNew extends React.Component {
         style={{
           display: "inline-block",
           backgroundColor: "white",
-          verticalAlign: "top",
-          overflow: "hidden"
+          verticalAlign: "top"
         }}
       >
         <form
           style={{ overflow: "none", position: "relative" }}
           onSubmit={this.createNotice}
         >
-          <fieldset className="new-notice-form">
+          <fieldset className="new-note-form">
             <input
-              className="new-notice-input"
+              className="new-note-input"
               type="title"
               id="title"
               maxLength="50"
@@ -75,7 +73,7 @@ class ChildNew extends React.Component {
               onChange={this.setTitle}
             />
             <textarea
-              className="new-notice-input"
+              className="new-note-input"
               rows="4"
               maxLength="240"
               type="body"
@@ -84,15 +82,15 @@ class ChildNew extends React.Component {
               onChange={this.setBody}
             />
             <input
-              className="new-notice-input"
+              className="new-note-input"
               type="description"
-              placeholder="enter optional image url here"
+              placeholder="add an image url"
               value={this.state.image}
               onChange={this.setImage}
               style={{ marginBottom: "85px" }}
             />
             <button
-              className="post-button"
+              className="new-note-button"
               type="submit"
               disabled={this.props.inProgress}
               onClick={this.props.hideNewNoticeWindow}
@@ -106,4 +104,4 @@ class ChildNew extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChildNew);
+export default connect(mapStateToProps, mapDispatchToProps)(NoteNew);

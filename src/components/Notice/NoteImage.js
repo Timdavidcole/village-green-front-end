@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({});
 
-const NoticePreviewImage = props => {
+const NoteImage = props => {
   const notice = props.notice;
   return (
     <div
@@ -103,4 +103,4 @@ const NoticePreviewImage = props => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NoticePreviewImage);
+export default connect(mapStateToProps, mapDispatchToProps)(NoteImage);

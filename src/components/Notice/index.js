@@ -1,12 +1,12 @@
 import NoticeContainerEdit from "./NoticeContainerEdit";
 import NoticeContainer from "./NoticeContainer";
-import NoticeChild from "./NoticeChild";
-import NoticeChildImage from "./NoticeChildImage";
+import NoteText from "./NoteText";
+import NoteImage from "./NoteImage";
 import React from "react";
 import agent from "../../agent";
 import { connect } from "react-redux";
 import "../../styles/notice.css";
-import ChildNew from "./ChildNew";
+import NoteNew from "./NoteNew";
 
 const mapStateToProps = state => ({
   ...state.notice,
@@ -55,14 +55,12 @@ class Notice extends React.Component {
         {this.props.editNotice ? <NoticeContainerEdit /> : <NoticeContainer />}
         {this.props.childNotices.map((notice, i) => {
           if (!notice.image) {
-            return <NoticeChild index={i} notice={notice} key={notice.slug} />;
+            return <NoteText index={i} notice={notice} key={notice.slug} />;
           } else {
-            return (
-              <NoticeChildImage index={i} notice={notice} key={notice.slug} />
-            );
+            return <NoteImage index={i} notice={notice} key={notice.slug} />;
           }
         })}
-        <ChildNew />
+        <NoteNew />
       </div>
     );
   }

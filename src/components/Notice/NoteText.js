@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import "../../styles/notice.css";
-import agent from "../../agent";
 import NoticePreviewUser from "../Home/NoticePreviewUser";
 
 const mapStateToProps = state => ({
@@ -13,14 +12,11 @@ const mapDispatchToProps = dispatch => ({
   viewNewNotice: payload => dispatch({ type: "NOTICE_PAGE_LOADED", payload })
 });
 
-const NoticeChild = props => {
+const NoteText = props => {
   const notice = props.notice;
-  console.log(notice.slug)
   return (
-    <div style={{ border: "1px solid black", display: "inline-block" }}>
-      <Link
-        to={`${notice.slug}`}
-      >
+    <div className="note-container">
+      <Link to={`${notice.slug}`}>
         <div>
           <div>
             <h3 style={{ color: "black", textAlign: "center" }}>
@@ -38,4 +34,4 @@ const NoticeChild = props => {
     </div>
   );
 };
-export default connect(mapStateToProps, mapDispatchToProps)(NoticeChild);
+export default connect(mapStateToProps, mapDispatchToProps)(NoteText);

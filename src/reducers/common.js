@@ -1,5 +1,5 @@
 const defaultState = {
-  appName: "Village Green",
+  appName: "noobo",
   token: null
 };
 
