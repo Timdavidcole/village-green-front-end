@@ -11,7 +11,8 @@ export default (
     case "NOTICE_PAGE_LOADED":
       return {
         ...state,
-        notice: action.payload[0].notice
+        notice: action.payload[0].notice,
+        childNotices: action.payload[0].childNotices
       };
     case "EDIT_NOTICE":
       return {
@@ -22,9 +23,8 @@ export default (
     case "ADD_CHILD_NOTICE":
       return {
         ...state,
-        childNotices: [action.payload, ...state.childNotices]
+        childNotices: [action.payload.notice, ...state.childNotices]
       };
-
     case "NOTICE_PAGE_UNLOADED":
       return { newNoticeMenuItem: "new-notice-menu-poster" };
     case "ADD_COMMENT":

@@ -29,7 +29,6 @@ class ChildNew extends React.Component {
       this.setState({ image: ev.target.value });
     };
     this.createNotice = ev => {
-        console.log(this.props.parentNotice)
       ev.preventDefault();
       agent.Notices.create({
         title: this.state.title,
@@ -57,11 +56,6 @@ class ChildNew extends React.Component {
           display: "inline-block",
           backgroundColor: "white",
           verticalAlign: "top",
-          height: "100%",
-          paddingTop: "15%",
-          paddingLeft: "10%",
-          paddingRight: "10%",
-          width: "60%",
           overflow: "hidden"
         }}
       >

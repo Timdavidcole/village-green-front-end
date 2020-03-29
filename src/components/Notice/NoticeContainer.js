@@ -1,7 +1,5 @@
 import NoticeMeta from "./NoticeMeta";
-import CommentContainer from "./CommentContainer";
 import React from "react";
-import agent from "../../agent";
 import { connect } from "react-redux";
 import "../../styles/notice.css";
 

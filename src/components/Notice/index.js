@@ -1,6 +1,7 @@
 import NoticeContainerEdit from "./NoticeContainerEdit";
 import NoticeContainer from "./NoticeContainer";
-import CommentContainer from "./CommentContainer";
+import NoticeChild from "./NoticeChild";
+import NoticeChildImage from "./NoticeChildImage";
 import React from "react";
 import agent from "../../agent";
 import { connect } from "react-redux";
@@ -10,7 +11,9 @@ import ChildNew from "./ChildNew";
 const mapStateToProps = state => ({
   ...state.notice,
   currentUser: state.common.currentUser,
-  editNotice: state.notice.editNotice
+  editNotice: state.notice.editNotice,
+  notice: state.notice.notice,
+  childNotices: state.notice.childNotices
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -27,9 +30,7 @@ class Notice extends React.Component {
       height: document.body.clientHeight
     });
     this.props.onLoad(
-      Promise.all([
-        agent.Notices.childNotices(this.props.match.params.id)
-      ])
+      Promise.all([agent.Notices.childNotices(this.props.match.params.id)])
     );
   }
 
@@ -38,13 +39,31 @@ class Notice extends React.Component {
   }
 
   render() {
-    console.log(this.props.editNotice);
     if (!this.props.notice) {
       return null;
     }
     return (
       <div className="notice-page">
         {this.props.editNotice ? <NoticeContainerEdit /> : <NoticeContainer />}
+        {this.props.childNotices.map((notice, i) => {
+          if (!notice.image) {
+            return (
+              <NoticeChild
+                index={i}
+                notice={notice}
+                key={notice.slug}
+              />
+            );
+          } else {
+            return (
+              <NoticeChildImage
+                index={i}
+                notice={notice}
+                key={notice.slug}
+              />
+            );
+          }
+        })}
         <ChildNew />
       </div>
     );
