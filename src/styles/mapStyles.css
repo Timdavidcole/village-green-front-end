@@ -133,8 +133,7 @@
     background-position: center;
     cursor: pointer;
     transition: background-color 0.2s, transform 0.2s;
-    transform: scale(1);
-    transform: translateY(-1px)
+    transform: scale(1)
 }
 
 .slider:hover::-webkit-slider-thumb:hover {
@@ -144,7 +143,7 @@
     background-repeat: no-repeat;
     background-size: 15px 15px;
     background-position: center;
-    transform: translateY(-1px) rotate(-90deg)
+    transform: rotate(-90deg)
 }
 
 .slider:hover::-webkit-slider-thumb:active {
@@ -174,14 +173,14 @@
     transform: scale(1)
 }
 
-.slider:hover::-moz-range-thumb:active {
+.slider:hover::-moz-range-thumb:hover {
     background-image: none;
-    background-color: rgb(103, 184, 106);
+    background-color: rgb(160, 215, 162);
     background-image: url('./resize.png');
     background-repeat: no-repeat;
-    background-size: 16px 16px;
+    background-size: 15px 15px;
     background-position: center;
-    transform: scale(1.2)
+    transform: translateY(-1px) rotate(-90deg)
 }
 
 .slider:hover::-moz-range-thumb:active {

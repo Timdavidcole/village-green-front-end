@@ -29,7 +29,16 @@ class MainMap extends React.PureComponent {
 
   render() {
     return (
-      <div style={{ opacity: this.props.mapBlur ? '0.25' : '1'}}>
+      <div
+        id="main-map"
+        style={{
+          position: "absolute",
+          zIndex: "1",
+          opacity: this.props.mapBlur ? "0.25" : "1",
+          height: "calc(100vh - 56px)",
+          width: "100%"
+        }}
+      >
         <MapComponent
           isMarkerShown={this.state.isMarkerShown}
           onMarkerClick={this.handleMarkerClick}

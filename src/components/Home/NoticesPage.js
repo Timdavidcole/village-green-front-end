@@ -48,23 +48,23 @@ const NoticesPage = props => {
     const noticesSorted = props.noticesSorted;
     if (noticesSorted.length === 1) {
       return {
-        height: "calc(100vh - 85px)"
+        height: "calc(100vh - 120px)"
       };
     }
     if (pageNumber === 1 && noticesSorted.length > 1) {
       return {
-        height: "calc(100vh - 125px)"
+        height: "calc(100vh - 150px)"
       };
     } else if (pageNumber > 1 && pageNumber < noticesSorted.length) {
       return {
-        height: "calc(100vh - 185px)"
+        height: "calc(100vh - 210px)"
       };
     } else if (
       pageNumber === noticesSorted.length &&
       noticesSorted.length > 1
     ) {
       return {
-        height: "calc(100vh - 125px)"
+        height: "calc(100vh - 155px)"
       };
     }
   };
@@ -89,9 +89,7 @@ const NoticesPage = props => {
   };
 
   if (!props.noticesByPage) {
-    return (
-      null
-    );
+    return null;
   }
   if (props.pageNumberAnimation) {
     setTimeout(stopPageNumberAnimation, duration);
