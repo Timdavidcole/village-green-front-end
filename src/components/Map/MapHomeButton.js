@@ -39,12 +39,18 @@ const MapHomeButton = props => {
     );
   };
 
+  const buttonClickedStyle = function() {
+    if (props.location === "home") {
+      return {
+        backgroundColor: "white",
+        color: "#70bf6d"
+      };
+    } else return null;
+  };
+
   return (
     <button
-    style={{
-      backgroundColor: props.location === 'home' ? "white" : "#70bf6d",
-      color: props.location === 'home' ? "#70bf6d" : "white"
-    }}
+      style={buttonClickedStyle()}
       onClick={homeOnClick()}
       onMouseUp={onMouseUp}
       className="home-button"

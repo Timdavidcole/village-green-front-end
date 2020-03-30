@@ -67,18 +67,7 @@ class MapNavBar extends React.Component {
 
   render() {
     return (
-      <div
-        className="navbar"
-        style={{
-          position: "absolute",
-          margin: "5px",
-          zIndex: "500",
-          width: "100%",
-          visibility: "hidden",
-          paddingBottom: "0px",
-          backgroundColor: "transparent"
-        }}
-      >
+      <div className="navbar">
         <MapHomeButton />
         <MapCurrentLocationButton />
         <HideNoticesButton />

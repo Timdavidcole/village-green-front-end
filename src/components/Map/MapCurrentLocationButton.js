@@ -39,12 +39,18 @@ const MapHomeButton = props => {
     );
   };
 
+  const buttonClickedStyle = function() {
+    if (props.location === "current") {
+      return {
+        backgroundColor: "white",
+        color: "#70bf6d"
+      };
+    } else return null;
+  };
+
   return (
     <button
-    style={{
-      backgroundColor: props.location === 'current' ? "white" : "#70bf6d",
-      color: props.location === 'current' ? "#70bf6d" : "white"
-    }}
+      style={buttonClickedStyle()}
       onClick={currLocOnClick()}
       onMouseUp={onMouseUp}
       href="#"

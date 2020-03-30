@@ -82,14 +82,7 @@ class NoticePreviewImage extends React.Component {
               ...transitionStyles[state]
             }}
           >
-            <div
-              className="card-inner"
-              style={{
-                width: "auto",
-                height: "auto",
-                backgroundColor: "#e4dfc0"
-              }}
-            >
+            <div className="card-container">
               <div
                 className="card-front"
                 style={{
@@ -120,9 +113,8 @@ class NoticePreviewImage extends React.Component {
                 className="card-back"
                 style={{
                   width: `${this.props.noticeWidth}px`,
-                  backgroundColor: "#e4dfc0",
-                  padding: "10px",
-                  minHeight: notice1.height
+                  height: notice1.height,
+                  backgroundColor: "#e4dfc0"
                 }}
               >
                 <Link to={`notice/${notice1.slug}`}>

@@ -1,7 +1,7 @@
 .home-button {
     margin: 3px;
-    height: 40px;
-    width: 40px;
+    height: 45px;
+    width: 45px;
     padding: 5px 7px 5px 7px;
     border-radius: 5px;
     background-color: #70bf6d;
@@ -13,6 +13,7 @@
     transform: translate(0px, 0px);
     transition: transform 0.1s linear, box-shadow 0.1s linear;
     visibility: visible;
+    font-size: 1.1rem;
 }
 
 .home-button:hover {
@@ -20,11 +21,32 @@
     background-color: #9dd59b;
 }
 
+.home-button:active {
+    background-color: #2e812b;
+    transform: translate(2px, 2px);
+    box-shadow: 3px 3px 0px 0px rgba(125, 125, 125, 0.79);
+}
+
+.home-button:focus {
+    outline: 0 !important;
+}
+
+.navbar {
+    position: absolute;
+    margin: 5px;
+    z-index: 500;
+    width: 100%;
+    visibility: hidden;
+    padding-bottom: 0px;
+    background-color: transparent;
+}
+
 .autoComplete {
     margin: 3px;
+    font-size: 1.1rem;
     margin-left: 10px;
     border: none;
-    line-height: 24px;
+    line-height: 30px;
     padding: 6px;
     border-radius: 5px;
     width: 25%;
@@ -40,27 +62,13 @@
 .autoComplete:focus {
     outline: none;
     width: 30%;
-
-}
-
-.home-button:hover {
-    background-color: #9dd59b;
-}
-
-.home-button:active {
-    background-color: #2e812b;
-    transform: translate(2px, 2px);
-    box-shadow: 3px 3px 0px 0px rgba(125, 125, 125, 0.79);
-}
-
-.home-button:focus {
-    outline: 0 !important;
 }
 
 .current-location-button {
+    font-size: 1.1rem;
     margin: 3px;
-    height: 40px;
-    width: 40px;
+    height: 45px;
+    width: 45px;
     padding: 5px 7px 5px 7px;
     border-radius: 5px;
     background-color: #70bf6d;

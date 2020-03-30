@@ -100,7 +100,7 @@ class NoticePreview extends React.Component {
               <Link to={`notice/${notice1.slug}`}>
                 <div style={{ color: "#4faa4f", width: `${this.props.noticeWidth - 20}px` }}>
                   <div style={{ borderBottom: "1px dashed red" }}>
-                    <h3 style={{ textAlign: "center" }}>{notice1.title}</h3>
+                    <h3 style={{ margin: "0px", textAlign: "center" }}>{notice1.title}</h3>
                   </div>
                   <span
                     style={{
