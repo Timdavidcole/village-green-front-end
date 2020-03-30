@@ -48,7 +48,7 @@ const NoticesPage = props => {
     const noticesSorted = props.noticesSorted;
     if (noticesSorted.length === 1) {
       return {
-        height: "calc(100vh - 120px)"
+        height: "calc(100vh - 105px)"
       };
     }
     if (pageNumber === 1 && noticesSorted.length > 1) {
@@ -57,14 +57,14 @@ const NoticesPage = props => {
       };
     } else if (pageNumber > 1 && pageNumber < noticesSorted.length) {
       return {
-        height: "calc(100vh - 210px)"
+        height: "calc(100vh - 185px)"
       };
     } else if (
       pageNumber === noticesSorted.length &&
       noticesSorted.length > 1
     ) {
       return {
-        height: "calc(100vh - 155px)"
+        height: "calc(100vh - 140px)"
       };
     }
   };

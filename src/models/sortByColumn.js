@@ -6,7 +6,7 @@ const sortByColumn = function(notices, noticesWindowDims, newNotice) {
   const margin = notice => (notice.image ? 0 : 20);
   let columnWithRoom = 0;
   const noticesToSort = [...notices];
-  const maxHeight = noticesWindowDims.height - 90;
+  const maxHeight = noticesWindowDims.height - 185;
 
   if (newNotice) {
     var firstNotice = { ...notices[0] };
