@@ -5,7 +5,7 @@ import "../../styles/notices.css";
 
 const mapStateToProps = state => ({
   pageNumber: state.notices.pageNumber,
-  noticesVisible: state.notices.noticesVisible,
+  noticesHidden: state.notices.noticesHidden,
   notices: state.notices.notices
 });
 
@@ -119,8 +119,9 @@ class ChangePageButton extends React.Component {
       exiting: { opacity: "1" },
       exited: { opacity: "1" }
     };
+    console.log(this.props.noticesHidden)
     return (
-      <Transition in={!this.props.noticesVisible} timeout={duration}>
+      <Transition in={this.props.noticesHidden} timeout={duration}>
         {state => (
           <div
             className={`${this.props.direction}-arrow-container`}
