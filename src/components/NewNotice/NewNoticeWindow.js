@@ -50,7 +50,6 @@ class NewNoticeWindow extends React.Component {
         menuItem = <NewNoticePoster />;
         break;
       case "event":
-        console.log("EVENT")
         menuItem = <NewNoticeEvent />;
         break;
       case "discussion":

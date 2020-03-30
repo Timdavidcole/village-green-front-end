@@ -90,13 +90,8 @@ class Notices extends React.Component {
   }
 
   render() {
-
     if (this.props.notices.length === 0) {
-      return (
-        <div id="notices" className="parent">
-          <div className="article-preview">No notices are here... yet.</div>
-        </div>
-      );
+      return null;
     }
 
     if (this.props.sorted) {

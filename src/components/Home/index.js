@@ -16,7 +16,7 @@ const mapStateToProps = state => ({
   newNotice: state.notices.newNotice,
   notices: state.notices.notices,
   noticesSorted: state.notices.noticesSorted,
-  loadingNotices: state.notices.loading,
+  loadingNotices: state.notices.loading
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -55,19 +55,18 @@ class Home extends React.Component {
   render() {
     return (
       <div
+        id="home-index-container"
         style={{
           width: "100vw",
           height: "calc(100vh - 56px)",
           overflow: "hidden"
         }}
       >
-        <div style={{ width: "100%", position: "absolute" }}>
-          <MapNavBar />
-          {this.props.loadingNotices ? <Loader /> : null}
-          <NewNoticeWindow />
-          <Notices />
-        </div>
+        <MapNavBar />
         <MainMap />
+        {this.props.loadingNotices ? <Loader /> : null}
+        <NewNoticeWindow />
+        <Notices />
       </div>
     );
   }

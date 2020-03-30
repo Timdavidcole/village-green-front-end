@@ -4,11 +4,22 @@
 
 .notice-container {
     width: 40%;
-    padding: 20px;
     height: calc(100vh - 55px);
+    padding: 20px;
     display: inline-flex;
     flex-direction: column;
+    flex-wrap: wrap;
     vertical-align: top;
+}
+
+.notes-container {
+    display: inline-flex;
+    flex-direction: row;
+    width: 60%;
+    height: calc(100vh - 55px);
+    padding: 10px;
+    align-items: flex-start;
+    align-content: flex-start;
 }
 
 .notice-details {
@@ -271,5 +282,16 @@
 .post-edit-button:active {
     background-color: #4fa04e;
     transform: translate(2px, 2px);
+    box-shadow: 3px 3px 0px 0px rgba(191, 191, 191, 0.79);
+}
+
+.note-container {
+    max-width: 240px;
+    min-width: 200px;
+    min-height: 200px;
+    background-color: #ffff75;
+    display: inline-block;
+    padding: 10px;
+    margin: 5px;
     box-shadow: 3px 3px 0px 0px rgba(191, 191, 191, 0.79);
 }

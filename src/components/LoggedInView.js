@@ -27,7 +27,7 @@ class LoggedInView extends React.Component {
       } else
         return (
           <button onClick={this.props.onClick} className="header-link">
-            New Notice
+            new notice
           </button>
         );
     };
@@ -35,16 +35,9 @@ class LoggedInView extends React.Component {
     if (this.props.currentUser) {
       return (
         <ul className="header-items-right">
-          <Link
-            to="/"
-            style={{
-              fontFamily: "titillium web, sans-serif",
-              fontSize: "1rem"
-            }}
-            className="header-link"
-          >
+          <Link to="/" className="header-link">
             <i className="fas fa-globe"></i>
-            <span> </span>Noticeboard
+            <span> </span>noticeboard
           </Link>
 
           {newNoticeMenu()}
@@ -55,18 +48,19 @@ class LoggedInView extends React.Component {
           >
             <i className="fas fa-thumbtack"></i>
             <span> </span>
-            Notices
+            notices
           </Link>
 
           <Link to="/settings" className="header-link">
-            Settings
+            settings
           </Link>
 
           <Link
             to={`/@${this.props.currentUser.username}`}
             className="header-link"
+            style={{display: "inline-block"}}
           >
-            {this.props.currentUser.username}
+            <span>{this.props.currentUser.username}</span>
             <img
               alt="User Profile"
               src={this.props.currentUser.image}
@@ -79,7 +73,7 @@ class LoggedInView extends React.Component {
             className="header-link"
             style={{ cursor: "pointer" }}
           >
-            Log Out
+            sign out
           </button>
         </ul>
       );

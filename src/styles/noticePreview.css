@@ -1,6 +1,7 @@
 .noticeCard {
     margin: auto;
     box-shadow: 5px 5px 10px 0px rgba(167, 167, 167, 0.79);
+    font-size: 1rem;
     border-radius: 6px;
     padding: 10px;
     background-color: #fffbf0;
@@ -13,8 +14,8 @@
     flex-Basis: "1 1 20%";
 }
 
-.noticeCard:hover .card-inner,
-.card-inner {
+.noticeCard:hover .card-container,
+.card-container {
     transform: rotateY(180deg);
     z-index: 555555;
 }
@@ -130,7 +131,7 @@
     transform: rotate(315deg)
 }
 
-.card-inner {
+.card-container {
     transition: 0.6s;
     transform-style: preserve-3d;
     position: relative;
@@ -148,6 +149,8 @@
 }
 
 .card-back {
+    box-sizing: border-box;
+    background-color: #e4dfc0;
     backface-visibility: hidden;
     position: absolute;
     top: 0;

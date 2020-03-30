@@ -16,14 +16,14 @@
     line-height: 52px;
     margin-right: 20px;
     margin-left: 20px;
-    margin-bottom: 3px
-}
+    }
 
 .tag-line {
     color: white;
     float: left;
-    margin-top: 19px;
+    margin-top: 22px;
     font-size: 14px;
+    font-weight: 100;
     font-style: italic;
 }
 
@@ -35,7 +35,7 @@ a:active {
     color: white;
 }
 
-a:not([href]):hover {
+.header-link:not([href]):hover {
     text-decoration: none;
     color: #4faa4f;
 }
@@ -46,14 +46,14 @@ a:not([href]):hover {
     height: 55px;
     margin: 0px;
     padding: 0px;
-    vertical-align:top
+    vertical-align: top
 }
 
 .header-link {
+    font-size: 1.1rem;
+    font-family: titillium web, sans-serif;
     background-color: rgb(103, 184, 106);
     font-weight: 600;
-    height: 100%;
-    line-height: 55px;
     color: white;
     display: inline-block;
     padding-top: 0px;
@@ -61,6 +61,8 @@ a:not([href]):hover {
     padding-left: 15px;
     border: none;
     outline: none;
+    height: 57px;
+    line-height: 57px;
     transform: scale(1);
     transition: transform 0.2s ease-in, color 0.2s ease-in;
 }
@@ -75,15 +77,13 @@ a:not([href]):hover {
     outline: none;
 }
 
-
 .user-profile-pic {
-    position: relative;
-    bottom: 3px;
     background-color: white;
-    padding: 1px;
     border-radius: 6px;
     width: 35px;
     height: 35px;
     object-fit: cover;
-    margin-left: 10px;
+    margin-left: 8px;
+    position: relative;
+    top: 10px
 }

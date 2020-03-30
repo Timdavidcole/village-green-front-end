@@ -1,7 +1,7 @@
 .home-button {
     margin: 3px;
-    height: 40px;
-    width: 40px;
+    height: 45px;
+    width: 45px;
     padding: 5px 7px 5px 7px;
     border-radius: 5px;
     background-color: #70bf6d;
@@ -13,6 +13,7 @@
     transform: translate(0px, 0px);
     transition: transform 0.1s linear, box-shadow 0.1s linear;
     visibility: visible;
+    font-size: 1.1rem;
 }
 
 .home-button:hover {
@@ -20,11 +21,30 @@
     background-color: #9dd59b;
 }
 
+.home-button:active {
+    background-color: #2e812b;
+    transform: translate(2px, 2px);
+    box-shadow: 3px 3px 0px 0px rgba(125, 125, 125, 0.79);
+}
+
+.home-button:focus {
+    outline: 0 !important;
+}
+
+.navbar {
+    position: absolute;
+    margin-top: 5px;
+    z-index: 500;
+    width: 100vw;
+    visibility: hidden;
+    background-color: transparent;
+}
+
 .autoComplete {
     margin: 3px;
-    margin-left: 10px;
+    font-size: 1.1rem;
     border: none;
-    line-height: 24px;
+    line-height: 30px;
     padding: 6px;
     border-radius: 5px;
     width: 25%;
@@ -40,27 +60,13 @@
 .autoComplete:focus {
     outline: none;
     width: 30%;
-
-}
-
-.home-button:hover {
-    background-color: #9dd59b;
-}
-
-.home-button:active {
-    background-color: #2e812b;
-    transform: translate(2px, 2px);
-    box-shadow: 3px 3px 0px 0px rgba(125, 125, 125, 0.79);
-}
-
-.home-button:focus {
-    outline: 0 !important;
 }
 
 .current-location-button {
+    font-size: 1.1rem;
     margin: 3px;
-    height: 40px;
-    width: 40px;
+    height: 45px;
+    width: 45px;
     padding: 5px 7px 5px 7px;
     border-radius: 5px;
     background-color: #70bf6d;
@@ -133,8 +139,7 @@
     background-position: center;
     cursor: pointer;
     transition: background-color 0.2s, transform 0.2s;
-    transform: scale(1);
-    transform: translateY(-1px)
+    transform: scale(1)
 }
 
 .slider:hover::-webkit-slider-thumb:hover {
@@ -144,7 +149,7 @@
     background-repeat: no-repeat;
     background-size: 15px 15px;
     background-position: center;
-    transform: translateY(-1px) rotate(-90deg)
+    transform: rotate(-90deg)
 }
 
 .slider:hover::-webkit-slider-thumb:active {
@@ -174,14 +179,14 @@
     transform: scale(1)
 }
 
-.slider:hover::-moz-range-thumb:active {
+.slider:hover::-moz-range-thumb:hover {
     background-image: none;
-    background-color: rgb(103, 184, 106);
+    background-color: rgb(160, 215, 162);
     background-image: url('./resize.png');
     background-repeat: no-repeat;
-    background-size: 16px 16px;
+    background-size: 15px 15px;
     background-position: center;
-    transform: scale(1.2)
+    transform: translateY(-1px) rotate(-90deg)
 }
 
 .slider:hover::-moz-range-thumb:active {

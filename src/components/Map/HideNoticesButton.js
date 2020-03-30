@@ -14,20 +14,27 @@ const HideNoticesButton = props => {
   const onClick = function() {
     props.noticesHidden("toggle");
   };
+
+  const buttonClickedStyle = function() {
+    if (props.noticesHiddenBol) {
+      return {
+        backgroundColor: "white",
+        color: "#70bf6d"
+      };
+    } else return null;
+  };
+
   return (
     <button
-      style={{
-        backgroundColor: props.noticesHiddenBol ? "white" : "#70bf6d",
-        color: props.noticesHiddenBol ? "#70bf6d" : "white"
-      }}
+      style={buttonClickedStyle()}
       onClick={onClick}
       className="home-button"
     >
       {props.noticesHiddenBol ? (
         <i class="fas fa-map-marked-alt"></i>
-        ) : (
+      ) : (
         <i class="fas fa-map-marked-alt"></i>
-        )}
+      )}
     </button>
   );
 };

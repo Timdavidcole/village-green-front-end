@@ -7,10 +7,7 @@ import NoticeButtons from "./NoticeButtons";
 import NoticePreviewUser from "./NoticePreviewUser";
 
 const mapStateToProps = state => ({
-  currentUser: state.common.currentUser,
-  notices: state.notices.notices,
   sorted: state.notices.sorted,
-  updatedUnsorted: state.notices.updatedUnsorted,
   noticesHidden: state.notices.noticesHidden,
   noticeWidth: state.notices.noticeWidth
 });
@@ -29,9 +26,9 @@ class NoticePreviewImage extends React.Component {
   }
 
   addDimensions(width, height) {
-    if (!this.props.notice1.height || this.props.notice1.height < 50) {
+    if (!this.props.notice.height || this.props.notice.height < 50) {
       this.props.loadDivDim({
-        title: this.props.notice1.title,
+        title: this.props.notice.title,
         width: width,
         height: height,
         index: this.props.indexTrue
@@ -40,18 +37,19 @@ class NoticePreviewImage extends React.Component {
   }
 
   componentDidUpdate() {
-    if (!this.props.notice1.height && !this.props.notice1.width) {
+    const noticeCard1 = document.getElementById(`noticeImage${this.props.index}`)
+    if (!this.props.notice.height && !this.props.notice.width) {
       if (this.props.page !== "pinned") {
         this.addDimensions(
-          document.getElementById(`noticeCard${this.props.index}`).offsetWidth,
-          document.getElementById(`noticeCard${this.props.index}`).offsetHeight
+          noticeCard1.offsetWidth,
+          noticeCard1.offsetHeight
         );
       }
     }
   }
 
   render() {
-    const notice1 = this.props.notice1;
+    const notice = this.props.notice;
     const duration = {
       appear: 100,
       enter: 100,
@@ -78,36 +76,34 @@ class NoticePreviewImage extends React.Component {
               padding: "0px",
               backgroundColor: "transparent",
               boxShadow: "none",
-              order: notice1.order,
+              order: notice.order,
               ...transitionStyles[state]
             }}
           >
-            <div
-              className="card-inner"
-              style={{
-                width: "auto",
-                height: "auto",
-                backgroundColor: "#e4dfc0"
-              }}
-            >
+            <div className="card-container">
               <div
                 className="card-front"
                 style={{
                   backgroundColor: "transparent",
-                  backgroundImage: `url(${notice1.image})`,
+                  backgroundImage: `url(${notice.image})`,
                   backgroundSize: "contain",
-                  backgroundRepeat: "no-repeat"
+                  backgroundRepeat: "no-repeat",
+                  height: `${notice.height}px`,
+                  width: `${notice.width}px`
                 }}
               >
                 <img
+                  id={`noticeImage${this.props.index}`}
                   alt=""
-                  src={notice1.image}
+                  src={notice.image}
                   style={{
                     visibility: "hidden",
                     maxWidth: `${this.props.noticeWidth}px`
                   }}
                   onLoad={ev => {
                     if (this.props.page !== "pinned") {
+                      console.log('component loaded load div dims')
+
                       this.addDimensions(
                         ev.target.offsetWidth,
                         ev.target.offsetHeight
@@ -120,15 +116,14 @@ class NoticePreviewImage extends React.Component {
                 className="card-back"
                 style={{
                   width: `${this.props.noticeWidth}px`,
-                  backgroundColor: "#e4dfc0",
-                  padding: "10px",
-                  minHeight: notice1.height
+                  height: notice.height,
+                  backgroundColor: "#e4dfc0"
                 }}
               >
-                <Link to={`notice/${notice1.slug}`}>
+                <Link to={`notice/${notice.slug}`}>
                   <div style={{ color: "#4faa4f", width: "100%" }}>
                     <div style={{ borderBottom: "1px dashed red" }}>
-                      <h3 style={{ textAlign: "center" }}>{notice1.title}</h3>
+                      <h3 style={{ textAlign: "center" }}>{notice.title}</h3>
                     </div>
                     <span
                       style={{
@@ -137,7 +132,7 @@ class NoticePreviewImage extends React.Component {
                         width: "100%"
                       }}
                     >
-                      {notice1.description}
+                      {notice.description}
                     </span>
                     <br></br>
                     <span
@@ -148,10 +143,11 @@ class NoticePreviewImage extends React.Component {
                         marginBottom: "40px",
                         height: "121px",
                         overflowY: "auto",
-                        overflowX: "auto"
+                        overflowX: "auto",
+                        fontSize: "0.8rem"
                       }}
                     >
-                      {notice1.body}
+                      {notice.body}
                     </span>
                   </div>
                 </Link>
@@ -163,11 +159,11 @@ class NoticePreviewImage extends React.Component {
                     bottom: "5px"
                   }}
                 >
-                  <NoticePreviewUser notice={notice1} />
+                  <NoticePreviewUser notice={notice} />
                   <NoticeButtons
                     page={this.props.page}
                     index={this.props.index - 2}
-                    notice={notice1}
+                    notice={notice}
                   />
                 </div>
               </div>

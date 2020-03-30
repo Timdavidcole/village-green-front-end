@@ -5,7 +5,7 @@ import "../../styles/notices.css";
 
 const mapStateToProps = state => ({
   pageNumber: state.notices.pageNumber,
-  noticesVisible: state.notices.noticesVisible,
+  noticesHidden: state.notices.noticesHidden,
   notices: state.notices.notices
 });
 
@@ -101,15 +101,15 @@ class ChangePageButton extends React.Component {
     const defaultButtonStyle = {
       backgroundColor: "white",
       fontFamily: "titillium web,sans-serif",
-      fontSize: "21px",
-      padding: "4px",
       position: "relative",
       borderRadius: "10px",
       outline: "none",
       border: "none",
       opacity: "1",
       width: "40vw",
+      height: "30px",
       pointerEvents: "all",
+      transform: "scale(1.0, 1.0)",
       transition: "transform 0.2s, box-shadow 0.2s, border-radius 0.2s"
     };
 
@@ -119,8 +119,9 @@ class ChangePageButton extends React.Component {
       exiting: { opacity: "1" },
       exited: { opacity: "1" }
     };
+    console.log(this.props.noticesHidden)
     return (
-      <Transition in={!this.props.noticesVisible} timeout={duration}>
+      <Transition in={this.props.noticesHidden} timeout={duration}>
         {state => (
           <div
             className={`${this.props.direction}-arrow-container`}
@@ -137,17 +138,7 @@ class ChangePageButton extends React.Component {
               onMouseDown={this.toggleClick}
               onMouseUp={this.toggleClick}
             >
-              <div
-                style={{
-                  width: "100%",
-                  height: "40px",
-                  padding: "0px",
-                  marginTop: "0px",
-                  pointerEvents: "all"
-                }}
-              >
                 <i className={`${this.props.direction}-arrow-icon`}></i>
-              </div>
             </button>
           </div>
         )}

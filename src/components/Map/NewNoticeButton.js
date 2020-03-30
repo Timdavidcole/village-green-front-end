@@ -14,12 +14,19 @@ const NewNoticeButton = props => {
   const onClick = function() {
     props.onClick();
   };
+
+  const buttonClickedStyle = function() {
+    if (props.showNewNoticeWindow) {
+      return {
+        backgroundColor: "white",
+        color: "#70bf6d"
+      };
+    } else return null;
+  };
+
   return (
     <button
-      style={{
-        backgroundColor: props.showNewNoticeWindow ? "white" : "#70bf6d",
-        color: props.showNewNoticeWindow ? "#70bf6d" : "white"
-      }}
+      style={buttonClickedStyle()}
       onClick={onClick}
       className="home-button"
     >

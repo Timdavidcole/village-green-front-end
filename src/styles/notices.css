@@ -1,10 +1,8 @@
 .noticesParent {
-    height: calc(100vh);
     width: calc(100vw);
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    padding-bottom: 50px;
     border: none;
     overflow-x: hidden;
     overflow-y: hidden;
@@ -15,27 +13,27 @@
 }
 
 .noticesSwipeAnimation {
+    padding-top: 4px;
+    height: calc(100vh - 101px);
     opacity: 1;
     transition: opacity 0.1s linear, transform 0.1s ease-in;
     position: relative;
-    z-index: 700001;
+    top: 46px;
+    z-index: 5000;
 }
 
 .up-arrow-container {
-    height: 40px;
     left: 30%;
-    bottom: 15px;
     position: relative;
-    margin-top: 20px;
-    margin-bottom: 0px;
     z-index: 700031209;
-    pointer-events: "all"
+    pointer-events: all;
 }
 
 .up-arrow-icon {
     background: url('up-arrow-green.svg');
-    height: 40px;
-    width: 40px;
+    height: 30px;
+    width: 30px;
+    bottom: 1px;
     border-radius: 100%;
     position: relative;
     display: inline-block;
@@ -56,19 +54,18 @@
 }
 
 .down-arrow-container {
-    height: 40px;
-    bottom: 0px;
     left: 30%;
+    bottom: 8px;
     position: absolute;
     z-index: 700031209;
     pointer-events: all;
-    margin-top: 5px
 }
 
 .down-arrow-icon {
     background: url('down-arrow-green.svg');
-    height: 40px;
-    width: 40px;
+    height: 30px;
+    width: 30px;
+    bottom: 1px;
     border-radius: 100%;
     position: relative;
     display: inline-block;

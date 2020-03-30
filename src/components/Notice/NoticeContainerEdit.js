@@ -45,7 +45,6 @@ class NoticeContainerEdit extends React.Component {
 
   editNotice(ev) {
     ev.preventDefault();
-    console.log(this.props.notice.slug);
     agent.Notices.edit(this.props.notice.slug, {
       title: this.state.title,
       description: this.state.description,

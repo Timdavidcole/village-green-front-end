@@ -2,7 +2,8 @@ export default (
   state = {
     showNewNoticeWindow: false,
     newNoticeMenuItem: "new-notice-menu-poster",
-    editNotice: false
+    editNotice: false,
+    childNotices: []
   },
   action
 ) => {
@@ -10,14 +11,19 @@ export default (
     case "NOTICE_PAGE_LOADED":
       return {
         ...state,
-        notice: action.payload[0].notice,
-        comments: action.payload[1].comments
+        notice: action.payload.notice,
+        childNotices: action.payload.childNotices
       };
     case "EDIT_NOTICE":
       return {
         ...state,
         notice: action.payload.notice,
         editNotice: false
+      };
+    case "ADD_CHILD_NOTICE":
+      return {
+        ...state,
+        childNotices: [action.payload.notice, ...state.childNotices]
       };
     case "NOTICE_PAGE_UNLOADED":
       return { newNoticeMenuItem: "new-notice-menu-poster" };

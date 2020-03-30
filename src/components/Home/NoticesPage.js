@@ -48,12 +48,12 @@ const NoticesPage = props => {
     const noticesSorted = props.noticesSorted;
     if (noticesSorted.length === 1) {
       return {
-        height: "calc(100vh - 85px)"
+        height: "calc(100vh - 105px)"
       };
     }
     if (pageNumber === 1 && noticesSorted.length > 1) {
       return {
-        height: "calc(100vh - 125px)"
+        height: "calc(100vh - 150px)"
       };
     } else if (pageNumber > 1 && pageNumber < noticesSorted.length) {
       return {
@@ -64,7 +64,7 @@ const NoticesPage = props => {
       noticesSorted.length > 1
     ) {
       return {
-        height: "calc(100vh - 125px)"
+        height: "calc(100vh - 140px)"
       };
     }
   };
@@ -89,9 +89,7 @@ const NoticesPage = props => {
   };
 
   if (!props.noticesByPage) {
-    return (
-      null
-    );
+    return null;
   }
   if (props.pageNumberAnimation) {
     setTimeout(stopPageNumberAnimation, duration);
@@ -130,16 +128,16 @@ const NoticesPage = props => {
               }
             }}
           >
-            {props.noticesByPage.map((notice1, i) => {
-              if (!notice1.image) {
+            {props.noticesByPage.map((notice, i) => {
+              if (!notice.image) {
                 return (
                   <NoticePreview
                     page={props.page}
                     noticesVisible={props.noticesVisible}
                     index={i + 2}
                     indexTrue={i}
-                    notice1={notice1}
-                    key={notice1.slug}
+                    notice={notice}
+                    key={notice.slug}
                   />
                 );
               } else {
@@ -149,8 +147,8 @@ const NoticesPage = props => {
                     noticesVisible={props.noticesVisible}
                     index={i + 2}
                     indexTrue={i}
-                    notice1={notice1}
-                    key={notice1.slug}
+                    notice={notice}
+                    key={notice.slug}
                   />
                 );
               }
