@@ -128,16 +128,16 @@ const NoticesPage = props => {
               }
             }}
           >
-            {props.noticesByPage.map((notice1, i) => {
-              if (!notice1.image) {
+            {props.noticesByPage.map((notice, i) => {
+              if (!notice.image) {
                 return (
                   <NoticePreview
                     page={props.page}
                     noticesVisible={props.noticesVisible}
                     index={i + 2}
                     indexTrue={i}
-                    notice1={notice1}
-                    key={notice1.slug}
+                    notice={notice}
+                    key={notice.slug}
                   />
                 );
               } else {
@@ -147,8 +147,8 @@ const NoticesPage = props => {
                     noticesVisible={props.noticesVisible}
                     index={i + 2}
                     indexTrue={i}
-                    notice1={notice1}
-                    key={notice1.slug}
+                    notice={notice}
+                    key={notice.slug}
                   />
                 );
               }

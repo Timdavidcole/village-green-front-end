@@ -33,18 +33,16 @@
 
 .navbar {
     position: absolute;
-    margin: 5px;
+    margin-top: 5px;
     z-index: 500;
-    width: 100%;
+    width: 100vw;
     visibility: hidden;
-    padding-bottom: 0px;
     background-color: transparent;
 }
 
 .autoComplete {
     margin: 3px;
     font-size: 1.1rem;
-    margin-left: 10px;
     border: none;
     line-height: 30px;
     padding: 6px;

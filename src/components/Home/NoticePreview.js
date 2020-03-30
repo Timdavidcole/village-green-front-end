@@ -7,8 +7,6 @@ import NoticeButtons from "./NoticeButtons";
 import NoticePreviewUser from "./NoticePreviewUser";
 
 const mapStateToProps = state => ({
-  currentUser: state.common.currentUser,
-  notices: state.notices.notices,
   sorted: state.notices.sorted,
   noticesHidden: state.notices.noticesHidden,
   noticeWidth: state.notices.noticeWidth
@@ -30,9 +28,9 @@ class NoticePreview extends React.Component {
   }
 
   addDimensions(width, height) {
-    if (!this.props.notice1.height && this.props.page !== "pinnned") {
+    if (!this.props.notice.height && this.props.page !== "pinnned") {
       this.props.loadDivDim({
-        title: this.props.notice1.title,
+        title: this.props.notice.title,
         width: width,
         height: height,
         index: this.props.indexTrue
@@ -41,7 +39,7 @@ class NoticePreview extends React.Component {
   }
 
   componentDidUpdate() {
-    if (!this.props.notice1.height && !this.props.notice1.width) {
+    if (!this.props.notice.height && !this.props.notice.width) {
       if (this.props.page !== "pinned") {
         this.addDimensions(
           document.getElementById(`noticeCard${this.props.index}`).offsetWidth,
@@ -52,7 +50,7 @@ class NoticePreview extends React.Component {
   }
 
   render() {
-    const notice1 = this.props.notice1;
+    const notice = this.props.notice;
     const duration = {
       appear: 100,
       enter: 100,
@@ -76,11 +74,12 @@ class NoticePreview extends React.Component {
             className={"noticeCard"}
             style={{
               display: this.props.noticesHidden ? "none" : "inline-block",
-              order: notice1.order,
+              order: notice.order,
               ...transitionStyles[state]
             }}
             onLoad={ev => {
               if (this.props.page !== "pinned") {
+                console.log(ev.target.offsetHeight)
                 this.addDimensions(
                   document.getElementById(`noticeCard${this.props.index}`)
                     .offsetWidth,
@@ -97,20 +96,22 @@ class NoticePreview extends React.Component {
                 position: "relative"
               }}
             >
-              <Link to={`notice/${notice1.slug}`}>
+              <Link to={`notice/${notice.slug}`}>
                 <div style={{ color: "#4faa4f", width: `${this.props.noticeWidth - 20}px` }}>
                   <div style={{ borderBottom: "1px dashed red" }}>
-                    <h3 style={{ margin: "0px", textAlign: "center" }}>{notice1.title}</h3>
+                    <h3 style={{ margin: "0px", textAlign: "center" }}>{notice.title}</h3>
                   </div>
                   <span
                     style={{
                       textAlign: "center",
                       display: "inline-block",
                       width: "100%",
-                      fontStyle: "italic"
+                      fontStyle: "italic",
+                      fontSize: "0.9rem",
+                      marginBottom: "5px"
                     }}
                   >
-                    {notice1.description}
+                    {notice.description}
                   </span>
                   <br></br>
                   <span
@@ -121,10 +122,11 @@ class NoticePreview extends React.Component {
                       marginBottom: "40px",
                       maxHeight: "121px",
                       overflowY: "auto",
-                      overflowX: "hidden"
+                      overflowX: "hidden",
+                      fontSize: "0.8rem"
                     }}
                   >
-                    {notice1.body}
+                    {notice.body}
                   </span>
                 </div>
               </Link>
@@ -136,11 +138,11 @@ class NoticePreview extends React.Component {
                   bottom: "-5px"
                 }}
               >
-                <NoticePreviewUser notice={notice1} />
+                <NoticePreviewUser notice={notice} />
                 <NoticeButtons
                   page={this.props.page}
                   index={this.props.index - 2}
-                  notice={notice1}
+                  notice={notice}
                 />
               </div>
             </div>
