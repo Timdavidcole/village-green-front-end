@@ -17,15 +17,13 @@ class NoticesPinned extends React.Component {
       return (
         <div
           style={{
+            boxSizing: "border-box",
             height: `calc(100vh - 55px)`,
             width: "auto",
             margin: "0",
             padding: "20px",
             border: "none",
-            overflow: "auto",
-            display: "flex",
-            flexDirection: "column",
-            flexWrap: "wrap"
+            overflow: "auto"
           }}
         >
           {this.props.noticesPinned.map((notice, i) => {

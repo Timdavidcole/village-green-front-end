@@ -58,7 +58,7 @@ class LoggedInView extends React.Component {
           <Link
             to={`/@${this.props.currentUser.username}`}
             className="header-link"
-            style={{display: "inline-block"}}
+            style={{ display: "inline-block" }}
           >
             <span>{this.props.currentUser.username}</span>
             <img

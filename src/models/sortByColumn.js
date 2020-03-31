@@ -8,8 +8,6 @@ const sortByColumn = function(notices, noticesWindowDims, newNotice) {
   const noticesToSort = [...notices];
   const maxHeight = noticesWindowDims.height - 35;
 
-  console.log(maxHeight)
-
   if (newNotice) {
     var firstNotice = { ...notices[0] };
     firstNotice.order = columnWithRoom + 1;
@@ -57,8 +55,6 @@ const sortByColumn = function(notices, noticesWindowDims, newNotice) {
   }
 
   noticesToSort.forEach((notice, index) => {
-    console.log(notice)
-    console.log([...sortedByColumn])
     if (newNotice && index === 0) {
       usedIndexes.push(0);
     } else {

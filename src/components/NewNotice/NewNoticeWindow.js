@@ -20,12 +20,10 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class NewNoticeWindow extends React.Component {
-  componentDidMount() {
-    document.addEventListener("click", this.handleClickOutside, true);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener("click", this.handleClickOutside, true);
+  componentDidUpdate() {
+    if (this.props.showNewNoticeWindow) {
+      document.addEventListener("click", this.handleClickOutside, true);
+    }
   }
 
   handleClickOutside = event => {
@@ -34,6 +32,7 @@ class NewNoticeWindow extends React.Component {
       if (!domNode || !domNode.contains(event.target)) {
         event.preventDefault();
         this.props.hideNewNoticeWindow();
+        document.removeEventListener("click", this.handleClickOutside, true);
       }
     }
   };
