@@ -34,9 +34,7 @@ class MapSearchBox extends React.Component {
   handleClickOutside = event => {
     if (this.props.noticesHidden) {
       const domNode = ReactDOM.findDOMNode(this);
-      console.log(domNode)
       if (!domNode || !domNode.contains(event.target)) {
-        console.log('show notices')
         event.preventDefault();
         this.props.noticesShown();
       }
