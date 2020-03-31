@@ -37,13 +37,12 @@ class NoticePreviewImage extends React.Component {
   }
 
   componentDidUpdate() {
-    const noticeCard1 = document.getElementById(`noticeImage${this.props.index}`)
+    const noticeCard1 = document.getElementById(
+      `noticeImage${this.props.index}`
+    );
     if (!this.props.notice.height && !this.props.notice.width) {
       if (this.props.page !== "pinned") {
-        this.addDimensions(
-          noticeCard1.offsetWidth,
-          noticeCard1.offsetHeight
-        );
+        this.addDimensions(noticeCard1.offsetWidth, noticeCard1.offsetHeight);
       }
     }
   }
@@ -81,37 +80,23 @@ class NoticePreviewImage extends React.Component {
             }}
           >
             <div className="card-container">
-              <div
+              <img
                 className="card-front"
+                id={`noticeImage${this.props.index}`}
+                alt=""
+                src={notice.image}
                 style={{
-                  backgroundColor: "transparent",
-                  backgroundImage: `url(${notice.image})`,
-                  backgroundSize: "contain",
-                  backgroundRepeat: "no-repeat",
-                  height: `${notice.height}px`,
-                  width: `${notice.width}px`
+                  maxWidth: `${this.props.noticeWidth}px`
                 }}
-              >
-                <img
-                  id={`noticeImage${this.props.index}`}
-                  alt=""
-                  src={notice.image}
-                  style={{
-                    visibility: "hidden",
-                    maxWidth: `${this.props.noticeWidth}px`
-                  }}
-                  onLoad={ev => {
-                    if (this.props.page !== "pinned") {
-                      console.log('component loaded load div dims')
-
-                      this.addDimensions(
-                        ev.target.offsetWidth,
-                        ev.target.offsetHeight
-                      );
-                    }
-                  }}
-                />
-              </div>
+                onLoad={ev => {
+                  if (this.props.page !== "pinned") {
+                    this.addDimensions(
+                      ev.target.offsetWidth,
+                      ev.target.offsetHeight
+                    );
+                  }
+                }}
+              />
               <div
                 className="card-back"
                 style={{
