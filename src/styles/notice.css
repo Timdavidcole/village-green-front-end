@@ -26,7 +26,7 @@
     padding: 20px;
     flex: 1 1 fill;
     background-color: #fffbf0;
-    box-shadow: 5px 5px 10px 0px rgba(220, 220, 220, 0.79);
+    box-shadow: 5px 5px 10px 0px var(--box-shadow-dark-grey);
 }
 
 .notice-image-container {
@@ -41,7 +41,7 @@
     height: 100%;
     max-height: 100%;
     max-width: 100%;
-    box-shadow: 5px 5px 10px 0px rgba(220, 220, 220, 0.79);
+    box-shadow: 5px 5px 10px 0px var(--box-shadow-dark-grey);
     margin-left: auto;
     margin-right: auto;
     display: block;
@@ -105,11 +105,11 @@
     width: 65px;
     padding: 5px;
     border-radius: 5px;
-    background-color: #70bf6d;
+    background-color: var(--noobo-dark-green);
     color: white;
     outline: none;
     border: none;
-    box-shadow: 5px 5px 0px 0px rgba(220, 220, 220, 0.79);
+    box-shadow: 5px 5px 0px 0px var(--box-shadow-dark-grey);
     visibility: visible;
     transform: translate(0px, 0px);
     transition: transform 0.1s linear, box-shadow 0.1s linear;
@@ -123,12 +123,12 @@
 }
 
 .notice-edit-button:hover {
-    box-shadow: 5px 5px 0px 0px rgba(220, 220, 220, 0.79);
+    box-shadow: 5px 5px 0px 0px var(--box-shadow-dark-grey);
     background-color: #9dd59b;
 }
 
 .notice-edit-button:active {
-    background-color: #4fa04e;
+    background-color: var(--noobo-darker-green);
     transform: translate(2px, 2px);
     box-shadow: 3px 3px 0px 0px rgba(191, 191, 191, 0.79);
 }
@@ -143,7 +143,7 @@
     color: white;
     outline: none;
     border: none;
-    box-shadow: 5px 5px 0px 0px rgba(220, 220, 220, 0.79);
+    box-shadow: 5px 5px 0px 0px var(--box-shadow-dark-grey);
     visibility: visible;
     transform: translate(0px, 0px);
     transition: transform 0.1s linear, box-shadow 0.1s linear;
@@ -157,7 +157,7 @@
 }
 
 .notice-delete-button:hover {
-    box-shadow: 5px 5px 0px 0px rgba(220, 220, 220, 0.79);
+    box-shadow: 5px 5px 0px 0px var(--box-shadow-dark-grey);
     background-color: #ff8a8a;
 }
 
@@ -178,7 +178,7 @@
 
 .notice-front-image-title {
     font-family: titillium web, sans-serif;
-    color: #70bf6d;
+    color: var(--noobo-dark-green);
     line-height: 40px;
 }
 
@@ -254,11 +254,11 @@
     margin: 3px;
     padding: 10px;
     border-radius: 5px;
-    background-color: #70bf6d;
+    background-color: var(--noobo-dark-green);
     color: white;
     outline: none;
     border: none;
-    box-shadow: 5px 5px 0px 0px rgba(220, 220, 220, 0.79);
+    box-shadow: 5px 5px 0px 0px var(--box-shadow-dark-grey);
     visibility: visible;
     transform: translate(0px, 0px);
     transition: transform 0.1s linear, box-shadow 0.1s linear;
@@ -275,12 +275,12 @@
 }
 
 .post-edit-button:hover {
-    box-shadow: 5px 5px 0px 0px rgba(220, 220, 220, 0.79);
+    box-shadow: 5px 5px 0px 0px var(--box-shadow-dark-grey);
     background-color: #9dd59b;
 }
 
 .post-edit-button:active {
-    background-color: #4fa04e;
+    background-color: var(--noobo-darker-green);
     transform: translate(2px, 2px);
     box-shadow: 3px 3px 0px 0px rgba(191, 191, 191, 0.79);
 }

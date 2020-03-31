@@ -7,8 +7,7 @@ const mapStateToProps = state => ({
   loggedIn: state.auth.loggedIn
 });
 
-const mapDispatchToProps = dispatch => ({
-});
+const mapDispatchToProps = dispatch => ({});
 
 class NoticeButtons extends React.Component {
   constructor(props) {
@@ -44,7 +43,7 @@ class NoticeButtons extends React.Component {
         backgroundColor: "#96d095"
       };
     } else {
-      return { backgroundColor: "white" };
+      return { backgroundColor: "white", color: "#70bf6d" };
     }
   }
 
@@ -67,7 +66,7 @@ class NoticeButtons extends React.Component {
             onMouseEnter={this.toggleHoverIn}
             onMouseLeave={this.toggleHoverOut}
           >
-          <i class="fas fa-thumbtack"></i>
+            <i class="fas fa-thumbtack"></i>
           </button>
         </div>
       );

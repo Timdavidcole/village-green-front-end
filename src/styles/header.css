@@ -1,5 +1,5 @@
 .header-bar {
-    background-color: rgb(103, 184, 106);
+    background-color: var(--noobo-dark-green);
     color: white;
     margin: 0px;
     height: 55px;
@@ -16,7 +16,7 @@
     line-height: 52px;
     margin-right: 20px;
     margin-left: 20px;
-    }
+}
 
 .tag-line {
     color: white;
@@ -37,7 +37,7 @@ a:active {
 
 .header-link:not([href]):hover {
     text-decoration: none;
-    color: #4faa4f;
+    color: var(--noobo-dark-green);
 }
 
 .header-items-right {
@@ -52,7 +52,7 @@ a:active {
 .header-link {
     font-size: 1.1rem;
     font-family: titillium web, sans-serif;
-    background-color: rgb(103, 184, 106);
+    background-color: var(--noobo-dark-green);
     font-weight: 600;
     color: white;
     display: inline-block;
@@ -68,8 +68,8 @@ a:active {
 }
 
 .header-link:hover {
-    background-color: rgb(229, 244, 224);
-    color: #2e962a;
+    background-color: var(--noobo-very-light-green);
+    color: var(--noobo-dark-green);
 }
 
 .header-link:focus {

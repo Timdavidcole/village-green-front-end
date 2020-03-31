@@ -22,65 +22,83 @@
     z-index: 5000;
 }
 
-.up-arrow-container {
-    left: 30%;
+.change-page-button {
+    background-color: var(--noobo-very-light-green);
+    font-family: titillium web, sans-serif;
     position: relative;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    opacity: 1;
+    width: 10vw;
+    height: 30px;
+    pointer-events: all;
+    transform: scale(1.0, 1.0);
+    transition: transform 0.2s, box-shadow 0.2s, border-radius 0.2s, background-color 0.2s;
+    box-shadow: 5px 5px 0px 0px var(--box-shadow-dark-grey);
+    border-bottom: 3px solid var(--noobo-dark-green);
+    border-right: 3px solid var(--noobo-dark-green);
+}
+
+.change-page-button:hover {
+    background-color: white;
+}
+
+.change-page-button:active {
+    transform: translate(3px, 3px);
+    box-shadow: 3px 3px 0px 0px var(--box-shadow-dark-grey);
+}
+
+.up-arrow-container,
+.down-arrow-container {
+    left: 45%;
     z-index: 700031209;
     pointer-events: all;
+}
+
+.up-arrow-container {
+    position: relative;
+    top: 1px;
+}
+
+.down-arrow-container {
+    bottom: 8px;
+    position: absolute;
 }
 
 .up-arrow-icon {
     background: url('up-arrow-green.svg');
-    height: 30px;
-    width: 30px;
-    bottom: 1px;
-    border-radius: 100%;
-    position: relative;
-    display: inline-block;
-    background-size: cover;
-    transform: scale(1.0, 1.0);
-    box-shadow: none;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.up-arrow-icon:hover {
-    transform: scale(1.2, 1.2);
-    box-shadow: 0px 1px 5px 1px rgb(106, 106, 106)
-}
-
-.up-arrow-icon:active {
-    transform: scale(0.9, 0.9);
-    box-shadow: 0px 1px 1px 1px rgb(106, 106, 106)
-}
-
-.down-arrow-container {
-    left: 30%;
-    bottom: 8px;
-    position: absolute;
-    z-index: 700031209;
-    pointer-events: all;
 }
 
 .down-arrow-icon {
     background: url('down-arrow-green.svg');
-    height: 30px;
-    width: 30px;
-    bottom: 1px;
+}
+
+.up-arrow-icon,
+.down-arrow-icon {
+    height: 100%;
+    width: 24px;
     border-radius: 100%;
     position: relative;
     display: inline-block;
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
     transform: scale(1.0, 1.0);
     box-shadow: none;
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.down-arrow-icon:hover {
-    transform: scale(1.2, 1.2);
-    box-shadow: 0px 1px 5px 1px rgb(106, 106, 106)
+.up-arrow-icon{
+    top: 1px;
 }
 
+.up-arrow-icon:hover,
+.down-arrow-icon:hover {
+    transform: scale(1.2, 1.2);
+}
+
+.up-arrow-icon:active,
 .down-arrow-icon:active {
     transform: scale(0.9, 0.9);
-    box-shadow: 0px 1px 1px 1px rgb(106, 106, 106)
+    box-shadow: 0px 1px 1px 1px var(--box-shadow-diffuse-grey)
 }
