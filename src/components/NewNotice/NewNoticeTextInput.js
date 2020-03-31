@@ -57,14 +57,6 @@ class NewNoticeTextInput extends React.Component {
     };
   }
 
-  componentDidMount() {
-    document.addEventListener("click", this.handleClickOutside, true);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener("click", this.handleClickOutside, true);
-  }
-
   render() {
     return (
       <div

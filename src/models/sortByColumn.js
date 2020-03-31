@@ -56,7 +56,7 @@ const sortByColumn = function(notices, noticesWindowDims, newNotice) {
 
   noticesToSort.forEach((notice, index) => {
     if (newNotice && index === 0) {
-      return null;
+      usedIndexes.push(0);
     } else {
       findColumnWithSpace(notice, columnWithRoom, index);
     }

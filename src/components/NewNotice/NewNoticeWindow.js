@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import "../../styles/newNotice.css";
 import NewNoticePoster from "./NewNoticePoster";
@@ -14,16 +15,27 @@ const mapStateToProps = state => ({
   newNoticeMenuItem: state.notice.newNoticeMenuItem
 });
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+  hideNewNoticeWindow: () => dispatch({ type: "HIDE_NEW_NOTICE" })
+});
 
 class NewNoticeWindow extends React.Component {
-  componentDidMount() {
-    document.addEventListener("click", this.handleClickOutside, true);
+  componentDidUpdate() {
+    if (this.props.showNewNoticeWindow) {
+      document.addEventListener("click", this.handleClickOutside, true);
+    }
   }
 
-  componentWillUnmount() {
-    document.removeEventListener("click", this.handleClickOutside, true);
-  }
+  handleClickOutside = event => {
+    if (this.props.showNewNoticeWindow) {
+      const domNode = ReactDOM.findDOMNode(this);
+      if (!domNode || !domNode.contains(event.target)) {
+        event.preventDefault();
+        this.props.hideNewNoticeWindow();
+        document.removeEventListener("click", this.handleClickOutside, true);
+      }
+    }
+  };
 
   visible() {
     if (this.props.showNewNoticeWindow) {

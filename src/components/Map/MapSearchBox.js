@@ -28,16 +28,15 @@ class MapSearchBox extends React.Component {
   }
 
   componentDidMount() {
-    document.addEventListener("click", this.handleClickOutside, true);
   }
 
   handleClickOutside = event => {
-    if (!this.props.noticesHidden) {
+    if (this.props.noticesHidden) {
       const domNode = ReactDOM.findDOMNode(this);
-
       if (!domNode || !domNode.contains(event.target)) {
         event.preventDefault();
         this.props.noticesShown();
+        document.removeEventListener("click", this.handleClickOutside, true);
       }
     }
   };
@@ -66,6 +65,7 @@ class MapSearchBox extends React.Component {
   }
 
   onClick() {
+    document.addEventListener("click", this.handleClickOutside, true);
     this.props.noticesHidden();
   }
 

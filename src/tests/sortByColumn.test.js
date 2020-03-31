@@ -15,17 +15,19 @@ const heightSortedNotices = [
 ];
 
 const columnSortedNotices = [
-  [{ height: 450, image: true, order: 1 }],
+  [
+    { height: 450, image: true, order: 1 },
+    { height: 100, image: true, order: 1 }
+  ],
   [
     { height: 350, image: true, order: 2 },
-    { height: 100, image: true, order: 2 }
+    { height: 150, image: false, order: 2 }
   ],
   [
     { height: 250, image: true, order: 3 },
-    { height: 150, image: false, order: 3 }
+    { height: 250, image: false, order: 3 }
   ],
   [
-    { height: 250, image: false, order: 4 },
     { height: 50, image: false, order: 4 },
     { height: 50, image: false, order: 4 }
   ]
@@ -39,11 +41,11 @@ const columnSortedNotices2 = [
   [
     { height: 350, image: true, order: 2 },
     { height: 250, image: false, order: 2 },
-    { height: 50, image: false, order: 2 }
+    { height: 100, image: true, order: 2 }
   ],
   [
     { height: 150, image: false, order: 3 },
-    { height: 100, image: true, order: 3 },
+    { height: 50, image: false, order: 3 },
     { height: 50, image: false, order: 3 }
   ]
 ];
@@ -64,20 +66,20 @@ const heightSortedNoticesWithNewNotice = [
 const columnSortedNoticesWithNewNotice = [
   [
     { height: 280, image: true, order: 1 },
-    { height: 150, image: false, order: 1 }
+    { height: 250, image: true, order: 1 }
   ],
-  [{ height: 450, image: true, order: 2 }],
+  [
+    { height: 450, image: true, order: 2 },
+    { height: 100, image: true, order: 2 }
+  ],
   [
     { height: 350, image: true, order: 3 },
-    { height: 100, image: true, order: 3 }
+    { height: 150, image: false, order: 3 }
   ],
   [
-    { height: 250, image: true, order: 4 },
+    { height: 250, image: false, order: 4 },
+    { height: 50, image: false, order: 4 },
     { height: 50, image: false, order: 4 }
-  ],
-  [
-    { height: 250, image: false, order: 5 },
-    { height: 50, image: false, order: 5 }
   ]
 ];
 

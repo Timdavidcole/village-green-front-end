@@ -1,6 +1,6 @@
 .noticeCard {
     margin: auto;
-    box-shadow: 5px 5px 10px 0px rgba(167, 167, 167, 0.79);
+    box-shadow: 5px 5px 10px 0px var(--box-shadow-diffuse-grey);
     font-size: 1rem;
     border-radius: 6px;
     padding: 10px;
@@ -32,73 +32,11 @@
     margin-top: 6px;
 }
 
-.thumbs-up-button {
-    height: 35px;
-    width: 35px;
-    background-color: white;
-    vertical-align: top;
-    border-radius: 100%;
-    outline-style: none;
-    border: none !important;
-    outline: none !important;
-    margin-left: 4px;
-    box-shadow: 3px 3px 10px 0px rgba(176, 176, 176, 0.79)
-}
-
-.thumbs-up-button:hover {
-    background-color: #a6eea3;
-}
-
-.thumbs-up-button:active {
-    background-color: #0e460c;
-}
-
-.thumbs-up-icon {
-    background: url('002-thumbs-up.svg');
-    height: 18px;
-    width: 18px;
-    display: inline-block;
-    background-size: cover;
-    outline: none
-}
-
-.thumbs-down-button {
-    height: 35px;
-    width: 35px;
-    background-color: white;
-    position: relative;
-    vertical-align: top;
-    border-radius: 100%;
-    border: none !important;
-    outline: none !important;
-    margin-left: 4px;
-    box-shadow: 3px 3px 10px 0px rgba(176, 176, 176, 0.79)
-}
-
-.thumbs-down-button:hover {
-    background-color: #c9eec7;
-}
-
-.thumbs-down-button:active {
-    background-color: #e4dfc0;
-}
-
-.thumbs-down-icon {
-    background: url('001-thumb.svg');
-    height: 18px;
-    width: 18px;
-    top: 10px;
-    left: 10px;
-    position: absolute;
-    display: inline-block;
-    background-size: cover;
-}
-
 .pin-notice-button {
     font-size: 1.3rem;
     height: 35px;
     width: 35px;
-    color: rgba(47, 147, 47, 0.79);
+    color: white;
     background-color: white;
     position: relative;
     right: 3px;
@@ -107,17 +45,18 @@
     border: none !important;
     outline: none !important;
     margin-left: 4px;
-    box-shadow: 3px 3px 0px 0px rgba(220, 220, 220, 0.79);
+    box-shadow: 3px 3px 0px 0px var(--box-shadow-dark-grey);
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .pin-notice-button:hover {
-    background-color: #a6eea3;
+    color: var(--noobo-dark-green);
+    background-color: var(--noobo-very-light-green);
 }
 
 .pin-notice-button:active {
     transform: translate(2px, 2px);
-    box-shadow: 1px 1px 0px 0px rgba(220, 220, 220, 0.79)
+    box-shadow: 1px 1px 0px 0px var(--box-shadow-dark-grey)
 }
 
 .pin-notice-icon {
@@ -146,7 +85,7 @@
     top: 0;
     left: 0;
     transform: rotateY(0deg);
-    box-shadow: 5px 5px 10px 0px rgba(167, 167, 167, 0.79);
+    box-shadow: 5px 5px 10px 0px var(--box-shadow-diffuse-grey);
 }
 
 .card-back {
@@ -158,5 +97,5 @@
     left: 0;
     z-index: 19879812749847981274 !important;
     transform: rotateY(180deg);
-    box-shadow: 5px 5px 10px 0px rgba(167, 167, 167, 0.79);
+    box-shadow: 5px 5px 10px 0px var(--box-shadow-diffuse-grey);
 }

@@ -66,51 +66,11 @@ class ChangePageButton extends React.Component {
     });
   }
 
-  buttonStyle() {
-    if (this.state.clicked) {
-      return {
-        backgroundColor: "#6bbf87",
-        color: "#0e460c",
-        boxShadow: "0px 0.5px 5px 0px rgb(0, 0, 0)",
-        borderRadius: "10px"
-      };
-    }
-    if (this.state.hover) {
-      return {
-        boxShadow: "0px 1px 5px 0px rgb(106, 106, 106)",
-        backgroundColor: "#d8ebd9",
-        color: "#5cb85c",
-        borderRadius: "10px"
-      };
-    } else {
-      return {
-        color: "#5cb85c",
-        transform: "scale(1.0, 1.0)",
-        boxShadow: "0px 1px 5px 0px rgb(106, 106, 106)"
-      };
-    }
-  }
-
   render() {
     const duration = {
       appear: 100,
       enter: 100,
       exit: 100
-    };
-
-    const defaultButtonStyle = {
-      backgroundColor: "white",
-      fontFamily: "titillium web,sans-serif",
-      position: "relative",
-      borderRadius: "10px",
-      outline: "none",
-      border: "none",
-      opacity: "1",
-      width: "40vw",
-      height: "30px",
-      pointerEvents: "all",
-      transform: "scale(1.0, 1.0)",
-      transition: "transform 0.2s, box-shadow 0.2s, border-radius 0.2s"
     };
 
     const transitionStyles = {
@@ -119,7 +79,7 @@ class ChangePageButton extends React.Component {
       exiting: { opacity: "1" },
       exited: { opacity: "1" }
     };
-    console.log(this.props.noticesHidden)
+
     return (
       <Transition in={this.props.noticesHidden} timeout={duration}>
         {state => (
@@ -129,16 +89,15 @@ class ChangePageButton extends React.Component {
             onMouseLeave={this.toggleHoverOut}
           >
             <button
+              className="change-page-button"
               style={{
-                ...defaultButtonStyle,
-                ...this.buttonStyle(),
                 ...transitionStyles[state]
               }}
               onClick={this.changePageNumber}
               onMouseDown={this.toggleClick}
               onMouseUp={this.toggleClick}
             >
-                <i className={`${this.props.direction}-arrow-icon`}></i>
+              <i className={`${this.props.direction}-arrow-icon`}></i>
             </button>
           </div>
         )}

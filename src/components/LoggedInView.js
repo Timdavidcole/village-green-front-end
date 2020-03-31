@@ -21,7 +21,7 @@ class LoggedInView extends React.Component {
       if (!window.location.href.includes("globalboard")) {
         return (
           <Link onClick={this.props.onClick} to="/" className="header-link">
-            {this.props.noticesWindowDims.width > 640 ? " New Notice" : null}
+            {this.props.noticesWindowDims.width > 640 ? " new notice" : null}
           </Link>
         );
       } else
@@ -58,7 +58,7 @@ class LoggedInView extends React.Component {
           <Link
             to={`/@${this.props.currentUser.username}`}
             className="header-link"
-            style={{display: "inline-block"}}
+            style={{ display: "inline-block" }}
           >
             <span>{this.props.currentUser.username}</span>
             <img
