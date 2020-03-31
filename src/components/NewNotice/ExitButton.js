@@ -3,14 +3,17 @@ import React from "react";
 const ExitButton = props => {
   return (
     <button
+      className="exit-button"
       style={{
         outline: "none",
-        backgroundColor: "none",
         border: "none",
         padding: "0",
         position: "absolute",
-        top: "7px",
-        right: "7px"
+        top: "3px",
+        right: "3px",
+        pointerEvents: "all",
+        zIndex: "019387490238745",
+        cursor: "pointer"
       }}
       onClick={props.onClick}
     >

@@ -24,7 +24,7 @@
 .home-button:active {
     background-color: #2e812b;
     transform: translate(2px, 2px);
-    box-shadow: 3px 3px 0px 0px rgba(125, 125, 125, 0.79);
+    box-shadow: 3px 3px 0px 0px rgba(220, 220, 220, 0.79);
 }
 
 .home-button:focus {
@@ -41,6 +41,7 @@
 }
 
 .autoComplete {
+    font-family: titillium web, sans-serif;
     margin: 3px;
     font-size: 1.1rem;
     border: none;
@@ -87,7 +88,7 @@
 .current-location-button:active {
     background-color: #2e812b;
     transform: translate(2px, 2px);
-    box-shadow: 3px 3px 0px 0px rgba(125, 125, 125, 0.79);
+    box-shadow: 3px 3px 0px 0px rgba(220, 220, 220, 0.79);
 }
 
 .current-location-button:focus {

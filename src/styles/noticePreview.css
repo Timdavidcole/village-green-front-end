@@ -95,6 +95,7 @@
 }
 
 .pin-notice-button {
+    font-size: 1.3rem;
     height: 35px;
     width: 35px;
     color: rgba(47, 147, 47, 0.79);
@@ -102,11 +103,12 @@
     position: relative;
     right: 3px;
     vertical-align: top;
-    border-radius: 100%;
+    border-radius: 10%;
     border: none !important;
     outline: none !important;
     margin-left: 4px;
-    box-shadow: 3px 3px 10px 0px rgba(176, 176, 176, 0.79)
+    box-shadow: 3px 3px 0px 0px rgba(220, 220, 220, 0.79);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .pin-notice-button:hover {
@@ -114,9 +116,8 @@
 }
 
 .pin-notice-button:active {
-    transform: translate(0px, 3px);
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 1px 1px 7px 0px rgba(176, 176, 176, 0.79)
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px 0px rgba(220, 220, 220, 0.79)
 }
 
 .pin-notice-icon {

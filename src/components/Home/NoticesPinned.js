@@ -36,7 +36,7 @@ class NoticesPinned extends React.Component {
                   noticesVisible={this.props.noticesVisible}
                   index={i + 1}
                   indexTrue={i}
-                  notice1={notice}
+                  notice={notice}
                   key={notice.slug}
                 />
               );
@@ -47,7 +47,7 @@ class NoticesPinned extends React.Component {
                   noticesVisible={this.props.noticesVisible}
                   index={i + 1}
                   indexTrue={i}
-                  notice1={notice}
+                  notice={notice}
                   key={notice.slug}
                 />
               );
