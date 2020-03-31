@@ -7,6 +7,7 @@ export default (
   },
   action
 ) => {
+    // eslint-disable-next-line default-case
   switch (action.type) {
     case "NOTICE_PAGE_LOADED":
       return {
