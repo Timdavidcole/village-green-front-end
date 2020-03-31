@@ -43,8 +43,8 @@ class NewNoticeMenu extends React.Component {
     return (
       <div id="new-notice-menu-container" className="new-notice-menu-container">
         <div className="new-notice-menu-flex">
-          <div style={{ position: "relative" }}>
-            <span id="new-notice-menu-text" className="new-notice-menu-text">
+          <div className="new-notice-menu-text" style={{ position: "relative" }}>
+            <span id="new-notice-menu-text" style={{ position: "absolute", width: "100%", textAlign: "center", top: "5px" }}>
               pick notice type
             </span>
           </div>

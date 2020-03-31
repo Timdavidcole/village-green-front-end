@@ -73,9 +73,6 @@ class NewNoticeTextInput extends React.Component {
           backgroundColor: "white",
           verticalAlign: "top",
           height: "100%",
-          paddingTop: "15%",
-          paddingLeft: "10%",
-          paddingRight: "10%",
           width: "calc(100% - 155px)",
           overflow: "none"
         }}
@@ -88,66 +85,62 @@ class NewNoticeTextInput extends React.Component {
             position: "absolute",
             width: "auto",
             color: "#4faa4f",
-            top: "62px",
+            top: "5px",
             left: "160px"
           }}
         >
           post a new notice
         </div>
 
-        <div>
-          <ExitButton onClick={this.props.hideNewNoticeWindow} />
-        </div>
+        <ExitButton onClick={this.props.hideNewNoticeWindow} />
 
-        <form
-          style={{ overflow: "none", position: "relative" }}
-          onSubmit={this.createNotice}
-        >
-          <fieldset className="new-notice-form">
-            <input
-              className="new-notice-input"
-              type="title"
-              id="title"
-              maxLength="50"
-              style={{ textAlign: "center" }}
-              placeholder="enter title here"
-              value={this.state.title}
-              onChange={this.setTitle}
-            />
-            <input
-              className="new-notice-input"
-              type="description"
-              maxLength="75"
-              style={{ textAlign: "center" }}
-              placeholder="enter description here"
-              value={this.state.description}
-              onChange={this.setDescription}
-            />
-            <textarea
-              className="new-notice-input"
-              rows="4"
-              maxLength="240"
-              type="body"
-              placeholder="enter body here"
-              value={this.state.body}
-              onChange={this.setBody}
-            />
-            <input
-              className="new-notice-input"
-              type="description"
-              placeholder="enter optional image url here"
-              value={this.state.image}
-              onChange={this.setImage}
-              style={{ marginBottom: "85px" }}
-            />
-            <button
-              className="post-button"
-              type="submit"
-              disabled={this.props.inProgress}
-              onClick={this.props.hideNewNoticeWindow}
-            >
-              post!
-            </button>
+        <form className="new-notice-form" onSubmit={this.createNotice}>
+          <fieldset className="new-notice-fieldset">
+            <div className="fieldset-flex">
+              <input
+                className="new-notice-input"
+                type="title"
+                id="title"
+                maxLength="50"
+                style={{ textAlign: "center" }}
+                placeholder="enter title here"
+                value={this.state.title}
+                onChange={this.setTitle}
+              />
+              <input
+                className="new-notice-input"
+                type="description"
+                maxLength="75"
+                style={{ textAlign: "center" }}
+                placeholder="enter description here"
+                value={this.state.description}
+                onChange={this.setDescription}
+              />
+              <textarea
+                className="new-notice-input"
+                rows="4"
+                maxLength="240"
+                type="body"
+                placeholder="enter body here"
+                value={this.state.body}
+                onChange={this.setBody}
+              />
+              <input
+                className="new-notice-input"
+                type="description"
+                placeholder="enter optional image url here"
+                value={this.state.image}
+                onChange={this.setImage}
+              />
+              <button
+                className="post-button"
+                type="submit"
+                disabled={this.props.inProgress}
+                onClick={this.props.hideNewNoticeWindow}
+              >
+                post!
+              </button>
+            </div>
           </fieldset>
         </form>
       </div>
