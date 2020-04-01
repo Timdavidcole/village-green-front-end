@@ -42,13 +42,17 @@ class NoticesPage extends React.Component {
   }
 
   componentDidMount() {
-    const scrollThreshold = 80
+    const scrollThreshold = 80;
     const throttle = (func, limit) => {
       let inThrottle = false;
       return function() {
         const args = arguments;
         const context = this;
-        if (!inThrottle && (args[0].deltaY > scrollThreshold || args[0].deltaY < -scrollThreshold)) {
+        if (
+          !inThrottle &&
+          (args[0].deltaY > scrollThreshold ||
+            args[0].deltaY < -scrollThreshold)
+        ) {
           func.apply(context, args);
           inThrottle = true;
           setTimeout(() => (inThrottle = false), limit);
@@ -65,13 +69,17 @@ class NoticesPage extends React.Component {
             event.deltaY > 0)
         ) {
           this.props.startPageNumberAnimation();
-          this.props.updatePageNumber({
-            direction: event.deltaY > 0 ? "up" : "down",
-            pageNumber:
-              event.deltaY > 0
-                ? this.props.pageNumber + 1
-                : this.props.pageNumber - 1
-          });
+          setTimeout(
+            () =>
+              this.props.updatePageNumber({
+                direction: event.deltaY > 0 ? "up" : "down",
+                pageNumber:
+                  event.deltaY > 0
+                    ? this.props.pageNumber + 1
+                    : this.props.pageNumber - 1
+              }),
+            200
+          );
         }
       }, 200),
       true
