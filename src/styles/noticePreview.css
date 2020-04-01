@@ -25,28 +25,21 @@
 }
 
 .thumb-buttons-container {
-    position: absolute;
-    right: 0px;
+    float: right;
     outline: none;
-    display: inline-block;
-    margin-top: 6px;
 }
 
 .pin-notice-button {
     font-size: 1.3rem;
     height: 35px;
     width: 35px;
-    color: white;
     background-color: white;
-    position: relative;
-    right: 3px;
     vertical-align: top;
-    border-radius: 10%;
-    border: none !important;
+    border-radius: 100%;
     outline: none !important;
-    margin-left: 4px;
+    border: none !important;
     box-shadow: 3px 3px 0px 0px var(--box-shadow-dark-grey);
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s, border-radius 0.2s;
 }
 
 .pin-notice-button:hover {
@@ -54,20 +47,11 @@
     background-color: var(--noobo-very-light-green);
 }
 
-.pin-notice-button:active {
-    transform: translate(2px, 2px);
-    box-shadow: 1px 1px 0px 0px var(--box-shadow-dark-grey)
-}
-
 .pin-notice-icon {
     background: url('icons8-pin-64.png');
     height: 20px;
     width: 20px;
-    top: 7px;
-    left: 8px;
-    position: absolute;
     display: inline-block;
-    background-size: cover;
     transform: rotate(315deg)
 }
 
@@ -98,4 +82,21 @@
     z-index: 19879812749847981274 !important;
     transform: rotateY(180deg);
     box-shadow: 5px 5px 10px 0px var(--box-shadow-diffuse-grey);
+}
+
+.notice-user-container {
+    float: left;
+}
+
+#notice-user {
+    vertical-align: top;
+    color: var(--noobo-dark-green);
+}
+
+.notice-user-image {
+    border-radius: 6px;
+    width: 35px;
+    height: 35px;
+    object-fit: cover;
+    margin-right: 3px;
 }
