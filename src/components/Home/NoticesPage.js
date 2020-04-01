@@ -1,12 +1,11 @@
 import NoticePreview from "./NoticePreview";
 import NoticePreviewImage from "./NoticePreviewImage";
-import throttle from "../../models/throttle";
+import PageScroll from "./PageScroll";
 import React from "react";
 import "../../styles/notices.css";
 import { connect } from "react-redux";
 import ChangePageButton from "./ChangePageButton";
 import { Transition } from "react-transition-group";
-import ReactDOM from "react-dom";
 
 const mapStateToProps = state => ({
   page: state.notices.page,
@@ -23,14 +22,15 @@ const mapDispatchToProps = dispatch => ({
   addNoticesWindowDims: payload =>
     dispatch({ type: "ADD_NOTICES_WINDOW_DIMS", payload }),
   stopPageNumberAnimation: () =>
-    dispatch({ type: "STOP_PAGE_NUMBER_ANIMATION" }),
-  updatePageNumber: payload =>
-    dispatch({ type: "UPDATE_PAGE_NUMBER", payload }),
-  startPageNumberAnimation: payload =>
-    dispatch({ type: "START_PAGE_NUMBER_ANIMATION", payload })
+    dispatch({ type: "STOP_PAGE_NUMBER_ANIMATION" })
 });
 
 class NoticesPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.myRef = React.createRef();
+  }
+
   whichPageNumberButton(direction) {
     const pageNumber = this.props.pageNumber;
     const noticesSorted = this.props.noticesSorted;
@@ -40,38 +40,6 @@ class NoticesPage extends React.Component {
     if (pageNumber < noticesSorted.length && direction === "down") {
       return <ChangePageButton direction="down" />;
     }
-  }
-
-  componentDidMount() {
-    this.createPageScroll();
-  }
-
-  createPageScroll() {
-    const noticesPage = ReactDOM.findDOMNode(this);
-    noticesPage.addEventListener(
-      "wheel",
-      throttle(event => {
-        if (
-          (this.props.pageNumber > 1 && event.deltaY < 0) ||
-          (this.props.pageNumber < this.props.noticesSorted.length &&
-            event.deltaY > 0)
-        ) {
-          this.props.startPageNumberAnimation();
-          setTimeout(
-            () =>
-              this.props.updatePageNumber({
-                direction: event.deltaY > 0 ? "up" : "down",
-                pageNumber:
-                  event.deltaY > 0
-                    ? this.props.pageNumber + 1
-                    : this.props.pageNumber - 1
-              }),
-            200
-          );
-        }
-      }, 200),
-      true
-    );
   }
 
   stopPageNumberAnimation = () => {
@@ -103,7 +71,6 @@ class NoticesPage extends React.Component {
       };
     }
   }
-
   render() {
     const duration = 200;
 
@@ -143,9 +110,14 @@ class NoticesPage extends React.Component {
               pointerEvents: "none",
               ...transitionStyles()[state]
             }}
+            ref={this.myRef}
           >
+            {this.myRef.current ? (
+              <PageScroll element={this.myRef.current} />
+            ) : null}
             {this.whichPageNumberButton("up")}
             <div
+              onClick={() => alert(this.myRef.current)}
               className="noticesParent"
               id="notices"
               style={this.checkPageStyle()}

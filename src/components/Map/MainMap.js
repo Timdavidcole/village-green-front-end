@@ -1,8 +1,7 @@
 import React from "react";
 import MapComponent from "./MapComponent";
 import { connect } from "react-redux";
-import throttle from "../../models/throttle";
-import ReactDOM from "react-dom";
+import PageScroll from "../Home/PageScroll";
 
 const mapStateToProps = state => ({
   mapBlur: state.notices.mapBlur,
@@ -18,41 +17,12 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class MainMap extends React.PureComponent {
-  state = {
-    isMarkerShown: false
-  };
-
-  componentDidMount() {
-    this.createPageScroll();
-  }
-
-  createPageScroll() {
-    const mapPage = ReactDOM.findDOMNode(this);
-    mapPage.addEventListener(
-      "wheel",
-      throttle(event => {
-        if (
-          (this.props.pageNumber > 1 && event.deltaY < 0) ||
-          (this.props.pageNumber < this.props.noticesSorted.length &&
-            event.deltaY > 0)
-        ) {
-          console.log("SCROLL");
-          this.props.startPageNumberAnimation();
-          setTimeout(
-            () =>
-              this.props.updatePageNumber({
-                direction: event.deltaY > 0 ? "up" : "down",
-                pageNumber:
-                  event.deltaY > 0
-                    ? this.props.pageNumber + 1
-                    : this.props.pageNumber - 1
-              }),
-            200
-          );
-        }
-      }, 200),
-      true
-    );
+  constructor(props) {
+    super(props);
+    this.myRef = React.createRef();
+    this.state = {
+      isMarkerShown: false
+    };
   }
 
   delayedShowMarker = () => {
@@ -77,7 +47,11 @@ class MainMap extends React.PureComponent {
           height: "calc(100vh - 56px)",
           width: "100%"
         }}
+        ref={this.myRef}
       >
+        {this.myRef.current ? (
+          <PageScroll element={this.myRef.current} />
+        ) : null}
         <MapComponent
           isMarkerShown={this.state.isMarkerShown}
           onMarkerClick={this.handleMarkerClick}
