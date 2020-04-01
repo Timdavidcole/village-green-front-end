@@ -4,7 +4,7 @@
     font-size: 1rem;
     border-radius: 6px;
     padding: 10px;
-    background-color: #fffbf0;
+    background-color: var(--noobo-card-background-yellow);
     position: relative;
     transition: opacity 0.2s linear;
     opacity: 1;

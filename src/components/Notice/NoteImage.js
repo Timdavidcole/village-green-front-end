@@ -18,7 +18,6 @@ const NoteImage = props => {
       className={"noticeCard"}
       style={{
         padding: "0px",
-        backgroundColor: "transparent",
         boxShadow: "none"
       }}
     >
@@ -26,14 +25,12 @@ const NoteImage = props => {
         className="card-inner"
         style={{
           width: "auto",
-          height: "auto",
-          backgroundColor: "#e4dfc0"
+          height: "auto"
         }}
       >
         <div
           className="card-front"
           style={{
-            backgroundColor: "transparent",
             backgroundImage: `url(${notice.image})`,
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat"
@@ -52,7 +49,6 @@ const NoteImage = props => {
           className="card-back"
           style={{
             width: `${props.noticeWidth}px`,
-            backgroundColor: "#e4dfc0",
             padding: "10px",
             minHeight: notice.height
           }}

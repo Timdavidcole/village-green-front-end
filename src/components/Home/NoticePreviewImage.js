@@ -102,7 +102,7 @@ class NoticePreviewImage extends React.Component {
                 style={{
                   width: `${this.props.noticeWidth}px`,
                   height: notice.height,
-                  backgroundColor: "#fffbf0",
+                  backgroundColor: "var(--noobo-card-background-yellow)",
                   padding: "10px",
                   boxSizing: "border-box"
                 }}
