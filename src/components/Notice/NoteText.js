@@ -19,11 +19,18 @@ const NoteText = props => {
       <Link to={`${notice.slug}`}>
         <div>
           <div>
-            <h3 style={{ color: "black", textAlign: "center" }}>
+            <h3
+              style={{
+                color: "var(--noobo-darker-green)",
+                textAlign: "center"
+              }}
+            >
               {notice.title}
             </h3>
           </div>
-          <span style={{ color: "black", textAlign: "center" }}>
+          <span
+            style={{ color: "var(--noobo-darker-green)", textAlign: "center" }}
+          >
             {notice.body}
           </span>
         </div>

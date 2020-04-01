@@ -1,16 +1,59 @@
 import React from "react";
 import MapComponent from "./MapComponent";
 import { connect } from "react-redux";
+import throttle from "../../models/throttle";
+import ReactDOM from "react-dom";
 
 const mapStateToProps = state => ({
-  mapBlur: state.notices.mapBlur
+  mapBlur: state.notices.mapBlur,
+  noticesSorted: state.notices.noticesSorted,
+  pageNumber: state.notices.pageNumber
 });
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+  updatePageNumber: payload =>
+    dispatch({ type: "UPDATE_PAGE_NUMBER", payload }),
+  startPageNumberAnimation: payload =>
+    dispatch({ type: "START_PAGE_NUMBER_ANIMATION", payload })
+});
+
 class MainMap extends React.PureComponent {
   state = {
     isMarkerShown: false
   };
+
+  componentDidMount() {
+    this.createPageScroll();
+  }
+
+  createPageScroll() {
+    const mapPage = ReactDOM.findDOMNode(this);
+    mapPage.addEventListener(
+      "wheel",
+      throttle(event => {
+        if (
+          (this.props.pageNumber > 1 && event.deltaY < 0) ||
+          (this.props.pageNumber < this.props.noticesSorted.length &&
+            event.deltaY > 0)
+        ) {
+          console.log("SCROLL");
+          this.props.startPageNumberAnimation();
+          setTimeout(
+            () =>
+              this.props.updatePageNumber({
+                direction: event.deltaY > 0 ? "up" : "down",
+                pageNumber:
+                  event.deltaY > 0
+                    ? this.props.pageNumber + 1
+                    : this.props.pageNumber - 1
+              }),
+            200
+          );
+        }
+      }, 200),
+      true
+    );
+  }
 
   delayedShowMarker = () => {
     setTimeout(() => {

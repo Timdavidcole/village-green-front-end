@@ -76,7 +76,7 @@ class NewNoticeTextInput extends React.Component {
             textAlign: "center",
             position: "absolute",
             width: "auto",
-            color: "#4faa4f",
+            color: "var(--noobo-darker-green)",
             top: "5px",
             left: "160px"
           }}

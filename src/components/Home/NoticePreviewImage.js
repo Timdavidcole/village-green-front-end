@@ -108,7 +108,7 @@ class NoticePreviewImage extends React.Component {
                 }}
               >
                 <Link to={`notice/${notice.slug}`}>
-                  <div style={{ color: "#4faa4f" }}>
+                  <div style={{ color: "var(--noobo-darker-green)" }}>
                     <div style={{ borderBottom: "1px dashed red" }}>
                       <h3 style={{ margin: "0px", textAlign: "center" }}>
                         {notice.title}

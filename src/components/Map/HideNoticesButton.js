@@ -19,7 +19,7 @@ const HideNoticesButton = props => {
     if (props.noticesHiddenBol) {
       return {
         backgroundColor: "white",
-        color: "#70bf6d"
+        color: "var(--noobo-darker-green)"
       };
     } else return null;
   };

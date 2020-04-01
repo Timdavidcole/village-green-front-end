@@ -54,7 +54,7 @@ const NoteImage = props => {
           }}
         >
           <Link to={`notice/${notice.slug}`}>
-            <div style={{ color: "#4faa4f", width: "100%" }}>
+            <div style={{ color: "var(--noobo-darker-green)", width: "100%" }}>
               <div style={{ borderBottom: "1px dashed red" }}>
                 <h3 style={{ textAlign: "center" }}>{notice.title}</h3>
               </div>

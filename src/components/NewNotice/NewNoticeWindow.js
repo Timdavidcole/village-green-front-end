@@ -88,7 +88,6 @@ class NewNoticeWindow extends React.Component {
       pointerEvents: "auto",
       boxShadow: "5px 10px 20px 3px rgba(176,176,176,0.79)",
       margin: "10px",
-      backgroundColor: "transparent",
       width: "60vw",
       height: "80vh",
       zIndex: "19823754928374",

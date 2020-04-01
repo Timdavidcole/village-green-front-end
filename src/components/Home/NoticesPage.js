@@ -1,5 +1,6 @@
 import NoticePreview from "./NoticePreview";
 import NoticePreviewImage from "./NoticePreviewImage";
+import throttle from "../../models/throttle";
 import React from "react";
 import "../../styles/notices.css";
 import { connect } from "react-redux";
@@ -42,23 +43,10 @@ class NoticesPage extends React.Component {
   }
 
   componentDidMount() {
-    const scrollThreshold = 80;
-    const throttle = (func, limit) => {
-      let inThrottle = false;
-      return function() {
-        const args = arguments;
-        const context = this;
-        if (
-          !inThrottle &&
-          (args[0].deltaY > scrollThreshold ||
-            args[0].deltaY < -scrollThreshold)
-        ) {
-          func.apply(context, args);
-          inThrottle = true;
-          setTimeout(() => (inThrottle = false), limit);
-        }
-      };
-    };
+    this.createPageScroll();
+  }
+
+  createPageScroll() {
     const noticesPage = ReactDOM.findDOMNode(this);
     noticesPage.addEventListener(
       "wheel",

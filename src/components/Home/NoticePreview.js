@@ -97,7 +97,7 @@ class NoticePreview extends React.Component {
               <Link to={`notice/${notice.slug}`}>
                 <div
                   style={{
-                    color: "#4faa4f",
+                    color: "var(--noobo-darker-green)",
                     width: `${this.props.noticeWidth - 20}px`
                   }}
                 >

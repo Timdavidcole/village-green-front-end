@@ -109,7 +109,9 @@ class MapComponent extends React.Component {
           })
         }
       >
-        {this.props.isMarkerShown && this.props.currentUser && this.props.centerLocation === "HOME" ? (
+        {this.props.isMarkerShown &&
+        this.props.currentUser &&
+        this.props.centerLocation === "HOME" ? (
           <Marker options={this.markerIcon()} position={this.props.centerMap} />
         ) : null}
       </GoogleMap>
