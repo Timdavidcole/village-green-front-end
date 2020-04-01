@@ -12,10 +12,6 @@ class MainMap extends React.PureComponent {
     isMarkerShown: false
   };
 
-  componentDidMount() {
-    this.delayedShowMarker();
-  }
-
   delayedShowMarker = () => {
     setTimeout(() => {
       this.setState({ isMarkerShown: true });

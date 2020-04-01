@@ -5,6 +5,7 @@ import "../../styles/notices.css";
 import { connect } from "react-redux";
 import ChangePageButton from "./ChangePageButton";
 import { Transition } from "react-transition-group";
+import ReactDOM from "react-dom";
 
 const mapStateToProps = state => ({
   page: state.notices.page,
@@ -21,11 +22,14 @@ const mapDispatchToProps = dispatch => ({
   addNoticesWindowDims: payload =>
     dispatch({ type: "ADD_NOTICES_WINDOW_DIMS", payload }),
   stopPageNumberAnimation: () =>
-    dispatch({ type: "STOP_PAGE_NUMBER_ANIMATION" })
+    dispatch({ type: "STOP_PAGE_NUMBER_ANIMATION" }),
+  updatePageNumber: payload =>
+    dispatch({ type: "UPDATE_PAGE_NUMBER", payload }),
+  startPageNumberAnimation: payload =>
+    dispatch({ type: "START_PAGE_NUMBER_ANIMATION", payload })
 });
 
 class NoticesPage extends React.Component {
-
   whichPageNumberButton(direction) {
     const pageNumber = this.props.pageNumber;
     const noticesSorted = this.props.noticesSorted;
@@ -37,9 +41,41 @@ class NoticesPage extends React.Component {
     }
   }
 
+  componentDidMount() {
+    const throttle = (func, limit) => {
+      let inThrottle = false;
+      return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+          func.apply(context, args);
+          inThrottle = true;
+          setTimeout(() => (inThrottle = false), limit);
+        }
+      };
+    };
+    const noticesPage = ReactDOM.findDOMNode(this);
+    noticesPage.addEventListener(
+      "wheel",
+      throttle(event => {
+        if (event.deltaY > 35 || event.deltaY < -35) {
+          this.props.startPageNumberAnimation()
+          this.props.updatePageNumber({
+            direction: event.deltaY > 0 ? "up" : "down",
+            pageNumber:
+              event.deltaY > 0
+                ? this.props.pageNumber + 1
+                : this.props.pageNumber - 1
+          });
+        }
+      }, 400),
+      true
+    );
+  }
+
   stopPageNumberAnimation = () => {
     this.props.stopPageNumberAnimation();
-  }
+  };
 
   checkPageStyle() {
     const pageNumber = this.props.pageNumber;

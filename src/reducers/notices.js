@@ -141,8 +141,6 @@ export default (
         mapBlur: false
       };
     case "UPDATE_PAGE_NUMBER":
-      console.log(action.payload.pageNumber)
-      console.log(state.noticesSorted.length)
       if (
         action.payload.pageNumber > 0 &&
         action.payload.pageNumber <= state.noticesSorted.length

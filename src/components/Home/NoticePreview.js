@@ -5,53 +5,26 @@ import "../../styles/noticePreview.css";
 import { Transition } from "react-transition-group";
 import NoticeButtons from "./NoticeButtons";
 import NoticePreviewUser from "./NoticePreviewUser";
-import ReactDOM from "react-dom";
 
 const mapStateToProps = state => ({
   sorted: state.notices.sorted,
   noticesHidden: state.notices.noticesHidden,
-  noticeWidth: state.notices.noticeWidth,
-  pageNumber: state.notices.pageNumber
+  noticeWidth: state.notices.noticeWidth
 });
 
 const mapDispatchToProps = dispatch => ({
   onLoad: payload => dispatch({ type: "NOTICE_PAGE_LOADED", payload }),
   onUnload: () => dispatch({ type: "NOTICE_PAGE_UNLOADED" }),
-  loadDivDim: payload => dispatch({ type: "LOAD_DIV_DIMENSIONS", payload }),
-  updatePageNumber: payload => dispatch({ type: "UPDATE_PAGE_NUMBER", payload })
+  loadDivDim: payload => dispatch({ type: "LOAD_DIV_DIMENSIONS", payload })
 });
 
 class NoticePreview extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { randomTop: 0, randomLeft: 0, scroll: 0 };
-
+    this.state = { randomTop: 0, randomLeft: 0 };
     this.addDimensions = this.addDimensions.bind(this);
   }
-
-  componentDidMount() {
-    const notice = ReactDOM.findDOMNode(this);
-    notice.addEventListener("wheel", this.handleScroll, true);
-    console.log("MOUNT");
-  }
-
-  handleScroll = event => {
-    const domNode = ReactDOM.findDOMNode(this);
-    console.log(event.deltaY);
-    let doit;
-    if (domNode && event.target.id !== `noticeCardBody${this.props.index}`) {
-      if (event.deltaY > 40 || event.deltaY < -40) {
-        this.props.updatePageNumber({
-          direction: event.deltaY < 0 ? "down" : "up",
-          pageNumber:
-            event.deltaY < 0
-              ? this.props.pageNumber + 1
-              : this.props.pageNumber - 1
-        });
-      }
-    }
-  };
 
   addDimensions(width, height) {
     if (!this.props.notice.height && this.props.page !== "pinnned") {
