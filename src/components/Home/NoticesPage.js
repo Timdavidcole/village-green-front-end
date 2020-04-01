@@ -42,12 +42,13 @@ class NoticesPage extends React.Component {
   }
 
   componentDidMount() {
+    const scrollThreshold = 80
     const throttle = (func, limit) => {
       let inThrottle = false;
       return function() {
         const args = arguments;
         const context = this;
-        if (!inThrottle && (args[0].deltaY > 35 || args[0].deltaY < -35)) {
+        if (!inThrottle && (args[0].deltaY > scrollThreshold || args[0].deltaY < -scrollThreshold)) {
           func.apply(context, args);
           inThrottle = true;
           setTimeout(() => (inThrottle = false), limit);
@@ -58,14 +59,20 @@ class NoticesPage extends React.Component {
     noticesPage.addEventListener(
       "wheel",
       throttle(event => {
-        this.props.startPageNumberAnimation();
-        this.props.updatePageNumber({
-          direction: event.deltaY > 0 ? "up" : "down",
-          pageNumber:
-            event.deltaY > 0
-              ? this.props.pageNumber + 1
-              : this.props.pageNumber - 1
-        });
+        if (
+          (this.props.pageNumber > 1 && event.deltaY < 0) ||
+          (this.props.pageNumber < this.props.noticesSorted.length &&
+            event.deltaY > 0)
+        ) {
+          this.props.startPageNumberAnimation();
+          this.props.updatePageNumber({
+            direction: event.deltaY > 0 ? "up" : "down",
+            pageNumber:
+              event.deltaY > 0
+                ? this.props.pageNumber + 1
+                : this.props.pageNumber - 1
+          });
+        }
       }, 200),
       true
     );
