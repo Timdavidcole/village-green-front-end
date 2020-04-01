@@ -5,27 +5,53 @@ import "../../styles/noticePreview.css";
 import { Transition } from "react-transition-group";
 import NoticeButtons from "./NoticeButtons";
 import NoticePreviewUser from "./NoticePreviewUser";
+import ReactDOM from "react-dom";
 
 const mapStateToProps = state => ({
   sorted: state.notices.sorted,
   noticesHidden: state.notices.noticesHidden,
-  noticeWidth: state.notices.noticeWidth
+  noticeWidth: state.notices.noticeWidth,
+  pageNumber: state.notices.pageNumber
 });
 
 const mapDispatchToProps = dispatch => ({
   onLoad: payload => dispatch({ type: "NOTICE_PAGE_LOADED", payload }),
   onUnload: () => dispatch({ type: "NOTICE_PAGE_UNLOADED" }),
-  loadDivDim: payload => dispatch({ type: "LOAD_DIV_DIMENSIONS", payload })
+  loadDivDim: payload => dispatch({ type: "LOAD_DIV_DIMENSIONS", payload }),
+  updatePageNumber: payload => dispatch({ type: "UPDATE_PAGE_NUMBER", payload })
 });
 
 class NoticePreview extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { randomTop: 0, randomLeft: 0 };
+    this.state = { randomTop: 0, randomLeft: 0, scroll: 0 };
 
     this.addDimensions = this.addDimensions.bind(this);
   }
+
+  componentDidMount() {
+    const notice = ReactDOM.findDOMNode(this);
+    notice.addEventListener("wheel", this.handleScroll, true);
+    console.log("MOUNT");
+  }
+
+  handleScroll = event => {
+    const domNode = ReactDOM.findDOMNode(this);
+    console.log(event.deltaY);
+    let doit;
+    if (domNode && event.target.id !== `noticeCardBody${this.props.index}`) {
+      if (event.deltaY > 40 || event.deltaY < -40) {
+        this.props.updatePageNumber({
+          direction: event.deltaY < 0 ? "down" : "up",
+          pageNumber:
+            event.deltaY < 0
+              ? this.props.pageNumber + 1
+              : this.props.pageNumber - 1
+        });
+      }
+    }
+  };
 
   addDimensions(width, height) {
     if (!this.props.notice.height && this.props.page !== "pinnned") {
@@ -79,7 +105,6 @@ class NoticePreview extends React.Component {
             }}
             onLoad={ev => {
               if (this.props.page !== "pinned") {
-                console.log(ev.target.offsetHeight)
                 this.addDimensions(
                   document.getElementById(`noticeCard${this.props.index}`)
                     .offsetWidth,
@@ -97,11 +122,19 @@ class NoticePreview extends React.Component {
               }}
             >
               <Link to={`notice/${notice.slug}`}>
-                <div style={{ color: "#4faa4f", width: `${this.props.noticeWidth - 20}px` }}>
+                <div
+                  style={{
+                    color: "#4faa4f",
+                    width: `${this.props.noticeWidth - 20}px`
+                  }}
+                >
                   <div style={{ borderBottom: "1px dashed red" }}>
-                    <h3 style={{ margin: "0px", textAlign: "center" }}>{notice.title}</h3>
+                    <h3 style={{ margin: "0px", textAlign: "center" }}>
+                      {notice.title}
+                    </h3>
                   </div>
                   <span
+                    id={`noticeCardDesc${this.props.index}`}
                     style={{
                       textAlign: "center",
                       display: "inline-block",
@@ -115,6 +148,7 @@ class NoticePreview extends React.Component {
                   </span>
                   <br></br>
                   <span
+                    id={`noticeCardBody${this.props.index}`}
                     style={{
                       display: "inline-block",
                       width: `${this.props.noticeWidth - 20}px`,

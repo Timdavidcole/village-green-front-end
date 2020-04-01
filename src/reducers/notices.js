@@ -13,7 +13,7 @@ export default (
     pageNumber: 1,
     loading: true,
     noticesHidden: false,
-    noticeWidth: '240',
+    noticeWidth: "240",
     mapBlur: true
   },
   action
@@ -141,12 +141,20 @@ export default (
         mapBlur: false
       };
     case "UPDATE_PAGE_NUMBER":
-      return {
-        ...state,
-        pageNumber: action.payload.pageNumber,
-        pageNumberChanged: true,
-        pageChangeDirection: action.payload.direction
-      };
+      console.log(action.payload.pageNumber)
+      console.log(state.noticesSorted.length)
+      if (
+        action.payload.pageNumber > 0 &&
+        action.payload.pageNumber <= state.noticesSorted.length
+      ) {
+        return {
+          ...state,
+          pageNumber: action.payload.pageNumber,
+          pageNumberChanged: true,
+          pageChangeDirection: action.payload.direction
+        };
+      } else return { ...state };
+
     case "START_PAGE_NUMBER_ANIMATION":
       return {
         ...state,
@@ -176,7 +184,7 @@ export default (
       return {
         ...state,
         notices: [],
-        noticesSorted: [],
+        noticesSorted: []
       };
   }
 

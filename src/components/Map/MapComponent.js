@@ -101,7 +101,7 @@ class MapComponent extends React.Component {
         defaultZoom={16}
         ref={thisMap => this.setState({ map: thisMap })}
         center={this.props.centerMap}
-        defaultOptions={{ mapTypeControl: false }}
+        defaultOptions={{ mapTypeControl: false, scrollwheel: false }}
         onCenterChanged={() =>
           this.props.changeMapCenter({
             coordinates: this.state.map.getCenter().toJSON(),
