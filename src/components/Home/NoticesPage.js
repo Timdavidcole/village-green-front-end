@@ -47,7 +47,7 @@ class NoticesPage extends React.Component {
       return function() {
         const args = arguments;
         const context = this;
-        if (!inThrottle) {
+        if (!inThrottle && (args[0].deltaY > 35 || args[0].deltaY < -35)) {
           func.apply(context, args);
           inThrottle = true;
           setTimeout(() => (inThrottle = false), limit);
@@ -58,17 +58,15 @@ class NoticesPage extends React.Component {
     noticesPage.addEventListener(
       "wheel",
       throttle(event => {
-        if (event.deltaY > 35 || event.deltaY < -35) {
-          this.props.startPageNumberAnimation()
-          this.props.updatePageNumber({
-            direction: event.deltaY > 0 ? "up" : "down",
-            pageNumber:
-              event.deltaY > 0
-                ? this.props.pageNumber + 1
-                : this.props.pageNumber - 1
-          });
-        }
-      }, 400),
+        this.props.startPageNumberAnimation();
+        this.props.updatePageNumber({
+          direction: event.deltaY > 0 ? "up" : "down",
+          pageNumber:
+            event.deltaY > 0
+              ? this.props.pageNumber + 1
+              : this.props.pageNumber - 1
+        });
+      }, 200),
       true
     );
   }
