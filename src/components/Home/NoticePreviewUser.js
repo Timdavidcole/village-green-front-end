@@ -1,36 +1,42 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../../styles/noticePreview.css";
+import timeSince from "../../models/timeSince";
 
 const NoticePreviewUser = function(props) {
   const notice = props.notice;
   return (
-    <div
-      style={{
-        display: "inline-block",
-        marginTop: "5px"
-      }}
-    >
-      <div
-        style={{
-          overflow: "hidden"
-        }}
+    <div className="notice-user-container">
+      <Link
+        id="notice-user"
+        className="notice-user"
+        to={`@${notice.author.username}`}
       >
-        <Link to={`@${notice.author.username}`} style={{ color: "#4faa4f" }}>
-          <img
-            style={{
-              borderRadius: "6px",
-              width: "35px",
-              height: "35px",
-              objectFit: "cover",
-              marginRight: "3px"
-            }}
-            src={notice.author.image}
-            alt="author"
-          />
+        <img
+          className="notice-user-image"
+          src={notice.author.image}
+          alt="author"
+        />
+        <span
+          style={{
+            display: "inline-block",
+            position: "absolute",
+            fontSize: "0.8rem"
+          }}
+        >
           {notice.author.username}
-        </Link>
-      </div>
+        </span>
+        <span
+          style={{
+            display: "inline-block",
+            position: "absolute",
+            fontSize: "0.8rem",
+            bottom: "5px"
+          }}
+        >
+          {timeSince(new Date(notice.createdAt))} ago
+        </span>
+      </Link>
     </div>
   );
 };

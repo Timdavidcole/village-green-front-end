@@ -102,33 +102,43 @@ class NoticePreviewImage extends React.Component {
                 style={{
                   width: `${this.props.noticeWidth}px`,
                   height: notice.height,
-                  backgroundColor: "#e4dfc0"
+                  backgroundColor: "var(--noobo-card-background-yellow)",
+                  padding: "10px",
+                  boxSizing: "border-box"
                 }}
               >
                 <Link to={`notice/${notice.slug}`}>
-                  <div style={{ color: "#4faa4f", width: "100%" }}>
+                  <div style={{ color: "var(--noobo-darker-green)" }}>
                     <div style={{ borderBottom: "1px dashed red" }}>
-                      <h3 style={{ textAlign: "center" }}>{notice.title}</h3>
+                      <h3 style={{ margin: "0px", textAlign: "center" }}>
+                        {notice.title}
+                      </h3>
                     </div>
                     <span
+                      id={`noticeCardDesc${this.props.index}`}
                       style={{
                         textAlign: "center",
                         display: "inline-block",
-                        width: "100%"
+                        width: "100%",
+                        fontStyle: "italic",
+                        fontSize: "0.9rem",
+                        marginBottom: "5px"
                       }}
                     >
                       {notice.description}
                     </span>
                     <br></br>
                     <span
+                      id={`noticeCardBody`}
                       style={{
                         display: "inline-block",
+                        padding: "0px",
+                        margin: "0px",
                         width: "100%",
                         textAlign: "center",
-                        marginBottom: "40px",
-                        height: "121px",
+                        maxHeight: "121px",
                         overflowY: "auto",
-                        overflowX: "auto",
+                        overflowX: "hidden",
                         fontSize: "0.8rem"
                       }}
                     >
@@ -138,7 +148,7 @@ class NoticePreviewImage extends React.Component {
                 </Link>
                 <div
                   style={{
-                    width: "93%",
+                    width: "calc(100% - 20px)",
                     position: "absolute",
                     margin: "0px",
                     bottom: "5px"

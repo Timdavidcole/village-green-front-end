@@ -23,7 +23,6 @@ class NoticePreview extends React.Component {
     super(props);
 
     this.state = { randomTop: 0, randomLeft: 0 };
-
     this.addDimensions = this.addDimensions.bind(this);
   }
 
@@ -79,7 +78,6 @@ class NoticePreview extends React.Component {
             }}
             onLoad={ev => {
               if (this.props.page !== "pinned") {
-                console.log(ev.target.offsetHeight)
                 this.addDimensions(
                   document.getElementById(`noticeCard${this.props.index}`)
                     .offsetWidth,
@@ -97,11 +95,19 @@ class NoticePreview extends React.Component {
               }}
             >
               <Link to={`notice/${notice.slug}`}>
-                <div style={{ color: "#4faa4f", width: `${this.props.noticeWidth - 20}px` }}>
+                <div
+                  style={{
+                    color: "var(--noobo-darker-green)",
+                    width: `${this.props.noticeWidth - 20}px`
+                  }}
+                >
                   <div style={{ borderBottom: "1px dashed red" }}>
-                    <h3 style={{ margin: "0px", textAlign: "center" }}>{notice.title}</h3>
+                    <h3 style={{ margin: "0px", textAlign: "center" }}>
+                      {notice.title}
+                    </h3>
                   </div>
                   <span
+                    id={`noticeCardDesc${this.props.index}`}
                     style={{
                       textAlign: "center",
                       display: "inline-block",
@@ -115,6 +121,7 @@ class NoticePreview extends React.Component {
                   </span>
                   <br></br>
                   <span
+                    id={`noticeCardBody`}
                     style={{
                       display: "inline-block",
                       width: `${this.props.noticeWidth - 20}px`,

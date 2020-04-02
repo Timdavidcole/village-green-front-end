@@ -1,5 +1,5 @@
 import React from "react";
-import NoticesPage from "./NoticesPage";
+import NoticesPageTransition from "./NoticesPageTransition";
 import "../../styles/notices.css";
 import { connect } from "react-redux";
 import sortByHeight from "../../models/sortByHeight";
@@ -21,9 +21,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  newNoticeDisplayed: () => dispatch({ type: "NEW_NOTICE_DISPLAYED" }),
-  addNoticesWindowDims: payload =>
-    dispatch({ type: "ADD_NOTICES_WINDOW_DIMS", payload }),
   updateSortedNotices: payload =>
     dispatch({ type: "UPDATE_SORTED_NOTICES", payload })
 });
@@ -96,14 +93,14 @@ class Notices extends React.Component {
 
     if (this.props.sorted) {
       return (
-        <NoticesPage
+        <NoticesPageTransition
           noticesByPage={this.props.noticesSorted[this.props.pageNumber - 1]}
         />
       );
     }
 
     if (!this.props.sorted) {
-      return <NoticesPage noticesByPage={this.props.notices} />;
+      return <NoticesPageTransition noticesByPage={this.props.notices} />;
     }
   }
 }

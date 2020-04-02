@@ -36,14 +36,24 @@ class NoticeButtons extends React.Component {
   }
 
   pinStyle() {
-    if (this.state.hover) {
+    if (this.state.pinned && this.state.hover) {
+      return {
+        backgroundColor: "var(--noobo-medium-green)",
+        boxShadow: "1px 1px 0px 0px var(--box-shadow-dark-grey)",
+        transform: "translate(2px, 2px)",
+        color: "var(--noobo-darker-green)"
+      };
+    } else if (this.state.hover) {
       return { backgroundColor: "#c9eec7" };
     } else if (this.state.pinned) {
       return {
-        backgroundColor: "#96d095"
+        backgroundColor: "var(--noobo-medium-green)",
+        boxShadow: "1px 1px 0px 0px var(--box-shadow-dark-grey)",
+        transform: "translate(2px, 2px)",
+        color: "var(--noobo-darker-green)"
       };
     } else {
-      return { backgroundColor: "white", color: "#70bf6d" };
+      return { backgroundColor: "white", color: "var(--noobo-dark-green)" };
     }
   }
 

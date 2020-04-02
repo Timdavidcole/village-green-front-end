@@ -19,7 +19,7 @@ const NewNoticeButton = props => {
     if (props.showNewNoticeWindow) {
       return {
         backgroundColor: "white",
-        color: "#70bf6d"
+        color: "var(--noobo-darker-green)"
       };
     } else return null;
   };

@@ -36,7 +36,7 @@ class Home extends React.Component {
       clearTimeout(doit);
       doit = setTimeout(() => {
         this.props.resize();
-      }, 200);
+      }, 300);
     });
   }
 

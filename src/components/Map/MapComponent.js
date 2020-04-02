@@ -101,7 +101,7 @@ class MapComponent extends React.Component {
         defaultZoom={16}
         ref={thisMap => this.setState({ map: thisMap })}
         center={this.props.centerMap}
-        defaultOptions={{ mapTypeControl: false }}
+        defaultOptions={{ mapTypeControl: false, scrollwheel: false }}
         onCenterChanged={() =>
           this.props.changeMapCenter({
             coordinates: this.state.map.getCenter().toJSON(),
@@ -109,7 +109,9 @@ class MapComponent extends React.Component {
           })
         }
       >
-        {this.props.isMarkerShown && this.props.currentUser && this.props.centerLocation === "HOME" ? (
+        {this.props.isMarkerShown &&
+        this.props.currentUser &&
+        this.props.centerLocation === "HOME" ? (
           <Marker options={this.markerIcon()} position={this.props.centerMap} />
         ) : null}
       </GoogleMap>

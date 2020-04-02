@@ -1,4 +1,5 @@
 .noticesParent {
+    margin-top: 3px;
     width: calc(100vw);
     display: flex;
     flex-direction: column;
@@ -13,12 +14,11 @@
 }
 
 .noticesSwipeAnimation {
-    padding-top: 4px;
-    height: calc(100vh - 101px);
+    height: calc(100vh - 113px);
     opacity: 1;
     transition: opacity 0.1s linear, transform 0.1s ease-in;
     position: relative;
-    top: 46px;
+    top: 58px;
     z-index: 5000;
 }
 
@@ -45,8 +45,13 @@
 }
 
 .change-page-button:active {
-    transform: translate(3px, 3px);
-    box-shadow: 3px 3px 0px 0px var(--box-shadow-dark-grey);
+    transform: translate(2px, 2px);
+    background-color: white;
+    box-shadow: 0px 0px 0px 0px var(--box-shadow-dark-grey);
+    border-left: 2px solid var(--noobo-dark-green);
+    border-top: 2px solid var(--noobo-dark-green);
+    border-bottom: 2px solid var(--noobo-dark-green);
+    border-right: 2px solid var(--noobo-dark-green);
 }
 
 .up-arrow-container,
@@ -88,17 +93,16 @@
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.up-arrow-icon{
+.up-arrow-icon {
     top: 1px;
 }
 
-.up-arrow-icon:hover,
-.down-arrow-icon:hover {
-    transform: scale(1.2, 1.2);
+.change-page-button:hover .up-arrow-icon,
+.change-page-button:hover .down-arrow-icon {
+    transform: scale(1.18, 1.18);
 }
 
 .up-arrow-icon:active,
 .down-arrow-icon:active {
     transform: scale(0.9, 0.9);
-    box-shadow: 0px 1px 1px 1px var(--box-shadow-diffuse-grey)
 }

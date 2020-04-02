@@ -7,13 +7,17 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({});
+
 class MainMap extends React.PureComponent {
-  state = {
-    isMarkerShown: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      isMarkerShown: false
+    };
+  }
 
   componentDidMount() {
-    this.delayedShowMarker();
+    this.setState({ ref: this.myRef });
   }
 
   delayedShowMarker = () => {

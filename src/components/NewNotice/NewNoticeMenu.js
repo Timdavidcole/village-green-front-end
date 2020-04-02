@@ -31,7 +31,7 @@ class NewNoticeMenu extends React.Component {
     if (this.props.newNoticeMenuItem === id)
       return {
         backgroundColor: "white",
-        color: "#4faa4f",
+        color: "var(--noobo-darker-green)",
         border: "none",
         outline: "none"
       };

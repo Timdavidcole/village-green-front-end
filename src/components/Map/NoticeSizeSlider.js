@@ -31,7 +31,7 @@ const NoticeSizeSlider = props => {
       <input
         onChange={handleChange}
         type="range"
-        min="150"
+        min="180"
         max="400"
         value={props.noticeWidth}
         className="slider"

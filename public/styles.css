@@ -5,6 +5,7 @@ body {
   --noobo-darker-green: #4fa04e;
   --box-shadow-dark-grey: rgba(220, 220, 220, 0.79);
   --box-shadow-diffuse-grey: rgba(167, 167, 167, 0.79);
+  --noobo-card-background-yellow: #fffbf0;
   margin: 0px;
   padding: 0px ! important;
   overflow: hidden;
