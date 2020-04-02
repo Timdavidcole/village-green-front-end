@@ -55,9 +55,6 @@ class MainMap extends React.PureComponent {
           containerElement={<div style={{ height: "calc(100vh - 56px)" }} />}
           mapElement={<div style={{ height: "calc(100vh - 56px)" }} />}
         />
-        {this.myRef.current ? (
-          <PageScroll element={this.myRef.current} />
-        ) : null}
       </div>
     );
   }

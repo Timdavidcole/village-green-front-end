@@ -1,5 +1,6 @@
 import throttle from "../../models/throttle";
 import { connect } from "react-redux";
+import React from "react";
 
 const mapStateToProps = state => ({
   pageNumber: state.notices.pageNumber,
@@ -13,36 +14,38 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type: "START_PAGE_NUMBER_ANIMATION", payload })
 });
 
-const PageScroll = props => {
-  console.log(props.element)
-  props.element.addEventListener(
-    "wheel",
-    throttle(function(event) {
-      console.log(event.deltaY)
-      console.log(props.pageNumber > 1 && event.deltaY < 0)
-      console.log(props.pageNumber < props.noticesSorted.length && event.deltaY > 0)
+class PageScroll extends React.PureComponent {
+  shouldComponentUpdate() {
+    return false;
+  }
 
-      if (
-        (props.pageNumber > 1 && event.deltaY < 0) ||
-        (props.pageNumber < props.noticesSorted.length && event.deltaY > 0)
-      ) {
-        console.log("SCROLL");
-        props.startPageNumberAnimation();
-        setTimeout(
-          () =>
-            props.updatePageNumber({
-              direction: event.deltaY < 0 ? "up" : "down",
-              pageNumber:
-                event.deltaY > 0 ? props.pageNumber + 1 : props.pageNumber - 1
-            }),
-          200
-        );
-      }
-    }, 200),
-    true
-  );
+  render() {
+    console.log("RENDER PAGESCROLL");
+    this.props.element.addEventListener(
+      "wheel",
+      throttle(event => {
+        if (
+          (this.props.pageNumber > 1 && event.deltaY < 0) ||
+          (this.props.pageNumber < this.props.noticesSorted.length && event.deltaY > 0)
+        ) {
+          console.log("SCROLL");
+          this.props.startPageNumberAnimation();
+          setTimeout(
+            () =>
+              this.props.updatePageNumber({
+                direction: event.deltaY < 0 ? "up" : "down",
+                pageNumber:
+                  event.deltaY > 0 ? this.props.pageNumber + 1 : this.props.pageNumber - 1
+              }),
+            200
+          );
+        }
+      }, 200),
+      true
+    );
 
-  return null;
-};
+    return null;
+  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(PageScroll);

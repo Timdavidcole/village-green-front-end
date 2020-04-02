@@ -21,9 +21,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  newNoticeDisplayed: () => dispatch({ type: "NEW_NOTICE_DISPLAYED" }),
-  addNoticesWindowDims: payload =>
-    dispatch({ type: "ADD_NOTICES_WINDOW_DIMS", payload }),
   updateSortedNotices: payload =>
     dispatch({ type: "UPDATE_SORTED_NOTICES", payload })
 });

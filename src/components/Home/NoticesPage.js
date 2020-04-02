@@ -10,24 +10,25 @@ const mapStateToProps = state => ({
   page: state.notices.page,
   resize: state.notices.resize,
   pageNumber: state.notices.pageNumber,
-  pageNumberAnimation: state.notices.pageNumberAnimation,
   noticesVisible: state.notices.noticesVisible,
   noticesWindowDims: state.notices.noticesWindowDims,
-  noticesSorted: state.notices.noticesSorted,
-  pageChangeDirection: state.notices.pageChangeDirection
+  noticesSorted: state.notices.noticesSorted
 });
 
 const mapDispatchToProps = dispatch => ({
   addNoticesWindowDims: payload =>
-    dispatch({ type: "ADD_NOTICES_WINDOW_DIMS", payload }),
-  stopPageNumberAnimation: () =>
-    dispatch({ type: "STOP_PAGE_NUMBER_ANIMATION" })
+    dispatch({ type: "ADD_NOTICES_WINDOW_DIMS", payload })
 });
 
 class NoticesPage extends React.Component {
   constructor(props) {
     super(props);
     this.myRef = React.createRef();
+    this.state = { ref: "" };
+  }
+
+  componentDidMount() {
+    this.setState({ ref: this.myRef });
   }
 
   whichPageNumberButton(direction) {
@@ -41,7 +42,7 @@ class NoticesPage extends React.Component {
     }
   }
 
-  checkPageStyle() {
+  addNewWindowDims() {
     const windowHeight = window.innerHeight;
     const windowWidth = window.innerWidth;
     if (
@@ -54,6 +55,9 @@ class NoticesPage extends React.Component {
         height: windowHeight
       });
     }
+  }
+
+  checkPageStyle() {
     const pageNumber = this.props.pageNumber;
     const noticesSorted = this.props.noticesSorted;
     if (noticesSorted.length === 1) {
@@ -80,10 +84,12 @@ class NoticesPage extends React.Component {
   }
 
   render() {
+    const domRef = this.myRef.current
+    console.log("RENDER NOTICESPAGE")
     return (
       <div>
-        {this.myRef.current ? (
-          <PageScroll element={this.myRef.current} />
+        {domRef ? (
+          <PageScroll element={domRef} />
         ) : null}
         {this.whichPageNumberButton("up")}
         <div
@@ -91,6 +97,8 @@ class NoticesPage extends React.Component {
           id="notices"
           style={this.checkPageStyle()}
           ref={this.myRef}
+          onLoad={    this.addNewWindowDims()
+          }
         >
           {this.props.noticesByPage.map((notice, i) => {
             if (!notice.image) {
