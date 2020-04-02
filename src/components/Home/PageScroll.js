@@ -14,19 +14,24 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const PageScroll = props => {
+  console.log(props.element)
   props.element.addEventListener(
     "wheel",
-    throttle(event => {
+    throttle(function(event) {
+      console.log(event.deltaY)
+      console.log(props.pageNumber > 1 && event.deltaY < 0)
+      console.log(props.pageNumber < props.noticesSorted.length && event.deltaY > 0)
+
       if (
         (props.pageNumber > 1 && event.deltaY < 0) ||
         (props.pageNumber < props.noticesSorted.length && event.deltaY > 0)
       ) {
-        console.log("SCROLL")
+        console.log("SCROLL");
         props.startPageNumberAnimation();
         setTimeout(
           () =>
             props.updatePageNumber({
-              direction: event.deltaY > 0 ? "up" : "down",
+              direction: event.deltaY < 0 ? "up" : "down",
               pageNumber:
                 event.deltaY > 0 ? props.pageNumber + 1 : props.pageNumber - 1
             }),

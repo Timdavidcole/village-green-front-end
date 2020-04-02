@@ -5,7 +5,6 @@ import React from "react";
 import "../../styles/notices.css";
 import { connect } from "react-redux";
 import ChangePageButton from "./ChangePageButton";
-import { Transition } from "react-transition-group";
 
 const mapStateToProps = state => ({
   page: state.notices.page,
@@ -42,11 +41,19 @@ class NoticesPage extends React.Component {
     }
   }
 
-  stopPageNumberAnimation = () => {
-    this.props.stopPageNumberAnimation();
-  };
-
   checkPageStyle() {
+    const windowHeight = window.innerHeight;
+    const windowWidth = window.innerWidth;
+    if (
+      this.props.resize ||
+      this.props.noticesWindowDims.height !== windowHeight ||
+      this.props.noticesWindowDims.width !== windowWidth
+    ) {
+      this.props.addNoticesWindowDims({
+        width: windowWidth,
+        height: windowHeight
+      });
+    }
     const pageNumber = this.props.pageNumber;
     const noticesSorted = this.props.noticesSorted;
     if (noticesSorted.length === 1) {
@@ -71,101 +78,48 @@ class NoticesPage extends React.Component {
       };
     }
   }
+
   render() {
-    const duration = 200;
-
-    const transitionStyles = () => {
-      if (this.props.pageChangeDirection === "up") {
-        return {
-          entering: { opacity: "0", transform: "translate(0px, -500px)" },
-          entered: { opacity: "0", transform: "translate(0px, 500px)" },
-          exiting: { opacity: "0", transform: "translate(0px, 500px)" },
-          exited: { opacity: "1" }
-        };
-      } else
-        return {
-          entering: { opacity: "0", transform: "translate(0px, 500px)" },
-          entered: { opacity: "0", transform: "translate(0px, -500px)" },
-          exiting: { opacity: "0", transform: "translate(0px, -500px)" },
-          exited: { opacity: "1" }
-        };
-    };
-
-    if (!this.props.noticesByPage) {
-      return null;
-    }
-    if (this.props.pageNumberAnimation) {
-      setTimeout(this.stopPageNumberAnimation, duration);
-    }
     return (
-      <Transition
-        in={this.props.pageNumberAnimation}
-        out={!this.props.pageNumberAnimation}
-        timeout={duration}
-      >
-        {state => (
-          <div
-            className="noticesSwipeAnimation"
-            style={{
-              pointerEvents: "none",
-              ...transitionStyles()[state]
-            }}
-            ref={this.myRef}
-          >
-            {this.myRef.current ? (
-              <PageScroll element={this.myRef.current} />
-            ) : null}
-            {this.whichPageNumberButton("up")}
-            <div
-              onClick={() => alert(this.myRef.current)}
-              className="noticesParent"
-              id="notices"
-              style={this.checkPageStyle()}
-              ref={el => {
-                if (
-                  (el && !this.props.noticesWindowDims.height) ||
-                  this.props.resize ||
-                  (el &&
-                    this.props.noticesWindowDims.height !==
-                      document.getElementById("notices").offsetHeight)
-                ) {
-                  this.props.addNoticesWindowDims({
-                    width: document.getElementById("notices").offsetWidth,
-                    height: document.getElementById("notices").offsetHeight
-                  });
-                }
-              }}
-            >
-              {this.props.noticesByPage.map((notice, i) => {
-                if (!notice.image) {
-                  return (
-                    <NoticePreview
-                      page={this.props.page}
-                      noticesVisible={this.props.noticesVisible}
-                      index={i + 2}
-                      indexTrue={i}
-                      notice={notice}
-                      key={notice.slug}
-                    />
-                  );
-                } else {
-                  return (
-                    <NoticePreviewImage
-                      page={this.props.page}
-                      noticesVisible={this.props.noticesVisible}
-                      index={i + 2}
-                      indexTrue={i}
-                      notice={notice}
-                      key={notice.slug}
-                    />
-                  );
-                }
-              })}
-            </div>
-            {this.whichPageNumberButton("down")}
-          </div>
-        )}
-      </Transition>
+      <div>
+        {this.myRef.current ? (
+          <PageScroll element={this.myRef.current} />
+        ) : null}
+        {this.whichPageNumberButton("up")}
+        <div
+          className="noticesParent"
+          id="notices"
+          style={this.checkPageStyle()}
+          ref={this.myRef}
+        >
+          {this.props.noticesByPage.map((notice, i) => {
+            if (!notice.image) {
+              return (
+                <NoticePreview
+                  page={this.props.page}
+                  noticesVisible={this.props.noticesVisible}
+                  index={i + 2}
+                  indexTrue={i}
+                  notice={notice}
+                  key={notice.slug}
+                />
+              );
+            } else {
+              return (
+                <NoticePreviewImage
+                  page={this.props.page}
+                  noticesVisible={this.props.noticesVisible}
+                  index={i + 2}
+                  indexTrue={i}
+                  notice={notice}
+                  key={notice.slug}
+                />
+              );
+            }
+          })}
+        </div>
+        {this.whichPageNumberButton("down")}
+      </div>
     );
   }
 }

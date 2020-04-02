@@ -1,6 +1,7 @@
 const throttle = (func, limit) => {
   const scrollThreshold = 80;
   let inThrottle = false;
+  console.log("CREATE THROTTLE")
   return function() {
     const args = arguments;
     const context = this;

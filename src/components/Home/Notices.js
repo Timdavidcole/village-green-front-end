@@ -1,5 +1,5 @@
 import React from "react";
-import NoticesPage from "./NoticesPage";
+import NoticesPageTransition from "./NoticesPageTransition";
 import "../../styles/notices.css";
 import { connect } from "react-redux";
 import sortByHeight from "../../models/sortByHeight";
@@ -96,14 +96,14 @@ class Notices extends React.Component {
 
     if (this.props.sorted) {
       return (
-        <NoticesPage
+        <NoticesPageTransition
           noticesByPage={this.props.noticesSorted[this.props.pageNumber - 1]}
         />
       );
     }
 
     if (!this.props.sorted) {
-      return <NoticesPage noticesByPage={this.props.notices} />;
+      return <NoticesPageTransition noticesByPage={this.props.notices} />;
     }
   }
 }

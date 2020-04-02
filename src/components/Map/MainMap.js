@@ -4,25 +4,23 @@ import { connect } from "react-redux";
 import PageScroll from "../Home/PageScroll";
 
 const mapStateToProps = state => ({
-  mapBlur: state.notices.mapBlur,
-  noticesSorted: state.notices.noticesSorted,
-  pageNumber: state.notices.pageNumber
+  mapBlur: state.notices.mapBlur
 });
 
-const mapDispatchToProps = dispatch => ({
-  updatePageNumber: payload =>
-    dispatch({ type: "UPDATE_PAGE_NUMBER", payload }),
-  startPageNumberAnimation: payload =>
-    dispatch({ type: "START_PAGE_NUMBER_ANIMATION", payload })
-});
+const mapDispatchToProps = dispatch => ({});
 
 class MainMap extends React.PureComponent {
   constructor(props) {
     super(props);
     this.myRef = React.createRef();
     this.state = {
-      isMarkerShown: false
+      isMarkerShown: false,
+      ref: ""
     };
+  }
+
+  componentDidMount() {
+    this.setState({ ref: this.myRef });
   }
 
   delayedShowMarker = () => {
@@ -49,9 +47,6 @@ class MainMap extends React.PureComponent {
         }}
         ref={this.myRef}
       >
-        {this.myRef.current ? (
-          <PageScroll element={this.myRef.current} />
-        ) : null}
         <MapComponent
           isMarkerShown={this.state.isMarkerShown}
           onMarkerClick={this.handleMarkerClick}
@@ -60,6 +55,9 @@ class MainMap extends React.PureComponent {
           containerElement={<div style={{ height: "calc(100vh - 56px)" }} />}
           mapElement={<div style={{ height: "calc(100vh - 56px)" }} />}
         />
+        {this.myRef.current ? (
+          <PageScroll element={this.myRef.current} />
+        ) : null}
       </div>
     );
   }
