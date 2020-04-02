@@ -121,7 +121,7 @@ class NoticePreview extends React.Component {
                   </span>
                   <br></br>
                   <span
-                    id={`noticeCardBody${this.props.index}`}
+                    id={`noticeCardBody`}
                     style={{
                       display: "inline-block",
                       width: `${this.props.noticeWidth - 20}px`,

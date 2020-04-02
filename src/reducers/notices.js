@@ -14,7 +14,8 @@ export default (
     loading: true,
     noticesHidden: false,
     noticeWidth: "240",
-    mapBlur: true
+    mapBlur: true,
+    noticesY: 0
   },
   action
 ) => {
@@ -139,6 +140,11 @@ export default (
         pageNumber: 1,
         loading: true,
         mapBlur: false
+      };
+      case "CHANGE_NOTICES_Y":
+      return {
+        ...state,
+        noticesY: action.payload
       };
     case "UPDATE_PAGE_NUMBER":
       if (

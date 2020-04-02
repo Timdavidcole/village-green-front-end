@@ -12,7 +12,8 @@ const mapStateToProps = state => ({
   pageNumber: state.notices.pageNumber,
   noticesVisible: state.notices.noticesVisible,
   noticesWindowDims: state.notices.noticesWindowDims,
-  noticesSorted: state.notices.noticesSorted
+  noticesSorted: state.notices.noticesSorted,
+  noticesY: state.notices.noticesY
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -81,7 +82,10 @@ class NoticesPage extends React.Component {
         <div
           className="noticesParent"
           id="notices"
-          style={this.checkPageStyle()}
+          style={{
+            transform: `translateY(${this.props.noticesY}px)`,
+            ...this.checkPageStyle()
+          }}
           ref={this.myRef}
           onLoad={this.addNewWindowDims()}
         >

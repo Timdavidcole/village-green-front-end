@@ -1,5 +1,5 @@
 const throttle = (func, limit) => {
-  const scrollThreshold = 80;
+  const scrollThreshold = 50;
   let inThrottle = false;
   return function() {
     const args = arguments;

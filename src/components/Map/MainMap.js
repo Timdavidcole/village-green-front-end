@@ -1,7 +1,6 @@
 import React from "react";
 import MapComponent from "./MapComponent";
 import { connect } from "react-redux";
-import PageScroll from "../Home/PageScroll";
 
 const mapStateToProps = state => ({
   mapBlur: state.notices.mapBlur
