@@ -12,10 +12,8 @@ const mapDispatchToProps = dispatch => ({});
 class MainMap extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.myRef = React.createRef();
     this.state = {
-      isMarkerShown: false,
-      ref: ""
+      isMarkerShown: false
     };
   }
 
@@ -45,7 +43,6 @@ class MainMap extends React.PureComponent {
           height: "calc(100vh - 56px)",
           width: "100%"
         }}
-        ref={this.myRef}
       >
         <MapComponent
           isMarkerShown={this.state.isMarkerShown}

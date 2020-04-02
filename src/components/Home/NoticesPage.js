@@ -21,16 +21,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class NoticesPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.myRef = React.createRef();
-    this.state = { ref: "" };
-  }
-
-  componentDidMount() {
-    this.setState({ ref: this.myRef });
-  }
-
   whichPageNumberButton(direction) {
     const pageNumber = this.props.pageNumber;
     const noticesSorted = this.props.noticesSorted;
@@ -84,21 +74,16 @@ class NoticesPage extends React.Component {
   }
 
   render() {
-    const domRef = this.myRef.current
-    console.log("RENDER NOTICESPAGE")
     return (
       <div>
-        {domRef ? (
-          <PageScroll element={domRef} />
-        ) : null}
+        <PageScroll />
         {this.whichPageNumberButton("up")}
         <div
           className="noticesParent"
           id="notices"
           style={this.checkPageStyle()}
           ref={this.myRef}
-          onLoad={    this.addNewWindowDims()
-          }
+          onLoad={this.addNewWindowDims()}
         >
           {this.props.noticesByPage.map((notice, i) => {
             if (!notice.image) {

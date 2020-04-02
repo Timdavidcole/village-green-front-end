@@ -20,27 +20,28 @@ class PageScroll extends React.PureComponent {
   }
 
   render() {
-    console.log("RENDER PAGESCROLL");
-    this.props.element.addEventListener(
+    document.addEventListener(
       "wheel",
       throttle(event => {
         if (
           (this.props.pageNumber > 1 && event.deltaY < 0) ||
-          (this.props.pageNumber < this.props.noticesSorted.length && event.deltaY > 0)
+          (this.props.pageNumber < this.props.noticesSorted.length &&
+            event.deltaY > 0)
         ) {
-          console.log("SCROLL");
           this.props.startPageNumberAnimation();
           setTimeout(
             () =>
               this.props.updatePageNumber({
                 direction: event.deltaY < 0 ? "up" : "down",
                 pageNumber:
-                  event.deltaY > 0 ? this.props.pageNumber + 1 : this.props.pageNumber - 1
+                  event.deltaY > 0
+                    ? this.props.pageNumber + 1
+                    : this.props.pageNumber - 1
               }),
             200
           );
         }
-      }, 200),
+      }, 800),
       true
     );
 
