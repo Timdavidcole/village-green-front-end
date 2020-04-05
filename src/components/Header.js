@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import React from "react";
 import LoggedInView from "./LoggedInView";
+import SignInHeader from "./SignInHeader";
 import { connect } from "react-redux";
 import "../styles/header.css";
 
@@ -19,19 +20,17 @@ const LoggedOutView = props => {
           className="header-link"
           style={{
             fontFamily: "titillium web, sans-serif",
-            fontSize: "1.2  rem"
+            fontSize: "1.2 rem"
           }}
         >
         <i className="fas fa-globe"></i>
-        <span> </span>Noticeboard
+        <span> </span>noticeboard
         </Link>
 
-        <Link to="/login" className="header-link">
-          Sign in
-        </Link>
+        <SignInHeader/>
 
         <Link to="/register" className="header-link">
-          Sign up
+          sign up
         </Link>
       </ul>
     );

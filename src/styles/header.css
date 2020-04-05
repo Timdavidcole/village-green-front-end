@@ -61,7 +61,7 @@ a:active {
     padding-left: 15px;
     border: none;
     outline: none;
-    height: 57px;
+    height: 55px;
     line-height: 57px;
     transform: scale(1);
     transition: transform 0.2s ease-in, color 0.2s ease-in;
@@ -86,4 +86,11 @@ a:active {
     margin-left: 8px;
     position: relative;
     top: 10px
+}
+
+.sign-in-container{
+    align-self: top;
+    height: 57px;
+    display: inline-block;
+
 }
