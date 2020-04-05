@@ -27,7 +27,9 @@ class LoggedInView extends React.Component {
       } else
         return (
           <button onClick={this.props.onClick} className="header-link">
-            new notice
+          <i style={{position: "relative", top: "2px"}} class="fas fa-plus"></i>
+          {" "}
+          notice
           </button>
         );
     };
@@ -36,7 +38,7 @@ class LoggedInView extends React.Component {
       return (
         <ul className="header-items-right">
           <Link to="/" className="header-link">
-            <i className="fas fa-globe"></i>
+            <i style={{position: "relative", top: "2px"}} className="fas fa-globe"></i>
             <span> </span>noticeboard
           </Link>
 
@@ -46,7 +48,7 @@ class LoggedInView extends React.Component {
             to={`/@${this.props.currentUser.username}/pinned`}
             className="header-link"
           >
-            <i className="fas fa-thumbtack"></i>
+            <i style={{position: "relative", top: "2px"}} className="fas fa-thumbtack"></i>
             <span> </span>
             notices
           </Link>
