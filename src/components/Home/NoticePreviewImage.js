@@ -6,16 +6,16 @@ import { Transition } from "react-transition-group";
 import NoticeButtons from "./NoticeButtons";
 import NoticePreviewUser from "./NoticePreviewUser";
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   sorted: state.notices.sorted,
   noticesHidden: state.notices.noticesHidden,
-  noticeWidth: state.notices.noticeWidth
+  noticeWidth: state.notices.noticeWidth,
 });
 
-const mapDispatchToProps = dispatch => ({
-  onLoad: payload => dispatch({ type: "NOTICE_PAGE_LOADED", payload }),
+const mapDispatchToProps = (dispatch) => ({
+  onLoad: (payload) => dispatch({ type: "NOTICE_PAGE_LOADED", payload }),
   onUnload: () => dispatch({ type: "NOTICE_PAGE_UNLOADED" }),
-  loadDivDim: payload => dispatch({ type: "LOAD_DIV_DIMENSIONS", payload })
+  loadDivDim: (payload) => dispatch({ type: "LOAD_DIV_DIMENSIONS", payload }),
 });
 
 class NoticePreviewImage extends React.Component {
@@ -31,7 +31,7 @@ class NoticePreviewImage extends React.Component {
         title: this.props.notice.title,
         width: width,
         height: height,
-        index: this.props.indexTrue
+        index: this.props.indexTrue,
       });
     }
   }
@@ -52,21 +52,21 @@ class NoticePreviewImage extends React.Component {
     const duration = {
       appear: 100,
       enter: 100,
-      exit: 100
+      exit: 100,
     };
 
     const transitionStyles = {
       entering: { opacity: "0" },
       entered: { opacity: "0" },
       exiting: { opacity: "1" },
-      exited: { opacity: "1" }
+      exited: { opacity: "1" },
     };
     return (
       <Transition
         in={!this.props.noticesVisible || !this.props.sorted}
         timeout={duration}
       >
-        {state => (
+        {(state) => (
           <div
             id={`noticeCard${this.props.index}`}
             className={"noticeCard"}
@@ -76,7 +76,7 @@ class NoticePreviewImage extends React.Component {
               backgroundColor: "transparent",
               boxShadow: "none",
               order: notice.order,
-              ...transitionStyles[state]
+              ...transitionStyles[state],
             }}
           >
             <div className="card-container">
@@ -86,10 +86,10 @@ class NoticePreviewImage extends React.Component {
                 alt=""
                 src={notice.image}
                 style={{
-                  maxWidth: `${this.props.noticeWidth}px`
+                  maxWidth: `${this.props.noticeWidth}px`,
                 }}
-                onLoad={ev => {
-                  if (this.props.page !== "pinned") {
+                onLoad={(ev) => {
+                  if (this.props.page !== "pinned" || ev.target.offsetHeight !== 0) {
                     this.addDimensions(
                       ev.target.offsetWidth,
                       ev.target.offsetHeight
@@ -104,7 +104,7 @@ class NoticePreviewImage extends React.Component {
                   height: notice.height,
                   backgroundColor: "var(--noobo-card-background-yellow)",
                   padding: "10px",
-                  boxSizing: "border-box"
+                  boxSizing: "border-box",
                 }}
               >
                 <Link to={`notice/${notice.slug}`}>
@@ -122,7 +122,7 @@ class NoticePreviewImage extends React.Component {
                         width: "100%",
                         fontStyle: "italic",
                         fontSize: "0.9rem",
-                        marginBottom: "5px"
+                        marginBottom: "5px",
                       }}
                     >
                       {notice.description}
@@ -139,7 +139,7 @@ class NoticePreviewImage extends React.Component {
                         maxHeight: "121px",
                         overflowY: "auto",
                         overflowX: "hidden",
-                        fontSize: "0.8rem"
+                        fontSize: "0.8rem",
                       }}
                     >
                       {notice.body}
@@ -151,7 +151,7 @@ class NoticePreviewImage extends React.Component {
                     width: "calc(100% - 20px)",
                     position: "absolute",
                     margin: "0px",
-                    bottom: "5px"
+                    bottom: "5px",
                   }}
                 >
                   <NoticePreviewUser notice={notice} />

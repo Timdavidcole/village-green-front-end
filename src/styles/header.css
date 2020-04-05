@@ -88,9 +88,56 @@ a:active {
     top: 10px
 }
 
-.sign-in-container{
+.sign-in-container {
     align-self: top;
-    height: 57px;
+    height: 55px;
+    position: relative;
+    top: -4px;
     display: inline-block;
+    border: none;
+    background-color: var(--noobo-dark-green);
+}
 
+.sign-in-form {
+    position: relative;
+    top: 3px;
+    border: none;
+}
+
+.sign-in-input {
+    font-family: titillium web, sans-serif;
+    border: none;
+    outline: none;
+    background-color: white;
+    font-size: 0.8rem !important;
+    padding: 5px;
+    margin-right: 10px;
+    border-radius: 5px;
+    width: 100px;
+    box-shadow: 3px 3px 0px 0px var(--box-shadow-dark-grey);
+    visibility: visible;
+}
+
+.sign-in-button {
+    font-family: titillium web, sans-serif;
+    color: var(--noobo-dark-green);
+    background-color: white;
+    font-size: 1.05rem;
+    height: 30px;
+    margin: 3px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    box-shadow: 3px 3px 0px 0px var(--box-shadow-dark-grey);
+    visibility: visible;
+    transform: translate(0px, 0px);
+}
+
+.sign-in-button:hover {
+    background-color: var(--noobo-very-light-green);
+}
+
+.sign-in-button:active {
+    background-color: var(--noobo-dark-green);
+    color: white
 }

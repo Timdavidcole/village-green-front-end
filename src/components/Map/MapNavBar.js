@@ -13,7 +13,6 @@ const mapDispatchToProps = (dispatch) => ({});
 
 class MapNavBar extends React.Component {
   render() {
-    console.log(this.props.currentUser);
     return (
       <div className="navbar">
         {this.props.currentUser ? (

@@ -5,13 +5,13 @@ import SignInHeader from "./SignInHeader";
 import { connect } from "react-redux";
 import "../styles/header.css";
 
-const mapStateToProps = state => ({
-  noticesWindowDims: state.notices.noticesWindowDims
+const mapStateToProps = (state) => ({
+  noticesWindowDims: state.notices.noticesWindowDims,
 });
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = (dispatch) => ({});
 
-const LoggedOutView = props => {
+const LoggedOutView = (props) => {
   if (!props.currentUser) {
     return (
       <ul className="header-items-right">
@@ -20,18 +20,21 @@ const LoggedOutView = props => {
           className="header-link"
           style={{
             fontFamily: "titillium web, sans-serif",
-            fontSize: "1.2 rem"
+            fontSize: "1.2 rem",
           }}
         >
-        <i className="fas fa-globe"></i>
-        <span> </span>noticeboard
+          <i
+            style={{ position: "relative", top: "2px" }}
+            className="fas fa-globe"
+          ></i>
+          <span> </span>noticeboard
         </Link>
-
-        <SignInHeader/>
 
         <Link to="/register" className="header-link">
           sign up
         </Link>
+
+        <SignInHeader />
       </ul>
     );
   }
