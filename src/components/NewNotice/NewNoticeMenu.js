@@ -38,7 +38,7 @@ class NewNoticeMenu extends React.Component {
   }
 
   render() {
-    const itemTypes = ["poster", "event", "discussion", "proclamation", "card"];
+    const itemTypes = ["poster", "event", "discussion", "card"];
 
     return (
       <div id="new-notice-menu-container" className="new-notice-menu-container">

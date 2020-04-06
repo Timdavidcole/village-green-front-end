@@ -61,24 +61,25 @@ class NewNoticeTextInput extends React.Component {
     return (
       <div
         style={{
+          borderRadius: "0px 10px 10px 0px",
           display: "inline-block",
           backgroundColor: "white",
           verticalAlign: "top",
           height: "100%",
-          width: "calc(100% - 155px)",
+          width: "49vw",
           overflow: "none"
         }}
       >
         <div
           style={{
             fontFamily: "titillium web, sans-serif",
-            fontSize: "1.3rem",
+            fontSize: "1.5vw",
             textAlign: "center",
             position: "absolute",
             width: "auto",
             color: "var(--noobo-darker-green)",
             top: "5px",
-            left: "160px"
+            left: "11.5vw"
           }}
         >
           post a new notice

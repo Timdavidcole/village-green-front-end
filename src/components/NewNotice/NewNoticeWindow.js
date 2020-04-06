@@ -5,7 +5,6 @@ import "../../styles/newNotice.css";
 import NewNoticePoster from "./NewNoticePoster";
 import NewNoticeEvent from "./NewNoticeEvent";
 import NewNoticeDiscussion from "./NewNoticeDiscussion";
-import NewNoticeProclamation from "./NewNoticeBusinessCard";
 import NewNoticeBusinessCard from "./NewNoticeBusinessCard";
 import NewNoticeMenu from "./NewNoticeMenu";
 
@@ -66,9 +65,6 @@ class NewNoticeWindow extends React.Component {
         break;
       case "discussion":
         menuItem = <NewNoticeDiscussion />;
-        break;
-      case "proclamation":
-        menuItem = <NewNoticeProclamation />;
         break;
       case "card":
         menuItem = <NewNoticeBusinessCard />;
