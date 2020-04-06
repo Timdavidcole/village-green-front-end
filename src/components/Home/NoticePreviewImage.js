@@ -22,6 +22,11 @@ class NoticePreviewImage extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      width: null,
+      height: null,
+    };
+
     this.addDimensions = this.addDimensions.bind(this);
   }
 
@@ -48,6 +53,7 @@ class NoticePreviewImage extends React.Component {
   }
 
   render() {
+    console.log(this.state);
     const notice = this.props.notice;
     const duration = {
       appear: 100,
@@ -89,7 +95,12 @@ class NoticePreviewImage extends React.Component {
                   maxWidth: `${this.props.noticeWidth}px`,
                 }}
                 onLoad={(ev) => {
-                  if (this.props.page !== "pinned" || ev.target.offsetHeight !== 0) {
+                  if (
+                    this.props.page !== "pinned" ||
+                    ev.target.offsetHeight !== 0
+                  ) {
+                    this.setState({ width: ev.target.offsetWidth, height: ev.target.offsetHeight });
+
                     this.addDimensions(
                       ev.target.offsetWidth,
                       ev.target.offsetHeight
@@ -100,7 +111,7 @@ class NoticePreviewImage extends React.Component {
               <div
                 className="card-back"
                 style={{
-                  width: `${this.props.noticeWidth}px`,
+                  width: `${this.state.width || this.props.noticeWidth}px`,
                   height: notice.height,
                   backgroundColor: "var(--noobo-card-background-yellow)",
                   padding: "10px",

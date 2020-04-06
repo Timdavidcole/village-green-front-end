@@ -38,7 +38,7 @@ class MainMap extends React.PureComponent {
         style={{
           position: "absolute",
           zIndex: "1",
-          opacity: this.props.mapBlur ? "0.25" : "1",
+          opacity: this.props.mapBlur ? "0" : "1",
           height: "calc(100vh - 56px)",
           width: "100%"
         }}
