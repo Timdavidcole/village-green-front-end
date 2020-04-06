@@ -92,6 +92,7 @@ class NoticePreviewImage extends React.Component {
                 alt=""
                 src={notice.image}
                 style={{
+                  minHeight: "160",
                   maxWidth: `${this.props.noticeWidth}px`,
                 }}
                 onLoad={(ev) => {

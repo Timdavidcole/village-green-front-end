@@ -45,11 +45,9 @@ class Header extends React.Component {
   render() {
     return (
       <menu className="header-bar">
-        {this.props.noticesWindowDims.width > 770 ? (
           <Link to="/" className="logo">
             {this.props.appName.toLowerCase()}
           </Link>
-        ) : null}
         {this.props.noticesWindowDims.width > 1150 ? (
           <Link to="/" className="tag-line">
             the noticeboard for anyone, anywhere and anything...

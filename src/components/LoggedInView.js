@@ -31,7 +31,7 @@ class LoggedInView extends React.Component {
               style={{ position: "relative", top: "2px" }}
               class="fas fa-plus"
             ></i>{" "}
-            {this.props.noticesWindowDims.width > 650 ? (
+            {this.props.noticesWindowDims.width > 770 ? (
               <span> notice</span>
               ) : null}
           </button>
@@ -46,7 +46,7 @@ class LoggedInView extends React.Component {
               style={{ position: "relative", top: "2px" }}
               className="fas fa-globe"
             ></i>
-            {this.props.noticesWindowDims.width > 650 ? (
+            {this.props.noticesWindowDims.width > 770 ? (
               <span> noticeboard</span>
               ) : null}
           </Link>
@@ -61,7 +61,7 @@ class LoggedInView extends React.Component {
               style={{ position: "relative", top: "2px" }}
               className="fas fa-thumbtack"
             ></i>
-            {this.props.noticesWindowDims.width > 650 ? (
+            {this.props.noticesWindowDims.width > 770 ? (
               <span> notices</span>
             ) : null}
           </Link>
@@ -71,7 +71,7 @@ class LoggedInView extends React.Component {
               style={{ position: "relative", top: "2px" }}
               class="fas fa-cog"
             ></i>
-            {this.props.noticesWindowDims.width > 650 ? (
+            {this.props.noticesWindowDims.width > 770 ? (
               <span> settings</span>
             ) : null}
           </Link>
