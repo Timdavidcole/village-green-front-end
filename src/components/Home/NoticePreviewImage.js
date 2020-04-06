@@ -32,12 +32,14 @@ class NoticePreviewImage extends React.Component {
 
   addDimensions(width, height) {
     if (!this.props.notice.height || this.props.notice.height < 50) {
-      this.props.loadDivDim({
-        title: this.props.notice.title,
-        width: width,
-        height: height,
-        index: this.props.indexTrue,
-      });
+      if (height !== 0) {
+        this.props.loadDivDim({
+          title: this.props.notice.title,
+          width: width,
+          height: height,
+          index: this.props.indexTrue,
+        });
+      }
     }
   }
 
@@ -53,7 +55,6 @@ class NoticePreviewImage extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     const notice = this.props.notice;
     const duration = {
       appear: 100,
@@ -100,8 +101,10 @@ class NoticePreviewImage extends React.Component {
                     this.props.page !== "pinned" ||
                     ev.target.offsetHeight !== 0
                   ) {
-                    this.setState({ width: ev.target.offsetWidth, height: ev.target.offsetHeight });
-
+                    this.setState({
+                      width: ev.target.offsetWidth,
+                      height: ev.target.offsetHeight,
+                    });
                     this.addDimensions(
                       ev.target.offsetWidth,
                       ev.target.offsetHeight
