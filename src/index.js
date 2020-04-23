@@ -5,7 +5,6 @@ import React from "react";
 import store from "./store";
 import { Route, BrowserRouter, Switch, Redirect } from "react-router-dom";
 import Home from "./components/Home";
-import Login from "./components/Login";
 import Register from "./components/Register";
 import Settings from "./components/Settings";
 import Notice from "./components/Notice";
@@ -20,7 +19,6 @@ ReactDOM.render(
       <Switch>
         <Route path="/globalboard" component={Home} />
         <Redirect exact from="/" to="/globalboard" />
-        <Route path="/login" component={Login} />
         <PrivateRoute path="/@:username/pinned" component={Pinned} />
         <Route path="/register" component={Register} />
         <PrivateRoute path="/settings" component={Settings} />

@@ -22,7 +22,7 @@
     vertical-align: top;
     position: relative;
     height: 100%;
-    width: 155px;
+    width: 11vw;
     background-color: var(--noobo-dark-green);
     border-radius: 10px 0px 0px 10px;
     display: inline-block;
@@ -39,7 +39,7 @@
 
 .new-notice-menu-text {
     font-family: titillium web, sans-serif;
-    font-size: 1.3rem;
+    font-size: 1.5vw;
     color: white;
     display: inline-block;
     width: 100%;
@@ -52,14 +52,13 @@
     outline: none;
     font-family: titillium web, sans-serif;
     margin-bottom: auto;
-    font-size: 1.4rem;
+    font-size: 2vw;
     display: inline-block;
     color: white;
     font-weight: 900;
     text-align: center;
     position: relative;
     width: 100%;
-    min-width: 100px;
     background-color: var(--noobo-medium-green);
     padding: 8%;
 }
@@ -81,9 +80,10 @@
 
 .new-notice-form {
     overflow: none;
-    position: relative;
+    position: absolute;
+    right: 0px;
+    width: 50vw;
     height: 100%;
-    width: 100%;
     padding: 20px;
     box-sizing: border-box;
 }
@@ -91,7 +91,6 @@
 .new-notice-fieldset {
     position: relative;
     height: 100%;
-    width: 100%;
     border: none;
     margin: 0px;
     padding: 0px;

@@ -2,17 +2,17 @@ import { Link } from "react-router-dom";
 import React from "react";
 import { connect } from "react-redux";
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   pinnedEvent: state.notices.pinnedEvent,
-  noticesWindowDims: state.notices.noticesWindowDims
+  noticesWindowDims: state.notices.noticesWindowDims,
 });
 
-const mapDispatchToProps = dispatch => ({
-  pinNotice: payload => dispatch({ type: "PIN_NOTICE", payload }),
-  onLoad: payload => dispatch({ type: "HOME_PAGE_LOADED", payload }),
-  updatePinned: payload => dispatch({ type: "REMOVE_PINNED", payload }),
+const mapDispatchToProps = (dispatch) => ({
+  pinNotice: (payload) => dispatch({ type: "PIN_NOTICE", payload }),
+  onLoad: (payload) => dispatch({ type: "HOME_PAGE_LOADED", payload }),
+  updatePinned: (payload) => dispatch({ type: "REMOVE_PINNED", payload }),
   onClick: () => dispatch({ type: "DISPLAY_NEW_NOTICE" }),
-  onClickLogout: () => dispatch({ type: "LOGOUT" })
+  onClickLogout: () => dispatch({ type: "LOGOUT" }),
 });
 
 class LoggedInView extends React.Component {
@@ -27,7 +27,13 @@ class LoggedInView extends React.Component {
       } else
         return (
           <button onClick={this.props.onClick} className="header-link">
-            new notice
+            <i
+              style={{ position: "relative", top: "2px" }}
+              class="fas fa-plus"
+            ></i>{" "}
+            {this.props.noticesWindowDims.width > 770 ? (
+              <span> notice</span>
+              ) : null}
           </button>
         );
     };
@@ -36,8 +42,13 @@ class LoggedInView extends React.Component {
       return (
         <ul className="header-items-right">
           <Link to="/" className="header-link">
-            <i className="fas fa-globe"></i>
-            <span> </span>noticeboard
+            <i
+              style={{ position: "relative", top: "2px" }}
+              className="fas fa-globe"
+            ></i>
+            {this.props.noticesWindowDims.width > 770 ? (
+              <span> noticeboard</span>
+              ) : null}
           </Link>
 
           {newNoticeMenu()}
@@ -46,13 +57,23 @@ class LoggedInView extends React.Component {
             to={`/@${this.props.currentUser.username}/pinned`}
             className="header-link"
           >
-            <i className="fas fa-thumbtack"></i>
-            <span> </span>
-            notices
+            <i
+              style={{ position: "relative", top: "2px" }}
+              className="fas fa-thumbtack"
+            ></i>
+            {this.props.noticesWindowDims.width > 770 ? (
+              <span> notices</span>
+            ) : null}
           </Link>
 
           <Link to="/settings" className="header-link">
-            settings
+            <i
+              style={{ position: "relative", top: "2px" }}
+              class="fas fa-cog"
+            ></i>
+            {this.props.noticesWindowDims.width > 770 ? (
+              <span> settings</span>
+            ) : null}
           </Link>
 
           <Link
