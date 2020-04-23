@@ -102,6 +102,8 @@ a:active {
     position: relative;
     top: 3px;
     border: none;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .sign-in-input {
