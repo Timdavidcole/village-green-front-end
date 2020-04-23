@@ -88,7 +88,7 @@
     box-sizing: border-box;
 }
 
-.new-notice-fieldset {
+.register-fieldset {
     position: relative;
     height: 100%;
     border: none;
@@ -96,7 +96,7 @@
     padding: 0px;
 }
 
-.fieldset-flex {
+.register-flex {
     position: relative;
     height: 100%;
     width: 100%;

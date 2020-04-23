@@ -5,13 +5,13 @@ import AddressItem from "./AddressItem";
 import { SlideDown } from "react-slidedown";
 import "react-slidedown/lib/slidedown.css";
 
-const mapStateToProps = state => ({ ...state.auth });
+const mapStateToProps = (state) => ({ ...state.auth });
 
-const mapDispatchToProps = dispatch => ({
-  getAddressAutoComplete: value => {
+const mapDispatchToProps = (dispatch) => ({
+  getAddressAutoComplete: (value) => {
     dispatch({ type: "UPDATE_FIELD_AUTH", key: "addressAutoComplete", value });
   },
-  onChangeAddress: value =>
+  onChangeAddress: (value) =>
     dispatch({ type: "UPDATE_FIELD_AUTH", key: "address", value }),
 });
 
@@ -23,7 +23,10 @@ class AddressContainer extends React.Component {
 
   shouldComponentUpdate(nextProps) {
     if (this.props.addressAutoComplete && nextProps.addressAutoComplete) {
-      if (this.props.addressAutoComplete.label !== nextProps.addressAutoComplete.label) {
+      if (
+        this.props.addressAutoComplete.label !==
+        nextProps.addressAutoComplete.label
+      ) {
         return true;
       }
     }
@@ -41,37 +44,23 @@ class AddressContainer extends React.Component {
   }
 
   addressAutoComplete() {
-    agent.Address.get(this.props.address).then(object => {
+    agent.Address.get(this.props.address).then((object) => {
       this.props.getAddressAutoComplete(object);
     });
   }
 
   render() {
     if (this.props.addressAutoComplete) {
+      console.log(this.props.addressAutoComplete.address);
       return (
-        <div style={{margin:"10px"}}>
-            <SlideDown className={"my-dropdown-slidedown"}>
-              <AddressItem
-                value={this.props.addressAutoComplete.address.houseNumber}
-                placeholder="Housenumber"
-              />
-              <AddressItem
-                value={this.props.addressAutoComplete.address.street}
-                placeholder="Street"
-              />
-              <AddressItem
-                value={this.props.addressAutoComplete.address.city}
-                placeholder="City"
-              />
-              <AddressItem
-                value={this.props.addressAutoComplete.address.country}
-                placeholder="Country"
-              />
-              <AddressItem
-                value={this.props.addressAutoComplete.address.postalCode}
-                placeholder="Post Code"
-              />
-            </SlideDown>
+        <div>
+          <SlideDown>
+            <div>{this.props.addressAutoComplete.address.houseNumber}</div>
+            <div>{this.props.addressAutoComplete.address.street}</div>
+            <div>{this.props.addressAutoComplete.address.city}</div>
+            <div>{this.props.addressAutoComplete.address.country}</div>
+            <div>{this.props.addressAutoComplete.address.postalCode}</div>
+          </SlideDown>
         </div>
       );
     } else {
@@ -80,7 +69,4 @@ class AddressContainer extends React.Component {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AddressContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(AddressContainer);

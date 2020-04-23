@@ -52,7 +52,6 @@
     ]
   },
   "devDependencies": {
-    "cypress": "^4.2.0",
     "watch": "^1.0.2"
   }
 }

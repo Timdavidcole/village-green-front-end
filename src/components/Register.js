@@ -2,7 +2,8 @@ import React from "react";
 import ListErrors from "./ListErrors";
 import agent from "../agent";
 import { connect } from "react-redux";
-import "../styles/register.css"
+import "../styles/register.css";
+import AddressContainer from "./AddressContainer";
 
 const mapStateToProps = (state) => ({ ...state.auth });
 
@@ -12,6 +13,9 @@ const mapDispatchToProps = (dispatch) => ({
       type: "REGISTER",
       payload: agent.Auth.register(username, email, password, address),
     }),
+  getAddressAutoComplete: (value) => {
+    dispatch({ type: "UPDATE_FIELD_AUTH", key: "addressAutoComplete", value });
+  },
 });
 
 class Register extends React.Component {
@@ -28,6 +32,7 @@ class Register extends React.Component {
       this.props.onSubmit(username, email, password, address);
     };
     this.addressAutoComplete = this.addressAutoComplete.bind(this);
+    this.changeAddress = this.changeAddress.bind(this);
   }
 
   addressAutoComplete() {
@@ -46,6 +51,14 @@ class Register extends React.Component {
     } else return null;
   }
 
+  changeAddress(ev) {
+    console.log(ev.target.value)
+    this.setState({ address: ev.target.value });
+    agent.Address.get(ev.target.value).then(object => {
+      this.props.getAddressAutoComplete(object);
+    });
+  }
+
   render() {
     const { email, password, username, address } = this.state;
 
@@ -53,7 +66,7 @@ class Register extends React.Component {
       <div>
         <ListErrors errors={this.props.errors} />
         <form
-          className="new-notice-form"
+          className="register-form"
           onSubmit={this.submitForm(
             username,
             email,
@@ -61,52 +74,52 @@ class Register extends React.Component {
             this.addressAutoComplete()
           )}
         >
-          <fieldset className="new-notice-fieldset">
-            <input
-              className="register-input"
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(ev) => {
-                this.setState({ email: ev.target.value });
-              }}
-            />
-            <input
-              className="register-input"
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(ev) => {
-                this.setState({ password: ev.target.value });
-              }}
-            />
-            <input
-              className="register-input"
-              type="username"
-              placeholder="Username"
-              value={username}
-              onChange={(ev) => {
-                this.setState({ username: ev.target.value });
-              }}
-            />
-            Address
-            <input
-              className="register-input"
-              type="text"
-              value={address}
-              placeholder={this.addressAutoComplete}
-              onChange={(ev) => {
-                this.setState({ address: ev.target.value });
-              }}
-            />
-            <button
-              className="register-button"
-              type="submit"
-              disabled={this.props.inProgress}
-            >
-              {" "}
-              Sign Up
-            </button>
+          <fieldset className="register-fieldset">
+            <div className="register-flex">
+              <input
+                className="register-input"
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(ev) => {
+                  this.setState({ email: ev.target.value });
+                }}
+              />
+              <input
+                className="register-input"
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(ev) => {
+                  this.setState({ password: ev.target.value });
+                }}
+              />
+              <input
+                className="register-input"
+                type="username"
+                placeholder="Username"
+                value={username}
+                onChange={(ev) => {
+                  this.setState({ username: ev.target.value });
+                }}
+              />
+              <input
+                className="register-input"
+                type="text"
+                value={address}
+                placeholder={"Address"}
+                onChange={this.changeAddress}
+              />
+              <AddressContainer />
+              <button
+                className="register-button"
+                type="submit"
+                disabled={this.props.inProgress}
+              >
+                {" "}
+                Sign Up
+              </button>
+            </div>
           </fieldset>
         </form>
       </div>
