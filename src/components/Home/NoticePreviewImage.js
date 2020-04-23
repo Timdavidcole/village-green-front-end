@@ -32,7 +32,7 @@ class NoticePreviewImage extends React.Component {
 
   addDimensions(width, height) {
     if (!this.props.notice.height || this.props.notice.height < 50) {
-      if (height !== 0) {
+      if (height !== 0 && this.props.page !== "pinned") {
         this.props.loadDivDim({
           title: this.props.notice.title,
           width: width,

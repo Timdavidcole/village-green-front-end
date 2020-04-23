@@ -184,6 +184,12 @@ export default (
         pageNumber: 1,
         noticesHidden: false
       };
+      case "PINNED_PAGE_LOADED":
+        return {
+          ...state,
+          noticesVisible: true,
+          pinned: true
+        };
     case "LOGOUT":
       return {
         ...state,
