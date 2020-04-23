@@ -62,6 +62,8 @@ class NoticePreviewImage extends React.Component {
       exit: 100,
     };
 
+    console.log('test')
+
     const transitionStyles = {
       entering: { opacity: "0" },
       entered: { opacity: "0" },
