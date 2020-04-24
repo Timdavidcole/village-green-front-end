@@ -10,6 +10,17 @@
     box-sizing: border-box;
 }
 
+.register-title {
+    font-family: titillium web, sans-serif;
+    font-size: 1.8rem;
+    text-align: left;
+    width: auto;
+    color: var(--noobo-darker-green);
+    top: 5px;
+    left: 11.5vw;
+    padding: 10px
+}
+
 .register-fieldset {
     position: relative;
     height: 100%;

@@ -58,9 +58,14 @@ class Register extends React.Component {
     } else return null;
   }
 
-  displayAddressAutoComplete() {
-    if (this.props.addressAutoComplete) {
-      return <UserPostcardPreview />;
+  displayUserPostcard() {
+    if (this.props.addressAutoComplete || this.state.username) {
+      return (
+        <UserPostcardPreview
+          username={this.state.username}
+          image={this.state.image}
+        />
+      );
     } else return null;
   }
 
@@ -87,13 +92,7 @@ class Register extends React.Component {
   }
 
   render() {
-    const {
-      email,
-      password,
-      username,
-      address,
-      image,
-    } = this.state;
+    const { email, password, username, address, image } = this.state;
 
     return (
       <div>
@@ -109,18 +108,7 @@ class Register extends React.Component {
           })}
         >
           <fieldset className="register-fieldset">
-            <div
-              style={{
-                fontFamily: "titillium web, sans-serif",
-                fontSize: "2rem",
-                textAlign: "left",
-                width: "auto",
-                color: "var(--noobo-darker-green)",
-                top: "5px",
-                left: "11.5vw",
-                padding: "10px",
-              }}
-            >
+            <div className="register-title">
               we just need some details before you can get posting...
             </div>
             <input
@@ -132,6 +120,7 @@ class Register extends React.Component {
               onChange={(ev) => {
                 this.setState({ email: ev.target.value });
               }}
+              required="true"
             />
             <input
               className="register-input"
@@ -142,6 +131,7 @@ class Register extends React.Component {
               onChange={(ev) => {
                 this.setState({ password: ev.target.value });
               }}
+              required="true"
             />
             <input
               className="register-input"
@@ -152,6 +142,7 @@ class Register extends React.Component {
               onChange={(ev) => {
                 this.setState({ username: ev.target.value });
               }}
+              required="true"
             />
             <input
               className="register-input"
@@ -160,6 +151,7 @@ class Register extends React.Component {
               placeholder={"address"}
               autocomplete="no"
               onChange={this.changeAddress}
+              required="true"
             />
             <input
               className="register-input"
@@ -170,8 +162,9 @@ class Register extends React.Component {
               onChange={(ev) => {
                 this.setState({ image: ev.target.value });
               }}
+              required="true"
             />
-            {this.displayAddressAutoComplete()}
+            {this.displayUserPostcard()}
             <button
               className="register-button"
               type="submit"
