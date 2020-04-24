@@ -12,26 +12,10 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch({ type: "UPDATE_FIELD_AUTH", key: "address", value }),
 });
 
-class AddressContainer extends React.Component {
+class UserPostcardPreview extends React.Component {
   constructor() {
     super();
     this.addressAutoComplete = this.addressAutoComplete.bind(this);
-  }
-
-  shouldComponentUpdate(nextProps) {
-    if (this.props.addressAutoComplete && nextProps.addressAutoComplete) {
-      if (
-        this.props.addressAutoComplete.label !==
-        nextProps.addressAutoComplete.label
-      ) {
-        return true;
-      }
-    }
-    if (this.props.address !== nextProps.address) {
-      return true;
-    } else {
-      return false;
-    }
   }
 
   componentDidUpdate() {
@@ -50,16 +34,20 @@ class AddressContainer extends React.Component {
     if (this.props.addressAutoComplete) {
       return (
         <div>
+          {this.props.username ? <div>{this.props.username}</div> : null}
+          {this.props.image ? (
+            <img className="user-profile-pic" src={`${this.props.image}`}></img>
+          ) : null}
           {this.props.addressAutoComplete.address.street ? (
             <div>{`${
               this.props.addressAutoComplete.address.houseNumber || ""
-            } ${this.props.addressAutoComplete.address.street}`}</div>
+            } ${this.props.addressAutoComplete.address.street}`},</div>
           ) : null}
           {this.props.addressAutoComplete.address.city ? (
-            <div>{`${this.props.addressAutoComplete.address.city || ""}`}</div>
+            <div>{`${this.props.addressAutoComplete.address.city}`},</div>
           ) : null}
           {this.props.addressAutoComplete.address.country ? (
-            <div>{this.props.addressAutoComplete.address.country}</div>
+            <div>{this.props.addressAutoComplete.address.country},</div>
           ) : null}
           {this.props.addressAutoComplete.address.postalCode ? (
             <div>{this.props.addressAutoComplete.address.postalCode}</div>
@@ -72,4 +60,7 @@ class AddressContainer extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddressContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserPostcardPreview);

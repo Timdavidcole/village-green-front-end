@@ -109,7 +109,7 @@ class Register extends React.Component {
         >
           <fieldset className="register-fieldset">
             <div className="register-title">
-              we just need some details before you can get posting...
+              we're just going to need some details before you start posting...
             </div>
             <input
               className="register-input"

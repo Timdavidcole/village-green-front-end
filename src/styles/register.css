@@ -6,27 +6,23 @@
     max-width: 500px;
     height: 100%;
     left: calc(50vw - 250px);
-    padding: 20px;
-    box-sizing: border-box;
+    border: 0px
 }
 
 .register-title {
     font-family: titillium web, sans-serif;
     font-size: 1.8rem;
     text-align: left;
-    width: auto;
+    width: 100%;
+    padding: 10px;
     color: var(--noobo-darker-green);
-    top: 5px;
-    left: 11.5vw;
-    padding: 10px
 }
 
 .register-fieldset {
     position: relative;
     height: 100%;
-    border: none;
+    border: 0px;
     margin: 0px;
-    padding: 0px;
 }
 
 .register-flex {
@@ -36,10 +32,12 @@
     border: none;
     display: flex;
     flex-direction: column;
+    box-sizing: content-box;
 }
 
 .register-input {
     margin: 10px;
+    box-sizing: border-box;
     padding: 10px;
     width: 100%;
     border: none;
