@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import agent from "../agent";
 
 const mapStateToProps = (state) => ({ ...state.auth });
 
@@ -13,28 +12,10 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 class UserPostcardPreview extends React.Component {
-  constructor() {
-    super();
-    this.getAddressAutoComplete = this.getAddressAutoComplete.bind(this);
-    this.addressAutoComplete = this.addressAutoComplete.bind(this);
-  }
-
-  componentDidUpdate() {
-    if (this.props.address !== undefined && this.props.address !== "") {
-      this.getAddressAutoComplete();
-    }
-  }
-
-  getAddressAutoComplete() {
-    agent.Address.get(this.props.address).then((object) => {
-      this.props.getAddressAutoComplete(object);
-    });
-  }
-
   addressAutoComplete() {
     if (this.props.addressAutoComplete) {
       return (
-        <div>
+        <div className="address-autocomplete-container">
           {this.props.addressAutoComplete.address.street ? (
             <div>
               {`${this.props.addressAutoComplete.address.houseNumber || ""} ${
@@ -63,12 +44,12 @@ class UserPostcardPreview extends React.Component {
       this.props.username ||
       this.props.image
     ) {
+      console.log(this.props.addressAutoComplete);
       return (
         <div
           className="user-postcard"
           style={
-            this.props.showButton &&
-            this.props.addressAutoComplete
+            this.props.showButton && this.props.addressAutoComplete
               ? { backgroundColor: "azure" }
               : null
           }
@@ -79,20 +60,22 @@ class UserPostcardPreview extends React.Component {
               src={`${this.props.image}`}
             ></img>
           ) : null}
-          {this.props.username ? <div>{this.props.username}</div> : null}
+          {this.props.username ? <div>{this.props.username},</div> : null}
           {this.addressAutoComplete()}
-          <button
-            className="register-button"
-            type="submit"
-            disabled={this.props.inProgress}
-            style={
-              this.props.addressAutoComplete && this.props.showButton
-                ? { visibility: "visible", opacity: "1" }
-                : { visibility: "hidden", opacity: "0" }
-            }
-          >
-            sign up
-          </button>
+          <div className="register-button-container">
+            <button
+              className="register-button"
+              type="submit"
+              disabled={this.props.inProgress}
+              style={
+                this.props.addressAutoComplete && this.props.showButton
+                  ? { visibility: "visible", opacity: "1" }
+                  : { visibility: "hidden", opacity: "0" }
+              }
+            >
+              sign up
+            </button>
+          </div>
         </div>
       );
     } else {

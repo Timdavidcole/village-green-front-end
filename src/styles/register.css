@@ -10,9 +10,8 @@
 .register-title {
     font-family: titillium web, sans-serif;
     font-size: 1.8rem;
-    text-align: left;
-    width: 100%;
-    padding: 10px;
+    text-align: justify;
+    padding: 20px;
     color: var(--noobo-darker-green);
 }
 
@@ -56,44 +55,59 @@
     margin-bottom: 0px;
 }
 
-.register-button {
+.register-button-container {
     right: 20px;
     bottom: 20px;
-    padding: 10px;
+    position: absolute;
+    box-sizing: border-box;
+}
+
+
+.address-autocomplete-container::before {
+    color: white;
+    padding: 5px;
     border-radius: 5px;
     background-color: var(--noobo-dark-green);
-    color: white;
-    outline: none;
-    border: none;
-    transition: background-color 0.1s linear, color 0.1s linear;
-    font-family: titillium web, sans-serif;
-    font-size: 1.4rem;
-    position: absolute;
-    z-index: 4;
-}
-
-.register-button:hover {
-    background-color: var(--noobo-very-light-green);
-    color: var(--noobo-dark-green)
-}
-
-.register-button::before {
-    padding: 10px;
-    border-radius: 5px;
-    background-color: green;
     opacity: 0;
     transform: translate(0px, 0px);
     transition: opacity 0.1s linear, box-shadow 0.1s linear;
     font-family: titillium web, sans-serif;
     font-size: 1.4rem;
     position: absolute;
-    top: 60px;
+    transform: translate(-25%, 100%);
     z-index: 5;
-    content: "TEST"
+    width: 150px;
+    font-size: 1rem;
+    font-weight: 100;
+    text-align: center;
+    content: "please check your details are correct"
 }
 
-.register-button:hover::before {
+#address-input:focus .address-autocomplete-container::before {
     opacity: 1
+}
+
+.register-button {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--noobo-dark-green);
+    color: white;
+    outline: none;
+    border: none;
+    font-family: titillium web, sans-serif;
+    font-size: 1.4rem;
+    z-index: 4;
+    box-sizing: border-box;
+}
+
+.register-button:hover {
+    color: var(--noobo-dark-green);
+    background-color: var(--noobo-very-light-green);
+}
+
+.register-button:active {
+    color: var(--noobo-dark-green);
+    background-color: white;
 }
 
 .user-postcard {
@@ -106,7 +120,7 @@
     margin: 10px;
     padding: 20px;
     box-sizing: border-box;
-    height: 180px;
+    min-height: 180px;
     position: relative
 }
 
