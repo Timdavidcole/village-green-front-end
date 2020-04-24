@@ -63,7 +63,6 @@ class UserPostcardPreview extends React.Component {
       this.props.username ||
       this.props.image
     ) {
-      console.log(this.props.addressAutoComplete);
       return (
         <div className="user-postcard">
           {this.props.image ? (

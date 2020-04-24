@@ -65,9 +65,7 @@
     color: white;
     outline: none;
     border: none;
-    visibility: visible;
-    transform: translate(0px, 0px);
-    transition: transform 0.1s linear, box-shadow 0.1s linear;
+    transition: background-color 0.1s linear, color 0.1s linear;
     font-family: titillium web, sans-serif;
     font-size: 1.4rem;
     position: absolute;
@@ -77,6 +75,25 @@
 .register-button:hover {
     background-color: var(--noobo-very-light-green);
     color: var(--noobo-dark-green)
+}
+
+.register-button::before {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: green;
+    opacity: 0;
+    transform: translate(0px, 0px);
+    transition: opacity 0.1s linear, box-shadow 0.1s linear;
+    font-family: titillium web, sans-serif;
+    font-size: 1.4rem;
+    position: absolute;
+    top: 60px;
+    z-index: 5;
+    content: "TEST"
+}
+
+.register-button:hover::before {
+    opacity: 1
 }
 
 .user-postcard {
