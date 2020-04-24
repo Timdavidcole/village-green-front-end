@@ -8,10 +8,16 @@ import UserPostcardPreview from "./UserPostcardPreview";
 const mapStateToProps = (state) => ({ ...state.auth });
 
 const mapDispatchToProps = (dispatch) => ({
-  onSubmit: (username, email, password, address) =>
+  onSubmit: (user) =>
     dispatch({
       type: "REGISTER",
-      payload: agent.Auth.register(username, email, password, address),
+      payload: agent.Auth.register(
+        user.username,
+        user.email,
+        user.password,
+        user.address,
+        user.image
+      ),
     }),
   getAddressAutoComplete: (value) => {
     dispatch({ type: "UPDATE_FIELD_AUTH", key: "addressAutoComplete", value });
@@ -26,11 +32,11 @@ class Register extends React.Component {
       password: "",
       username: "",
       address: "",
-      imageUrl: "",
+      image: "",
     };
-    this.submitForm = (username, email, password, address) => (event) => {
+    this.submitForm = (user) => (event) => {
       event.preventDefault();
-      this.props.onSubmit(username, email, password, address);
+      this.props.onSubmit(user);
     };
     this.addressAutoComplete = this.addressAutoComplete.bind(this);
     this.changeAddress = this.changeAddress.bind(this);
@@ -81,19 +87,26 @@ class Register extends React.Component {
   }
 
   render() {
-    const { email, password, username, address, imageUrl } = this.state;
+    const {
+      email,
+      password,
+      username,
+      address,
+      image,
+    } = this.state;
 
     return (
       <div>
         <ListErrors errors={this.props.errors} />
         <form
           className="register-form"
-          onSubmit={this.submitForm(
-            username,
-            email,
-            password,
-            this.addressAutoComplete()
-          )}
+          onSubmit={this.submitForm({
+            username: username,
+            email: email,
+            password: password,
+            address: this.addressAutoComplete(),
+            image: image,
+          })}
         >
           <fieldset className="register-fieldset">
             <div
@@ -151,11 +164,11 @@ class Register extends React.Component {
             <input
               className="register-input"
               type="url"
-              value={imageUrl}
-              placeholder={"image URL"}
+              value={image}
+              placeholder={"profile picture URL (optional)"}
               autocomplete="no"
               onChange={(ev) => {
-                this.setState({ imageUrl: ev.target.value });
+                this.setState({ image: ev.target.value });
               }}
             />
             {this.displayAddressAutoComplete()}
