@@ -15,33 +15,33 @@ const mapDispatchToProps = (dispatch) => ({
 class UserPostcardPreview extends React.Component {
   constructor() {
     super();
+    this.getAddressAutoComplete = this.getAddressAutoComplete.bind(this);
     this.addressAutoComplete = this.addressAutoComplete.bind(this);
   }
 
   componentDidUpdate() {
     if (this.props.address !== undefined && this.props.address !== "") {
-      this.addressAutoComplete();
+      this.getAddressAutoComplete();
     }
   }
 
-  addressAutoComplete() {
+  getAddressAutoComplete() {
     agent.Address.get(this.props.address).then((object) => {
       this.props.getAddressAutoComplete(object);
     });
   }
 
-  render() {
+  addressAutoComplete() {
     if (this.props.addressAutoComplete) {
       return (
         <div>
-          {this.props.username ? <div>{this.props.username}</div> : null}
-          {this.props.image ? (
-            <img className="user-profile-pic" src={`${this.props.image}`}></img>
-          ) : null}
           {this.props.addressAutoComplete.address.street ? (
-            <div>{`${
-              this.props.addressAutoComplete.address.houseNumber || ""
-            } ${this.props.addressAutoComplete.address.street}`},</div>
+            <div>
+              {`${this.props.addressAutoComplete.address.houseNumber || ""} ${
+                this.props.addressAutoComplete.address.street
+              }`}
+              ,
+            </div>
           ) : null}
           {this.props.addressAutoComplete.address.city ? (
             <div>{`${this.props.addressAutoComplete.address.city}`},</div>
@@ -52,6 +52,36 @@ class UserPostcardPreview extends React.Component {
           {this.props.addressAutoComplete.address.postalCode ? (
             <div>{this.props.addressAutoComplete.address.postalCode}</div>
           ) : null}
+        </div>
+      );
+    }
+  }
+
+  render() {
+    if (
+      this.props.addressAutoComplete ||
+      this.props.username ||
+      this.props.image
+    ) {
+      console.log(this.props.addressAutoComplete);
+      return (
+        <div className="user-postcard">
+          {this.props.image ? (
+            <img
+              className="user-postcard-pic"
+              src={`${this.props.image}`}
+            ></img>
+          ) : null}
+          {this.props.username ? <div>{this.props.username}</div> : null}
+          {this.addressAutoComplete()}
+          <button
+            className="register-button"
+            type="submit"
+            disabled={this.props.inProgress}
+            style={this.props.showButton}
+          >
+            sign up
+          </button>
         </div>
       );
     } else {

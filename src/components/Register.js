@@ -58,23 +58,13 @@ class Register extends React.Component {
     } else return null;
   }
 
-  displayUserPostcard() {
-    if (this.props.addressAutoComplete || this.state.username) {
-      return (
-        <UserPostcardPreview
-          username={this.state.username}
-          image={this.state.image}
-        />
-      );
-    } else return null;
-  }
-
   changeAddress(ev) {
     this.setState({ address: ev.target.value });
     if (ev.target.value === "") {
       this.props.getAddressAutoComplete(null);
     } else {
       agent.Address.get(ev.target.value).then((object) => {
+        console.log(object)
         this.props.getAddressAutoComplete(object);
       });
     }
@@ -87,8 +77,8 @@ class Register extends React.Component {
       this.state.password &&
       this.state.username
     ) {
-      return "visible";
-    } else return "hidden";
+      return { visibility: "visible", opacity: "1" };
+    } else return { visibility: "hidden", opacity: "0" };
   }
 
   render() {
@@ -109,7 +99,7 @@ class Register extends React.Component {
         >
           <fieldset className="register-fieldset">
             <div className="register-title">
-              we're just going to need some details before you start posting...
+              Great! We're just going to need some details before you start posting...
             </div>
             <input
               className="register-input"
@@ -164,16 +154,11 @@ class Register extends React.Component {
               }}
               required="true"
             />
-            {this.displayUserPostcard()}
-            <button
-              className="register-button"
-              type="submit"
-              disabled={this.props.inProgress}
-              style={{ visibility: this.showButton() }}
-            >
-              {" "}
-              sign up
-            </button>
+            <UserPostcardPreview
+              username={this.state.username}
+              image={this.state.image}
+              showButton={this.showButton()}
+            />
           </fieldset>
         </form>
       </div>

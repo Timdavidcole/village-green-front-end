@@ -1,11 +1,11 @@
 .register-form {
     overflow: none;
     position: absolute;
+    right: 10px;
     width: 50vw;
-    min-width: 100px;
+    min-width: 300px;
     max-width: 500px;
     height: 100%;
-    left: calc(50vw - 250px);
     border: 0px
 }
 
@@ -57,23 +57,48 @@
 }
 
 .register-button {
-    margin: 10px;
+    right: 20px;
+    bottom: 20px;
     padding: 10px;
     border-radius: 5px;
     background-color: var(--noobo-dark-green);
     color: white;
     outline: none;
     border: none;
-    box-shadow: 5px 5px 0px 0px var(--box-shadow-dark-grey);
     visibility: visible;
     transform: translate(0px, 0px);
     transition: transform 0.1s linear, box-shadow 0.1s linear;
     font-family: titillium web, sans-serif;
     font-size: 1.4rem;
+    position: absolute;
+    z-index: 4;
 }
 
 .register-button:hover {
-    box-shadow: 5px 5px 0px 0px var(--box-shadow-dark-grey);
     background-color: var(--noobo-very-light-green);
     color: var(--noobo-dark-green)
+}
+
+.user-postcard {
+    color: var(--noobo-darker-green);
+    font-family: titillium web, sans-serif;
+    box-shadow: 5px 5px 0px 0px var(--box-shadow-dark-grey);
+    border-bottom: 2px outset rgb(201, 201, 201);
+    border-right: 2px outset rgb(201, 201, 201);
+    width: 100%;
+    margin: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+    min-height: 150px;
+    position: relative
+}
+
+.user-postcard-pic {
+    background-color: white;
+    border-radius: 6px;
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    margin-left: 8px;
+    float: right
 }
