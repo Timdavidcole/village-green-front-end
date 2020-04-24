@@ -1,9 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import agent from "../agent";
-import AddressItem from "./AddressItem";
-import { SlideDown } from "react-slidedown";
-import "react-slidedown/lib/slidedown.css";
 
 const mapStateToProps = (state) => ({ ...state.auth });
 
@@ -53,13 +50,20 @@ class AddressContainer extends React.Component {
     if (this.props.addressAutoComplete) {
       return (
         <div>
-          <SlideDown>
-            <div>{this.props.addressAutoComplete.address.houseNumber}</div>
-            <div>{this.props.addressAutoComplete.address.street}</div>
-            <div>{this.props.addressAutoComplete.address.city}</div>
+          {this.props.addressAutoComplete.address.street ? (
+            <div>{`${
+              this.props.addressAutoComplete.address.houseNumber || ""
+            } ${this.props.addressAutoComplete.address.street}`}</div>
+          ) : null}
+          {this.props.addressAutoComplete.address.city ? (
+            <div>{`${this.props.addressAutoComplete.address.city || ""}`}</div>
+          ) : null}
+          {this.props.addressAutoComplete.address.country ? (
             <div>{this.props.addressAutoComplete.address.country}</div>
+          ) : null}
+          {this.props.addressAutoComplete.address.postalCode ? (
             <div>{this.props.addressAutoComplete.address.postalCode}</div>
-          </SlideDown>
+          ) : null}
         </div>
       );
     } else {

@@ -2,8 +2,10 @@
     overflow: none;
     position: absolute;
     width: 50vw;
+    min-width: 100px;
+    max-width: 500px;
     height: 100%;
-    left: calc(50% - 50vw / 2);
+    left: calc(50vw - 250px);
     padding: 20px;
     box-sizing: border-box;
 }
