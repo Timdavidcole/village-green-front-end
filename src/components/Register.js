@@ -3,7 +3,7 @@ import ListErrors from "./ListErrors";
 import agent from "../agent";
 import { connect } from "react-redux";
 import "../styles/register.css";
-import AddressContainer from "./AddressContainer";
+import UserPostcardPreview from "./UserPostcardPreview";
 
 const mapStateToProps = (state) => ({ ...state.auth });
 
@@ -26,6 +26,7 @@ class Register extends React.Component {
       password: "",
       username: "",
       address: "",
+      imageUrl: "",
     };
     this.submitForm = (username, email, password, address) => (event) => {
       event.preventDefault();
@@ -53,7 +54,7 @@ class Register extends React.Component {
 
   displayAddressAutoComplete() {
     if (this.props.addressAutoComplete) {
-      return <AddressContainer />;
+      return <UserPostcardPreview />;
     } else return null;
   }
 
@@ -68,8 +69,19 @@ class Register extends React.Component {
     }
   }
 
+  showButton() {
+    if (
+      this.state.address &&
+      this.state.email &&
+      this.state.password &&
+      this.state.username
+    ) {
+      return "visible";
+    } else return "hidden";
+  }
+
   render() {
-    const { email, password, username, address } = this.state;
+    const { email, password, username, address, imageUrl } = this.state;
 
     return (
       <div>
@@ -84,11 +96,26 @@ class Register extends React.Component {
           )}
         >
           <fieldset className="register-fieldset">
+            <div
+              style={{
+                fontFamily: "titillium web, sans-serif",
+                fontSize: "2rem",
+                textAlign: "left",
+                width: "auto",
+                color: "var(--noobo-darker-green)",
+                top: "5px",
+                left: "11.5vw",
+                padding: "10px",
+              }}
+            >
+              we just need some details before you can get posting...
+            </div>
             <input
               className="register-input"
               type="email"
-              placeholder="Email"
+              placeholder="email"
               value={email}
+              autocomplete="no"
               onChange={(ev) => {
                 this.setState({ email: ev.target.value });
               }}
@@ -96,8 +123,9 @@ class Register extends React.Component {
             <input
               className="register-input"
               type="password"
-              placeholder="Password"
+              placeholder="password"
               value={password}
+              autocomplete="new-password"
               onChange={(ev) => {
                 this.setState({ password: ev.target.value });
               }}
@@ -105,8 +133,9 @@ class Register extends React.Component {
             <input
               className="register-input"
               type="username"
-              placeholder="Username"
+              placeholder="username"
               value={username}
+              autocomplete="no"
               onChange={(ev) => {
                 this.setState({ username: ev.target.value });
               }}
@@ -115,20 +144,32 @@ class Register extends React.Component {
               className="register-input"
               type="text"
               value={address}
-              placeholder={"Address"}
+              placeholder={"address"}
+              autocomplete="no"
               onChange={this.changeAddress}
             />
+            <input
+              className="register-input"
+              type="url"
+              value={imageUrl}
+              placeholder={"image URL"}
+              autocomplete="no"
+              onChange={(ev) => {
+                this.setState({ imageUrl: ev.target.value });
+              }}
+            />
+            {this.displayAddressAutoComplete()}
             <button
               className="register-button"
               type="submit"
               disabled={this.props.inProgress}
+              style={{ visibility: this.showButton() }}
             >
               {" "}
               sign up
             </button>
           </fieldset>
         </form>
-        {this.displayAddressAutoComplete()}
       </div>
     );
   }

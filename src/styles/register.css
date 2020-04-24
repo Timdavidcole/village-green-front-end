@@ -38,6 +38,13 @@
     box-shadow: 5px 5px 0px 0px var(--box-shadow-dark-grey);
     white-space: pre-line;
     font-size: 1.1rem;
+    transition: padding 0.2s linear, box-shadow 0.2s linear;
+}
+
+.register-input:focus {
+    background-color: azure;
+    padding: 15px;
+    box-shadow: 2px 2px 0px 0px var(--box-shadow-dark-grey);
 }
 
 .register-button {
