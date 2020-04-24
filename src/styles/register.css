@@ -1,10 +1,8 @@
 .register-form {
     overflow: none;
     position: absolute;
-    right: 10px;
-    width: 50vw;
-    min-width: 300px;
-    max-width: 500px;
+    width: 400px;
+    left: calc(50vw - 200px);
     height: 100%;
     border: 0px
 }
@@ -44,16 +42,18 @@
     outline: none;
     border-bottom: 2px outset rgb(201, 201, 201);
     border-right: 2px outset rgb(201, 201, 201);
-    box-shadow: 5px 5px 0px 0px var(--box-shadow-dark-grey);
+    box-shadow: 7px 7px 0px 0px var(--box-shadow-dark-grey);
     white-space: pre-line;
     font-size: 1.1rem;
-    transition: padding 0.2s linear, box-shadow 0.2s linear;
+    transition: width 0.2s linear, padding 0.2s linear, box-shadow 0.2s linear, margin-bottom 0.2s linear;
 }
 
 .register-input:focus {
     background-color: azure;
     padding: 15px;
+    width: 101%;
     box-shadow: 2px 2px 0px 0px var(--box-shadow-dark-grey);
+    margin-bottom: 0px;
 }
 
 .register-button {
@@ -106,7 +106,7 @@
     margin: 10px;
     padding: 20px;
     box-sizing: border-box;
-    min-height: 150px;
+    height: 180px;
     position: relative
 }
 

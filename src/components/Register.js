@@ -64,21 +64,19 @@ class Register extends React.Component {
       this.props.getAddressAutoComplete(null);
     } else {
       agent.Address.get(ev.target.value).then((object) => {
-        console.log(object)
+        console.log(object);
         this.props.getAddressAutoComplete(object);
       });
     }
   }
 
   showButton() {
-    if (
+    return (
       this.state.address &&
       this.state.email &&
       this.state.password &&
       this.state.username
-    ) {
-      return { visibility: "visible", opacity: "1" };
-    } else return { visibility: "hidden", opacity: "0" };
+    );
   }
 
   render() {
@@ -99,7 +97,8 @@ class Register extends React.Component {
         >
           <fieldset className="register-fieldset">
             <div className="register-title">
-              Great! We're just going to need some details before you start posting...
+              Great! We're just going to need some details before you start
+              posting...
             </div>
             <input
               className="register-input"

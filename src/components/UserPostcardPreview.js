@@ -64,7 +64,15 @@ class UserPostcardPreview extends React.Component {
       this.props.image
     ) {
       return (
-        <div className="user-postcard">
+        <div
+          className="user-postcard"
+          style={
+            this.props.showButton &&
+            this.props.addressAutoComplete
+              ? { backgroundColor: "azure" }
+              : null
+          }
+        >
           {this.props.image ? (
             <img
               className="user-postcard-pic"
@@ -77,7 +85,11 @@ class UserPostcardPreview extends React.Component {
             className="register-button"
             type="submit"
             disabled={this.props.inProgress}
-            style={this.props.showButton}
+            style={
+              this.props.addressAutoComplete && this.props.showButton
+                ? { visibility: "visible", opacity: "1" }
+                : { visibility: "hidden", opacity: "0" }
+            }
           >
             sign up
           </button>
