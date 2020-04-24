@@ -51,12 +51,21 @@ class Register extends React.Component {
     } else return null;
   }
 
+  displayAddressAutoComplete() {
+    if (this.props.addressAutoComplete) {
+      return <AddressContainer />;
+    } else return null;
+  }
+
   changeAddress(ev) {
-    console.log(ev.target.value)
     this.setState({ address: ev.target.value });
-    agent.Address.get(ev.target.value).then(object => {
-      this.props.getAddressAutoComplete(object);
-    });
+    if (ev.target.value === "") {
+      this.props.getAddressAutoComplete(null);
+    } else {
+      agent.Address.get(ev.target.value).then((object) => {
+        this.props.getAddressAutoComplete(object);
+      });
+    }
   }
 
   render() {
@@ -75,53 +84,51 @@ class Register extends React.Component {
           )}
         >
           <fieldset className="register-fieldset">
-            <div className="register-flex">
-              <input
-                className="register-input"
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(ev) => {
-                  this.setState({ email: ev.target.value });
-                }}
-              />
-              <input
-                className="register-input"
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(ev) => {
-                  this.setState({ password: ev.target.value });
-                }}
-              />
-              <input
-                className="register-input"
-                type="username"
-                placeholder="Username"
-                value={username}
-                onChange={(ev) => {
-                  this.setState({ username: ev.target.value });
-                }}
-              />
-              <input
-                className="register-input"
-                type="text"
-                value={address}
-                placeholder={"Address"}
-                onChange={this.changeAddress}
-              />
-              <AddressContainer />
-              <button
-                className="register-button"
-                type="submit"
-                disabled={this.props.inProgress}
-              >
-                {" "}
-                Sign Up
-              </button>
-            </div>
+            <input
+              className="register-input"
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(ev) => {
+                this.setState({ email: ev.target.value });
+              }}
+            />
+            <input
+              className="register-input"
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(ev) => {
+                this.setState({ password: ev.target.value });
+              }}
+            />
+            <input
+              className="register-input"
+              type="username"
+              placeholder="Username"
+              value={username}
+              onChange={(ev) => {
+                this.setState({ username: ev.target.value });
+              }}
+            />
+            <input
+              className="register-input"
+              type="text"
+              value={address}
+              placeholder={"Address"}
+              onChange={this.changeAddress}
+            />
+            <button
+              className="register-button"
+              type="submit"
+              disabled={this.props.inProgress}
+            >
+              {" "}
+              sign up
+            </button>
           </fieldset>
         </form>
+        {this.displayAddressAutoComplete()}
       </div>
     );
   }

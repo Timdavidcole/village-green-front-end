@@ -51,7 +51,6 @@ class AddressContainer extends React.Component {
 
   render() {
     if (this.props.addressAutoComplete) {
-      console.log(this.props.addressAutoComplete.address);
       return (
         <div>
           <SlideDown>
