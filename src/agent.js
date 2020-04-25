@@ -23,7 +23,7 @@ const Address = {
       .query({
         api_key: "ak_k9foifvbjpGu6cmc1wObmNz2MOi3w"
       })
-      .then((res) => JSON.parse(res.text)),
+      .then((res) => res.body.result)
 };
 
 const requests = {

@@ -126,3 +126,28 @@
     margin-left: 8px;
     float: right
 }
+
+.find-address-button {
+    position: absolute;
+    right: 0px;
+    top: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: white;
+    color: var(--noobo-darker-green);
+    outline: none;
+    border: none;
+    font-family: titillium web, sans-serif;
+    font-size: 0.8rem;
+    z-index: 10;
+    box-sizing: border-box;
+    transition: opacity 0.1s ease-in;
+}
+
+.find-address-button:hover {
+    background-color: var(--noobo-very-light-green);
+}
+
+.find-address-button:active {
+    background-color: white;
+}

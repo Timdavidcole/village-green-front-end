@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch) => ({
         user.username,
         user.email,
         user.password,
-        user.address,
+        user.postcode,
         user.image
       ),
     }),
@@ -31,7 +31,7 @@ class Register extends React.Component {
       email: "",
       password: "",
       username: "",
-      address: "",
+      postcode: "",
       image: "",
       focusAddress: false,
     };
@@ -40,11 +40,10 @@ class Register extends React.Component {
       this.props.onSubmit(user);
     };
     this.addressAutoComplete = this.addressAutoComplete.bind(this);
-    this.changeAddress = this.changeAddress.bind(this);
+    this.findAddress = this.findAddress.bind(this);
   }
 
   addressAutoComplete() {
-    console.log(this.props.addressAutoComplete)
     if (this.state.address && this.props.addressAutoComplete) {
       return (
         this.props.addressAutoComplete.address.houseNumber +
@@ -60,21 +59,18 @@ class Register extends React.Component {
     } else return null;
   }
 
-  changeAddress(ev) {
-    this.setState({ address: ev.target.value });
-    if (ev.target.value === "") {
-      this.props.getAddressAutoComplete(null);
-    } else {
-      agent.Address.get(ev.target.value).then((object) => {
-        console.log(object);
-        this.props.getAddressAutoComplete(object);
-      });
-    }
+  findAddress(event) {
+    console.log("BBUM");
+    console.log(event);
+    event.preventDefault();
+    agent.Address.get(this.state.postcode).then((object) => {
+      this.props.getAddressAutoComplete(object);
+    });
   }
 
   showButton() {
     return (
-      this.state.address &&
+      this.state.postcode &&
       this.state.email &&
       this.state.password &&
       this.state.username
@@ -82,7 +78,7 @@ class Register extends React.Component {
   }
 
   render() {
-    const { email, password, username, address, image } = this.state;
+    const { email, password, username, postcode, image } = this.state;
 
     return (
       <div>
@@ -93,7 +89,7 @@ class Register extends React.Component {
             username: username,
             email: email,
             password: password,
-            address: this.addressAutoComplete(),
+            postcode: this.addressAutoComplete(),
             image: image,
           })}
         >
@@ -135,18 +131,33 @@ class Register extends React.Component {
               }}
               required="true"
             />
-            <input
-              id="address-input"
-              className="register-input"
-              type="text"
-              value={address}
-              placeholder={"address"}
-              autocomplete="chrome-off"
-              onChange={this.changeAddress}
-              required="true"
-              onFocus={() => this.setState({ focusAddress: true })}
-              onBlur={() => this.setState({ focusAddress: false })}
-            />
+            <div style={{ position: "relative" }}>
+              <input
+                id="postcode-input"
+                className="register-input"
+                type="text"
+                value={postcode}
+                placeholder={"postcode"}
+                autocomplete="chrome-off"
+                onChange={(ev) => this.setState({ postcode: ev.target.value })}
+                required="true"
+                onFocus={() => this.setState({ focusPostcode: true })}
+                onBlur={() => this.setState({ focusPostcode: false })}
+              ></input>
+              <button
+                type="button"
+                style={
+                  this.state.focusPostcode && this.state.postcode
+                    ? { opacity: "1" }
+                    : { opacity: "0" }
+                }
+                className="find-address-button"
+                onClick={this.findAddress}
+              >
+                find address
+              </button>
+            </div>
+
             <input
               className="register-input"
               type="url"
