@@ -12,23 +12,24 @@ const mapDispatchToProps = (dispatch) => ({
 class AddressDropDown extends React.Component {
   dropDownSlide() {
     return this.props.addressAutoComplete && this.props.focusPostcode
-      ? { maxHeight: "70px" }
-      : { maxHeight: "0px" };
+      ? { maxHeight: "70px", marginTop: "10px" }
+      : { maxHeight: "0px", marginTop: "0px" };
   }
   render() {
     if (this.props.addressAutoComplete) {
+      console.log(this.props.addressAutoComplete)
       return (
         <div className="address-dropdown" style={this.dropDownSlide()}>
           {this.props.addressAutoComplete.map((address, index) => {
             return (
-              <div
+              <a
                 onClick={() => this.props.selectAddress(index)}
                 key={index}
                 className="address-dropdown-item"
               >
                 {address.line_1 ? address.line_1 + ", " : null}
                 {address.line_2 ? address.line_2 : null}
-              </div>
+              </a>
             );
           })}
           <br></br>

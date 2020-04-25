@@ -69,8 +69,9 @@ class Register extends React.Component {
   }
 
   showButton() {
+    console.log(this.props.selectedAddress)
     return (
-      this.state.postcode &&
+      this.props.selectedAddress &&
       this.state.email &&
       this.state.password &&
       this.state.username

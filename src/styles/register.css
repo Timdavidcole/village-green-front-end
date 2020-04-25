@@ -91,6 +91,7 @@
     font-size: 1.4rem;
     z-index: 4;
     box-sizing: border-box;
+    transition: opacity 0.2s linear, transform 0.2s linear;
 }
 
 .register-button:hover {
@@ -158,17 +159,19 @@
 }
 
 .address-dropdown {
-    margin-top: 10px;
     overflow-y: scroll;
-    transition: max-height 0.3s linear
+    transition: max-height 0.3s linear,margin-top 0.3s linear
 }
 
 .address-dropdown-item {
+    display: inline-block;
+    width: 90%;
     padding-left: 10px;
     margin-left: 10px;
 }
 
 .address-dropdown-item:hover {
+    color: black;
     background-color: var(--noobo-very-light-green);
 }
 

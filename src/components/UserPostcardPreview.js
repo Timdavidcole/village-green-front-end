@@ -17,7 +17,6 @@ class UserPostcardPreview extends React.Component {
       const address = this.props.addressAutoComplete[
         this.props.selectedAddress
       ];
-      console.log(this.props.addressAutoComplete[this.props.selectedAddress]);
       return (
         <div>
           {address.line_1 ? <div>{address.line_1},</div> : null}
@@ -62,8 +61,8 @@ class UserPostcardPreview extends React.Component {
               disabled={this.props.inProgress}
               style={
                 this.props.addressAutoComplete && this.props.showButton
-                  ? { visibility: "visible", opacity: "1" }
-                  : { visibility: "hidden", opacity: "0" }
+                  ? { opacity: "1", transform: "scale(1,1)" }
+                  : { opacity: "0", transform: "scale(0,0)" }
               }
             >
               sign up
