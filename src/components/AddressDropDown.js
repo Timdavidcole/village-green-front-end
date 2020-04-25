@@ -3,7 +3,11 @@ import { connect } from "react-redux";
 
 const mapStateToProps = (state) => ({ ...state.auth });
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  selectAddress: (index) => {
+    dispatch({ type: "SELECT_ADDRESS", index });
+  },
+});
 
 class AddressDropDown extends React.Component {
   dropDownSlide() {
@@ -12,16 +16,22 @@ class AddressDropDown extends React.Component {
       : { maxHeight: "0px" };
   }
   render() {
-    if (this.props.addressAutoComplete && this.props.focusPostcode) {
+    if (this.props.addressAutoComplete) {
       return (
         <div className="address-dropdown" style={this.dropDownSlide()}>
           {this.props.addressAutoComplete.map((address, index) => {
             return (
-              <div key={index} className="address-dropdown-item">
-                {address.line_1}
+              <div
+                onClick={() => this.props.selectAddress(index)}
+                key={index}
+                className="address-dropdown-item"
+              >
+                {address.line_1 ? address.line_1 + ", " : null}
+                {address.line_2 ? address.line_2 : null}
               </div>
             );
           })}
+          <br></br>
         </div>
       );
     } else

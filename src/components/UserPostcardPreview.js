@@ -13,27 +13,28 @@ const mapDispatchToProps = (dispatch) => ({
 
 class UserPostcardPreview extends React.Component {
   addressAutoComplete() {
-    console.log(this.props.addressAutoComplete);
-    if (this.props.addressAutoComplete) {
-      console.log(this.props.addressAutoComplete);
+    if (this.props.selectedAddress !== undefined) {
+      const address = this.props.addressAutoComplete[
+        this.props.selectedAddress
+      ];
+      console.log(this.props.addressAutoComplete[this.props.selectedAddress]);
       return (
         <div>
-          <div
-            className={"address-autocomplete-tooltip"}
-            style={this.props.focusAddress ? { opacity: 1 } : { opacity: 0 }}
-          >
-            please check your details are correct
-          </div>
-          {}
-          <div>{this.props.addressAutoComplete[0].line_1}</div>
+          {address.line_1 ? <div>{address.line_1},</div> : null}
+          {address.line_2 ? <div>{address.line_2},</div> : null}
+          {address.line_3 ? <div>{address.line_3},</div> : null}
+          {address.post_town ? <div>{address.post_town},</div> : null}
+          {address.country ? <div>{address.country}</div> : null}
+          {address.postcode ? <div>{address.postcode}</div> : null}
         </div>
       );
     }
   }
 
   render() {
+    console.log(this.props.selectedAddress);
     if (
-      this.props.addressAutoComplete ||
+      this.props.selectedAddress !== undefined ||
       this.props.username ||
       this.props.image
     ) {

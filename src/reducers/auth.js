@@ -1,6 +1,6 @@
 export default (
   state = {
-    loggedIn: false
+    loggedIn: false,
   },
   action
 ) => {
@@ -28,6 +28,11 @@ export default (
       return {
         inProgress: false,
         loggedIn: false,
+      };
+    case "SELECT_ADDRESS":
+      return {
+        ...state,
+        selectedAddress: action.index,
       };
     case "LOGIN_PAGE_UNLOADED":
       return {

@@ -158,8 +158,9 @@
 }
 
 .address-dropdown {
+    margin-top: 10px;
     overflow-y: scroll;
-    transition: max-height 0.5s linear
+    transition: max-height 0.3s linear
 }
 
 .address-dropdown-item {
