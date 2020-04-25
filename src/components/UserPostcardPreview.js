@@ -13,15 +13,17 @@ const mapDispatchToProps = (dispatch) => ({
 
 class UserPostcardPreview extends React.Component {
   addressAutoComplete() {
-    console.log(this.props.addressAutoComplete)
+    console.log(this.props.addressAutoComplete);
     if (this.props.addressAutoComplete) {
-      console.log(this.props.addressAutoComplete)
+      console.log(this.props.addressAutoComplete);
       return (
         <div>
           <div
             className={"address-autocomplete-tooltip"}
             style={this.props.focusAddress ? { opacity: 1 } : { opacity: 0 }}
-          >please check your details are correct</div>
+          >
+            please check your details are correct
+          </div>
           {}
           <div>{this.props.addressAutoComplete[0].line_1}</div>
         </div>

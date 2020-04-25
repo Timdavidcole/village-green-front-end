@@ -4,6 +4,7 @@ import agent from "../agent";
 import { connect } from "react-redux";
 import "../styles/register.css";
 import UserPostcardPreview from "./UserPostcardPreview";
+import AddressDropDown from "./AddressDropDown";
 
 const mapStateToProps = (state) => ({ ...state.auth });
 
@@ -33,7 +34,7 @@ class Register extends React.Component {
       username: "",
       postcode: "",
       image: "",
-      focusAddress: false,
+      focusPostcode: false,
     };
     this.submitForm = (user) => (event) => {
       event.preventDefault();
@@ -60,8 +61,7 @@ class Register extends React.Component {
   }
 
   findAddress(event) {
-    console.log("BBUM");
-    console.log(event);
+    document.getElementById("postcode-input").focus();
     event.preventDefault();
     agent.Address.get(this.state.postcode).then((object) => {
       this.props.getAddressAutoComplete(object);
@@ -79,7 +79,6 @@ class Register extends React.Component {
 
   render() {
     const { email, password, username, postcode, image } = this.state;
-
     return (
       <div>
         <ListErrors errors={this.props.errors} />
@@ -144,10 +143,9 @@ class Register extends React.Component {
                 onFocus={() => this.setState({ focusPostcode: true })}
                 onBlur={() => this.setState({ focusPostcode: false })}
               ></input>
-              {this.props.addressAutoComplete.map((address, index) => {
-                return <div>{address.line_1}</div>;
-              })}
+              <AddressDropDown focusPostcode={this.state.focusPostcode} />
               <button
+                id="find-address-button"
                 type="button"
                 style={
                   this.state.focusPostcode && this.state.postcode
@@ -173,7 +171,7 @@ class Register extends React.Component {
               required="true"
             />
             <UserPostcardPreview
-              focusAddress={this.state.focusAddress}
+              focusPostcode={this.state.focusPostcode}
               username={this.state.username}
               image={this.state.image}
               showButton={this.showButton()}

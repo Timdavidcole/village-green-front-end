@@ -151,3 +151,33 @@
 .find-address-button:active {
     background-color: white;
 }
+
+.address-dropdown-container {
+    margin: 10px;
+    padding: 10px;
+}
+
+.address-dropdown {
+    overflow-y: scroll;
+    transition: max-height 0.5s linear
+}
+
+.address-dropdown-item {
+    padding-left: 10px;
+    margin-left: 10px;
+}
+
+.address-dropdown-item:hover {
+    background-color: var(--noobo-very-light-green);
+}
+
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, .5);
+    box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}

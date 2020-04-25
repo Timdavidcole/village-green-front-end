@@ -3,76 +3,31 @@ import { connect } from "react-redux";
 
 const mapStateToProps = (state) => ({ ...state.auth });
 
-const mapDispatchToProps = (dispatch) => ({
-  getAddressAutoComplete: (value) => {
-    dispatch({ type: "UPDATE_FIELD_AUTH", key: "addressAutoComplete", value });
-  },
-  onChangeAddress: (value) =>
-    dispatch({ type: "UPDATE_FIELD_AUTH", key: "address", value }),
-});
+const mapDispatchToProps = (dispatch) => ({});
 
 class AddressDropDown extends React.Component {
-  addressAutoComplete() {
-    console.log(this.props.addressAutoComplete);
-    if (this.props.addressAutoComplete) {
-      console.log(this.props.addressAutoComplete);
-      return (
-        <div>
-          <div
-            className={"address-autocomplete-tooltip"}
-            style={this.props.focusAddress ? { opacity: 1 } : { opacity: 0 }}
-          >
-            please check your details are correct
-          </div>
-          {}
-          <div>{this.props.addressAutoComplete[0].line_1}</div>
-        </div>
-      );
-    }
+  dropDownSlide() {
+    return this.props.addressAutoComplete && this.props.focusPostcode
+      ? { maxHeight: "70px" }
+      : { maxHeight: "0px" };
   }
-
   render() {
-    if (
-      this.props.addressAutoComplete ||
-      this.props.username ||
-      this.props.image
-    ) {
+    if (this.props.addressAutoComplete && this.props.focusPostcode) {
       return (
-        <div
-          className="user-postcard"
-          style={
-            this.props.showButton && this.props.addressAutoComplete
-              ? { backgroundColor: "azure" }
-              : null
-          }
-        >
-          {this.props.image ? (
-            <img
-              className="user-postcard-pic"
-              src={`${this.props.image}`}
-            ></img>
-          ) : null}
-          {this.props.username ? <div>{this.props.username},</div> : null}
-          {this.addressAutoComplete()}
-          <div className="register-button-container">
-            <button
-              className="register-button"
-              type="submit"
-              disabled={this.props.inProgress}
-              style={
-                this.props.addressAutoComplete && this.props.showButton
-                  ? { visibility: "visible", opacity: "1" }
-                  : { visibility: "hidden", opacity: "0" }
-              }
-            >
-              sign up
-            </button>
-          </div>
+        <div className="address-dropdown" style={this.dropDownSlide()}>
+          {this.props.addressAutoComplete.map((address, index) => {
+            return (
+              <div key={index} className="address-dropdown-item">
+                {address.line_1}
+              </div>
+            );
+          })}
         </div>
       );
-    } else {
-      return null;
-    }
+    } else
+      return (
+        <div className="address-dropdown" style={this.dropDownSlide()}></div>
+      );
   }
 }
 
