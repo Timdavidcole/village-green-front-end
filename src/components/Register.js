@@ -144,6 +144,9 @@ class Register extends React.Component {
                 onFocus={() => this.setState({ focusPostcode: true })}
                 onBlur={() => this.setState({ focusPostcode: false })}
               ></input>
+              {this.props.addressAutoComplete.map((address, index) => {
+                return <div>{address.line_1}</div>;
+              })}
               <button
                 type="button"
                 style={
