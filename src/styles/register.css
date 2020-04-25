@@ -63,28 +63,21 @@
 }
 
 
-.address-autocomplete-container::before {
+.address-autocomplete-tooltip {
     color: white;
     padding: 5px;
     border-radius: 5px;
     background-color: var(--noobo-dark-green);
-    opacity: 0;
-    transform: translate(0px, 0px);
     transition: opacity 0.1s linear, box-shadow 0.1s linear;
     font-family: titillium web, sans-serif;
     font-size: 1.4rem;
     position: absolute;
-    transform: translate(-25%, 100%);
+    transform: translate(0%, 200%);
     z-index: 5;
     width: 150px;
     font-size: 1rem;
     font-weight: 100;
     text-align: center;
-    content: "please check your details are correct"
-}
-
-#address-input:focus .address-autocomplete-container::before {
-    opacity: 1
 }
 
 .register-button {

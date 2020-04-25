@@ -33,6 +33,7 @@ class Register extends React.Component {
       username: "",
       address: "",
       image: "",
+      focusAddress: false,
     };
     this.submitForm = (user) => (event) => {
       event.preventDefault();
@@ -43,6 +44,7 @@ class Register extends React.Component {
   }
 
   addressAutoComplete() {
+    console.log(this.props.addressAutoComplete)
     if (this.state.address && this.props.addressAutoComplete) {
       return (
         this.props.addressAutoComplete.address.houseNumber +
@@ -139,9 +141,11 @@ class Register extends React.Component {
               type="text"
               value={address}
               placeholder={"address"}
-              autocomplete="no"
+              autocomplete="chrome-off"
               onChange={this.changeAddress}
               required="true"
+              onFocus={() => this.setState({ focusAddress: true })}
+              onBlur={() => this.setState({ focusAddress: false })}
             />
             <input
               className="register-input"
@@ -155,6 +159,7 @@ class Register extends React.Component {
               required="true"
             />
             <UserPostcardPreview
+              focusAddress={this.state.focusAddress}
               username={this.state.username}
               image={this.state.image}
               showButton={this.showButton()}

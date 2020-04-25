@@ -15,7 +15,11 @@ class UserPostcardPreview extends React.Component {
   addressAutoComplete() {
     if (this.props.addressAutoComplete) {
       return (
-        <div className="address-autocomplete-container">
+        <div>
+          <div
+            className={"address-autocomplete-tooltip"}
+            style={this.props.focusAddress ? { opacity: 1 } : { opacity: 0 }}
+          >please check your details are correct</div>
           {this.props.addressAutoComplete.address.street ? (
             <div>
               {`${this.props.addressAutoComplete.address.houseNumber || ""} ${
