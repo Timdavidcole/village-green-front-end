@@ -6,19 +6,19 @@ import "../../styles/notices.css";
 import { connect } from "react-redux";
 import ChangePageButton from "./ChangePageButton";
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   page: state.notices.page,
   resize: state.notices.resize,
   pageNumber: state.notices.pageNumber,
   noticesVisible: state.notices.noticesVisible,
   noticesWindowDims: state.notices.noticesWindowDims,
   noticesSorted: state.notices.noticesSorted,
-  noticesY: state.notices.noticesY
+  noticesY: state.notices.noticesY,
 });
 
-const mapDispatchToProps = dispatch => ({
-  addNoticesWindowDims: payload =>
-    dispatch({ type: "ADD_NOTICES_WINDOW_DIMS", payload })
+const mapDispatchToProps = (dispatch) => ({
+  addNoticesWindowDims: (payload) =>
+    dispatch({ type: "ADD_NOTICES_WINDOW_DIMS", payload }),
 });
 
 class NoticesPage extends React.Component {
@@ -43,49 +43,21 @@ class NoticesPage extends React.Component {
     ) {
       this.props.addNoticesWindowDims({
         width: windowWidth,
-        height: windowHeight
+        height: windowHeight,
       });
     }
   }
 
-  checkPageStyle() {
-    const pageNumber = this.props.pageNumber;
-    const noticesSorted = this.props.noticesSorted;
-    if (noticesSorted.length === 1) {
-      return {
-        height: "calc(100vh - 105px)"
-      };
-    }
-    if (pageNumber === 1 && noticesSorted.length > 1) {
-      return {
-        height: "calc(100vh - 150px)"
-      };
-    } else if (pageNumber > 1 && pageNumber < noticesSorted.length) {
-      return {
-        height: "calc(100vh - 185px)"
-      };
-    } else if (
-      pageNumber === noticesSorted.length &&
-      noticesSorted.length > 1
-    ) {
-      return {
-        height: "calc(100vh - 140px)"
-      };
-    }
-  }
-
   render() {
+    if(this.props.noticesSorted){
+      const noticesSorted = this.props.noticesSorted
+      console.log(noticesSorted)
+    }
     return (
       <div>
-        <PageScroll />
-        {this.whichPageNumberButton("up")}
         <div
           className="noticesParent"
           id="notices"
-          style={{
-            transform: `translateY(${this.props.noticesY}px)`,
-            ...this.checkPageStyle()
-          }}
           ref={this.myRef}
           onLoad={this.addNewWindowDims()}
         >
@@ -115,7 +87,6 @@ class NoticesPage extends React.Component {
             }
           })}
         </div>
-        {this.whichPageNumberButton("down")}
       </div>
     );
   }

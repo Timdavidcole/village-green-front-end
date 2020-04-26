@@ -13,6 +13,7 @@ const sortByHeight = function(notices, newNotice) {
   if (newNotice) {
     noticesHeight.unshift(newNotice1);
   }
+  console.log(noticesHeight)
   return noticesHeight;
 };
 

@@ -6,7 +6,7 @@ const sortByColumn = function(notices, noticesWindowDims, newNotice) {
   const margin = notice => (notice.image ? 0 : 20);
   let columnWithRoom = 0;
   const noticesToSort = [...notices];
-  const maxHeight = noticesWindowDims.height - 185;
+  const maxHeight = noticesWindowDims.height - 125;
 
   if (newNotice) {
     var firstNotice = { ...notices[0] };
@@ -61,6 +61,18 @@ const sortByColumn = function(notices, noticesWindowDims, newNotice) {
       findColumnWithSpace(notice, columnWithRoom, index);
     }
   });
+
+  function flatten(array) {
+    return array.reduce(function(flat, toFlatten) {
+      return flat.concat(
+        Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten
+      );
+    }, []);
+  }
+
+  sortedByColumn = flatten(sortedByColumn)
+  
+  console.log(sortedByColumn)
   return sortedByColumn;
 };
 

@@ -6,11 +6,12 @@
     flex-wrap: wrap;
     border: none;
     overflow-x: hidden;
-    overflow-y: hidden;
+    overflow-y: scroll;
     opacity: 1;
     align-items: stretch;
     z-index: 70000;
-    position: relative
+    position: relative;
+    height: calc(100vh - 125px)
 }
 
 .noticesSwipeAnimation {
