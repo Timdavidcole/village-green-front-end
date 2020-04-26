@@ -19,7 +19,7 @@ const tokenPlugin = (req) => {
 const Address = {
   get: (query) =>
     superagent
-      .get(`https://api.ideal-postcodes.co.uk/v1/postcodes/ID11QD`)
+      .get(`https://api.ideal-postcodes.co.uk/v1/postcodes/${query}`)
       .query({
         api_key: "ak_k9foifvbjpGu6cmc1wObmNz2MOi3w"
       })

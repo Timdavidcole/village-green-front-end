@@ -49,7 +49,6 @@ class Register extends React.Component {
       const address = this.props.addressAutoComplete[
         this.props.selectedAddress
       ];
-      console.log(address);
       return (
         (address.line_1 ? address.line_1 + ", " : '') +
         (address.line_2 ? address.line_2 + ", " : '') +
