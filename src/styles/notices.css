@@ -2,10 +2,9 @@
     margin-top: 3px;
     width: calc(100vw);
     display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+    flex-direction: row;
     border: none;
-    overflow-x: hidden;
+    overflow-x: scroll;
     overflow-y: scroll;
     opacity: 1;
     align-items: stretch;

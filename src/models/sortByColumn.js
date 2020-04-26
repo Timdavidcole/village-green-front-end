@@ -8,7 +8,9 @@ const sortByColumn = function(notices, noticesWindowDims, newNotice, noticeWidth
   const noticesToSort = [...notices];
   const maxHeight = noticesWindowDims.height - 125;
   let maxHeights = [maxHeight, maxHeight, maxHeight]
+  console.log(noticeWidth)
   const maxColumns = Math.floor(noticesWindowDims.width / noticeWidth);
+  console.log(maxColumns)
 
   if (newNotice) {
     var firstNotice = { ...notices[0] };
