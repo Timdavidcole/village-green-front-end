@@ -5,6 +5,7 @@ import "../../styles/notices.css";
 import { connect } from "react-redux";
 
 const mapStateToProps = (state) => ({
+  noticeWidth: state.notices.noticeWidth,
   notices: state.notices.notices,
   page: state.notices.page,
   sorted: state.notices.sorted,
@@ -43,7 +44,11 @@ class NoticesPage extends React.Component {
   }
 
   renderColumns(column, index) {
-    return <div key={index}>{column.map(this.renderNotices)}</div>;
+    return (
+      <div style={{ margin: "auto", width: `${this.props.noticeWidth}px` }} key={index}>
+        {column.map(this.renderNotices)}
+      </div>
+    );
   }
 
   renderNotices(notice, i) {
