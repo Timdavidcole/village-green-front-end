@@ -3,24 +3,36 @@ import "../../styles/mapStyles.css";
 import { connect } from "react-redux";
 import agent from "../../agent";
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   noticeWidth: state.notices.noticeWidth,
-  centerMap: state.map.centerMap
+  centerMap: state.map.centerMap,
+  noticesWindowDims: state.notices.noticesWindowDims,
 });
 
-const mapDispatchToProps = dispatch => ({
-  updateNoticeSize: payload =>
+const mapDispatchToProps = (dispatch) => ({
+  updateNoticeSize: (payload) =>
     dispatch({ type: "UPDATE_NOTICE_WIDTH", payload }),
-  updateUnsortedNotices: payload =>
-    dispatch({ type: "UPDATE_UNSORTED_NOTICES", payload })
+  updateUnsortedNotices: (payload) =>
+    dispatch({ type: "UPDATE_UNSORTED_NOTICES", payload }),
 });
 
-const NoticeSizeSlider = props => {
-  const handleChange = function(event) {
+const NoticeSizeSlider = (props) => {
+  const handleChange = function (event) {
     props.updateNoticeSize(event.target.value);
   };
 
-  const updateSortedNotices = function() {
+  const fillSpace = function (noticeSliderWidth) {
+    const columns = Math.floor(
+      props.noticesWindowDims.width / noticeSliderWidth
+    );
+    const extraSpace =
+      (props.noticesWindowDims.width % noticeSliderWidth) / columns;
+    const newColumnWidth = extraSpace + noticeSliderWidth;
+    return newColumnWidth;
+  };
+
+  const resizeAndResort = function () {
+    props.updateNoticeSize(fillSpace(parseInt(props.noticeWidth)));
     props.updateUnsortedNotices(
       agent.Notices.all(JSON.stringify(props.centerMap))
     );
@@ -31,12 +43,20 @@ const NoticeSizeSlider = props => {
       <input
         onChange={handleChange}
         type="range"
-        min="180"
-        max="400"
+        min={
+          props.noticesWindowDims
+            ? `${props.noticesWindowDims.width / 6}`
+            : "200"
+        }
+        max={
+          props.noticesWindowDims
+            ? `${props.noticesWindowDims.width / 2}`
+            : "500"
+        }
         value={props.noticeWidth}
         className="slider"
         id="noticeSizeSlider"
-        onMouseUp={updateSortedNotices}
+        onMouseUp={resizeAndResort}
       ></input>
     </div>
   );

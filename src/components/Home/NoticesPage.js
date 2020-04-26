@@ -43,7 +43,6 @@ class NoticesPage extends React.Component {
   }
 
   renderColumns(column, index) {
-    console.log(column);
     return <div key={index}>{column.map(this.renderNotices)}</div>;
   }
 
@@ -74,9 +73,6 @@ class NoticesPage extends React.Component {
   }
 
   render() {
-    console.log(this.props.sorted);
-    console.log(this.props.noticesByPage);
-
     return (
       <div
         className="noticesParent"
