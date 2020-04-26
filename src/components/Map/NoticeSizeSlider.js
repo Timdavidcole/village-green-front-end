@@ -6,6 +6,7 @@ import agent from "../../agent";
 const mapStateToProps = (state) => ({
   columnsCount: state.notices.columnsCount,
   noticeWidth: state.notices.noticeWidth,
+  resize: state.notices.resize,
   centerMap: state.map.centerMap,
   noticesWindowDims: state.notices.noticesWindowDims,
 });
@@ -19,33 +20,43 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch({ type: "UPDATE_UNSORTED_NOTICES", payload }),
 });
 
-const NoticeSizeSlider = (props) => {
-  const handleChange = function (event) {
-    props.updateColumnsCount(parseInt(event.target.value));
-    props.updateNoticeSize(
-      Math.floor(props.noticesWindowDims.width / parseInt(event.target.value) - 10)
-    );
-  };
+class NoticeSizeSlider extends React.Component {
+  constructor() {
+    super();
 
-  const resizeAndResort = function (event) {
-    props.updateUnsortedNotices(
-      agent.Notices.all(JSON.stringify(props.centerMap))
+    this.handleChange = this.handleChange.bind(this);
+    this.resizeAndResort = this.resizeAndResort.bind(this);
+  }
+  handleChange(event) {
+    this.props.updateColumnsCount(parseInt(event.target.value));
+    this.props.updateNoticeSize(
+      Math.floor(
+        this.props.noticesWindowDims.width / parseInt(event.target.value) - 20
+      )
     );
-  };
-  return (
-    <div className="slidecontainer">
-      <input
-        onChange={handleChange}
-        type="range"
-        min="2"
-        max="6"
-        value={props.columnsCount}
-        className="slider"
-        id="noticeSizeSlider"
-        onMouseUp={resizeAndResort}
-      ></input>
-    </div>
-  );
-};
+  }
+
+  resizeAndResort(event) {
+    this.props.updateUnsortedNotices(
+      agent.Notices.all(JSON.stringify(this.props.centerMap))
+    );
+  }
+  render() {
+    return (
+      <div className="slidecontainer">
+        <input
+          onChange={this.handleChange}
+          type="range"
+          min="2"
+          max="6"
+          value={this.props.columnsCount}
+          className="slider"
+          id="noticeSizeSlider"
+          onMouseUp={this.resizeAndResort}
+        ></input>
+      </div>
+    );
+  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(NoticeSizeSlider);
