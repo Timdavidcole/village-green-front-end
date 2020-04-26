@@ -21,14 +21,14 @@ class AddressDropDown extends React.Component {
         <div className="address-dropdown" style={this.dropDownSlide()}>
           {this.props.addressAutoComplete.map((address, index) => {
             return (
-              <a
+              <div
                 onClick={() => this.props.selectAddress(index)}
                 key={index}
                 className="address-dropdown-item"
               >
                 {address.line_1 ? address.line_1 + ", " : null}
                 {address.line_2 ? address.line_2 : null}
-              </a>
+              </div>
             );
           })}
           <br></br>

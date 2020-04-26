@@ -2,7 +2,6 @@ import ListErrors from "./ListErrors";
 import React from "react";
 import agent from "../agent";
 import { connect } from "react-redux";
-import AddressContainer from "./AddressContainer";
 
 const mapStateToProps = state => ({
   ...state.settings,
@@ -176,9 +175,6 @@ class SettingsForm extends React.Component {
               onChange={this.updateState("address")}
             />
           </fieldset>
-          <AddressContainer
-            addressAutoComplete={this.state.addressAutoComplete}
-          />
           <button
             className="btn btn-lg btn-primary pull-xs-right"
             type="submit"

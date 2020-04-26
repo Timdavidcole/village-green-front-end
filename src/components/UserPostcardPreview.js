@@ -46,7 +46,7 @@ class UserPostcardPreview extends React.Component {
           }
         >
           {this.props.image ? (
-            <img
+            <img alt='profile-pic'
               className="user-postcard-pic"
               src={`${this.props.image}`}
             ></img>
