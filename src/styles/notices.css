@@ -1,15 +1,16 @@
 .noticesParent {
-    margin-top: 3px;
+    margin: auto;
     width: calc(100vw);
     display: flex;
     flex-direction: row;
     border: none;
-    overflow-x: scroll;
+    overflow-x: none;
     overflow-y: scroll;
     opacity: 1;
     align-items: stretch;
     z-index: 70000;
-    position: relative;
+    position: absolute;
+    bottom: 0px;
     height: calc(100vh - 125px)
 }
 

@@ -5,6 +5,7 @@ import "../../styles/notices.css";
 import { connect } from "react-redux";
 
 const mapStateToProps = (state) => ({
+  notices: state.notices.notices,
   page: state.notices.page,
   sorted: state.notices.sorted,
   resize: state.notices.resize,
@@ -47,7 +48,6 @@ class NoticesPage extends React.Component {
   }
 
   renderNotices(notice, i) {
-    console.log(notice);
     if (!notice.image) {
       return (
         <NoticePreview
@@ -78,17 +78,15 @@ class NoticesPage extends React.Component {
     console.log(this.props.noticesByPage);
 
     return (
-      <div>
-        <div
-          className="noticesParent"
-          id="notices"
-          ref={this.myRef}
-          onLoad={this.addNewWindowDims()}
-        >
-          {this.props.sorted
-            ? this.props.noticesByPage.map(this.renderColumns)
-            : this.props.noticesByPage.map(this.renderNotices)}
-        </div>
+      <div
+        className="noticesParent"
+        id="notices"
+        ref={this.myRef}
+        onLoad={this.addNewWindowDims()}
+      >
+        {this.props.sorted
+          ? this.props.noticesSorted.map(this.renderColumns)
+          : this.props.notices.map(this.renderNotices)}
       </div>
     );
   }

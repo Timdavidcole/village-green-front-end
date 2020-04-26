@@ -79,19 +79,7 @@ class Notices extends React.Component {
   render() {
     if (this.props.notices.length === 0) {
       return null;
-    }
-
-    if (this.props.sorted) {
-      console.log("this.props.noticesSorted")
-      console.log(this.props.noticesSorted)
-      return <NoticesPage noticesByPage={this.props.noticesSorted} />;
-    }
-
-    if (!this.props.sorted) {
-      console.log("this.props.notices")
-      console.log(this.props.notices)
-      return <NoticesPage noticesByPage={this.props.notices} />;
-    }
+    } else return <NoticesPage />;
   }
 }
 
