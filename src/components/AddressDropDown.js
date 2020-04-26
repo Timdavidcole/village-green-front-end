@@ -17,7 +17,6 @@ class AddressDropDown extends React.Component {
   }
   render() {
     if (this.props.addressAutoComplete) {
-      console.log(this.props.addressAutoComplete)
       return (
         <div className="address-dropdown" style={this.dropDownSlide()}>
           {this.props.addressAutoComplete.map((address, index) => {

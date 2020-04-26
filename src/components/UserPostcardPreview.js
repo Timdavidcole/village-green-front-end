@@ -31,7 +31,6 @@ class UserPostcardPreview extends React.Component {
   }
 
   render() {
-    console.log(this.props.selectedAddress);
     if (
       this.props.selectedAddress !== undefined ||
       this.props.username ||

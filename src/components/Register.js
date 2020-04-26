@@ -16,7 +16,7 @@ const mapDispatchToProps = (dispatch) => ({
         user.username,
         user.email,
         user.password,
-        user.postcode,
+        user.address,
         user.image
       ),
     }),
@@ -45,17 +45,17 @@ class Register extends React.Component {
   }
 
   addressAutoComplete() {
-    if (this.state.address && this.props.addressAutoComplete) {
+    if (this.props.selectedAddress && this.props.addressAutoComplete) {
+      const address = this.props.addressAutoComplete[
+        this.props.selectedAddress
+      ];
+      console.log(address);
       return (
-        this.props.addressAutoComplete.address.houseNumber +
-        " " +
-        this.props.addressAutoComplete.address.street +
-        ", " +
-        this.props.addressAutoComplete.address.city +
-        ", " +
-        this.props.addressAutoComplete.address.country +
-        ", " +
-        this.props.addressAutoComplete.address.postalCode
+        (address.line_1 ? address.line_1 + ", " : '') +
+        (address.line_2 ? address.line_2 + ", " : '') +
+        (address.line_3 ? address.line_3 + ", " : '') +
+        (address.country ? address.country + ", " : '') +
+        (address.postcode ? address.postcode : '')
       );
     } else return null;
   }
@@ -69,7 +69,6 @@ class Register extends React.Component {
   }
 
   showButton() {
-    console.log(this.props.selectedAddress)
     return (
       this.props.selectedAddress &&
       this.state.email &&
@@ -79,6 +78,7 @@ class Register extends React.Component {
   }
 
   render() {
+    console.log(this.addressAutoComplete());
     const { email, password, username, postcode, image } = this.state;
     return (
       <div>
@@ -89,7 +89,7 @@ class Register extends React.Component {
             username: username,
             email: email,
             password: password,
-            postcode: this.addressAutoComplete(),
+            address: this.addressAutoComplete(),
             image: image,
           })}
         >
