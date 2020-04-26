@@ -1,6 +1,5 @@
 import NoticePreview from "./NoticePreview";
 import NoticePreviewImage from "./NoticePreviewImage";
-import PageScroll from "./PageScroll";
 import React from "react";
 import "../../styles/notices.css";
 import { connect } from "react-redux";

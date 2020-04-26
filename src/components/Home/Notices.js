@@ -38,10 +38,9 @@ class Notices extends React.Component {
         sortByColumn(
           sortByHeight([...this.props.notices]),
           this.props.noticesWindowDims,
-          this.props.newNotice
-        ),
-        this.props.noticesWindowDims,
-        this.props.noticeWidth
+          this.props.newNotice,
+          this.props.noticeWidth
+        )
       );
     }
     if (this.props.updatedUnsorted && this.checkNoticesDimensions()) {
@@ -49,10 +48,9 @@ class Notices extends React.Component {
         sortByColumn(
           sortByHeight([...this.props.notices], this.props.newNotice),
           this.props.noticesWindowDims,
-          this.props.newNotice
-        ),
-        this.props.noticesWindowDims,
-        this.props.noticeWidth
+          this.props.newNotice,
+          this.props.noticeWidth
+        )
       );
     }
     if (this.props.sortDelete && this.checkNoticesDimensions()) {
@@ -62,10 +60,9 @@ class Notices extends React.Component {
             ...this.props.noticesSorted[this.props.pageNumber - 1],
           ]),
           this.props.noticesWindowDims,
-          this.props.newNotice
-        ),
-        this.props.noticesWindowDims,
-        this.props.noticeWidth
+          this.props.newNotice,
+          this.props.noticeWidth
+        )
       );
     }
   }
@@ -86,11 +83,7 @@ class Notices extends React.Component {
     }
 
     if (this.props.sorted) {
-      return (
-        <NoticesPageTransition
-          noticesByPage={this.props.noticesSorted}
-        />
-      );
+      return <NoticesPageTransition noticesByPage={this.props.noticesSorted} />;
     }
 
     if (!this.props.sorted) {

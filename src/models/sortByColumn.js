@@ -1,17 +1,25 @@
 import sumHeights from "./sumHeights";
 
-const sortByColumn = function(notices, noticesWindowDims, newNotice) {
+const sortByColumn = function(notices, noticesWindowDims, newNotice, noticeWidth) {
   let sortedByColumn = [[]];
   let usedIndexes = [];
   const margin = notice => (notice.image ? 0 : 20);
   let columnWithRoom = 0;
   const noticesToSort = [...notices];
   const maxHeight = noticesWindowDims.height - 125;
+  let maxHeights = [maxHeight, maxHeight, maxHeight]
+  const maxColumns = Math.floor(noticesWindowDims.width / noticeWidth);
 
   if (newNotice) {
     var firstNotice = { ...notices[0] };
     firstNotice.order = columnWithRoom + 1;
     sortedByColumn = [[firstNotice]];
+  }
+
+  function changeColumnWithRoom(){
+    if (columnWithRoom < maxColumns - 1){
+      columnWithRoom ++
+    } else columnWithRoom = 0
   }
 
   function findColumnWithSpace(notice1, column, index1) {
@@ -28,7 +36,7 @@ const sortByColumn = function(notices, noticesWindowDims, newNotice) {
       sortedByColumn.push([notice1]);
       usedIndexes.push(index1);
       nextColumn = column;
-      columnWithRoom++;
+      changeColumnWithRoom();
     } else {
       nextColumn = column + 1;
       findColumnWithSpace(notice1, nextColumn);
@@ -51,7 +59,7 @@ const sortByColumn = function(notices, noticesWindowDims, newNotice) {
   }
 
   function columnRemainder(column) {
-    return maxHeight - sumHeights(sortedByColumn[column]);
+    return maxHeights[column] - sumHeights(sortedByColumn[column]);
   }
 
   noticesToSort.forEach((notice, index) => {
