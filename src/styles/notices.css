@@ -11,7 +11,7 @@
     z-index: 70000;
     position: absolute;
     bottom: 0px;
-    height: calc(100vh - 125px)
+    height: calc(100vh - 115px)
 }
 
 .noticesSwipeAnimation {
