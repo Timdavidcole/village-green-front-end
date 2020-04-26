@@ -1,10 +1,9 @@
 import React from "react";
-import NoticesPageTransition from "./NoticesPageTransition";
+import NoticesPage from "./NoticesPage";
 import "../../styles/notices.css";
 import { connect } from "react-redux";
 import sortByHeight from "../../models/sortByHeight";
 import sortByColumn from "../../models/sortByColumn";
-import sortByPage from "../../models/sortByPage";
 
 const mapStateToProps = (state) => ({
   noticesWindowDims: state.notices.noticesWindowDims,
@@ -83,11 +82,15 @@ class Notices extends React.Component {
     }
 
     if (this.props.sorted) {
-      return <NoticesPageTransition noticesByPage={this.props.noticesSorted} />;
+      console.log("this.props.noticesSorted")
+      console.log(this.props.noticesSorted)
+      return <NoticesPage noticesByPage={this.props.noticesSorted} />;
     }
 
     if (!this.props.sorted) {
-      return <NoticesPageTransition noticesByPage={this.props.notices} />;
+      console.log("this.props.notices")
+      console.log(this.props.notices)
+      return <NoticesPage noticesByPage={this.props.notices} />;
     }
   }
 }

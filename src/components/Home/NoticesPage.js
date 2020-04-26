@@ -3,12 +3,11 @@ import NoticePreviewImage from "./NoticePreviewImage";
 import React from "react";
 import "../../styles/notices.css";
 import { connect } from "react-redux";
-import ChangePageButton from "./ChangePageButton";
 
 const mapStateToProps = (state) => ({
   page: state.notices.page,
+  sorted: state.notices.sorted,
   resize: state.notices.resize,
-  pageNumber: state.notices.pageNumber,
   noticesVisible: state.notices.noticesVisible,
   noticesWindowDims: state.notices.noticesWindowDims,
   noticesSorted: state.notices.noticesSorted,
@@ -21,17 +20,12 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 class NoticesPage extends React.Component {
-  whichPageNumberButton(direction) {
-    const pageNumber = this.props.pageNumber;
-    const noticesSorted = this.props.noticesSorted;
-    if (pageNumber > 1 && direction === "up") {
-      return <ChangePageButton direction="up" />;
-    }
-    if (pageNumber < noticesSorted.length && direction === "down") {
-      return <ChangePageButton direction="down" />;
-    }
-  }
+  constructor() {
+    super();
 
+    this.renderColumns = this.renderColumns.bind(this);
+    this.renderNotices = this.renderNotices.bind(this);
+  }
   addNewWindowDims() {
     const windowHeight = window.innerHeight;
     const windowWidth = window.innerWidth;
@@ -47,11 +41,42 @@ class NoticesPage extends React.Component {
     }
   }
 
-  render() {
-    if(this.props.noticesSorted){
-      const noticesSorted = this.props.noticesSorted
-      console.log(noticesSorted)
+  renderColumns(column, index) {
+    console.log(column);
+    return <div key={index}>{column.map(this.renderNotices)}</div>;
+  }
+
+  renderNotices(notice, i) {
+    console.log(notice);
+    if (!notice.image) {
+      return (
+        <NoticePreview
+          page={this.props.page}
+          noticesVisible={this.props.noticesVisible}
+          index={i + 2}
+          indexTrue={i}
+          notice={notice}
+          key={notice.slug}
+        />
+      );
+    } else {
+      return (
+        <NoticePreviewImage
+          page={this.props.page}
+          noticesVisible={this.props.noticesVisible}
+          index={i + 2}
+          indexTrue={i}
+          notice={notice}
+          key={notice.slug}
+        />
+      );
     }
+  }
+
+  render() {
+    console.log(this.props.sorted);
+    console.log(this.props.noticesByPage);
+
     return (
       <div>
         <div
@@ -60,31 +85,9 @@ class NoticesPage extends React.Component {
           ref={this.myRef}
           onLoad={this.addNewWindowDims()}
         >
-          {this.props.noticesByPage.map((notice, i) => {
-            if (!notice.image) {
-              return (
-                <NoticePreview
-                  page={this.props.page}
-                  noticesVisible={this.props.noticesVisible}
-                  index={i + 2}
-                  indexTrue={i}
-                  notice={notice}
-                  key={notice.slug}
-                />
-              );
-            } else {
-              return (
-                <NoticePreviewImage
-                  page={this.props.page}
-                  noticesVisible={this.props.noticesVisible}
-                  index={i + 2}
-                  indexTrue={i}
-                  notice={notice}
-                  key={notice.slug}
-                />
-              );
-            }
-          })}
+          {this.props.sorted
+            ? this.props.noticesByPage.map(this.renderColumns)
+            : this.props.noticesByPage.map(this.renderNotices)}
         </div>
       </div>
     );
