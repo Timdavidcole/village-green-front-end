@@ -6,40 +6,31 @@ const superagent = superagentPromise(_superagent, global.Promise);
 // const API_ROOT = "http://localhost:3001/api";
 const API_ROOT = "https://village-green-backend-api.herokuapp.com/api";
 
-const responseBody = res => res.body;
+const responseBody = (res) => res.body;
 
 let token = null;
 
-const tokenPlugin = req => {
+const tokenPlugin = (req) => {
   if (token) {
     req.set("authorization", `Token ${token}`);
   }
 };
 
 const Address = {
-  get: query =>
+  get: (query) =>
     superagent
-      .get(`https://autocomplete.geocoder.api.here.com/6.2/suggest.json`)
+      .get(`https://api.ideal-postcodes.co.uk/v1/postcodes/${query}`)
       .query({
-        app_id: "yiHAq4dpgi8IolLODQhZ",
-        app_code: "ZoP4eVfs_w8jCGMGu9dw_g",
-        query: query,
-        maxresults: 1
+        api_key: "ak_k9foifvbjpGu6cmc1wObmNz2MOi3w"
       })
-      .then(res => JSON.parse(res.text).suggestions[0])
+      .then((res) => res.body.result)
 };
 
 const requests = {
-  del: url =>
-    superagent
-      .del(`${API_ROOT}${url}`)
-      .use(tokenPlugin)
-      .then(responseBody),
-  get: url =>
-    superagent
-      .get(`${API_ROOT}${url}`)
-      .use(tokenPlugin)
-      .then(responseBody),
+  del: (url) =>
+    superagent.del(`${API_ROOT}${url}`).use(tokenPlugin).then(responseBody),
+  get: (url) =>
+    superagent.get(`${API_ROOT}${url}`).use(tokenPlugin).then(responseBody),
   post: (url, body) =>
     superagent
       .post(`${API_ROOT}${url}`, body)
@@ -49,29 +40,29 @@ const requests = {
     superagent
       .put(`${API_ROOT}${url}`, body)
       .use(tokenPlugin)
-      .then(responseBody)
+      .then(responseBody),
 };
 
 const Profile = {
-  get: username => requests.get(`/profiles/${username}`)
+  get: (username) => requests.get(`/profiles/${username}`),
 };
 
 const Notices = {
-  create: notice => requests.post(`/notices/`, { notice }),
-  all: coords => requests.get(`/notices?limit=50&coords=${coords}`),
-  byAuthor: author =>
+  create: (notice) => requests.post(`/notices/`, { notice }),
+  all: (coords) => requests.get(`/notices?limit=50&coords=${coords}`),
+  byAuthor: (author) =>
     requests.get(`/notices?author=${encodeURIComponent(author)}&limit=10`),
-  pinned: author =>
+  pinned: (author) =>
     requests.get(`/notices?pinned=${encodeURIComponent(author)}&limit=10`),
-  get: slug => requests.get(`/notices/${slug}`),
-  del: slug => requests.del(`/notices/${slug}`),
+  get: (slug) => requests.get(`/notices/${slug}`),
+  del: (slug) => requests.del(`/notices/${slug}`),
   edit: (slug, notice) => requests.put(`/notices/${slug}`, { notice }),
-  childNotices: slug => requests.get(`/notices/${slug}/children`)
+  childNotices: (slug) => requests.get(`/notices/${slug}/children`),
 };
 
 const Pinned = {
-  pinNotice: slug => requests.post(`/notices/${slug}/pin`),
-  unPinNotice: slug => requests.del(`/notices/${slug}/pin`)
+  pinNotice: (slug) => requests.post(`/notices/${slug}/pin`),
+  unPinNotice: (slug) => requests.del(`/notices/${slug}/pin`),
 };
 
 const Comments = {
@@ -79,16 +70,18 @@ const Comments = {
     requests.post(`/notices/${slug}/comments`, { comment }),
   delete: (slug, commentId) =>
     requests.del(`/notices/${slug}/comments/${commentId}`),
-  forNotice: slug => requests.get(`/notices/${slug}/comments`)
+  forNotice: (slug) => requests.get(`/notices/${slug}/comments`),
 };
 
 const Auth = {
   current: () => requests.get("/user"),
   login: (email, password) =>
     requests.post("/users/login", { user: { email, password } }),
-  register: (username, email, password, address = null) =>
-    requests.post("/users", { user: { username, email, password, address } }),
-  save: user => requests.put("/user", { user })
+  register: (username, email, password, address, image) =>
+    requests.post("/users", {
+      user: { username, email, password, address, image },
+    }),
+  save: (user) => requests.put("/user", { user }),
 };
 
 export default {
@@ -98,7 +91,7 @@ export default {
   Address,
   Profile,
   Pinned,
-  setToken: _token => {
+  setToken: (_token) => {
     token = _token;
-  }
+  },
 };

@@ -48,7 +48,6 @@ class SignInHeader extends React.Component {
             type="email"
             placeholder="Email"
             value={email}
-            autocomplete="new-password"
             onChange={this.changeEmail}
           />
 
@@ -57,7 +56,6 @@ class SignInHeader extends React.Component {
             type="password"
             placeholder="Password"
             value={password}
-            autocomplete="new-password"
             onChange={this.changePassword}
           />
 

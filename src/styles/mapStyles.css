@@ -66,6 +66,7 @@
 .autoComplete:focus {
     outline: none;
     width: 30%;
+    background-color: azure;
 }
 
 .current-location-button {

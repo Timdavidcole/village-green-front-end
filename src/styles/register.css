@@ -1,0 +1,187 @@
+.register-form {
+    overflow: none;
+    position: absolute;
+    width: 400px;
+    left: calc(50vw - 200px);
+    height: 100%;
+    border: 0px
+}
+
+.register-title {
+    font-family: titillium web, sans-serif;
+    font-size: 1.8rem;
+    text-align: justify;
+    padding: 20px;
+    color: var(--noobo-darker-green);
+}
+
+.register-fieldset {
+    position: relative;
+    height: 100%;
+    border: 0px;
+    margin: 0px;
+}
+
+.register-flex {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    box-sizing: content-box;
+}
+
+.register-input {
+    margin: 10px;
+    box-sizing: border-box;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    outline: none;
+    border-bottom: 2px outset rgb(201, 201, 201);
+    border-right: 2px outset rgb(201, 201, 201);
+    box-shadow: 7px 7px 0px 0px var(--box-shadow-dark-grey);
+    white-space: pre-line;
+    font-size: 1.1rem;
+    transition: width 0.2s linear, padding 0.2s linear, box-shadow 0.2s linear, margin-bottom 0.2s linear;
+}
+
+.register-input:focus {
+    background-color: azure;
+    padding: 15px;
+    width: 101%;
+    box-shadow: 2px 2px 0px 0px var(--box-shadow-dark-grey);
+    margin-bottom: 0px;
+}
+
+.register-button-container {
+    right: 20px;
+    bottom: 20px;
+    position: absolute;
+    box-sizing: border-box;
+}
+
+
+.address-autocomplete-tooltip {
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: var(--noobo-dark-green);
+    transition: opacity 0.1s linear, box-shadow 0.1s linear;
+    font-family: titillium web, sans-serif;
+    font-size: 1.4rem;
+    position: absolute;
+    transform: translate(0%, 200%);
+    z-index: 5;
+    width: 150px;
+    font-size: 1rem;
+    font-weight: 100;
+    text-align: center;
+}
+
+.register-button {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--noobo-dark-green);
+    color: white;
+    outline: none;
+    border: none;
+    font-family: titillium web, sans-serif;
+    font-size: 1.4rem;
+    z-index: 4;
+    box-sizing: border-box;
+    transition: opacity 0.2s linear, transform 0.2s linear;
+}
+
+.register-button:hover {
+    color: var(--noobo-dark-green);
+    background-color: var(--noobo-very-light-green);
+}
+
+.register-button:active {
+    color: var(--noobo-dark-green);
+    background-color: white;
+}
+
+.user-postcard {
+    color: var(--noobo-darker-green);
+    font-family: titillium web, sans-serif;
+    box-shadow: 5px 5px 0px 0px var(--box-shadow-dark-grey);
+    border-bottom: 2px outset rgb(201, 201, 201);
+    border-right: 2px outset rgb(201, 201, 201);
+    width: 100%;
+    margin: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+    min-height: 180px;
+    position: relative
+}
+
+.user-postcard-pic {
+    background-color: white;
+    border-radius: 6px;
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    margin-left: 8px;
+    float: right
+}
+
+.find-address-button {
+    position: absolute;
+    right: 0px;
+    top: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: white;
+    color: var(--noobo-darker-green);
+    outline: none;
+    border: none;
+    font-family: titillium web, sans-serif;
+    font-size: 0.8rem;
+    z-index: 10;
+    box-sizing: border-box;
+    transition: opacity 0.1s ease-in;
+}
+
+.find-address-button:hover {
+    background-color: var(--noobo-very-light-green);
+}
+
+.find-address-button:active {
+    background-color: white;
+}
+
+.address-dropdown-container {
+    margin: 10px;
+    padding: 10px;
+}
+
+.address-dropdown {
+    overflow-y: scroll;
+    transition: max-height 0.3s linear,margin-top 0.3s linear
+}
+
+.address-dropdown-item {
+    display: inline-block;
+    width: 90%;
+    padding-left: 10px;
+    margin-left: 10px;
+}
+
+.address-dropdown-item:hover {
+    color: black;
+    background-color: var(--noobo-very-light-green);
+}
+
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, .5);
+    box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}

@@ -2,136 +2,185 @@ import React from "react";
 import ListErrors from "./ListErrors";
 import agent from "../agent";
 import { connect } from "react-redux";
-import AddressContainer from "./AddressContainer";
+import "../styles/register.css";
+import UserPostcardPreview from "./UserPostcardPreview";
+import AddressDropDown from "./AddressDropDown";
 
-const mapStateToProps = state => ({ ...state.auth });
+const mapStateToProps = (state) => ({ ...state.auth });
 
-const mapDispatchToProps = dispatch => ({
-  onChangeEmail: value =>
-    dispatch({ type: "UPDATE_FIELD_AUTH", key: "email", value }),
-  onChangePassword: value =>
-    dispatch({ type: "UPDATE_FIELD_AUTH", key: "password", value }),
-  onChangeUsername: value =>
-    dispatch({ type: "UPDATE_FIELD_AUTH", key: "username", value }),
-  onChangeAddress: value =>
-    dispatch({ type: "UPDATE_FIELD_AUTH", key: "address", value }),
-  onSubmit: (username, email, password, address) =>
+const mapDispatchToProps = (dispatch) => ({
+  onSubmit: (user) =>
     dispatch({
       type: "REGISTER",
-      payload: agent.Auth.register(username, email, password, address)
-    })
+      payload: agent.Auth.register(
+        user.username,
+        user.email,
+        user.password,
+        user.address,
+        user.image
+      ),
+    }),
+  getAddressAutoComplete: (value) => {
+    dispatch({ type: "UPDATE_FIELD_AUTH", key: "addressAutoComplete", value });
+  },
 });
 
 class Register extends React.Component {
   constructor() {
     super();
-    this.changeEmail = event => this.props.onChangeEmail(event.target.value);
-    this.changePassword = event =>
-      this.props.onChangePassword(event.target.value);
-    this.changeUsername = event =>
-      this.props.onChangeUsername(event.target.value);
-    this.changeAddress = event => {
-      this.props.onChangeAddress(event.target.value);
+    this.state = {
+      email: "",
+      password: "",
+      username: "",
+      postcode: "",
+      image: "",
+      focusPostcode: false,
     };
-    this.submitForm = (username, email, password, address) => event => {
+    this.submitForm = (user) => (event) => {
       event.preventDefault();
-      this.props.onSubmit(username, email, password, address);
+      this.props.onSubmit(user);
     };
     this.addressAutoComplete = this.addressAutoComplete.bind(this);
+    this.findAddress = this.findAddress.bind(this);
   }
 
   addressAutoComplete() {
-
-    if (this.props.address && this.props.addressAutoComplete) {
+    if (this.props.selectedAddress && this.props.addressAutoComplete) {
+      const address = this.props.addressAutoComplete[
+        this.props.selectedAddress
+      ];
       return (
-        this.props.addressAutoComplete.address.houseNumber +
-        " " +
-        this.props.addressAutoComplete.address.street +
-        ", " +
-        this.props.addressAutoComplete.address.city +
-        ", " +
-        this.props.addressAutoComplete.address.country +
-        ", " +
-        this.props.addressAutoComplete.address.postalCode
+        (address.line_1 ? address.line_1 + ", " : '') +
+        (address.line_2 ? address.line_2 + ", " : '') +
+        (address.line_3 ? address.line_3 + ", " : '') +
+        (address.country ? address.country + ", " : '') +
+        (address.postcode ? address.postcode : '')
       );
     } else return null;
   }
 
-  render() {
-    const { email, password, username, address } = this.props;
+  findAddress(event) {
+    document.getElementById("postcode-input").focus();
+    event.preventDefault();
+    agent.Address.get(this.state.postcode).then((object) => {
+      this.props.getAddressAutoComplete(object);
+    });
+  }
 
+  showButton() {
     return (
-      <div className="auth-page">
-        <div className="container page">
-          <div className="row">
-            <div className="col-md-6 offset-md-3 col-xs-12">
-              <h1 className="text-xs-center">Sign up</h1>
-              <ListErrors errors={this.props.errors} />
-              <form
-                onSubmit={this.submitForm(
-                  username,
-                  email,
-                  password,
-                  this.addressAutoComplete()
-                )}
-              >
-                <fieldset>
-                  <fieldset className="form-group">
-                    <input
-                      className="form-control form-control-lg"
-                      type="email"
-                      placeholder="Email"
-                      value={email}
-                      onChange={this.changeEmail}
-                    />
-                  </fieldset>
-                  <fieldset className="form-group">
-                    <input
-                      className="form-control form-control-lg"
-                      type="password"
-                      placeholder="Password"
-                      value={password}
-                      onChange={this.changePassword}
-                    />
-                  </fieldset>
-                  <fieldset className="form-group">
-                    <input
-                      className="form-control form-control-lg"
-                      type="username"
-                      placeholder="Username"
-                      value={username}
-                      onChange={this.changeUsername}
-                    />
-                  </fieldset>
-                  Address
-                  <fieldset className="form-group">
-                    <input
-                      className="form-control form-control-lg"
-                      type="text"
-                      value={address}
-                      onChange={this.changeAddress}
-                    />
-                  </fieldset>
-                  <AddressContainer />
-                  <button
-                    className="btn btn-lg btn-primary pull-xs-right"
-                    type="submit"
-                    disabled={this.props.inProgress}
-                  >
-                    {" "}
-                    Sign Up
-                  </button>
-                </fieldset>
-              </form>
+      this.props.selectedAddress &&
+      this.state.email &&
+      this.state.password &&
+      this.state.username
+    );
+  }
+
+  render() {
+    console.log(this.addressAutoComplete());
+    const { email, password, username, postcode, image } = this.state;
+    return (
+      <div>
+        <ListErrors errors={this.props.errors} />
+        <form
+          className="register-form"
+          onSubmit={this.submitForm({
+            username: username,
+            email: email,
+            password: password,
+            address: this.addressAutoComplete(),
+            image: image,
+          })}
+        >
+          <fieldset className="register-fieldset">
+            <div className="register-title">
+              Great! We're just going to need some info before you can start
+              posting...
             </div>
-          </div>
-        </div>
+            <input
+              className="register-input"
+              type="email"
+              placeholder="email"
+              value={email}
+              autocomplete="no"
+              onChange={(ev) => {
+                this.setState({ email: ev.target.value });
+              }}
+              required="true"
+            />
+            <input
+              className="register-input"
+              type="password"
+              placeholder="password"
+              value={password}
+              autocomplete="new-password"
+              onChange={(ev) => {
+                this.setState({ password: ev.target.value });
+              }}
+              required="true"
+            />
+            <input
+              className="register-input"
+              type="username"
+              placeholder="username"
+              value={username}
+              autocomplete="no"
+              onChange={(ev) => {
+                this.setState({ username: ev.target.value });
+              }}
+              required="true"
+            />
+            <div style={{ position: "relative" }}>
+              <input
+                id="postcode-input"
+                className="register-input"
+                type="text"
+                value={postcode}
+                placeholder={"postcode"}
+                autocomplete="chrome-off"
+                onChange={(ev) => this.setState({ postcode: ev.target.value })}
+                required="true"
+                onFocus={() => this.setState({ focusPostcode: true })}
+                onBlur={() => this.setState({ focusPostcode: false })}
+              ></input>
+              <AddressDropDown focusPostcode={this.state.focusPostcode} />
+              <button
+                id="find-address-button"
+                type="button"
+                style={
+                  this.state.focusPostcode && this.state.postcode
+                    ? { opacity: "1" }
+                    : { opacity: "0" }
+                }
+                className="find-address-button"
+                onClick={this.findAddress}
+              >
+                find address
+              </button>
+            </div>
+
+            <input
+              className="register-input"
+              type="url"
+              value={image}
+              placeholder={"profile picture URL (optional)"}
+              autocomplete="no"
+              onChange={(ev) => {
+                this.setState({ image: ev.target.value });
+              }}
+              required="true"
+            />
+            <UserPostcardPreview
+              focusPostcode={this.state.focusPostcode}
+              username={this.state.username}
+              image={this.state.image}
+              showButton={this.showButton()}
+            />
+          </fieldset>
+        </form>
       </div>
     );
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Register);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

@@ -68,6 +68,7 @@ class NoticePreviewImage extends React.Component {
       exiting: { opacity: "1" },
       exited: { opacity: "1" },
     };
+
     return (
       <Transition
         in={!this.props.noticesVisible || !this.props.sorted}
@@ -94,17 +95,13 @@ class NoticePreviewImage extends React.Component {
                 src={notice.image}
                 style={{
                   minHeight: "160",
-                  maxWidth: `${this.props.noticeWidth}px`,
+                  width: `${this.props.noticeWidth}px`
                 }}
                 onLoad={(ev) => {
                   if (
                     this.props.page !== "pinned" ||
                     ev.target.offsetHeight !== 0
                   ) {
-                    this.setState({
-                      width: ev.target.offsetWidth,
-                      height: ev.target.offsetHeight,
-                    });
                     this.addDimensions(
                       ev.target.offsetWidth,
                       ev.target.offsetHeight
@@ -115,7 +112,7 @@ class NoticePreviewImage extends React.Component {
               <div
                 className="card-back"
                 style={{
-                  width: `${this.state.width || this.props.noticeWidth}px`,
+                  width: `${this.props.noticeWidth}px`,
                   height: notice.height,
                   backgroundColor: "var(--noobo-card-background-yellow)",
                   padding: "10px",
