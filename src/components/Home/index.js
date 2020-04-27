@@ -7,7 +7,7 @@ import Notices from "./Notices";
 import NewNoticeWindow from "../NewNotice/NewNoticeWindow";
 import Loader from "./Loader";
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   noticesVisible: state.notices.noticesVisible,
   centerMap: state.map.centerMap,
   loggedIn: state.auth.loggedIn,
@@ -16,15 +16,15 @@ const mapStateToProps = state => ({
   newNotice: state.notices.newNotice,
   notices: state.notices.notices,
   noticesSorted: state.notices.noticesSorted,
-  loadingNotices: state.notices.loading
+  loadingNotices: state.notices.loading,
 });
 
-const mapDispatchToProps = dispatch => ({
-  onLoad: payload => dispatch({ type: "HOME_PAGE_LOADED", payload }),
-  updateUnsortedNotices: payload =>
+const mapDispatchToProps = (dispatch) => ({
+  onLoad: (payload) => dispatch({ type: "HOME_PAGE_LOADED", payload }),
+  updateUnsortedNotices: (payload) =>
     dispatch({ type: "UPDATE_UNSORTED_NOTICES", payload }),
   resize: () => dispatch({ type: "RESIZE" }),
-  loading: () => dispatch({ type: "LOADING" })
+  loading: () => dispatch({ type: "LOADING" }),
 });
 
 class Home extends React.Component {
@@ -47,7 +47,7 @@ class Home extends React.Component {
       );
     } else if (this.props.newNoticeArrange) {
       this.props.updateUnsortedNotices({
-        notices: [this.props.newNotice, ...this.props.notices]
+        notices: [this.props.newNotice, ...this.props.notices],
       });
     }
   }
@@ -59,7 +59,7 @@ class Home extends React.Component {
         style={{
           width: "100vw",
           height: "calc(100vh - 56px)",
-          overflow: "hidden"
+          overflow: "hidden",
         }}
       >
         <MapNavBar />

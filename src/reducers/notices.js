@@ -23,10 +23,12 @@ export default (
   // eslint-disable-next-line default-case
   switch (action.type) {
     case "HOME_PAGE_LOADED":
+      console.log(action.payload)
       return {
         ...state,
         noticesSorted: [],
         notices: [...action.payload.notices],
+        noticeWidth: window.innerWidth / 4,
         sorted: false,
         updatedUnsorted: true,
         noticesVisible: false,

@@ -23,10 +23,10 @@ const mapDispatchToProps = (dispatch) => ({
 class NoticeSizeSlider extends React.Component {
   constructor() {
     super();
-
     this.handleChange = this.handleChange.bind(this);
     this.resizeAndResort = this.resizeAndResort.bind(this);
   }
+
   handleChange(event) {
     this.props.updateColumnsCount(parseInt(event.target.value));
     this.props.updateNoticeSize(
@@ -36,7 +36,7 @@ class NoticeSizeSlider extends React.Component {
     );
   }
 
-  resizeAndResort(event) {
+  resizeAndResort() {
     this.props.updateUnsortedNotices(
       agent.Notices.all(JSON.stringify(this.props.centerMap))
     );
