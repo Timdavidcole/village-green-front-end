@@ -1,16 +1,16 @@
 .noticesParent {
-    margin-top: 3px;
     width: calc(100vw);
     display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+    flex-direction: row;
     border: none;
-    overflow-x: hidden;
-    overflow-y: hidden;
+    overflow-x: none;
+    overflow-y: scroll;
     opacity: 1;
     align-items: stretch;
     z-index: 70000;
-    position: relative
+    position: absolute;
+    bottom: 0px;
+    height: calc(100vh - 115px)
 }
 
 .noticesSwipeAnimation {

@@ -1,4 +1,4 @@
-import NoticePreview from "./NoticePreview";
+import NoticePreviewText from "./NoticePreviewText";
 import NoticePreviewImage from "./NoticePreviewImage";
 import React from "react";
 import "../../styles/notices.css";
@@ -29,7 +29,7 @@ class NoticesPinned extends React.Component {
           {this.props.noticesPinned.map((notice, i) => {
             if (!notice.image) {
               return (
-                <NoticePreview
+                <NoticePreviewText
                   page={this.props.page}
                   noticesVisible={this.props.noticesVisible}
                   index={i + 1}

@@ -1,49 +1,53 @@
 import sumHeights from "./sumHeights";
 
-const sortByColumn = function(notices, noticesWindowDims, newNotice) {
-  let sortedByColumn = [[]];
+const sortByColumn = function (
+  notices,
+  noticesWindowDims,
+  newNotice,
+  noticeWidth
+) {
+  let sortedByColumn = [];
   let usedIndexes = [];
-  const margin = notice => (notice.image ? 0 : 20);
   let columnWithRoom = 0;
   const noticesToSort = [...notices];
-  const maxHeight = noticesWindowDims.height - 185;
+  const maxHeight = noticesWindowDims.height - 125;
+  const maxColumns = Math.floor(noticesWindowDims.width / noticeWidth);
+  let maxHeights = [];
 
-  if (newNotice) {
-    var firstNotice = { ...notices[0] };
-    firstNotice.order = columnWithRoom + 1;
-    sortedByColumn = [[firstNotice]];
+  const margin = (notice) => (notice.image ? 0 : 20);
+
+  function changeColumnWithRoom() {
+    if (columnWithRoom < maxColumns - 1) {
+      columnWithRoom++;
+    } else columnWithRoom = 0;
+    return columnWithRoom;
   }
 
-  function findColumnWithSpace(notice1, column, index1) {
-    var nextColumn;
-    if (usedIndexes.includes(index1)) {
+  function findColumnWithSpace(notice, column, index) {
+    if (usedIndexes.includes(index)) {
       return true;
     }
-    if (columnRemainder(column) - (notice1.height + margin(notice1)) > 0) {
-      notice1.order = column + 1;
-      sortedByColumn[column].push(notice1);
-      usedIndexes.push(index1);
-    } else if (!findNoticeThatFits(column)) {
-      notice1.order = column + 2;
-      sortedByColumn.push([notice1]);
-      usedIndexes.push(index1);
-      nextColumn = column;
-      columnWithRoom++;
+    if (columnRemainder(column) - (notice.height + margin(notice)) > 0) {
+      sortedByColumn[column].push(notice);
+      usedIndexes.push(index);
+      changeColumnWithRoom();
     } else {
-      nextColumn = column + 1;
-      findColumnWithSpace(notice1, nextColumn);
+      findNoticeThatFits(column);
+      maxHeights[column] = maxHeights[column] + maxHeight;
+      findColumnWithSpace(notice, changeColumnWithRoom());
     }
   }
 
   function findNoticeThatFits(column) {
-    notices.some((notice2, index2) => {
+    notices.some((notice, index) => {
       if (
-        columnRemainder(column) - (notice2.height + margin(notice2)) > 0 &&
-        !usedIndexes.includes(index2)
+        columnRemainder(columnWithRoom) - (notice.height + margin(notice)) >
+          0 &&
+        !usedIndexes.includes(index)
       ) {
-        notice2.order = column + 1;
-        sortedByColumn[column].push(notice2);
-        usedIndexes.push(index2);
+        sortedByColumn[column].push(notice);
+        usedIndexes.push(index);
+        findNoticeThatFits(column);
         return true;
       }
       return false;
@@ -51,7 +55,17 @@ const sortByColumn = function(notices, noticesWindowDims, newNotice) {
   }
 
   function columnRemainder(column) {
-    return maxHeight - sumHeights(sortedByColumn[column]);
+    return maxHeights[column] - sumHeights(sortedByColumn[column]);
+  }
+
+  for (let step = 0; step < maxColumns; step++) {
+    maxHeights.push(maxHeight);
+    sortedByColumn.push([]);
+  }
+
+  if (newNotice) {
+    var firstNotice = { ...notices[0] };
+    sortedByColumn[0] = [firstNotice];
   }
 
   noticesToSort.forEach((notice, index) => {
@@ -61,6 +75,7 @@ const sortByColumn = function(notices, noticesWindowDims, newNotice) {
       findColumnWithSpace(notice, columnWithRoom, index);
     }
   });
+
   return sortedByColumn;
 };
 

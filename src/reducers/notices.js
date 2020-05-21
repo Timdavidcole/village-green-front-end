@@ -12,10 +12,11 @@ export default (
     newNoticeArrange: false,
     pageNumber: 1,
     loading: true,
+    columnsCount: "4",
     noticesHidden: false,
     noticeWidth: "240",
     mapBlur: true,
-    noticesY: 0
+    noticesY: 0,
   },
   action
 ) => {
@@ -26,14 +27,15 @@ export default (
         ...state,
         noticesSorted: [],
         notices: [...action.payload.notices],
+        noticeWidth: window.innerWidth / 4,
         sorted: false,
         updatedUnsorted: true,
-        noticesVisible: false,
+        noticesVisible: true,
         update: true,
         newNoticeArrange: false,
         loading: true,
         pageNumber: 1,
-        noticesHidden: false
+        noticesHidden: false,
       };
     case "ADD_NEW_NOTICE":
       return {
@@ -42,52 +44,52 @@ export default (
         newNotice: action.payload.notice,
         newNoticeArrange: true,
         sorted: false,
-        pageNumber: 1
+        pageNumber: 1,
       };
     case "NEW_NOTICE_DISPLAYED":
       return {
         ...state,
         newNotice: [],
-        newNoticeArrange: false
+        newNoticeArrange: false,
       };
     case "NOTICES_VISIBLE":
       return {
         ...state,
         noticesVisible: false,
         loading: true,
-        mapBlur: false
+        mapBlur: false,
       };
     case "LOADING":
       return {
         ...state,
         loading: true,
         noticesVisible: false,
-        mapBlur: false
+        mapBlur: false,
       };
     case "NOTICES_HIDDEN":
       if (action.payload === "toggle") {
         return {
           ...state,
           noticesHidden: !state.noticesHidden,
-          mapBlur: !state.mapBlur
+          mapBlur: !state.mapBlur,
         };
       } else {
         return {
           ...state,
           noticesHidden: true,
-          mapBlur: false
+          mapBlur: false,
         };
       }
     case "NOTICES_SHOWN":
       return {
         ...state,
         noticesHidden: false,
-        mapBlur: true
+        mapBlur: true,
       };
     case "UPDATE_NOTICE_WIDTH":
       return {
         ...state,
-        noticeWidth: action.payload
+        noticeWidth: action.payload,
       };
     case "HOME_PAGE_UNLOADED":
       return {};
@@ -96,13 +98,13 @@ export default (
       const newNotice1 = {
         ...newNotices1[action.payload.index],
         height: action.payload.height,
-        width: action.payload.width
+        width: action.payload.width,
       };
       newNotices1[action.payload.index] = newNotice1;
       return {
         ...state,
         notices: newNotices1,
-        noticesVisible: false
+        noticesVisible: false,
       };
     case "ADD_NOTICES_WINDOW_DIMS":
       return {
@@ -112,7 +114,7 @@ export default (
         resize: false,
         update: true,
         waitTillDimUpdate: false,
-        noticesVisible: false
+        noticesVisible: false,
       };
     case "UPDATE_SORTED_NOTICES":
       return {
@@ -128,7 +130,7 @@ export default (
         sortDelete: false,
         loading: false,
         pageNumberChanged: false,
-        noticesHidden: false
+        noticesHidden: false,
       };
     case "RESIZE":
       return {
@@ -139,12 +141,17 @@ export default (
         waitTillDimUpdate: true,
         pageNumber: 1,
         loading: true,
-        mapBlur: false
+        mapBlur: false,
       };
-      case "CHANGE_NOTICES_Y":
+    case "CHANGE_NOTICES_Y":
       return {
         ...state,
-        noticesY: action.payload
+        noticesY: action.payload,
+      };
+    case "UPDATE_COLUMNS_COUNT":
+      return {
+        ...state,
+        columnsCount: action.payload,
       };
     case "UPDATE_PAGE_NUMBER":
       if (
@@ -155,7 +162,7 @@ export default (
           ...state,
           pageNumber: action.payload.pageNumber,
           pageNumberChanged: true,
-          pageChangeDirection: action.payload.direction
+          pageChangeDirection: action.payload.direction,
         };
       } else return { ...state };
 
@@ -163,12 +170,12 @@ export default (
       return {
         ...state,
         pageNumberAnimation: true,
-        pageChangeDirection: action.payload
+        pageChangeDirection: action.payload,
       };
     case "STOP_PAGE_NUMBER_ANIMATION":
       return {
         ...state,
-        pageNumberAnimation: false
+        pageNumberAnimation: false,
       };
     case "UPDATE_UNSORTED_NOTICES":
       return {
@@ -182,19 +189,19 @@ export default (
         newNoticeArrange: false,
         loading: true,
         pageNumber: 1,
-        noticesHidden: false
+        noticesHidden: false,
       };
-      case "PINNED_PAGE_LOADED":
-        return {
-          ...state,
-          noticesVisible: true,
-          pinned: true
-        };
+    case "PINNED_PAGE_LOADED":
+      return {
+        ...state,
+        noticesVisible: true,
+        pinned: true,
+      };
     case "LOGOUT":
       return {
         ...state,
         notices: [],
-        noticesSorted: []
+        noticesSorted: [],
       };
   }
 

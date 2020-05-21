@@ -77,7 +77,6 @@ class Register extends React.Component {
   }
 
   render() {
-    console.log(this.addressAutoComplete());
     const { email, password, username, postcode, image } = this.state;
     return (
       <div>
