@@ -78,10 +78,6 @@ class NoticePreviewText extends React.Component {
             }}
             onLoad={(ev) => {
               if (this.props.page !== "pinned") {
-                console.log(
-                  document.getElementById(`noticeCard${this.props.index}`)
-                    .offsetHeight
-                );
                 this.addDimensions(
                   document.getElementById(`noticeCard${this.props.index}`)
                     .offsetWidth,
