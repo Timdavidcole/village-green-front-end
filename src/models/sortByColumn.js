@@ -69,7 +69,6 @@ const sortByColumn = function (
   }
 
   noticesToSort.forEach((notice, index) => {
-    console.log(notice.title.toString());
     if (newNotice && index === 0) {
       usedIndexes.push(0);
     } else {
