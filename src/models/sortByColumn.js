@@ -30,12 +30,10 @@ const sortByColumn = function (
     if (columnRemainder(column) - (notice.height + margin(notice)) > 0) {
       sortedByColumn[column].push(notice);
       usedIndexes.push(index);
-      changeColumnWithRoom()
-    } else if (!findNoticeThatFits(column)) {
-      maxHeights[column] = maxHeights[column] + maxHeight;
-      sortedByColumn[changeColumnWithRoom()].push(notice);
-      usedIndexes.push(index);
+      changeColumnWithRoom();
     } else {
+      findNoticeThatFits(column);
+      maxHeights[column] = maxHeights[column] + maxHeight;
       findColumnWithSpace(notice, changeColumnWithRoom());
     }
   }
@@ -43,12 +41,13 @@ const sortByColumn = function (
   function findNoticeThatFits(column) {
     notices.some((notice, index) => {
       if (
-        columnRemainder(columnWithRoom) - (notice.height + margin(notice)) > 0 &&
+        columnRemainder(columnWithRoom) - (notice.height + margin(notice)) >
+          0 &&
         !usedIndexes.includes(index)
       ) {
         sortedByColumn[column].push(notice);
         usedIndexes.push(index);
-        findNoticeThatFits(column)
+        findNoticeThatFits(column);
         return true;
       }
       return false;
@@ -70,7 +69,7 @@ const sortByColumn = function (
   }
 
   noticesToSort.forEach((notice, index) => {
-    console.log(notice.title.toString())
+    console.log(notice.title.toString());
     if (newNotice && index === 0) {
       usedIndexes.push(0);
     } else {
