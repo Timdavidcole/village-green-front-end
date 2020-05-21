@@ -1,5 +1,4 @@
 .noticeCard {
-    margin: auto;
     box-shadow: 5px 5px 10px 0px var(--box-shadow-diffuse-grey);
     font-size: 1rem;
     border-radius: 6px;

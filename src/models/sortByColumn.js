@@ -74,16 +74,6 @@ const sortByColumn = function (
     }
   });
 
-  // function flatten(array) {
-  //   return array.reduce(function(flat, toFlatten) {
-  //     return flat.concat(
-  //       Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten
-  //     );
-  //   }, []);
-  // }
-
-  // sortedByColumn = flatten(sortedByColumn)
-
   return sortedByColumn;
 };
 

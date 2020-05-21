@@ -6,19 +6,19 @@ import { Transition } from "react-transition-group";
 import NoticeButtons from "./NoticeButtons";
 import NoticePreviewUser from "./NoticePreviewUser";
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   sorted: state.notices.sorted,
   noticesHidden: state.notices.noticesHidden,
-  noticeWidth: state.notices.noticeWidth
+  noticeWidth: state.notices.noticeWidth,
 });
 
-const mapDispatchToProps = dispatch => ({
-  onLoad: payload => dispatch({ type: "NOTICE_PAGE_LOADED", payload }),
+const mapDispatchToProps = (dispatch) => ({
+  onLoad: (payload) => dispatch({ type: "NOTICE_PAGE_LOADED", payload }),
   onUnload: () => dispatch({ type: "NOTICE_PAGE_UNLOADED" }),
-  loadDivDim: payload => dispatch({ type: "LOAD_DIV_DIMENSIONS", payload })
+  loadDivDim: (payload) => dispatch({ type: "LOAD_DIV_DIMENSIONS", payload }),
 });
 
-class NoticePreview extends React.Component {
+class NoticePreviewText extends React.Component {
   constructor(props) {
     super(props);
 
@@ -32,7 +32,7 @@ class NoticePreview extends React.Component {
         title: this.props.notice.title,
         width: width,
         height: height,
-        index: this.props.indexTrue
+        index: this.props.indexTrue,
       });
     }
   }
@@ -53,31 +53,35 @@ class NoticePreview extends React.Component {
     const duration = {
       appear: 100,
       enter: 100,
-      exit: 100
+      exit: 100,
     };
 
     const transitionStyles = {
       entering: { opacity: "0" },
       entered: { opacity: "0" },
       exiting: { opacity: "1" },
-      exited: { opacity: "1" }
+      exited: { opacity: "1" },
     };
     return (
       <Transition
         in={!this.props.noticesVisible || !this.props.sorted}
         timeout={duration}
       >
-        {state => (
+        {(state) => (
           <div
             id={`noticeCard${this.props.index}`}
             className={"noticeCard"}
             style={{
               display: this.props.noticesHidden ? "none" : "inline-block",
               order: notice.order,
-              ...transitionStyles[state]
+              ...transitionStyles[state],
             }}
-            onLoad={ev => {
+            onLoad={(ev) => {
               if (this.props.page !== "pinned") {
+                console.log(
+                  document.getElementById(`noticeCard${this.props.index}`)
+                    .offsetHeight
+                );
                 this.addDimensions(
                   document.getElementById(`noticeCard${this.props.index}`)
                     .offsetWidth,
@@ -91,14 +95,14 @@ class NoticePreview extends React.Component {
               style={{
                 width: "100%",
                 height: "100%",
-                position: "relative"
+                position: "relative",
               }}
             >
               <Link to={`notice/${notice.slug}`}>
                 <div
                   style={{
                     color: "var(--noobo-darker-green)",
-                    width: `${this.props.noticeWidth - 20}px`
+                    width: `${this.props.noticeWidth - 20}px`,
                   }}
                 >
                   <div style={{ borderBottom: "1px dashed red" }}>
@@ -114,7 +118,7 @@ class NoticePreview extends React.Component {
                       width: "100%",
                       fontStyle: "italic",
                       fontSize: "0.9rem",
-                      marginBottom: "5px"
+                      marginBottom: "5px",
                     }}
                   >
                     {notice.description}
@@ -130,7 +134,7 @@ class NoticePreview extends React.Component {
                       maxHeight: "121px",
                       overflowY: "auto",
                       overflowX: "hidden",
-                      fontSize: "0.8rem"
+                      fontSize: "0.8rem",
                     }}
                   >
                     {notice.body}
@@ -142,7 +146,7 @@ class NoticePreview extends React.Component {
                   width: "100%",
                   position: "absolute",
                   margin: "0px",
-                  bottom: "-5px"
+                  bottom: "-5px",
                 }}
               >
                 <NoticePreviewUser notice={notice} />
@@ -160,4 +164,4 @@ class NoticePreview extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NoticePreview);
+export default connect(mapStateToProps, mapDispatchToProps)(NoticePreviewText);

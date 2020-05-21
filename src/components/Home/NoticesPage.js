@@ -1,4 +1,4 @@
-import NoticePreview from "./NoticePreview";
+import NoticePreviewText from "./NoticePreviewText";
 import NoticePreviewImage from "./NoticePreviewImage";
 import React from "react";
 import "../../styles/notices.css";
@@ -45,7 +45,10 @@ class NoticesPage extends React.Component {
 
   renderColumns(column, index) {
     return (
-      <div style={{ margin: "auto", width: `${this.props.noticeWidth}px` }} key={index}>
+      <div
+        style={{ margin: "auto", width: `${this.props.noticeWidth}px` }}
+        key={index}
+      >
         {column.map(this.renderNotices)}
       </div>
     );
@@ -54,7 +57,7 @@ class NoticesPage extends React.Component {
   renderNotices(notice, i) {
     if (!notice.image) {
       return (
-        <NoticePreview
+        <NoticePreviewText
           page={this.props.page}
           noticesVisible={this.props.noticesVisible}
           index={i + 2}
@@ -77,6 +80,10 @@ class NoticesPage extends React.Component {
     }
   }
 
+  flexStyle() {
+    return this.props.sorted ? { display: "flex" } : { display: "block" };
+  }
+
   render() {
     return (
       <div
@@ -84,6 +91,7 @@ class NoticesPage extends React.Component {
         id="notices"
         ref={this.myRef}
         onLoad={this.addNewWindowDims()}
+        style={this.flexStyle()}
       >
         {this.props.sorted
           ? this.props.noticesSorted.map(this.renderColumns)
