@@ -40,7 +40,8 @@ class Profile extends React.Component {
   }
 
   render() {
-    const profile = this.props.profile;
+    const profile = this.props.profile.profile;
+    console.log(profile)
     if (!profile) {
       return null;
     }

@@ -6,7 +6,7 @@ import sortByHeight from "../../models/sortByHeight";
 import sortByColumn from "../../models/sortByColumn";
 
 const mapStateToProps = (state) => ({
-  noticesWindowDims: state.notices.noticesWindowDims,
+  windowDims: state.notices.windowDims,
   notices: state.notices.notices,
   sorted: state.notices.sorted,
   updatedUnsorted: state.notices.updatedUnsorted,
@@ -29,14 +29,14 @@ class Notices extends React.Component {
     if (
       (this.checkNoticesDimensions() &&
         !this.props.sorted &&
-        this.props.noticesWindowDims.height &&
+        this.props.windowDims.height &&
         !this.props.waitTillDimUpdate) ||
       this.props.pageNumberChanged
     ) {
       this.props.updateSortedNotices(
         sortByColumn(
           sortByHeight([...this.props.notices]),
-          this.props.noticesWindowDims,
+          this.props.windowDims,
           this.props.newNotice,
           this.props.noticeWidth
         )
@@ -46,7 +46,7 @@ class Notices extends React.Component {
       this.props.updateSortedNotices(
         sortByColumn(
           sortByHeight([...this.props.notices], this.props.newNotice),
-          this.props.noticesWindowDims,
+          this.props.windowDims,
           this.props.newNotice,
           this.props.noticeWidth
         )
@@ -58,7 +58,7 @@ class Notices extends React.Component {
           sortByHeight([
             ...this.props.noticesSorted[this.props.pageNumber - 1],
           ]),
-          this.props.noticesWindowDims,
+          this.props.windowDims,
           this.props.newNotice,
           this.props.noticeWidth
         )

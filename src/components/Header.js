@@ -6,10 +6,14 @@ import { connect } from "react-redux";
 import "../styles/header.css";
 
 const mapStateToProps = (state) => ({
-  noticesWindowDims: state.notices.noticesWindowDims,
+  windowDims: state.notices.windowDims,
+  resize: state.notices.resize
 });
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  addWindowDims: (payload) =>
+    dispatch({ type: "ADD_NOTICES_WINDOW_DIMS", payload }),
+});
 
 const LoggedOutView = (props) => {
   if (!props.currentUser) {
@@ -42,13 +46,27 @@ const LoggedOutView = (props) => {
 };
 
 class Header extends React.Component {
+  addNewWindowDims(props) {
+    const windowHeight = window.innerHeight;
+    const windowWidth = window.innerWidth;
+    if (
+      this.props.resize ||
+      this.props.windowDims.height !== windowHeight ||
+      this.props.windowDims.width !== windowWidth
+    ) {
+      this.props.addWindowDims({
+        width: windowWidth,
+        height: windowHeight,
+      });
+    }
+  }
   render() {
     return (
-      <menu className="header-bar">
-          <Link to="/" className="logo">
-            {this.props.appName.toLowerCase()}
-          </Link>
-        {this.props.noticesWindowDims.width > 1150 ? (
+      <menu className="header-bar" onLoad={this.addNewWindowDims()}>
+        <Link to="/" className="logo">
+          {this.props.appName.toLowerCase()}
+        </Link>
+        {window.innerWidth > 1150 ? (
           <Link to="/" className="tag-line">
             the noticeboard for anyone, anywhere and anything...
           </Link>

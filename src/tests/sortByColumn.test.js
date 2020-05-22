@@ -1,6 +1,6 @@
 import sortByColumn from "../models/sortByColumn";
 
-const noticesWindowDims = { height: 600, width: 250 };
+const windowDims = { height: 600, width: 250 };
 const noticesWindowDims2 = { height: 800, width: 250 };
 
 const heightSortedNotices = [
@@ -85,7 +85,7 @@ const columnSortedNoticesWithNewNotice = [
 
 describe("sortByColumn()", () => {
   it("should return an array of objects arranged into columns", () => {
-    expect(sortByColumn(heightSortedNotices, noticesWindowDims, false)).toEqual(
+    expect(sortByColumn(heightSortedNotices, windowDims, false)).toEqual(
       columnSortedNotices
     );
   });
@@ -103,7 +103,7 @@ describe("sortByColumn()", () => {
     expect(
       sortByColumn(
         heightSortedNoticesWithNewNotice,
-        noticesWindowDims,
+        windowDims,
         newNotice
       )
     ).toEqual(columnSortedNoticesWithNewNotice);

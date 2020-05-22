@@ -2,7 +2,7 @@ import sumHeights from "./sumHeights";
 
 const sortByColumn = function (
   notices,
-  noticesWindowDims,
+  windowDims,
   newNotice,
   noticeWidth
 ) {
@@ -10,8 +10,8 @@ const sortByColumn = function (
   let usedIndexes = [];
   let columnWithRoom = 0;
   const noticesToSort = [...notices];
-  const maxHeight = noticesWindowDims.height - 125;
-  const maxColumns = Math.floor(noticesWindowDims.width / noticeWidth);
+  const maxHeight = windowDims.height - 125;
+  const maxColumns = Math.floor(windowDims.width / noticeWidth);
   let maxHeights = [];
 
   const margin = (notice) => (notice.image ? 0 : 20);

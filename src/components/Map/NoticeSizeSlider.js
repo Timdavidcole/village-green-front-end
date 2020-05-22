@@ -8,7 +8,7 @@ const mapStateToProps = (state) => ({
   noticeWidth: state.notices.noticeWidth,
   resize: state.notices.resize,
   centerMap: state.map.centerMap,
-  noticesWindowDims: state.notices.noticesWindowDims,
+  windowDims: state.notices.windowDims,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -31,7 +31,7 @@ class NoticeSizeSlider extends React.Component {
     this.props.updateColumnsCount(parseInt(event.target.value));
     this.props.updateNoticeSize(
       Math.floor(
-        this.props.noticesWindowDims.width / parseInt(event.target.value) - 20
+        this.props.windowDims.width / parseInt(event.target.value) - 20
       )
     );
   }

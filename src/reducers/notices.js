@@ -6,7 +6,7 @@ export default (
     noticesCount: null,
     sorted: false,
     updatedUnsorted: false,
-    noticesWindowDims: { height: null, width: null },
+    windowDims: { height: null, width: null },
     waitTillDimUpdate: true,
     newNotice: null,
     newNoticeArrange: false,
@@ -109,7 +109,7 @@ export default (
     case "ADD_NOTICES_WINDOW_DIMS":
       return {
         ...state,
-        noticesWindowDims: action.payload,
+        windowDims: action.payload,
         sorted: false,
         resize: false,
         update: true,

@@ -11,14 +11,12 @@ const mapStateToProps = (state) => ({
   sorted: state.notices.sorted,
   resize: state.notices.resize,
   noticesVisible: state.notices.noticesVisible,
-  noticesWindowDims: state.notices.noticesWindowDims,
+  windowDims: state.notices.windowDims,
   noticesSorted: state.notices.noticesSorted,
   noticesY: state.notices.noticesY,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  addNoticesWindowDims: (payload) =>
-    dispatch({ type: "ADD_NOTICES_WINDOW_DIMS", payload }),
 });
 
 class NoticesPage extends React.Component {
@@ -27,20 +25,6 @@ class NoticesPage extends React.Component {
 
     this.renderColumns = this.renderColumns.bind(this);
     this.renderNotices = this.renderNotices.bind(this);
-  }
-  addNewWindowDims() {
-    const windowHeight = window.innerHeight;
-    const windowWidth = window.innerWidth;
-    if (
-      this.props.resize ||
-      this.props.noticesWindowDims.height !== windowHeight ||
-      this.props.noticesWindowDims.width !== windowWidth
-    ) {
-      this.props.addNoticesWindowDims({
-        width: windowWidth,
-        height: windowHeight,
-      });
-    }
   }
 
   renderColumns(column, index) {
@@ -90,7 +74,6 @@ class NoticesPage extends React.Component {
         className="noticesParent"
         id="notices"
         ref={this.myRef}
-        onLoad={this.addNewWindowDims()}
         style={this.flexStyle()}
       >
         {this.props.sorted

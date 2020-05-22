@@ -1,6 +1,6 @@
 import sortByPage from "../models/sortByPage";
 
-const noticesWindowDims = { height: 600, width: 1000 };
+const windowDims = { height: 600, width: 1000 };
 const noticesWindowDims2 = { height: 800, width: 1200 };
 
 const columnSortedNotices = [
@@ -65,16 +65,16 @@ const pageSortedNoticesDifWindow = [
 
 describe("sortByPage()", () => {
   it("should return an array of notices arranged into pages", () => {
-    expect(sortByPage(columnSortedNotices, noticesWindowDims, 400)).toEqual(
+    expect(sortByPage(columnSortedNotices, windowDims, 400)).toEqual(
       pageSortedNotices
     );
   });
 
   it("should return an array of notices arranged into different pages if different notice width is used", () => {
-    expect(sortByPage(columnSortedNotices, noticesWindowDims, 200)).not.toBe(
+    expect(sortByPage(columnSortedNotices, windowDims, 200)).not.toBe(
       pageSortedNotices
     );
-    expect(sortByPage(columnSortedNotices, noticesWindowDims, 200)).toEqual(
+    expect(sortByPage(columnSortedNotices, windowDims, 200)).toEqual(
       pageSortedNoticesDifWidth
     );
   });

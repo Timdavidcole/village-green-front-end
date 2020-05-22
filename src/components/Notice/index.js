@@ -19,13 +19,13 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onLoad: payload => dispatch({ type: "NOTICE_PAGE_LOADED", payload }),
   onUnload: () => dispatch({ type: "NOTICE_PAGE_UNLOADED" }),
-  addNoticesWindowDims: payload =>
+  addWindowDims: payload =>
     dispatch({ type: "ADD_NOTICES_WINDOW_DIMS", payload })
 });
 
 class Notice extends React.Component {
   componentWillMount() {
-    this.props.addNoticesWindowDims({
+    this.props.addWindowDims({
       width: document.body.clientWidth,
       height: document.body.clientHeight
     });
